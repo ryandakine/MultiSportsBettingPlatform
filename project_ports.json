@@ -1,0 +1,41 @@
+{
+  "project_ports": {
+    "MultiSportsBettingPlatform": {
+      "preferred_port": 8000,
+      "fallback_range": [8001, 8010],
+      "description": "Main betting platform with AI agents"
+    },
+    "Project_B": {
+      "preferred_port": 8001,
+      "fallback_range": [8002, 8011],
+      "description": "Second project"
+    },
+    "Project_C": {
+      "preferred_port": 8002,
+      "fallback_range": [8003, 8012],
+      "description": "Third project"
+    },
+    "Project_D": {
+      "preferred_port": 8003,
+      "fallback_range": [8004, 8013],
+      "description": "Fourth project"
+    }
+  },
+  "port_ranges": {
+    "development": [8000, 8099],
+    "testing": [8100, 8199],
+    "staging": [8200, 8299],
+    "production": [8300, 8399]
+  },
+  "reserved_ports": [
+    8000,
+    8001,
+    8002,
+    8003,
+    8004,
+    8005
+  ],
+  "auto_find": true,
+  "max_attempts": 100,
+  "timeout_seconds": 1
+} 

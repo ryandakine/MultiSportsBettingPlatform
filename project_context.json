@@ -1,0 +1,49 @@
+{
+  "current_project": "head_agent",
+  "projects": {
+    "head_agent": {
+      "name": "Multi-Sport Betting Platform",
+      "path": "C:\\Users\\himse\\MultiSportsBettingPlatform",
+      "type": "head_agent",
+      "status": "ready",
+      "description": "Main coordinator for all sub-agents"
+    },
+    "cfl_nfl_gold": {
+      "name": "CFL/NFL Gold System",
+      "path": "C:\\Users\\himse\\cfl_nfl_gold",
+      "type": "sub_agent",
+      "sport": "football",
+      "status": "in_progress",
+      "completion": 85,
+      "description": "Football betting sub-agent"
+    },
+    "baseball": {
+      "name": "Baseball System",
+      "path": "C:\\Users\\himse\\[baseball_path]",
+      "type": "sub_agent",
+      "sport": "baseball",
+      "status": "in_progress",
+      "completion": 90,
+      "description": "Baseball betting sub-agent"
+    },
+    "basketball": {
+      "name": "Basketball System",
+      "path": "C:\\Users\\himse\\[basketball_path]",
+      "type": "sub_agent",
+      "sport": "basketball",
+      "status": "planned",
+      "completion": 0,
+      "description": "Basketball betting sub-agent"
+    },
+    "hockey": {
+      "name": "Hockey System",
+      "path": "C:\\Users\\himse\\[hockey_path]",
+      "type": "sub_agent",
+      "sport": "hockey",
+      "status": "planned",
+      "completion": 0,
+      "description": "Hockey betting sub-agent"
+    }
+  },
+  "last_updated": "C:\\Users\\himse\\MultiSportsBettingPlatform"
+}

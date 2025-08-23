@@ -1,0 +1,153 @@
+{
+  "timestamp": "2025-07-28 21:09:48",
+  "total_ports_tested": 24,
+  "available_ports": 20,
+  "in_use_accessible": 4,
+  "in_use_inaccessible": 0,
+  "results": {
+    "8000": {
+      "description": "Main FastAPI Server",
+      "available": false,
+      "accessible": true,
+      "http_working": true
+    },
+    "8001": {
+      "description": "Alternative Server Port",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "8002": {
+      "description": "Backup Server Port",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "8003": {
+      "description": "Development Server Port",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "5432": {
+      "description": "PostgreSQL Database",
+      "available": false,
+      "accessible": true,
+      "http_working": false
+    },
+    "6379": {
+      "description": "Redis Database",
+      "available": false,
+      "accessible": true,
+      "http_working": false
+    },
+    "3000": {
+      "description": "Frontend Development Server",
+      "available": false,
+      "accessible": true,
+      "http_working": true
+    },
+    "3001": {
+      "description": "Alternative Frontend Port",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "3306": {
+      "description": "MySQL Database",
+      "available": true,
+      "accessible": false,
+      "http_working": false
+    },
+    "27017": {
+      "description": "MongoDB Database",
+      "available": true,
+      "accessible": false,
+      "http_working": false
+    },
+    "9200": {
+      "description": "Elasticsearch Database",
+      "available": true,
+      "accessible": false,
+      "http_working": false
+    },
+    "8086": {
+      "description": "InfluxDB Database",
+      "available": true,
+      "accessible": false,
+      "http_working": false
+    },
+    "8004": {
+      "description": "Claude AI Service",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "8005": {
+      "description": "Perplexity AI Service",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "8006": {
+      "description": "OpenAI Service",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "8007": {
+      "description": "AI Model Service",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "8008": {
+      "description": "Prediction Engine",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "8009": {
+      "description": "Analytics Service",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "8010": {
+      "description": "Baseball Agent",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "8011": {
+      "description": "Basketball Agent",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "8012": {
+      "description": "Football Agent",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "8013": {
+      "description": "Hockey Agent",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "8014": {
+      "description": "Head Agent Coordinator",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    },
+    "8015": {
+      "description": "Prediction Aggregator",
+      "available": true,
+      "accessible": true,
+      "http_working": true
+    }
+  }
+}

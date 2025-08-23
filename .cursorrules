@@ -1,0 +1,76 @@
+# Cursor Rules for MultiSportsBettingPlatform
+
+## Project Overview
+This is a multi-level betting platform with a head agent coordinating specialized sub-agents for different sports (MLB, CFL/NFL, etc.). The system uses FastAPI, Redis, PostgreSQL, and AI integration.
+
+## Core Principles
+- **YOLO Mode**: When in doubt, implement with maximum confidence and fallback options
+- **Verbose Logging**: ALWAYS use detailed logging with clear status indicators
+- **Graceful Degradation**: Systems should work even when dependencies fail
+- **Dynamic Port Management**: Avoid port conflicts across multiple projects
+
+## Verbose Logging Requirements
+- **ALWAYS** use emoji indicators (✅, ❌, ⚠️, 🚀, 🎯, etc.) for visual clarity
+- **ALWAYS** include timestamps in log messages
+- **ALWAYS** show detailed error messages with context
+- **ALWAYS** log both success and failure states
+- **ALWAYS** include system status and health checks
+- **ALWAYS** show progress indicators for long operations
+- **ALWAYS** log API request/response details
+- **ALWAYS** show port usage and availability status
+
+## Code Style
+- Use type hints extensively
+- Implement comprehensive error handling
+- Add docstrings to all functions and classes
+- Use dataclasses for data structures
+- Implement async/await patterns where appropriate
+
+## Testing Strategy
+- Create standalone tests that bypass dependency issues
+- Test both success and failure scenarios
+- Include integration tests for external systems
+- Use mock services for development
+
+## Error Handling
+- Catch specific exceptions, not generic ones
+- Provide meaningful error messages
+- Implement fallback mechanisms
+- Log all errors with context
+
+## API Design
+- Use consistent response formats
+- Include status indicators in all responses
+- Implement proper HTTP status codes
+- Add request/response logging
+
+## Debugging Guidelines
+- **ALWAYS** show the exact error message and stack trace
+- **ALWAYS** log the current state of the system
+- **ALWAYS** show what was attempted and what failed
+- **ALWAYS** provide clear next steps or fallback options
+- **ALWAYS** log system health and connectivity status
+
+## YOLO Mode Implementation
+- When FastAPI fails, fall back to simple HTTP server
+- When external systems are unavailable, use mock responses
+- When dependencies are missing, provide alternative implementations
+- Always maintain functionality even in degraded mode
+
+## Integration Requirements
+- Support multiple specialized betting systems
+- Implement cross-system prediction aggregation
+- Provide health monitoring for all systems
+- Enable dynamic system discovery and connection
+
+## Performance Considerations
+- Use caching for frequently accessed data
+- Implement connection pooling for external services
+- Add timeout handling for all external calls
+- Monitor and log performance metrics
+
+## Security
+- Implement proper authentication and authorization
+- Use environment variables for sensitive data
+- Add rate limiting and request validation
+- Log security events and access attempts 
