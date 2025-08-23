@@ -1,0 +1,51 @@
+{
+  "name": "sports-betting-platform",
+  "version": "1.0.0",
+  "description": "Professional Sports Betting Platform with Kendo React UI",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "@progress/kendo-react-grid": "^6.0.0",
+    "@progress/kendo-react-charts": "^6.0.0",
+    "@progress/kendo-react-layout": "^6.0.0",
+    "@progress/kendo-react-buttons": "^6.0.0",
+    "@progress/kendo-react-inputs": "^6.0.0",
+    "@progress/kendo-react-dropdowns": "^6.0.0",
+    "@progress/kendo-react-treelist": "^6.0.0",
+    "@progress/kendo-react-dialogs": "^6.0.0",
+    "@progress/kendo-react-form": "^6.0.0",
+    "@progress/kendo-react-notification": "^6.0.0",
+    "@progress/kendo-react-scheduler": "^6.0.0",
+    "@progress/kendo-theme-material": "^6.0.0",
+    "@progress/kendo-theme-bootstrap": "^6.0.0",
+    "@progress/kendo-theme-default": "^6.0.0",
+    "@progress/kendo-theme-fluent": "^6.0.0",
+    "web-vitals": "^2.1.4"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

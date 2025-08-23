@@ -1,0 +1,310 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: multisports-backend-service
+  labels:
+    app: multisports-backend
+spec:
+  selector:
+    app: multisports-backend
+  ports:
+  - name: http
+    port: 8000
+    targetPort: 8000
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: multisports-frontend-service
+  labels:
+    app: multisports-frontend
+spec:
+  selector:
+    app: multisports-frontend
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: multisports-analytics-service
+  labels:
+    app: multisports-analytics
+spec:
+  selector:
+    app: multisports-analytics
+  ports:
+  - name: http
+    port: 8001
+    targetPort: 8001
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: multisports-database-service
+  labels:
+    app: multisports-database
+spec:
+  selector:
+    app: multisports-database
+  ports:
+  - name: postgresql
+    port: 5432
+    targetPort: 5432
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: multisports-cache-service
+  labels:
+    app: multisports-cache
+spec:
+  selector:
+    app: multisports-cache
+  ports:
+  - name: redis
+    port: 6379
+    targetPort: 6379
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: multisports-monitoring-service
+  labels:
+    app: multisports-monitoring
+spec:
+  selector:
+    app: multisports-monitoring
+  ports:
+  - name: prometheus
+    port: 9090
+    targetPort: 9090
+  - name: grafana
+    port: 3000
+    targetPort: 3000
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: multisports-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "300"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "300"
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+    nginx.ingress.kubernetes.io/rate-limit-window: "1m"
+spec:
+  tls:
+  - hosts:
+    - multisports.example.com
+    - api.multisports.example.com
+    - analytics.multisports.example.com
+    - monitoring.multisports.example.com
+    secretName: multisports-tls
+  rules:
+  - host: multisports.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: multisports-frontend-service
+            port:
+              number: 80
+  - host: api.multisports.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: multisports-backend-service
+            port:
+              number: 8000
+  - host: analytics.multisports.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: multisports-analytics-service
+            port:
+              number: 8001
+  - host: monitoring.multisports.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: multisports-monitoring-service
+            port:
+              number: 3000
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: multisports-db-init
+data:
+  init.sql: |
+    -- Initialize database schema
+    CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(50) UNIQUE NOT NULL,
+        email VARCHAR(100) UNIQUE NOT NULL,
+        password_hash VARCHAR(255) NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    
+    CREATE TABLE IF NOT EXISTS betting_performance (
+        bet_id VARCHAR(50) PRIMARY KEY,
+        user_id VARCHAR(50) NOT NULL,
+        sport VARCHAR(20) NOT NULL,
+        game_id VARCHAR(50) NOT NULL,
+        home_team VARCHAR(100) NOT NULL,
+        away_team VARCHAR(100) NOT NULL,
+        bet_amount DECIMAL(10,2) NOT NULL,
+        odds DECIMAL(5,2) NOT NULL,
+        selection VARCHAR(20) NOT NULL,
+        result VARCHAR(20) NOT NULL,
+        profit_loss DECIMAL(10,2) NOT NULL,
+        roi DECIMAL(5,2) NOT NULL,
+        confidence DECIMAL(5,2) NOT NULL,
+        risk_level VARCHAR(20) NOT NULL,
+        placed_at TIMESTAMP NOT NULL,
+        settled_at TIMESTAMP,
+        weather_conditions JSONB,
+        team_stats JSONB,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    
+    CREATE INDEX idx_user_bets ON betting_performance(user_id);
+    CREATE INDEX idx_sport_bets ON betting_performance(sport);
+    CREATE INDEX idx_bet_date ON betting_performance(placed_at);
+    CREATE INDEX idx_bet_result ON betting_performance(result);
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: multisports-redis-config
+data:
+  redis.conf: |
+    # Redis configuration for production
+    bind 0.0.0.0
+    port 6379
+    timeout 0
+    tcp-keepalive 300
+    daemonize no
+    supervised no
+    pidfile /var/run/redis_6379.pid
+    loglevel notice
+    logfile ""
+    databases 16
+    save 900 1
+    save 300 10
+    save 60 10000
+    stop-writes-on-bgsave-error yes
+    rdbcompression yes
+    rdbchecksum yes
+    dbfilename dump.rdb
+    dir /data
+    maxmemory 256mb
+    maxmemory-policy allkeys-lru
+    appendonly yes
+    appendfilename "appendonly.aof"
+    appendfsync everysec
+    no-appendfsync-on-rewrite no
+    auto-aof-rewrite-percentage 100
+    auto-aof-rewrite-min-size 64mb
+    aof-load-truncated yes
+    aof-use-rdb-preamble yes
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: multisports-prometheus-config
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval: 15s
+      evaluation_interval: 15s
+    
+    rule_files:
+      # - "first_rules.yml"
+      # - "second_rules.yml"
+    
+    scrape_configs:
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['localhost:9090']
+    
+      - job_name: 'multisports-backend'
+        static_configs:
+          - targets: ['multisports-backend-service:8000']
+        metrics_path: /metrics
+        scrape_interval: 30s
+    
+      - job_name: 'multisports-analytics'
+        static_configs:
+          - targets: ['multisports-analytics-service:8001']
+        metrics_path: /metrics
+        scrape_interval: 30s
+    
+      - job_name: 'multisports-database'
+        static_configs:
+          - targets: ['multisports-database-service:5432']
+        scrape_interval: 60s
+    
+      - job_name: 'multisports-cache'
+        static_configs:
+          - targets: ['multisports-cache-service:6379']
+        scrape_interval: 60s
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: multisports-grafana-dashboards
+data:
+  dashboard.yml: |
+    apiVersion: 1
+    
+    providers:
+    - name: 'default'
+      orgId: 1
+      folder: ''
+      type: file
+      disableDeletion: false
+      updateIntervalSeconds: 10
+      allowUiUpdates: true
+      options:
+        path: /etc/grafana/provisioning/dashboards
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: multisports-grafana-datasources
+data:
+  datasource.yml: |
+    apiVersion: 1
+    
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      access: proxy
+      url: http://localhost:9090
+      isDefault: true 

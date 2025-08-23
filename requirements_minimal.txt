@@ -1,0 +1,24 @@
+# Minimal requirements for MultiSportsBettingPlatform
+# Core dependencies only
+
+# FastAPI and server
+fastapi>=0.104.0
+uvicorn>=0.24.0
+
+# Pydantic and settings
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+
+# Environment and configuration
+python-dotenv>=1.0.0
+
+# HTTP client
+httpx>=0.25.0
+
+# AI Services
+anthropic>=0.7.0
+perplexity-python>=0.1.0
+
+# Testing
+pytest>=7.4.0
+pytest-asyncio>=0.21.0 
