@@ -1,0 +1,4764 @@
+{
+  "summary": {
+    "total_parlays": 365,
+    "wins": 88,
+    "win_rate": 24.10958904109589,
+    "final_bankroll": 196606.54668973928,
+    "roi": 1866.0654668973925
+  },
+  "sport_distribution": {
+    "NCAAW": 197,
+    "NCAAB": 1018,
+    "NCAAF": 175,
+    "NHL": 250,
+    "NFL": 89,
+    "WNBA": 96
+  },
+  "history": [
+    {
+      "day": 1,
+      "parlay_legs": [
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Columbia Lions",
+        "NCAAB:Ohio State Buckeyes",
+        "NCAAB:Morehead State Eagles",
+        "NCAAB:Sacred Heart Pioneers"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 12435.301666928855
+    },
+    {
+      "day": 2,
+      "parlay_legs": [
+        "NCAAB:Miami Hurricanes",
+        "NCAAB:Florida Gators",
+        "NCAAB:Texas State Bobcats",
+        "NCAAF:NCAAF Team 2",
+        "NCAAB:Kennesaw State Owls"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 12335.301666928855
+    },
+    {
+      "day": 3,
+      "parlay_legs": [
+        "NCAAB:Ohio State Buckeyes",
+        "NCAAB:NJIT Highlanders",
+        "NHL:NHL Team 3",
+        "NCAAB:Colgate Raiders",
+        "NCAAB:UL Monroe Warhawks"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 12235.301666928855
+    },
+    {
+      "day": 4,
+      "parlay_legs": [
+        "NCAAB:Weber State Wildcats",
+        "NHL:NHL Team 2",
+        "NCAAW:NCAAW Team 4",
+        "NFL:NFL Team 1",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 12135.301666928855
+    },
+    {
+      "day": 5,
+      "parlay_legs": [
+        "NCAAB:Dartmouth Big Green",
+        "NCAAB:Saint Francis Red Flash",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Canisius Golden Griffins",
+        "NHL:NHL Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 12035.301666928855
+    },
+    {
+      "day": 6,
+      "parlay_legs": [
+        "NCAAB:Rhode Island Rams",
+        "NCAAB:Virginia Cavaliers",
+        "NCAAB:Notre Dame Fighting Irish",
+        "NCAAB:Maine-Fort Kent Bengals",
+        "NFL:NFL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 11935.301666928855
+    },
+    {
+      "day": 7,
+      "parlay_legs": [
+        "NCAAB:Mars Hill Mountain Lions",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Indiana State Sycamores",
+        "NCAAF:NCAAF Team 3",
+        "NCAAW:NCAAW Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 11835.301666928855
+    },
+    {
+      "day": 8,
+      "parlay_legs": [
+        "NCAAB:IU Indianapolis Jaguars",
+        "NCAAB:Wofford Terriers",
+        "WNBA:WNBA Team 1",
+        "NCAAB:St. Francis Brooklyn Terriers",
+        "NHL:NHL Team 5"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 11735.301666928855
+    },
+    {
+      "day": 9,
+      "parlay_legs": [
+        "NCAAB:Iowa Hawkeyes",
+        "NCAAB:Texas A&M Aggies",
+        "NHL:NHL Team 2",
+        "NHL:NHL Team 4",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 11635.301666928855
+    },
+    {
+      "day": 10,
+      "parlay_legs": [
+        "NCAAB:Grand Canyon Lopes",
+        "NCAAB:Aquinas Saints",
+        "NCAAB:Longwood Lancers",
+        "NCAAB:UT Martin Skyhawks",
+        "NCAAW:NCAAW Team 6"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 11535.301666928855
+    },
+    {
+      "day": 11,
+      "parlay_legs": [
+        "NCAAB:Oakland Golden Grizzlies",
+        "NCAAB:St. Bonaventure Bonnies",
+        "NHL:NHL Team 4",
+        "NCAAF:NCAAF Team 2",
+        "NCAAB:Eastern Michigan Eagles"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 13970.60333385771
+    },
+    {
+      "day": 12,
+      "parlay_legs": [
+        "NCAAB:Hofstra Pride",
+        "NCAAW:NCAAW Team 3",
+        "NCAAB:Pepperdine Waves",
+        "NHL:NHL Team 6",
+        "NCAAB:Bryant Bulldogs"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 13870.60333385771
+    },
+    {
+      "day": 13,
+      "parlay_legs": [
+        "NCAAB:Cal State Bakersfield Roadrunners",
+        "NCAAB:Seton Hall Pirates",
+        "NCAAB:Weber State Wildcats",
+        "NCAAB:Baylor Bears",
+        "NCAAW:NCAAW Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 13770.60333385771
+    },
+    {
+      "day": 14,
+      "parlay_legs": [
+        "NCAAB:Tulane Green Wave",
+        "NCAAB:Boise State Broncos",
+        "WNBA:WNBA Team 1",
+        "NCAAW:NCAAW Team 1",
+        "WNBA:WNBA Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 13670.60333385771
+    },
+    {
+      "day": 15,
+      "parlay_legs": [
+        "NHL:NHL Team 1",
+        "NHL:NHL Team 3",
+        "NHL:NHL Team 5",
+        "NCAAB:St. Francis Brooklyn Terriers",
+        "NHL:NHL Team 7"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 13570.60333385771
+    },
+    {
+      "day": 16,
+      "parlay_legs": [
+        "NCAAB:Jackson State Tigers",
+        "NCAAB:DePaul Blue Demons",
+        "NHL:NHL Team 5",
+        "NCAAB:Middle Tennessee Blue Raiders",
+        "NHL:NHL Team 7"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 13470.60333385771
+    },
+    {
+      "day": 17,
+      "parlay_legs": [
+        "NCAAB:Navy Midshipmen",
+        "NCAAF:NCAAF Team 3",
+        "NCAAB:UConn Huskies",
+        "NCAAW:NCAAW Team 3",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 13370.60333385771
+    },
+    {
+      "day": 18,
+      "parlay_legs": [
+        "NCAAB:Kentucky Wildcats",
+        "NCAAB:Vanderbilt Commodores",
+        "NCAAB:Belmont Bruins",
+        "WNBA:WNBA Team 2",
+        "NCAAB:Hawai'i Rainbow Warriors"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 15805.905000786566
+    },
+    {
+      "day": 19,
+      "parlay_legs": [
+        "NCAAB:UC Davis Aggies",
+        "NHL:NHL Team 5",
+        "NHL:NHL Team 6",
+        "NCAAB:High Point Panthers",
+        "NCAAW:NCAAW Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 15705.905000786566
+    },
+    {
+      "day": 20,
+      "parlay_legs": [
+        "NCAAB:New Mexico State Aggies",
+        "NCAAB:Purdue Boilermakers",
+        "NCAAF:NCAAF Team 2",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Loyola Maryland Greyhounds"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 18141.20666771542
+    },
+    {
+      "day": 21,
+      "parlay_legs": [
+        "NCAAB:Boise State Broncos",
+        "NCAAB:North Texas Mean Green",
+        "NCAAB:Oregon Ducks",
+        "NCAAW:NCAAW Team 2",
+        "NCAAF:NCAAF Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 18041.20666771542
+    },
+    {
+      "day": 22,
+      "parlay_legs": [
+        "NCAAB:Mississippi Valley State Delta Devils",
+        "NCAAB:Xavier Musketeers",
+        "NCAAB:Santa Clara Broncos",
+        "NCAAB:Idaho Vandals",
+        "NHL:NHL Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 17941.20666771542
+    },
+    {
+      "day": 23,
+      "parlay_legs": [
+        "NCAAB:Ole Miss Rebels",
+        "NCAAB:NJIT Highlanders",
+        "NCAAB:Providence Friars",
+        "NCAAB:USC Trojans",
+        "NCAAB:TCU Horned Frogs"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 20376.508334644277
+    },
+    {
+      "day": 24,
+      "parlay_legs": [
+        "NHL:NHL Team 6",
+        "NCAAB:Texas A&M Aggies",
+        "NFL:NFL Team 1",
+        "NCAAF:NCAAF Team 1",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 20276.508334644277
+    },
+    {
+      "day": 25,
+      "parlay_legs": [
+        "NCAAB:Saint Josephs Long Island Golden Eagles",
+        "NCAAB:Utah Valley Wolverines",
+        "WNBA:WNBA Team 2",
+        "NHL:NHL Team 1",
+        "NCAAB:Western Carolina Catamounts"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 20176.508334644277
+    },
+    {
+      "day": 26,
+      "parlay_legs": [
+        "NCAAB:Temple Owls",
+        "NCAAB:Troy Trojans",
+        "WNBA:WNBA Team 2",
+        "NCAAB:Louisiana Tech Bulldogs",
+        "NCAAB:Fairleigh Dickinson Knights"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 20076.508334644277
+    },
+    {
+      "day": 27,
+      "parlay_legs": [
+        "NHL:NHL Team 5",
+        "NCAAB:Gonzaga Bulldogs",
+        "NHL:NHL Team 4",
+        "NCAAB:Wichita State Shockers",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 19976.508334644277
+    },
+    {
+      "day": 28,
+      "parlay_legs": [
+        "NCAAB:Rice Owls",
+        "NFL:NFL Team 1",
+        "NCAAB:Winthrop Eagles",
+        "NCAAB:Purdue Boilermakers",
+        "NCAAB:Creighton Bluejays"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 22411.810001573132
+    },
+    {
+      "day": 29,
+      "parlay_legs": [
+        "NCAAB:New Mexico State Aggies",
+        "NCAAB:Mercer Bears",
+        "NCAAB:UMass Lowell River Hawks",
+        "NCAAB:Western Michigan Broncos",
+        "NCAAF:NCAAF Team 3"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 24847.111668501988
+    },
+    {
+      "day": 30,
+      "parlay_legs": [
+        "NCAAB:Yale Bulldogs",
+        "NHL:NHL Team 4",
+        "NCAAB:Fordham Rams",
+        "NCAAB:IU Indianapolis Jaguars",
+        "NCAAB:Hawai'i Rainbow Warriors"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 24747.111668501988
+    },
+    {
+      "day": 31,
+      "parlay_legs": [
+        "NCAAB:Missouri State Bears",
+        "NCAAB:Ball State Cardinals",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:UMBC Retrievers",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 24647.111668501988
+    },
+    {
+      "day": 32,
+      "parlay_legs": [
+        "NCAAB:Western Illinois Leathernecks",
+        "NCAAB:West Coast Baptist Eagles",
+        "NCAAB:VMI Keydets",
+        "NCAAB:Iowa Hawkeyes",
+        "NCAAB:UIC Flames"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 24547.111668501988
+    },
+    {
+      "day": 33,
+      "parlay_legs": [
+        "NCAAB:George Washington Revolutionaries",
+        "NCAAW:NCAAW Team 4",
+        "WNBA:WNBA Team 1",
+        "NCAAB:New Mexico State Aggies",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 24447.111668501988
+    },
+    {
+      "day": 34,
+      "parlay_legs": [
+        "NCAAB:Arizona Wildcats",
+        "NCAAB:Chattanooga Mocs",
+        "NCAAW:NCAAW Team 1",
+        "NCAAW:NCAAW Team 5",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 24347.111668501988
+    },
+    {
+      "day": 35,
+      "parlay_legs": [
+        "NCAAB:Eastern Michigan Eagles",
+        "NCAAB:St. Bonaventure Bonnies",
+        "NCAAB:South Dakota State Jackrabbits",
+        "NHL:NHL Team 1",
+        "NCAAB:Wake Forest Demon Deacons"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 26782.413335430843
+    },
+    {
+      "day": 36,
+      "parlay_legs": [
+        "NCAAW:NCAAW Team 1",
+        "NCAAW:NCAAW Team 2",
+        "NHL:NHL Team 3",
+        "NHL:NHL Team 4",
+        "NCAAB:Southern Miss Golden Eagles"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 26682.413335430843
+    },
+    {
+      "day": 37,
+      "parlay_legs": [
+        "NCAAB:South Dakota State Jackrabbits",
+        "NCAAB:Alabama State Hornets",
+        "NCAAF:NCAAF Team 1",
+        "NCAAF:NCAAF Team 2",
+        "NCAAF:NCAAF Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 26582.413335430843
+    },
+    {
+      "day": 38,
+      "parlay_legs": [
+        "NCAAB:Howard Bison",
+        "NCAAB:Kentucky Wildcats",
+        "NCAAB:Alabama A&M Bulldogs",
+        "NCAAF:NCAAF Team 2",
+        "NHL:NHL Team 4"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 29017.7150023597
+    },
+    {
+      "day": 39,
+      "parlay_legs": [
+        "NCAAW:NCAAW Team 1",
+        "NCAAF:NCAAF Team 4",
+        "NCAAF:NCAAF Team 1",
+        "NHL:NHL Team 4",
+        "NCAAB:Belhaven Blazers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 28917.7150023597
+    },
+    {
+      "day": 40,
+      "parlay_legs": [
+        "WNBA:WNBA Team 2",
+        "NCAAF:NCAAF Team 5",
+        "NCAAW:NCAAW Team 6",
+        "NCAAW:NCAAW Team 3",
+        "NCAAB:Incarnate Word Cardinals"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 28817.7150023597
+    },
+    {
+      "day": 41,
+      "parlay_legs": [
+        "NCAAB:Minnesota Morris Cougars",
+        "NCAAB:Notre Dame Fighting Irish",
+        "NCAAB:Omaha Mavericks",
+        "NCAAB:Toledo Rockets",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 28717.7150023597
+    },
+    {
+      "day": 42,
+      "parlay_legs": [
+        "NCAAB:Utah Valley Wolverines",
+        "NCAAB:St. John's Red Storm",
+        "NCAAB:UNC Asheville Bulldogs",
+        "NFL:NFL Team 2",
+        "NCAAB:Seton Hall Pirates"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 28617.7150023597
+    },
+    {
+      "day": 43,
+      "parlay_legs": [
+        "NFL:NFL Team 2",
+        "NCAAB:Tarleton State Texans",
+        "NCAAW:NCAAW Team 4",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Wisconsin Badgers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 28517.7150023597
+    },
+    {
+      "day": 44,
+      "parlay_legs": [
+        "NCAAB:UTEP Miners",
+        "NCAAB:Stonehill Skyhawks",
+        "NCAAB:Southern Illinois Salukis",
+        "NHL:NHL Team 4",
+        "NCAAB:South Alabama Jaguars"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 28417.7150023597
+    },
+    {
+      "day": 45,
+      "parlay_legs": [
+        "NCAAW:NCAAW Team 4",
+        "NCAAW:NCAAW Team 6",
+        "NCAAB:Cal Poly Mustangs",
+        "NHL:NHL Team 6",
+        "NCAAW:NCAAW Team 1"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 30853.016669288554
+    },
+    {
+      "day": 46,
+      "parlay_legs": [
+        "WNBA:WNBA Team 1",
+        "NCAAB:UCF Knights",
+        "NCAAB:Arizona Wildcats",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Arizona State Sun Devils"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 33288.31833621741
+    },
+    {
+      "day": 47,
+      "parlay_legs": [
+        "NCAAB:Stony Brook Seawolves",
+        "NHL:NHL Team 3",
+        "NCAAF:NCAAF Team 1",
+        "NCAAF:NCAAF Team 3",
+        "NCAAF:NCAAF Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 33188.31833621741
+    },
+    {
+      "day": 48,
+      "parlay_legs": [
+        "NCAAB:Maine Black Bears",
+        "NCAAB:George Mason Patriots",
+        "NCAAB:Fairleigh Dickinson Knights",
+        "NCAAB:Notre Dame Fighting Irish",
+        "NCAAB:Morehead State Eagles"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 33088.31833621741
+    },
+    {
+      "day": 49,
+      "parlay_legs": [
+        "NCAAB:Houston Cougars",
+        "NCAAB:Eastern Illinois Panthers",
+        "NCAAF:NCAAF Team 2",
+        "NHL:NHL Team 3",
+        "NCAAB:Florida Atlantic Owls"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 35523.620003146265
+    },
+    {
+      "day": 50,
+      "parlay_legs": [
+        "NCAAB:Alabama A&M Bulldogs",
+        "NCAAW:NCAAW Team 2",
+        "NCAAB:Loyola Chicago Ramblers",
+        "NHL:NHL Team 2",
+        "NCAAW:NCAAW Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 35423.620003146265
+    },
+    {
+      "day": 51,
+      "parlay_legs": [
+        "NCAAW:NCAAW Team 2",
+        "NHL:NHL Team 4",
+        "NCAAW:NCAAW Team 5",
+        "NHL:NHL Team 6",
+        "NCAAW:NCAAW Team 4"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 37858.92167007512
+    },
+    {
+      "day": 52,
+      "parlay_legs": [
+        "NCAAB:Duke Blue Devils",
+        "NCAAB:Ohio State Buckeyes",
+        "NCAAB:Seattle U Redhawks",
+        "NFL:NFL Team 2",
+        "NCAAB:Murray State Racers"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 40294.223337003976
+    },
+    {
+      "day": 53,
+      "parlay_legs": [
+        "NCAAB:NC State Wolfpack",
+        "NCAAB:Saint Mary's Gaels",
+        "NFL:NFL Team 2",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Florida State Seminoles"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 40194.223337003976
+    },
+    {
+      "day": 54,
+      "parlay_legs": [
+        "NCAAB:Hartford Hawks",
+        "NCAAB:Eastern Michigan Eagles",
+        "NCAAB:Tennessee Volunteers",
+        "NCAAF:NCAAF Team 2",
+        "NFL:NFL Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 40094.223337003976
+    },
+    {
+      "day": 55,
+      "parlay_legs": [
+        "NCAAB:The Citadel Bulldogs",
+        "NCAAB:Charleston Southern Buccaneers",
+        "NCAAW:NCAAW Team 2",
+        "NCAAB:Wichita State Shockers",
+        "NCAAB:USC Trojans"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 42529.52500393283
+    },
+    {
+      "day": 56,
+      "parlay_legs": [
+        "NCAAB:Texas Southern Tigers",
+        "NFL:NFL Team 2",
+        "NCAAF:NCAAF Team 2",
+        "NCAAB:William & Mary Tribe",
+        "NCAAB:Wright State Raiders"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 44964.82667086169
+    },
+    {
+      "day": 57,
+      "parlay_legs": [
+        "NCAAB:Bradley Braves",
+        "NCAAB:Temple Owls",
+        "NCAAF:NCAAF Team 3",
+        "NHL:NHL Team 2",
+        "NHL:NHL Team 6"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 44864.82667086169
+    },
+    {
+      "day": 58,
+      "parlay_legs": [
+        "NCAAB:San Francisco Dons",
+        "NCAAB:Georgetown Hoyas",
+        "NCAAB:Bethune-Cookman Wildcats",
+        "NCAAW:NCAAW Team 1",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 47300.12833779054
+    },
+    {
+      "day": 59,
+      "parlay_legs": [
+        "NCAAB:South Florida Bulls",
+        "NCAAB:UC Santa Cruz Banana Slugs",
+        "NCAAB:Ohio State Buckeyes",
+        "NCAAB:Villanova Wildcats",
+        "NHL:NHL Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 47200.12833779054
+    },
+    {
+      "day": 60,
+      "parlay_legs": [
+        "NCAAB:UNC Asheville Bulldogs",
+        "NCAAB:Northern Iowa Panthers",
+        "NHL:NHL Team 2",
+        "NHL:NHL Team 3",
+        "NCAAB:New Hampshire Wildcats"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 47100.12833779054
+    },
+    {
+      "day": 61,
+      "parlay_legs": [
+        "NCAAB:Lamar Cardinals",
+        "NHL:NHL Team 3",
+        "WNBA:WNBA Team 3",
+        "NCAAF:NCAAF Team 1",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 47000.12833779054
+    },
+    {
+      "day": 62,
+      "parlay_legs": [
+        "NCAAB:Alabama A&M Bulldogs",
+        "NHL:NHL Team 2",
+        "NCAAF:NCAAF Team 4",
+        "NCAAB:San Diego State Aztecs",
+        "NCAAF:NCAAF Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 46900.12833779054
+    },
+    {
+      "day": 63,
+      "parlay_legs": [
+        "NCAAB:Washington College (MD) Shoremen",
+        "NCAAF:NCAAF Team 2",
+        "NHL:NHL Team 7",
+        "NCAAW:NCAAW Team 3",
+        "WNBA:WNBA Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 46800.12833779054
+    },
+    {
+      "day": 64,
+      "parlay_legs": [
+        "NCAAW:NCAAW Team 2",
+        "NCAAB:St. Thomas-Minnesota Tommies",
+        "NCAAF:NCAAF Team 1",
+        "NCAAF:NCAAF Team 4",
+        "NCAAW:NCAAW Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 46700.12833779054
+    },
+    {
+      "day": 65,
+      "parlay_legs": [
+        "NCAAB:Liberty Flames",
+        "NCAAB:Butler Bulldogs",
+        "NHL:NHL Team 2",
+        "NCAAB:Illinois Fighting Illini",
+        "WNBA:WNBA Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 46600.12833779054
+    },
+    {
+      "day": 66,
+      "parlay_legs": [
+        "NCAAB:Gonzaga Bulldogs",
+        "NCAAB:Arkansas-Pine Bluff Golden Lions",
+        "NCAAW:NCAAW Team 2",
+        "NCAAB:Abilene Christian Wildcats",
+        "NCAAB:Tulsa Golden Hurricane"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 49035.4300047194
+    },
+    {
+      "day": 67,
+      "parlay_legs": [
+        "NCAAB:Sonoma State Seawolves",
+        "NCAAF:NCAAF Team 1",
+        "NHL:NHL Team 2",
+        "NCAAW:NCAAW Team 4",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 48935.4300047194
+    },
+    {
+      "day": 68,
+      "parlay_legs": [
+        "NCAAB:App State Mountaineers",
+        "NCAAF:NCAAF Team 3",
+        "NFL:NFL Team 2",
+        "NCAAB:James Madison Dukes",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 48835.4300047194
+    },
+    {
+      "day": 69,
+      "parlay_legs": [
+        "NCAAB:Houston Christian Huskies",
+        "NCAAB:Georgia Bulldogs",
+        "NFL:NFL Team 1",
+        "NHL:NHL Team 2",
+        "NCAAB:Columbia Lions"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 48735.4300047194
+    },
+    {
+      "day": 70,
+      "parlay_legs": [
+        "NCAAB:Valparaiso Beacons",
+        "NCAAB:Wright State Raiders",
+        "NCAAB:NC State Wolfpack",
+        "NCAAB:Memphis Tigers",
+        "NFL:NFL Team 2"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 51170.73167164825
+    },
+    {
+      "day": 71,
+      "parlay_legs": [
+        "NCAAB:Saint Louis Billikens",
+        "NCAAB:Chicago State Cougars",
+        "NCAAB:McNeese Cowboys",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Nevada Wolf Pack"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 51070.73167164825
+    },
+    {
+      "day": 72,
+      "parlay_legs": [
+        "NCAAB:Long Beach State Beach",
+        "NCAAB:Merrimack Warriors",
+        "WNBA:WNBA Team 1",
+        "WNBA:WNBA Team 2",
+        "NFL:NFL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 50970.73167164825
+    },
+    {
+      "day": 73,
+      "parlay_legs": [
+        "NCAAB:Bob Jones Bruins",
+        "NCAAB:Northern Kentucky Norse",
+        "NCAAB:NC State Wolfpack",
+        "NCAAB:Norfolk State Spartans",
+        "NCAAB:Montana State Bobcats"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 50870.73167164825
+    },
+    {
+      "day": 74,
+      "parlay_legs": [
+        "NCAAB:Arizona Wildcats",
+        "NCAAB:Northwestern Wildcats",
+        "NCAAW:NCAAW Team 2",
+        "NCAAW:NCAAW Team 5",
+        "NFL:NFL Team 1"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 53306.03333857711
+    },
+    {
+      "day": 75,
+      "parlay_legs": [
+        "NCAAB:UC Santa Barbara Gauchos",
+        "NCAAB:UConn Huskies",
+        "NHL:NHL Team 2",
+        "NFL:NFL Team 1",
+        "NCAAB:North Florida Ospreys"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 53206.03333857711
+    },
+    {
+      "day": 76,
+      "parlay_legs": [
+        "NCAAB:Gardner-Webb Runnin' Bulldogs",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Southern Jaguars",
+        "NCAAB:Northern Kentucky Norse",
+        "NCAAB:Northern Iowa Panthers"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 55641.33500550596
+    },
+    {
+      "day": 77,
+      "parlay_legs": [
+        "NCAAB:Towson Tigers",
+        "NFL:NFL Team 2",
+        "NCAAF:NCAAF Team 4",
+        "NHL:NHL Team 6",
+        "NCAAB:Coppin State Eagles"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 55541.33500550596
+    },
+    {
+      "day": 78,
+      "parlay_legs": [
+        "NCAAB:Merchant Marine Academy Mariners",
+        "NHL:NHL Team 2",
+        "NHL:NHL Team 4",
+        "NCAAB:Kansas State Wildcats",
+        "NCAAW:NCAAW Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 55441.33500550596
+    },
+    {
+      "day": 79,
+      "parlay_legs": [
+        "NCAAB:Bradley Braves",
+        "NCAAB:Arizona Wildcats",
+        "NCAAW:NCAAW Team 1",
+        "NCAAF:NCAAF Team 2",
+        "NHL:NHL Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 55341.33500550596
+    },
+    {
+      "day": 80,
+      "parlay_legs": [
+        "NCAAB:Ole Miss Rebels",
+        "NCAAB:Maryland Terrapins",
+        "NCAAB:Wyoming Cowboys",
+        "NHL:NHL Team 2",
+        "NCAAB:Nevada Wolf Pack"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 57776.63667243482
+    },
+    {
+      "day": 81,
+      "parlay_legs": [
+        "NCAAB:Florida Gulf Coast Eagles",
+        "NCAAB:McNeese Cowboys",
+        "NCAAB:California Baptist Lancers",
+        "NHL:NHL Team 1",
+        "NCAAB:Idaho Vandals"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 57676.63667243482
+    },
+    {
+      "day": 82,
+      "parlay_legs": [
+        "NCAAB:Washington State Cougars",
+        "NHL:NHL Team 1",
+        "NHL:NHL Team 2",
+        "NCAAB:Lehigh Mountain Hawks",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 60111.938339363674
+    },
+    {
+      "day": 83,
+      "parlay_legs": [
+        "NCAAB:Santa Clara Broncos",
+        "NCAAW:NCAAW Team 2",
+        "NCAAF:NCAAF Team 2",
+        "NCAAF:NCAAF Team 1",
+        "WNBA:WNBA Team 1"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 62547.24000629253
+    },
+    {
+      "day": 84,
+      "parlay_legs": [
+        "NCAAB:St. Thomas-Minnesota Tommies",
+        "NCAAW:NCAAW Team 2",
+        "NCAAB:San Francisco Dons",
+        "NCAAB:Navy Midshipmen",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 64982.541673221385
+    },
+    {
+      "day": 85,
+      "parlay_legs": [
+        "NCAAB:California Golden Bears",
+        "NCAAB:Maine Black Bears",
+        "NCAAB:Utah Utes",
+        "NHL:NHL Team 3",
+        "NCAAB:Gardner-Webb Runnin' Bulldogs"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 64882.541673221385
+    },
+    {
+      "day": 86,
+      "parlay_legs": [
+        "NCAAB:UTEP Miners",
+        "NCAAB:California Golden Bears",
+        "NCAAF:NCAAF Team 5",
+        "NCAAB:Dartmouth Big Green",
+        "NCAAB:USC Trojans"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 64782.541673221385
+    },
+    {
+      "day": 87,
+      "parlay_legs": [
+        "NCAAB:Cal State Fullerton Titans",
+        "NCAAF:NCAAF Team 2",
+        "NCAAF:NCAAF Team 4",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Iona Gaels"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 67217.84334015024
+    },
+    {
+      "day": 88,
+      "parlay_legs": [
+        "NCAAB:Arkansas-Pine Bluff Golden Lions",
+        "NFL:NFL Team 3",
+        "NHL:NHL Team 2",
+        "NCAAW:NCAAW Team 3",
+        "NCAAW:NCAAW Team 1"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 69653.14500707909
+    },
+    {
+      "day": 89,
+      "parlay_legs": [
+        "NCAAB:Xavier Musketeers",
+        "NCAAB:Vermont Catamounts",
+        "NFL:NFL Team 3",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Bradley Braves"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 69553.14500707909
+    },
+    {
+      "day": 90,
+      "parlay_legs": [
+        "NCAAB:UTEP Miners",
+        "NCAAB:Loyola New Orleans Wolfpack",
+        "NCAAW:NCAAW Team 2",
+        "NCAAB:SIU Edwardsville Cougars",
+        "NFL:NFL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 69453.14500707909
+    },
+    {
+      "day": 91,
+      "parlay_legs": [
+        "NCAAB:Hampton Pirates",
+        "NCAAB:Towson Tigers",
+        "NCAAB:Tennessee State Tigers",
+        "NCAAB:TCU Horned Frogs",
+        "NCAAB:UL Monroe Warhawks"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 69353.14500707909
+    },
+    {
+      "day": 92,
+      "parlay_legs": [
+        "NCAAB:Saint Josephs Long Island Golden Eagles",
+        "NCAAB:Iowa Hawkeyes",
+        "NCAAB:Belmont Bruins",
+        "NHL:NHL Team 1",
+        "WNBA:WNBA Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 69253.14500707909
+    },
+    {
+      "day": 93,
+      "parlay_legs": [
+        "NCAAB:Stanford Cardinal",
+        "NCAAB:San Diego State Aztecs",
+        "NCAAF:NCAAF Team 4",
+        "NCAAW:NCAAW Team 3",
+        "NCAAW:NCAAW Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 69153.14500707909
+    },
+    {
+      "day": 94,
+      "parlay_legs": [
+        "NCAAB:Saint Louis Billikens",
+        "NCAAB:Mercer Bears",
+        "NCAAB:Purdue Boilermakers",
+        "NHL:NHL Team 4",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 71588.44667400794
+    },
+    {
+      "day": 95,
+      "parlay_legs": [
+        "NHL:NHL Team 1",
+        "NHL:NHL Team 3",
+        "NCAAB:Oral Roberts Golden Eagles",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Georgetown Hoyas"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 71488.44667400794
+    },
+    {
+      "day": 96,
+      "parlay_legs": [
+        "NCAAB:Maryland Eastern Shore Hawks",
+        "NCAAB:Iowa Hawkeyes",
+        "NCAAB:Miami Hurricanes",
+        "NCAAB:UCLA Bruins",
+        "NCAAW:NCAAW Team 3"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 73923.74834093679
+    },
+    {
+      "day": 97,
+      "parlay_legs": [
+        "NCAAB:Tennessee State Tigers",
+        "NCAAB:Nevada Wolf Pack",
+        "NHL:NHL Team 3",
+        "NHL:NHL Team 4",
+        "NCAAB:Campbell Fighting Camels"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 76359.05000786563
+    },
+    {
+      "day": 98,
+      "parlay_legs": [
+        "NCAAB:Tulane Green Wave",
+        "NCAAB:Kent State Golden Flashes",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Florida International Panthers",
+        "NCAAB:Kentucky Wildcats"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 76259.05000786563
+    },
+    {
+      "day": 99,
+      "parlay_legs": [
+        "WNBA:WNBA Team 1",
+        "NCAAW:NCAAW Team 1",
+        "WNBA:WNBA Team 2",
+        "NHL:NHL Team 2",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 76159.05000786563
+    },
+    {
+      "day": 100,
+      "parlay_legs": [
+        "NCAAB:Abilene Christian Wildcats",
+        "NCAAB:Kent State Golden Flashes",
+        "NCAAB:Davidson Wildcats",
+        "NHL:NHL Team 4",
+        "NCAAB:Wisconsin Badgers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 76059.05000786563
+    },
+    {
+      "day": 101,
+      "parlay_legs": [
+        "NCAAB:Iowa State Cyclones",
+        "NCAAB:Winthrop Eagles",
+        "NCAAB:Louisiana Ragin' Cajuns",
+        "NCAAW:NCAAW Team 2",
+        "NHL:NHL Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 75959.05000786563
+    },
+    {
+      "day": 102,
+      "parlay_legs": [
+        "NCAAB:Incarnate Word Cardinals",
+        "NCAAB:Eastern Illinois Panthers",
+        "NCAAB:Wright State Raiders",
+        "NCAAB:New Mexico State Aggies",
+        "NCAAF:NCAAF Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 75859.05000786563
+    },
+    {
+      "day": 103,
+      "parlay_legs": [
+        "NCAAB:TCU Horned Frogs",
+        "WNBA:WNBA Team 3",
+        "NHL:NHL Team 1",
+        "NCAAB:Binghamton Bearcats",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 75759.05000786563
+    },
+    {
+      "day": 104,
+      "parlay_legs": [
+        "NCAAF:NCAAF Team 4",
+        "NCAAB:Providence Friars",
+        "NCAAF:NCAAF Team 1",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Bowling Green Falcons"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 75659.05000786563
+    },
+    {
+      "day": 105,
+      "parlay_legs": [
+        "NCAAW:NCAAW Team 1",
+        "WNBA:WNBA Team 1",
+        "NHL:NHL Team 2",
+        "NCAAB:USC Trojans",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 78094.35167479448
+    },
+    {
+      "day": 106,
+      "parlay_legs": [
+        "NCAAB:Rhode Island Rams",
+        "NCAAB:Alcorn State Braves",
+        "NCAAB:Rhode Island Rams",
+        "NCAAB:Xavier Musketeers",
+        "NCAAF:NCAAF Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 77994.35167479448
+    },
+    {
+      "day": 107,
+      "parlay_legs": [
+        "NCAAB:Florida Gators",
+        "NCAAB:Georgia Bulldogs",
+        "NHL:NHL Team 3",
+        "NCAAF:NCAAF Team 2",
+        "NCAAF:NCAAF Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 77894.35167479448
+    },
+    {
+      "day": 108,
+      "parlay_legs": [
+        "NCAAB:Incarnate Word Cardinals",
+        "NCAAB:Mount Saint Vincent",
+        "NCAAW:NCAAW Team 1",
+        "NFL:NFL Team 3",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 77794.35167479448
+    },
+    {
+      "day": 109,
+      "parlay_legs": [
+        "NCAAB:Harvard Crimson",
+        "NCAAB:Our Lady Of The Lake Saints",
+        "NCAAB:Louisiana Tech Bulldogs",
+        "NCAAB:Liberty Flames",
+        "NCAAB:Towson Tigers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 77694.35167479448
+    },
+    {
+      "day": 110,
+      "parlay_legs": [
+        "NCAAB:New Mexico Lobos",
+        "NCAAB:Eureka Red Devils",
+        "NCAAF:NCAAF Team 2",
+        "NCAAB:Houston Cougars",
+        "NCAAB:Illinois State Redbirds"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 77594.35167479448
+    },
+    {
+      "day": 111,
+      "parlay_legs": [
+        "NCAAB:VCU Rams",
+        "NCAAB:Tulsa Golden Hurricane",
+        "NCAAW:NCAAW Team 3",
+        "NHL:NHL Team 7",
+        "NCAAB:Loyola Chicago Ramblers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 77494.35167479448
+    },
+    {
+      "day": 112,
+      "parlay_legs": [
+        "NCAAB:Old Dominion Monarchs",
+        "NHL:NHL Team 2",
+        "NCAAB:Houston Cougars",
+        "NCAAW:NCAAW Team 6",
+        "NFL:NFL Team 2"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 79929.65334172333
+    },
+    {
+      "day": 113,
+      "parlay_legs": [
+        "NCAAW:NCAAW Team 2",
+        "NCAAB:Maryland Terrapins",
+        "NCAAF:NCAAF Team 1",
+        "NCAAF:NCAAF Team 2",
+        "NCAAF:NCAAF Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 79829.65334172333
+    },
+    {
+      "day": 114,
+      "parlay_legs": [
+        "NCAAB:McNeese Cowboys",
+        "NCAAB:Arkansas-Pine Bluff Golden Lions",
+        "NCAAB:South Dakota State Jackrabbits",
+        "NCAAB:Charleston Southern Buccaneers",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 79729.65334172333
+    },
+    {
+      "day": 115,
+      "parlay_legs": [
+        "NCAAB:East Carolina Pirates",
+        "NHL:NHL Team 1",
+        "NCAAW:NCAAW Team 2",
+        "NCAAW:NCAAW Team 3",
+        "NCAAB:St. John's Red Storm"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 79629.65334172333
+    },
+    {
+      "day": 116,
+      "parlay_legs": [
+        "NCAAB:UTSA Roadrunners",
+        "NCAAB:Belmont Bruins",
+        "NCAAB:Drake Bulldogs",
+        "NCAAB:Michigan Wolverines",
+        "NFL:NFL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 79529.65334172333
+    },
+    {
+      "day": 117,
+      "parlay_legs": [
+        "NCAAB:East Carolina Pirates",
+        "NCAAB:Saint Louis Billikens",
+        "NCAAB:Villanova Wildcats",
+        "NCAAB:Portland State Vikings",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 79429.65334172333
+    },
+    {
+      "day": 118,
+      "parlay_legs": [
+        "NCAAB:VCU Rams",
+        "NCAAB:Florida Gulf Coast Eagles",
+        "NHL:NHL Team 4",
+        "NHL:NHL Team 6",
+        "NHL:NHL Team 5"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 81864.95500865218
+    },
+    {
+      "day": 119,
+      "parlay_legs": [
+        "NHL:NHL Team 5",
+        "NFL:NFL Team 3",
+        "NFL:NFL Team 1",
+        "NHL:NHL Team 1",
+        "NFL:NFL Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 81764.95500865218
+    },
+    {
+      "day": 120,
+      "parlay_legs": [
+        "NCAAB:Winthrop Eagles",
+        "NCAAB:Arizona State Sun Devils",
+        "NCAAF:NCAAF Team 4",
+        "NFL:NFL Team 2",
+        "NHL:NHL Team 3"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 84200.25667558103
+    },
+    {
+      "day": 121,
+      "parlay_legs": [
+        "NCAAB:SE Louisiana Lions",
+        "NCAAB:Syracuse Orange",
+        "NCAAB:UNC Wilmington Seahawks",
+        "NCAAB:Liberty Flames",
+        "NCAAB:Furman Paladins"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 84100.25667558103
+    },
+    {
+      "day": 122,
+      "parlay_legs": [
+        "NCAAB:Tennessee Tech Golden Eagles",
+        "NCAAW:NCAAW Team 1",
+        "NCAAW:NCAAW Team 6",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Monmouth Hawks"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 86535.55834250987
+    },
+    {
+      "day": 123,
+      "parlay_legs": [
+        "NCAAB:North Texas Mean Green",
+        "NCAAB:South Carolina Upstate Spartans",
+        "NCAAB:Yale Bulldogs",
+        "NHL:NHL Team 3",
+        "NCAAB:Middle Tennessee Blue Raiders"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 88970.86000943872
+    },
+    {
+      "day": 124,
+      "parlay_legs": [
+        "NCAAB:Jacksonville Dolphins",
+        "NCAAB:UMBC Retrievers",
+        "NCAAB:Furman Paladins",
+        "NCAAB:Oregon Ducks",
+        "NHL:NHL Team 6"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88870.86000943872
+    },
+    {
+      "day": 125,
+      "parlay_legs": [
+        "NCAAB:Houston Cougars",
+        "NCAAF:NCAAF Team 4",
+        "NHL:NHL Team 3",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Texas State Bobcats"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88770.86000943872
+    },
+    {
+      "day": 126,
+      "parlay_legs": [
+        "NCAAB:Oakland Golden Grizzlies",
+        "WNBA:WNBA Team 1",
+        "WNBA:WNBA Team 2",
+        "NHL:NHL Team 3",
+        "WNBA:WNBA Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88670.86000943872
+    },
+    {
+      "day": 127,
+      "parlay_legs": [
+        "NCAAB:UAB Blazers",
+        "NHL:NHL Team 4",
+        "NCAAW:NCAAW Team 2",
+        "NCAAB:Utah Utes",
+        "NCAAB:Ferris State Bulldogs"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88570.86000943872
+    },
+    {
+      "day": 128,
+      "parlay_legs": [
+        "NCAAB:Air Force Falcons",
+        "NHL:NHL Team 4",
+        "NCAAB:Southern Illinois Salukis",
+        "NFL:NFL Team 2",
+        "NFL:NFL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88470.86000943872
+    },
+    {
+      "day": 129,
+      "parlay_legs": [
+        "NCAAB:Longwood Lancers",
+        "NHL:NHL Team 5",
+        "NCAAF:NCAAF Team 1",
+        "NHL:NHL Team 1",
+        "NCAAF:NCAAF Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88370.86000943872
+    },
+    {
+      "day": 130,
+      "parlay_legs": [
+        "NCAAB:Presbyterian Blue Hose",
+        "NHL:NHL Team 4",
+        "NCAAB:Wright State Raiders",
+        "NHL:NHL Team 1",
+        "NCAAB:UNC Greensboro Spartans"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88270.86000943872
+    },
+    {
+      "day": 131,
+      "parlay_legs": [
+        "NCAAB:Auburn Tigers",
+        "NCAAB:Liberty Flames",
+        "NHL:NHL Team 1",
+        "NCAAB:Life Pacific Warriors",
+        "NHL:NHL Team 8"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88170.86000943872
+    },
+    {
+      "day": 132,
+      "parlay_legs": [
+        "NCAAB:Tennessee Tech Golden Eagles",
+        "NHL:NHL Team 5",
+        "NCAAW:NCAAW Team 3",
+        "NHL:NHL Team 2",
+        "NCAAW:NCAAW Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88070.86000943872
+    },
+    {
+      "day": 133,
+      "parlay_legs": [
+        "NCAAB:Bradley Braves",
+        "NFL:NFL Team 1",
+        "NCAAB:Central Michigan Chippewas",
+        "NCAAB:Arkansas State Red Wolves",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 87970.86000943872
+    },
+    {
+      "day": 134,
+      "parlay_legs": [
+        "NCAAB:BYU Cougars",
+        "NCAAB:Illinois Fighting Illini",
+        "NCAAB:Fisk Bulldogs",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:UT Arlington Mavericks"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 87870.86000943872
+    },
+    {
+      "day": 135,
+      "parlay_legs": [
+        "NCAAB:Omaha Mavericks",
+        "NCAAB:UL Monroe Warhawks",
+        "NCAAF:NCAAF Team 5",
+        "NCAAW:NCAAW Team 3",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 87770.86000943872
+    },
+    {
+      "day": 136,
+      "parlay_legs": [
+        "NCAAB:Utah Utes",
+        "NCAAB:Houston Christian Huskies",
+        "NCAAW:NCAAW Team 4",
+        "NCAAB:Minnesota Golden Gophers",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 87670.86000943872
+    },
+    {
+      "day": 137,
+      "parlay_legs": [
+        "NCAAB:Charleston Cougars",
+        "NFL:NFL Team 3",
+        "NFL:NFL Team 1",
+        "WNBA:WNBA Team 1",
+        "NCAAB:San Diego Toreros"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 87570.86000943872
+    },
+    {
+      "day": 138,
+      "parlay_legs": [
+        "NCAAB:Little Rock Trojans",
+        "NCAAB:Campbellsville-Harrodsburg Pioneers",
+        "NCAAW:NCAAW Team 2",
+        "NCAAB:Michigan Wolverines",
+        "NHL:NHL Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 87470.86000943872
+    },
+    {
+      "day": 139,
+      "parlay_legs": [
+        "NCAAB:UConn Huskies",
+        "WNBA:WNBA Team 3",
+        "NHL:NHL Team 7",
+        "NCAAW:NCAAW Team 2",
+        "NHL:NHL Team 6"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 87370.86000943872
+    },
+    {
+      "day": 140,
+      "parlay_legs": [
+        "NCAAB:Murray State Racers",
+        "NCAAW:NCAAW Team 1",
+        "NFL:NFL Team 1",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Bryant Bulldogs"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 87270.86000943872
+    },
+    {
+      "day": 141,
+      "parlay_legs": [
+        "NHL:NHL Team 2",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Louisiana Tech Bulldogs",
+        "NHL:NHL Team 3",
+        "NCAAB:Quinnipiac Bobcats"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 87170.86000943872
+    },
+    {
+      "day": 142,
+      "parlay_legs": [
+        "NCAAB:Boston University Terriers",
+        "NCAAB:Jackson State Tigers",
+        "NCAAB:Sacred Heart Pioneers",
+        "NCAAB:Green Bay Phoenix",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 87070.86000943872
+    },
+    {
+      "day": 143,
+      "parlay_legs": [
+        "NCAAB:Colorado State Rams",
+        "NHL:NHL Team 4",
+        "NHL:NHL Team 2",
+        "NHL:NHL Team 3",
+        "NCAAB:Western Michigan Broncos"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 86970.86000943872
+    },
+    {
+      "day": 144,
+      "parlay_legs": [
+        "NCAAB:West Virginia Mountaineers",
+        "NCAAB:Coastal Carolina Chanticleers",
+        "WNBA:WNBA Team 2",
+        "NCAAB:San Diego State Aztecs",
+        "NCAAF:NCAAF Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 86870.86000943872
+    },
+    {
+      "day": 145,
+      "parlay_legs": [
+        "NCAAB:USC Trojans",
+        "NCAAB:Notre Dame Fighting Irish",
+        "NCAAB:UMass Lowell River Hawks",
+        "NCAAB:San Diego Toreros",
+        "NCAAB:Liberty Flames"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 89306.16167636757
+    },
+    {
+      "day": 146,
+      "parlay_legs": [
+        "NCAAB:Wisconsin Badgers",
+        "NCAAB:St. Bonaventure Bonnies",
+        "NFL:NFL Team 1",
+        "WNBA:WNBA Team 2",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 89206.16167636757
+    },
+    {
+      "day": 147,
+      "parlay_legs": [
+        "NCAAB:Minnesota Golden Gophers",
+        "NHL:NHL Team 2",
+        "NCAAW:NCAAW Team 2",
+        "NCAAW:NCAAW Team 6",
+        "NFL:NFL Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 89106.16167636757
+    },
+    {
+      "day": 148,
+      "parlay_legs": [
+        "NCAAB:Weber State Wildcats",
+        "NCAAB:Milligan Buffaloes",
+        "NHL:NHL Team 3",
+        "NFL:NFL Team 2",
+        "NFL:NFL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 89006.16167636757
+    },
+    {
+      "day": 149,
+      "parlay_legs": [
+        "NCAAB:Marshall Thundering Herd",
+        "NCAAW:NCAAW Team 2",
+        "WNBA:WNBA Team 2",
+        "NCAAF:NCAAF Team 3",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88906.16167636757
+    },
+    {
+      "day": 150,
+      "parlay_legs": [
+        "NCAAB:Northern Arizona Lumberjacks",
+        "NCAAB:Missouri State Bears",
+        "NCAAF:NCAAF Team 2",
+        "NCAAB:Princeton Tigers",
+        "NCAAB:UAlbany Great Danes"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88806.16167636757
+    },
+    {
+      "day": 151,
+      "parlay_legs": [
+        "NCAAB:Morgan State Bears",
+        "NCAAB:Fresno State Bulldogs",
+        "NCAAF:NCAAF Team 2",
+        "NCAAW:NCAAW Team 4",
+        "NHL:NHL Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88706.16167636757
+    },
+    {
+      "day": 152,
+      "parlay_legs": [
+        "NCAAB:Cal State Northridge Matadors",
+        "NCAAB:Houston Cougars",
+        "NCAAB:Old Dominion Monarchs",
+        "NCAAB:Marshall Thundering Herd",
+        "NCAAB:Alabama State Hornets"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88606.16167636757
+    },
+    {
+      "day": 153,
+      "parlay_legs": [
+        "NCAAB:Florida Gulf Coast Eagles",
+        "NCAAB:Utah Valley Wolverines",
+        "NCAAB:Oklahoma Sooners",
+        "NCAAB:Michigan State Spartans",
+        "WNBA:WNBA Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88506.16167636757
+    },
+    {
+      "day": 154,
+      "parlay_legs": [
+        "NCAAB:UNC Wilmington Seahawks",
+        "NCAAB:Nevada Wolf Pack",
+        "NCAAF:NCAAF Team 4",
+        "WNBA:WNBA Team 1",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 88406.16167636757
+    },
+    {
+      "day": 155,
+      "parlay_legs": [
+        "NCAAB:Lafayette Leopards",
+        "NCAAB:Villanova Wildcats",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Texas Longhorns",
+        "NCAAB:Saint Joseph's Hawks"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 90841.46334329642
+    },
+    {
+      "day": 156,
+      "parlay_legs": [
+        "NCAAW:NCAAW Team 2",
+        "NCAAW:NCAAW Team 5",
+        "NHL:NHL Team 4",
+        "NCAAW:NCAAW Team 1",
+        "NCAAF:NCAAF Team 5"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 90741.46334329642
+    },
+    {
+      "day": 157,
+      "parlay_legs": [
+        "NCAAB:Radford Highlanders",
+        "NCAAB:Maryland Terrapins",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Gonzaga Bulldogs",
+        "NCAAB:New Mexico State Aggies"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 93176.76501022527
+    },
+    {
+      "day": 158,
+      "parlay_legs": [
+        "NCAAB:Nevada Wolf Pack",
+        "NCAAB:Northern Kentucky Norse",
+        "NFL:NFL Team 1",
+        "NFL:NFL Team 2",
+        "NCAAB:Little Rock Trojans"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 93076.76501022527
+    },
+    {
+      "day": 159,
+      "parlay_legs": [
+        "NCAAB:Georgia State Panthers",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Mississippi State Bulldogs",
+        "NFL:NFL Team 1",
+        "WNBA:WNBA Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 92976.76501022527
+    },
+    {
+      "day": 160,
+      "parlay_legs": [
+        "NCAAB:North Carolina Central Eagles",
+        "NCAAF:NCAAF Team 1",
+        "NCAAF:NCAAF Team 2",
+        "NCAAW:NCAAW Team 2",
+        "NCAAF:NCAAF Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 92876.76501022527
+    },
+    {
+      "day": 161,
+      "parlay_legs": [
+        "NCAAB:Kentucky Wildcats",
+        "NCAAB:Niagara Purple Eagles",
+        "NCAAB:Army Black Knights",
+        "NFL:NFL Team 3",
+        "NCAAB:Wright State Raiders"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 92776.76501022527
+    },
+    {
+      "day": 162,
+      "parlay_legs": [
+        "NCAAB:Alcorn State Braves",
+        "NCAAW:NCAAW Team 4",
+        "NCAAB:San Diego Christian Hawks",
+        "NCAAB:Michigan State Spartans",
+        "NCAAB:Penn State Nittany Lions"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 92676.76501022527
+    },
+    {
+      "day": 163,
+      "parlay_legs": [
+        "NCAAB:Jacksonville Dolphins",
+        "NCAAF:NCAAF Team 2",
+        "NCAAB:App State Mountaineers",
+        "NHL:NHL Team 2",
+        "NCAAW:NCAAW Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 92576.76501022527
+    },
+    {
+      "day": 164,
+      "parlay_legs": [
+        "NCAAB:Missouri State Bears",
+        "NHL:NHL Team 6",
+        "WNBA:WNBA Team 3",
+        "NCAAB:Saint Joseph's Hawks",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 92476.76501022527
+    },
+    {
+      "day": 165,
+      "parlay_legs": [
+        "NCAAB:Coppin State Eagles",
+        "NCAAB:UC Irvine Anteaters",
+        "WNBA:WNBA Team 3",
+        "NCAAW:NCAAW Team 4",
+        "NCAAB:Yale Bulldogs"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 92376.76501022527
+    },
+    {
+      "day": 166,
+      "parlay_legs": [
+        "NCAAB:Mississippi Valley State Delta Devils",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Eastern Michigan Eagles",
+        "WNBA:WNBA Team 1",
+        "NFL:NFL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 92276.76501022527
+    },
+    {
+      "day": 167,
+      "parlay_legs": [
+        "NCAAB:Jacksonville State Gamecocks",
+        "NCAAB:Texas State Bobcats",
+        "NCAAB:East Carolina Pirates",
+        "NHL:NHL Team 3",
+        "NCAAB:Purdue Boilermakers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 92176.76501022527
+    },
+    {
+      "day": 168,
+      "parlay_legs": [
+        "NCAAB:UT Arlington Mavericks",
+        "NCAAB:Denver Pioneers",
+        "NCAAW:NCAAW Team 3",
+        "NCAAB:Illinois Fighting Illini",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 92076.76501022527
+    },
+    {
+      "day": 169,
+      "parlay_legs": [
+        "NCAAB:UNC Greensboro Spartans",
+        "WNBA:WNBA Team 2",
+        "NFL:NFL Team 2",
+        "NCAAB:SMU Mustangs",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 91976.76501022527
+    },
+    {
+      "day": 170,
+      "parlay_legs": [
+        "NCAAB:Robert Morris Colonials",
+        "NCAAB:Louisiana Ragin' Cajuns",
+        "NCAAB:Limestone Saints",
+        "NCAAB:UC Irvine Anteaters",
+        "NCAAB:South Dakota State Jackrabbits"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 91876.76501022527
+    },
+    {
+      "day": 171,
+      "parlay_legs": [
+        "NCAAB:Cornell Big Red",
+        "NCAAB:UMBC Retrievers",
+        "NCAAB:Rhode Island Rams",
+        "NCAAB:Ole Miss Rebels",
+        "NCAAB:Texas Southern Tigers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 91776.76501022527
+    },
+    {
+      "day": 172,
+      "parlay_legs": [
+        "NCAAB:Southern Utah Thunderbirds",
+        "NHL:NHL Team 2",
+        "NCAAB:Tulane Green Wave",
+        "NCAAW:NCAAW Team 4",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 91676.76501022527
+    },
+    {
+      "day": 173,
+      "parlay_legs": [
+        "NCAAB:Indiana State Sycamores",
+        "NCAAB:Rutgers Scarlet Knights",
+        "NCAAB:Mercer Bears",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Middle Tennessee Blue Raiders"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 91576.76501022527
+    },
+    {
+      "day": 174,
+      "parlay_legs": [
+        "NCAAB:Ohio Bobcats",
+        "NCAAB:South Carolina Gamecocks",
+        "NCAAB:Kansas Jayhawks",
+        "WNBA:WNBA Team 1",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 91476.76501022527
+    },
+    {
+      "day": 175,
+      "parlay_legs": [
+        "NCAAB:Virginia Tech Hokies",
+        "NHL:NHL Team 4",
+        "NCAAB:Abilene Christian Wildcats",
+        "NCAAB:Saint Louis Billikens",
+        "NCAAB:Houston Cougars"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 93912.06667715411
+    },
+    {
+      "day": 176,
+      "parlay_legs": [
+        "NCAAB:Tennessee Tech Golden Eagles",
+        "NHL:NHL Team 3",
+        "NCAAB:Valparaiso Beacons",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Loyola Maryland Greyhounds"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 93812.06667715411
+    },
+    {
+      "day": 177,
+      "parlay_legs": [
+        "NCAAB:Texas Southern Tigers",
+        "NCAAB:Central Michigan Chippewas",
+        "NFL:NFL Team 1",
+        "NCAAB:UTEP Miners",
+        "NCAAB:Morehead State Eagles"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 93712.06667715411
+    },
+    {
+      "day": 178,
+      "parlay_legs": [
+        "NCAAF:NCAAF Team 3",
+        "NCAAF:NCAAF Team 1",
+        "WNBA:WNBA Team 2",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Northern Colorado Bears"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 93612.06667715411
+    },
+    {
+      "day": 179,
+      "parlay_legs": [
+        "NCAAB:Northwestern State Demons",
+        "NCAAB:Duke Blue Devils",
+        "NCAAB:High Point Panthers",
+        "NCAAB:DePaul Blue Demons",
+        "NFL:NFL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 93512.06667715411
+    },
+    {
+      "day": 180,
+      "parlay_legs": [
+        "NCAAB:Murray State Racers",
+        "NHL:NHL Team 4",
+        "NCAAW:NCAAW Team 2",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Oklahoma State Cowboys"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 93412.06667715411
+    },
+    {
+      "day": 181,
+      "parlay_legs": [
+        "NCAAB:Lincoln (MO) Blue Tigers",
+        "NCAAB:Georgetown Hoyas",
+        "NCAAB:St. John's Red Storm",
+        "NCAAB:Valparaiso Beacons",
+        "NCAAW:NCAAW Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 93312.06667715411
+    },
+    {
+      "day": 182,
+      "parlay_legs": [
+        "NCAAB:Air Force Falcons",
+        "NHL:NHL Team 2",
+        "NHL:NHL Team 1",
+        "NCAAB:LSU Tigers",
+        "NCAAB:Western Kentucky Hilltoppers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 93212.06667715411
+    },
+    {
+      "day": 183,
+      "parlay_legs": [
+        "NCAAB:Pacific Tigers",
+        "NCAAF:NCAAF Team 2",
+        "NCAAF:NCAAF Team 3",
+        "NCAAW:NCAAW Team 1",
+        "NCAAW:NCAAW Team 5"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 95647.36834408296
+    },
+    {
+      "day": 184,
+      "parlay_legs": [
+        "WNBA:WNBA Team 2",
+        "NCAAB:Lindenwood Lions",
+        "NCAAB:Niagara Purple Eagles",
+        "NCAAW:NCAAW Team 4",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 95547.36834408296
+    },
+    {
+      "day": 185,
+      "parlay_legs": [
+        "NCAAB:Maryland Terrapins",
+        "NHL:NHL Team 2",
+        "NCAAW:NCAAW Team 6",
+        "NFL:NFL Team 2",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 97982.67001101181
+    },
+    {
+      "day": 186,
+      "parlay_legs": [
+        "NCAAB:UTEP Miners",
+        "NCAAF:NCAAF Team 2",
+        "NCAAW:NCAAW Team 5",
+        "NCAAB:UC Santa Barbara Gauchos",
+        "NCAAB:Incarnate Word Cardinals"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 97882.67001101181
+    },
+    {
+      "day": 187,
+      "parlay_legs": [
+        "NCAAB:Arizona State Sun Devils",
+        "NCAAB:Kansas State Wildcats",
+        "NHL:NHL Team 3",
+        "NHL:NHL Team 4",
+        "NCAAB:Bryant Bulldogs"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 97782.67001101181
+    },
+    {
+      "day": 188,
+      "parlay_legs": [
+        "NCAAB:SIU Edwardsville Cougars",
+        "NCAAF:NCAAF Team 3",
+        "NCAAB:Northern Kentucky Norse",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Florida International Panthers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 97682.67001101181
+    },
+    {
+      "day": 189,
+      "parlay_legs": [
+        "NCAAB:Florida Gators",
+        "NCAAB:Merrimack Warriors",
+        "NCAAB:Utah Utes",
+        "NCAAB:Hartford Hawks",
+        "NCAAB:Delaware State Hornets"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 97582.67001101181
+    },
+    {
+      "day": 190,
+      "parlay_legs": [
+        "NCAAF:NCAAF Team 2",
+        "NCAAB:Kansas City Roos",
+        "NCAAB:Bowling Green Falcons",
+        "NCAAB:Northwestern Wildcats",
+        "NCAAB:Nebraska Cornhuskers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 97482.67001101181
+    },
+    {
+      "day": 191,
+      "parlay_legs": [
+        "NCAAB:Drake Bulldogs",
+        "NCAAB:Texas A&M-Corpus Christi Islanders",
+        "NCAAB:Texas Southern Tigers",
+        "NCAAF:NCAAF Team 2",
+        "NCAAW:NCAAW Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 97382.67001101181
+    },
+    {
+      "day": 192,
+      "parlay_legs": [
+        "NCAAB:Davidson Wildcats",
+        "NCAAB:Trinity College of Jacksonville Eagles",
+        "NCAAB:Providence Friars",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Bethune-Cookman Wildcats"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 97282.67001101181
+    },
+    {
+      "day": 193,
+      "parlay_legs": [
+        "NCAAB:Kansas Jayhawks",
+        "NCAAB:Buffalo Bulls",
+        "NCAAB:Texas A&M-Corpus Christi Islanders",
+        "NCAAB:Nevada Wolf Pack",
+        "NCAAB:Seton Hall Pirates"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 99717.97167794066
+    },
+    {
+      "day": 194,
+      "parlay_legs": [
+        "WNBA:WNBA Team 1",
+        "NCAAB:American University Eagles",
+        "NCAAB:Minnesota Golden Gophers",
+        "NCAAF:NCAAF Team 2",
+        "NCAAF:NCAAF Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 99617.97167794066
+    },
+    {
+      "day": 195,
+      "parlay_legs": [
+        "NCAAB:Kennesaw State Owls",
+        "NCAAW:NCAAW Team 5",
+        "NHL:NHL Team 1",
+        "NHL:NHL Team 3",
+        "NCAAW:NCAAW Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 99517.97167794066
+    },
+    {
+      "day": 196,
+      "parlay_legs": [
+        "NFL:NFL Team 1",
+        "NCAAB:Auburn Tigers",
+        "WNBA:WNBA Team 3",
+        "NCAAB:Detroit Mercy Titans",
+        "WNBA:WNBA Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 99417.97167794066
+    },
+    {
+      "day": 197,
+      "parlay_legs": [
+        "NHL:NHL Team 3",
+        "NCAAB:Arkansas State Red Wolves",
+        "NFL:NFL Team 2",
+        "NCAAW:NCAAW Team 2",
+        "NCAAB:Stetson Hatters"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 99317.97167794066
+    },
+    {
+      "day": 198,
+      "parlay_legs": [
+        "NCAAB:Utah State Aggies",
+        "NHL:NHL Team 6",
+        "NHL:NHL Team 5",
+        "NCAAB:Marist Red Foxes",
+        "NHL:NHL Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 99217.97167794066
+    },
+    {
+      "day": 199,
+      "parlay_legs": [
+        "NCAAB:Oklahoma Sooners",
+        "NCAAB:Wright State Raiders",
+        "WNBA:WNBA Team 2",
+        "NHL:NHL Team 6",
+        "NHL:NHL Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 99117.97167794066
+    },
+    {
+      "day": 200,
+      "parlay_legs": [
+        "NCAAB:Utah State Aggies",
+        "NCAAB:Cleveland State Vikings",
+        "NCAAB:Troy Trojans",
+        "NCAAW:NCAAW Team 4",
+        "NCAAB:Wofford Terriers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 99017.97167794066
+    },
+    {
+      "day": 201,
+      "parlay_legs": [
+        "NCAAB:UNC Asheville Bulldogs",
+        "NCAAB:Northwestern Wildcats",
+        "NCAAB:Duke Blue Devils",
+        "NCAAB:Buffalo Bulls",
+        "NHL:NHL Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 98917.97167794066
+    },
+    {
+      "day": 202,
+      "parlay_legs": [
+        "NCAAB:Hofstra Pride",
+        "NCAAB:Binghamton Bearcats",
+        "NCAAF:NCAAF Team 2",
+        "NHL:NHL Team 3",
+        "WNBA:WNBA Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 98817.97167794066
+    },
+    {
+      "day": 203,
+      "parlay_legs": [
+        "NCAAB:App State Mountaineers",
+        "NCAAB:Hartford Hawks",
+        "NCAAB:Alabama Crimson Tide",
+        "NCAAB:Akron Zips",
+        "NCAAB:Tulane Green Wave"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 98717.97167794066
+    },
+    {
+      "day": 204,
+      "parlay_legs": [
+        "NCAAB:High Point Panthers",
+        "NFL:NFL Team 1",
+        "NCAAB:Northern Colorado Bears",
+        "NCAAB:Duquesne Dukes",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 98617.97167794066
+    },
+    {
+      "day": 205,
+      "parlay_legs": [
+        "NCAAB:South Carolina State Bulldogs",
+        "NCAAB:Akron Zips",
+        "NCAAW:NCAAW Team 5",
+        "NCAAB:Ole Miss Rebels",
+        "NCAAB:George Mason Patriots"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 98517.97167794066
+    },
+    {
+      "day": 206,
+      "parlay_legs": [
+        "NCAAF:NCAAF Team 2",
+        "WNBA:WNBA Team 1",
+        "NCAAW:NCAAW Team 2",
+        "NCAAB:Seton Hall Pirates",
+        "NCAAB:Western Michigan Broncos"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 100953.2733448695
+    },
+    {
+      "day": 207,
+      "parlay_legs": [
+        "NCAAB:Arizona Wildcats",
+        "NHL:NHL Team 3",
+        "NCAAW:NCAAW Team 2",
+        "NCAAF:NCAAF Team 2",
+        "NHL:NHL Team 6"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 100853.2733448695
+    },
+    {
+      "day": 208,
+      "parlay_legs": [
+        "NCAAB:Stony Brook Seawolves",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Providence Friars",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Northern Arizona Lumberjacks"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 100753.2733448695
+    },
+    {
+      "day": 209,
+      "parlay_legs": [
+        "NCAAB:Georgia Tech Yellow Jackets",
+        "NCAAB:Lipscomb Bisons",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Texas A&M-Corpus Christi Islanders",
+        "NCAAB:Arkansas-Pine Bluff Golden Lions"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 100653.2733448695
+    },
+    {
+      "day": 210,
+      "parlay_legs": [
+        "NCAAB:New Orleans Privateers",
+        "NCAAB:VMI Keydets",
+        "NCAAB:Charleston Southern Buccaneers",
+        "NCAAB:UAB Blazers",
+        "NHL:NHL Team 5"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 103088.57501179836
+    },
+    {
+      "day": 211,
+      "parlay_legs": [
+        "NCAAF:NCAAF Team 2",
+        "NCAAW:NCAAW Team 6",
+        "NCAAB:Pittsburgh Panthers",
+        "WNBA:WNBA Team 2",
+        "NCAAB:Duke Blue Devils"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 105523.8766787272
+    },
+    {
+      "day": 212,
+      "parlay_legs": [
+        "NCAAW:NCAAW Team 4",
+        "NCAAF:NCAAF Team 3",
+        "NCAAB:Long Beach State Beach",
+        "NFL:NFL Team 1",
+        "NCAAB:Colorado State Rams"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 105423.8766787272
+    },
+    {
+      "day": 213,
+      "parlay_legs": [
+        "NCAAB:Idaho State Bengals",
+        "NCAAB:Clemson Tigers",
+        "NCAAB:Cleveland State Vikings",
+        "NHL:NHL Team 5",
+        "NHL:NHL Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 105323.8766787272
+    },
+    {
+      "day": 214,
+      "parlay_legs": [
+        "NCAAB:Duke Blue Devils",
+        "WNBA:WNBA Team 1",
+        "NCAAF:NCAAF Team 1",
+        "NCAAW:NCAAW Team 4",
+        "NCAAB:Stony Brook Seawolves"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 105223.8766787272
+    },
+    {
+      "day": 215,
+      "parlay_legs": [
+        "NCAAB:Rutgers Scarlet Knights",
+        "NCAAB:Troy Trojans",
+        "NCAAW:NCAAW Team 3",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Air Force Falcons"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 105123.8766787272
+    },
+    {
+      "day": 216,
+      "parlay_legs": [
+        "NCAAB:Iona Gaels",
+        "NHL:NHL Team 1",
+        "WNBA:WNBA Team 2",
+        "NCAAW:NCAAW Team 1",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 107559.17834565605
+    },
+    {
+      "day": 217,
+      "parlay_legs": [
+        "NCAAB:Vermont Catamounts",
+        "NCAAB:Liberty Flames",
+        "NCAAF:NCAAF Team 2",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:UNC Greensboro Spartans"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 107459.17834565605
+    },
+    {
+      "day": 218,
+      "parlay_legs": [
+        "NCAAB:Lamar Cardinals",
+        "NCAAW:NCAAW Team 1",
+        "NFL:NFL Team 1",
+        "WNBA:WNBA Team 1",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 109894.4800125849
+    },
+    {
+      "day": 219,
+      "parlay_legs": [
+        "NCAAB:Lipscomb Bisons",
+        "NCAAF:NCAAF Team 1",
+        "NFL:NFL Team 2",
+        "NCAAB:Middle Tennessee Blue Raiders",
+        "NCAAW:NCAAW Team 5"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 109794.4800125849
+    },
+    {
+      "day": 220,
+      "parlay_legs": [
+        "NCAAB:North Carolina Tar Heels",
+        "NCAAB:Bradley Braves",
+        "NCAAB:Incarnate Word Cardinals",
+        "NCAAF:NCAAF Team 2",
+        "NCAAB:South Dakota State Jackrabbits"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 112229.78167951375
+    },
+    {
+      "day": 221,
+      "parlay_legs": [
+        "NCAAF:NCAAF Team 1",
+        "NFL:NFL Team 1",
+        "NCAAB:Western Kentucky Hilltoppers",
+        "WNBA:WNBA Team 1",
+        "NCAAW:NCAAW Team 4"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 114665.0833464426
+    },
+    {
+      "day": 222,
+      "parlay_legs": [
+        "NCAAB:Tennessee Volunteers",
+        "NCAAW:NCAAW Team 2",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Louisville Cardinals",
+        "NCAAB:UMBC Retrievers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 114565.0833464426
+    },
+    {
+      "day": 223,
+      "parlay_legs": [
+        "NCAAF:NCAAF Team 1",
+        "NCAAW:NCAAW Team 5",
+        "NCAAB:Wichita State Shockers",
+        "NCAAB:Nebraska Cornhuskers",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 117000.38501337144
+    },
+    {
+      "day": 224,
+      "parlay_legs": [
+        "NCAAB:Belmont Bruins",
+        "NCAAB:Abilene Christian Wildcats",
+        "NCAAB:UAB Blazers",
+        "NCAAB:Sarah Lawrence Gryphons",
+        "NCAAB:Drake Bulldogs"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 116900.38501337144
+    },
+    {
+      "day": 225,
+      "parlay_legs": [
+        "NCAAF:NCAAF Team 4",
+        "NCAAB:UC Irvine Anteaters",
+        "NCAAB:Kentucky Wesleyan Panthers",
+        "NCAAB:Arkansas State Red Wolves",
+        "NCAAB:Oakland Golden Grizzlies"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 116800.38501337144
+    },
+    {
+      "day": 226,
+      "parlay_legs": [
+        "NCAAB:Oklahoma Sooners",
+        "NCAAB:Central Arkansas Bears",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Boston University Terriers",
+        "NCAAB:Michigan Wolverines"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 116700.38501337144
+    },
+    {
+      "day": 227,
+      "parlay_legs": [
+        "NCAAB:Texas Tech Red Raiders",
+        "NCAAB:High Point Panthers",
+        "NCAAB:Morgan State Bears",
+        "WNBA:WNBA Team 2",
+        "NCAAB:Notre Dame Fighting Irish"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 119135.68668030029
+    },
+    {
+      "day": 228,
+      "parlay_legs": [
+        "NCAAW:NCAAW Team 4",
+        "NCAAW:NCAAW Team 3",
+        "NCAAB:Missouri Tigers",
+        "NCAAF:NCAAF Team 3",
+        "NCAAB:Utah State Aggies"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 119035.68668030029
+    },
+    {
+      "day": 229,
+      "parlay_legs": [
+        "NCAAB:Brown Bears",
+        "NCAAB:Nevada Wolf Pack",
+        "NCAAB:Saint Joseph's Hawks",
+        "NCAAB:South Carolina Gamecocks",
+        "NCAAB:Lipscomb Bisons"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 121470.98834722914
+    },
+    {
+      "day": 230,
+      "parlay_legs": [
+        "NCAAB:New Mexico State Aggies",
+        "NHL:NHL Team 3",
+        "NHL:NHL Team 2",
+        "NCAAB:Brown Bears",
+        "NCAAB:Missouri State Bears"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 123906.29001415799
+    },
+    {
+      "day": 231,
+      "parlay_legs": [
+        "NCAAB:Tulsa Golden Hurricane",
+        "NHL:NHL Team 3",
+        "NCAAB:Florida Atlantic Owls",
+        "NHL:NHL Team 1",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 123806.29001415799
+    },
+    {
+      "day": 232,
+      "parlay_legs": [
+        "NCAAB:Boise State Broncos",
+        "NHL:NHL Team 2",
+        "NHL:NHL Team 5",
+        "NCAAF:NCAAF Team 5",
+        "NCAAB:UCF Knights"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 123706.29001415799
+    },
+    {
+      "day": 233,
+      "parlay_legs": [
+        "NCAAB:Liberty Flames",
+        "NCAAB:Providence Friars",
+        "WNBA:WNBA Team 2",
+        "WNBA:WNBA Team 3",
+        "NCAAB:Cedarville Yellow Jackets"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 123606.29001415799
+    },
+    {
+      "day": 234,
+      "parlay_legs": [
+        "NCAAB:Southern Illinois Salukis",
+        "NCAAB:Central Connecticut Blue Devils",
+        "WNBA:WNBA Team 2",
+        "NHL:NHL Team 2",
+        "NHL:NHL Team 5"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 123506.29001415799
+    },
+    {
+      "day": 235,
+      "parlay_legs": [
+        "NCAAB:William & Mary Tribe",
+        "NCAAB:UT Rio Grande Valley Vaqueros",
+        "NHL:NHL Team 5",
+        "NCAAF:NCAAF Team 2",
+        "WNBA:WNBA Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 123406.29001415799
+    },
+    {
+      "day": 236,
+      "parlay_legs": [
+        "NCAAB:Dartmouth Big Green",
+        "NCAAB:Robert Morris Colonials",
+        "NHL:NHL Team 5",
+        "NCAAB:Liberty Flames",
+        "NHL:NHL Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 123306.29001415799
+    },
+    {
+      "day": 237,
+      "parlay_legs": [
+        "NCAAB:East Tennessee State Buccaneers",
+        "NCAAB:Miami Hurricanes",
+        "NCAAF:NCAAF Team 2",
+        "NCAAB:NC State Wolfpack",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 123206.29001415799
+    },
+    {
+      "day": 238,
+      "parlay_legs": [
+        "NCAAB:Vermont Catamounts",
+        "NCAAF:NCAAF Team 4",
+        "NCAAW:NCAAW Team 5",
+        "NCAAB:Keiser Seahawks",
+        "NCAAB:Fordham Rams"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 123106.29001415799
+    },
+    {
+      "day": 239,
+      "parlay_legs": [
+        "NCAAB:Villanova Wildcats",
+        "NCAAW:NCAAW Team 1",
+        "NFL:NFL Team 2",
+        "NHL:NHL Team 1",
+        "NFL:NFL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 123006.29001415799
+    },
+    {
+      "day": 240,
+      "parlay_legs": [
+        "NCAAB:UNC Asheville Bulldogs",
+        "NCAAB:Elon Phoenix",
+        "NCAAB:Bowling Green Falcons",
+        "NCAAF:NCAAF Team 2",
+        "NCAAB:Arizona State Sun Devils"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 122906.29001415799
+    },
+    {
+      "day": 241,
+      "parlay_legs": [
+        "NHL:NHL Team 1",
+        "NHL:NHL Team 2",
+        "NCAAF:NCAAF Team 4",
+        "NHL:NHL Team 5",
+        "NCAAB:Saint Louis Billikens"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 122806.29001415799
+    },
+    {
+      "day": 242,
+      "parlay_legs": [
+        "NCAAB:Sam Houston Bearkats",
+        "NFL:NFL Team 2",
+        "NCAAB:UTEP Miners",
+        "NCAAF:NCAAF Team 2",
+        "NCAAF:NCAAF Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 122706.29001415799
+    },
+    {
+      "day": 243,
+      "parlay_legs": [
+        "NCAAB:Duke Blue Devils",
+        "NCAAB:San Jos\u00e9 State Spartans",
+        "NCAAB:George Washington Revolutionaries",
+        "NCAAB:Belmont Bruins",
+        "NCAAW:NCAAW Team 3"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 125141.59168108684
+    },
+    {
+      "day": 244,
+      "parlay_legs": [
+        "NCAAB:Villanova Wildcats",
+        "NCAAB:Westminster (PA) Titans",
+        "NCAAB:San Diego State Aztecs",
+        "NCAAB:Maine Black Bears",
+        "NCAAF:NCAAF Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 125041.59168108684
+    },
+    {
+      "day": 245,
+      "parlay_legs": [
+        "NCAAB:Liberty Flames",
+        "NCAAB:Troy Trojans",
+        "NCAAB:Memphis Tigers",
+        "NCAAW:NCAAW Team 3",
+        "NCAAW:NCAAW Team 5"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 124941.59168108684
+    },
+    {
+      "day": 246,
+      "parlay_legs": [
+        "NCAAB:Toledo Rockets",
+        "NCAAW:NCAAW Team 4",
+        "NCAAW:NCAAW Team 5",
+        "NCAAF:NCAAF Team 2",
+        "NCAAB:Norfolk State Spartans"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 124841.59168108684
+    },
+    {
+      "day": 247,
+      "parlay_legs": [
+        "NCAAB:Austin Peay Governors",
+        "WNBA:WNBA Team 1",
+        "NHL:NHL Team 5",
+        "NCAAB:Towson Tigers",
+        "NCAAB:Alcorn State Braves"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 124741.59168108684
+    },
+    {
+      "day": 248,
+      "parlay_legs": [
+        "NCAAB:North Dakota State Bison",
+        "NHL:NHL Team 2",
+        "NCAAB:Yale Bulldogs",
+        "NFL:NFL Team 1",
+        "NCAAB:Fresno State Bulldogs"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 124641.59168108684
+    },
+    {
+      "day": 249,
+      "parlay_legs": [
+        "NHL:NHL Team 3",
+        "NHL:NHL Team 6",
+        "NCAAF:NCAAF Team 5",
+        "WNBA:WNBA Team 2",
+        "NCAAB:Bowling Green Falcons"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 124541.59168108684
+    },
+    {
+      "day": 250,
+      "parlay_legs": [
+        "NCAAB:North Carolina Tar Heels",
+        "NCAAB:South Florida Bulls",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Montana Grizzlies",
+        "NCAAB:Georgia Bulldogs"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 124441.59168108684
+    },
+    {
+      "day": 251,
+      "parlay_legs": [
+        "NCAAB:San Diego State Aztecs",
+        "NCAAB:Chicago State Cougars",
+        "NCAAB:Wofford Terriers",
+        "NCAAW:NCAAW Team 2",
+        "NHL:NHL Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 124341.59168108684
+    },
+    {
+      "day": 252,
+      "parlay_legs": [
+        "NCAAB:Marshall Thundering Herd",
+        "NCAAB:Indiana Hoosiers",
+        "NFL:NFL Team 1",
+        "NFL:NFL Team 3",
+        "NCAAB:South Carolina Upstate Spartans"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 124241.59168108684
+    },
+    {
+      "day": 253,
+      "parlay_legs": [
+        "NCAAB:UAB Blazers",
+        "NHL:NHL Team 3",
+        "NCAAB:San Diego Christian Hawks",
+        "NCAAB:Yale Bulldogs",
+        "NCAAB:Akron Zips"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 124141.59168108684
+    },
+    {
+      "day": 254,
+      "parlay_legs": [
+        "NCAAB:California Golden Bears",
+        "NCAAB:Ohio State Buckeyes",
+        "NCAAF:NCAAF Team 2",
+        "NHL:NHL Team 5",
+        "NCAAW:NCAAW Team 4"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 126576.89334801568
+    },
+    {
+      "day": 255,
+      "parlay_legs": [
+        "NCAAB:UAlbany Great Danes",
+        "NCAAF:NCAAF Team 1",
+        "NFL:NFL Team 1",
+        "NCAAF:NCAAF Team 4",
+        "NHL:NHL Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 126476.89334801568
+    },
+    {
+      "day": 256,
+      "parlay_legs": [
+        "NCAAB:Rutgers Scarlet Knights",
+        "NCAAB:Hawai'i Rainbow Warriors",
+        "NCAAB:Texas Tech Red Raiders",
+        "NCAAB:Gonzaga Bulldogs",
+        "NHL:NHL Team 5"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 128912.19501494453
+    },
+    {
+      "day": 257,
+      "parlay_legs": [
+        "NCAAB:Incarnate Word Cardinals",
+        "NHL:NHL Team 3",
+        "NHL:NHL Team 2",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Rhode Island Rams"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 131347.4966818734
+    },
+    {
+      "day": 258,
+      "parlay_legs": [
+        "NCAAB:Providence Friars",
+        "NCAAB:Idaho Vandals",
+        "NCAAB:IU Indianapolis Jaguars",
+        "NCAAB:Northwestern Wildcats",
+        "NCAAB:UC Riverside Highlanders"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 133782.79834880226
+    },
+    {
+      "day": 259,
+      "parlay_legs": [
+        "NHL:NHL Team 3",
+        "NCAAB:Texas A&M Aggies",
+        "NCAAB:Gonzaga Bulldogs",
+        "NCAAB:Oregon State Beavers",
+        "NCAAB:Dartmouth Big Green"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 136218.10001573112
+    },
+    {
+      "day": 260,
+      "parlay_legs": [
+        "NCAAB:Florida Gators",
+        "NCAAB:American University Eagles",
+        "NCAAF:NCAAF Team 3",
+        "NCAAB:Louisiana Ragin' Cajuns",
+        "NCAAB:SIU Edwardsville Cougars"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 136118.10001573112
+    },
+    {
+      "day": 261,
+      "parlay_legs": [
+        "NCAAB:Oakland Golden Grizzlies",
+        "NCAAB:Eastern Washington Eagles",
+        "NCAAB:Purdue Boilermakers",
+        "NFL:NFL Team 1",
+        "NHL:NHL Team 3"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 138553.40168265998
+    },
+    {
+      "day": 262,
+      "parlay_legs": [
+        "NCAAB:North Carolina Tar Heels",
+        "NCAAB:Xavier Musketeers",
+        "NCAAW:NCAAW Team 5",
+        "NCAAF:NCAAF Team 2",
+        "NCAAB:Murray State Racers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 138453.40168265998
+    },
+    {
+      "day": 263,
+      "parlay_legs": [
+        "NCAAB:Davidson Wildcats",
+        "NCAAF:NCAAF Team 1",
+        "NHL:NHL Team 3",
+        "WNBA:WNBA Team 2",
+        "NCAAB:Wagner Seahawks"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 140888.70334958885
+    },
+    {
+      "day": 264,
+      "parlay_legs": [
+        "NCAAB:UC Riverside Highlanders",
+        "NCAAB:Hampton Pirates",
+        "WNBA:WNBA Team 1",
+        "NHL:NHL Team 1",
+        "WNBA:WNBA Team 3"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 143324.0050165177
+    },
+    {
+      "day": 265,
+      "parlay_legs": [
+        "NCAAB:Purdue Fort Wayne Mastodons",
+        "NCAAB:Mississippi Valley State Delta Devils",
+        "NCAAB:Murray State Racers",
+        "NCAAB:Detroit Mercy Titans",
+        "NCAAB:Central Arkansas Bears"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 143224.0050165177
+    },
+    {
+      "day": 266,
+      "parlay_legs": [
+        "NCAAB:Oregon State Beavers",
+        "NHL:NHL Team 3",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Texas Longhorns",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 145659.30668344657
+    },
+    {
+      "day": 267,
+      "parlay_legs": [
+        "NCAAW:NCAAW Team 2",
+        "NCAAB:Purdue Fort Wayne Mastodons",
+        "NCAAB:Gonzaga Bulldogs",
+        "NCAAB:Abilene Christian Wildcats",
+        "NFL:NFL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 145559.30668344657
+    },
+    {
+      "day": 268,
+      "parlay_legs": [
+        "NCAAB:Abilene Christian Wildcats",
+        "NCAAF:NCAAF Team 2",
+        "NCAAB:Morgan State Bears",
+        "NCAAW:NCAAW Team 2",
+        "NCAAW:NCAAW Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 145459.30668344657
+    },
+    {
+      "day": 269,
+      "parlay_legs": [
+        "NCAAB:Charleston Cougars",
+        "NCAAB:Florida Atlantic Owls",
+        "NCAAB:Northern Kentucky Norse",
+        "NFL:NFL Team 3",
+        "NCAAB:Loyola Maryland Greyhounds"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 147894.60835037543
+    },
+    {
+      "day": 270,
+      "parlay_legs": [
+        "NCAAB:UT Arlington Mavericks",
+        "NCAAB:San Diego State Aztecs",
+        "NCAAW:NCAAW Team 4",
+        "NCAAB:Temple Owls",
+        "NCAAB:Covenant Fighting Scots"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 147794.60835037543
+    },
+    {
+      "day": 271,
+      "parlay_legs": [
+        "NCAAB:New Mexico State Aggies",
+        "NFL:NFL Team 1",
+        "NCAAB:Stanislaus State Warriors",
+        "NCAAB:Texas A&M-Corpus Christi Islanders",
+        "NHL:NHL Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 147694.60835037543
+    },
+    {
+      "day": 272,
+      "parlay_legs": [
+        "NCAAB:Bradley Braves",
+        "NCAAB:Southern Miss Golden Eagles",
+        "NCAAB:Jackson State Tigers",
+        "NCAAB:Lipscomb Bisons",
+        "NCAAB:Oregon State Beavers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 147594.60835037543
+    },
+    {
+      "day": 273,
+      "parlay_legs": [
+        "NCAAB:Grambling Tigers",
+        "NCAAB:Midway University Eagles",
+        "NCAAW:NCAAW Team 3",
+        "NHL:NHL Team 2",
+        "NCAAB:Texas A&M-Corpus Christi Islanders"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 147494.60835037543
+    },
+    {
+      "day": 274,
+      "parlay_legs": [
+        "NCAAB:Saint Mary's Gaels",
+        "NCAAW:NCAAW Team 3",
+        "NCAAW:NCAAW Team 6",
+        "NCAAB:Vermont Catamounts",
+        "NFL:NFL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 147394.60835037543
+    },
+    {
+      "day": 275,
+      "parlay_legs": [
+        "NCAAB:Northeastern Huskies",
+        "NCAAB:Saint Louis Billikens",
+        "NCAAB:Pittsburgh Panthers",
+        "NHL:NHL Team 2",
+        "NHL:NHL Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 147294.60835037543
+    },
+    {
+      "day": 276,
+      "parlay_legs": [
+        "NCAAB:Longwood Lancers",
+        "NHL:NHL Team 2",
+        "NCAAF:NCAAF Team 3",
+        "NHL:NHL Team 7",
+        "WNBA:WNBA Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 147194.60835037543
+    },
+    {
+      "day": 277,
+      "parlay_legs": [
+        "NCAAB:Northwest Indian RedHawks",
+        "NCAAB:Akron Zips",
+        "NHL:NHL Team 1",
+        "NCAAB:Northern Iowa Panthers",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 147094.60835037543
+    },
+    {
+      "day": 278,
+      "parlay_legs": [
+        "NCAAB:Florida International Panthers",
+        "NCAAB:Southern Miss Golden Eagles",
+        "NCAAB:Oregon Ducks",
+        "NHL:NHL Team 4",
+        "NCAAW:NCAAW Team 1"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 149529.9100173043
+    },
+    {
+      "day": 279,
+      "parlay_legs": [
+        "NCAAB:Grambling Tigers",
+        "NCAAB:Carver College Cougars",
+        "NCAAW:NCAAW Team 4",
+        "NCAAW:NCAAW Team 2",
+        "NCAAW:NCAAW Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 149429.9100173043
+    },
+    {
+      "day": 280,
+      "parlay_legs": [
+        "NCAAB:Gonzaga Bulldogs",
+        "NCAAW:NCAAW Team 4",
+        "NCAAW:NCAAW Team 3",
+        "NCAAB:Lafayette Leopards",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 149329.9100173043
+    },
+    {
+      "day": 281,
+      "parlay_legs": [
+        "NCAAB:Long Beach State Beach",
+        "NCAAB:Manhattan Jaspers",
+        "NFL:NFL Team 2",
+        "NFL:NFL Team 1",
+        "NCAAB:Georgia Bulldogs"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 149229.9100173043
+    },
+    {
+      "day": 282,
+      "parlay_legs": [
+        "NCAAB:Quinnipiac Bobcats",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Wright State Raiders",
+        "NCAAB:Northwestern State Demons",
+        "NCAAB:Indiana Hoosiers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 149129.9100173043
+    },
+    {
+      "day": 283,
+      "parlay_legs": [
+        "NCAAF:NCAAF Team 2",
+        "WNBA:WNBA Team 2",
+        "NCAAF:NCAAF Team 4",
+        "NHL:NHL Team 5",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 149029.9100173043
+    },
+    {
+      "day": 284,
+      "parlay_legs": [
+        "NCAAB:West Virginia Mountaineers",
+        "NCAAB:Wagner Seahawks",
+        "NCAAW:NCAAW Team 3",
+        "NCAAB:Louisiana Ragin' Cajuns",
+        "WNBA:WNBA Team 2"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 151465.21168423316
+    },
+    {
+      "day": 285,
+      "parlay_legs": [
+        "NHL:NHL Team 1",
+        "NFL:NFL Team 3",
+        "NCAAB:Florida Gulf Coast Eagles",
+        "NCAAB:Nicholls Colonels",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 153900.51335116202
+    },
+    {
+      "day": 286,
+      "parlay_legs": [
+        "NCAAB:Gonzaga Bulldogs",
+        "NCAAB:George Mason Patriots",
+        "NCAAB:Howard Bison",
+        "NCAAF:NCAAF Team 2",
+        "NCAAB:Missouri State Bears"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 153800.51335116202
+    },
+    {
+      "day": 287,
+      "parlay_legs": [
+        "NCAAB:Midway University Eagles",
+        "NCAAB:San Jos\u00e9 State Spartans",
+        "NCAAB:New Mexico Lobos",
+        "NCAAB:NJIT Highlanders",
+        "NCAAF:NCAAF Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 153700.51335116202
+    },
+    {
+      "day": 288,
+      "parlay_legs": [
+        "NCAAB:Wichita State Shockers",
+        "NCAAB:Colgate Raiders",
+        "NCAAB:Nebraska Cornhuskers",
+        "NHL:NHL Team 3",
+        "NCAAB:North Carolina Tar Heels"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 153600.51335116202
+    },
+    {
+      "day": 289,
+      "parlay_legs": [
+        "NHL:NHL Team 3",
+        "NCAAF:NCAAF Team 3",
+        "NHL:NHL Team 4",
+        "NHL:NHL Team 6",
+        "NHL:NHL Team 7"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 153500.51335116202
+    },
+    {
+      "day": 290,
+      "parlay_legs": [
+        "NCAAB:Kent State Golden Flashes",
+        "NCAAB:Denver Pioneers",
+        "NFL:NFL Team 1",
+        "NCAAB:Oral Roberts Golden Eagles",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 153400.51335116202
+    },
+    {
+      "day": 291,
+      "parlay_legs": [
+        "NHL:NHL Team 3",
+        "NCAAW:NCAAW Team 3",
+        "WNBA:WNBA Team 3",
+        "NCAAW:NCAAW Team 2",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 153300.51335116202
+    },
+    {
+      "day": 292,
+      "parlay_legs": [
+        "NCAAB:Miami (OH) RedHawks",
+        "NCAAW:NCAAW Team 5",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Le Moyne Dolphins",
+        "NFL:NFL Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 153200.51335116202
+    },
+    {
+      "day": 293,
+      "parlay_legs": [
+        "NCAAB:Gonzaga Bulldogs",
+        "NCAAB:Duke Blue Devils",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Iona Gaels",
+        "NHL:NHL Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 153100.51335116202
+    },
+    {
+      "day": 294,
+      "parlay_legs": [
+        "NCAAB:Western Illinois Leathernecks",
+        "NCAAB:Oregon Ducks",
+        "NCAAB:Colorado Buffaloes",
+        "NCAAB:Duquesne Dukes",
+        "NCAAB:Buffalo Bulls"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 153000.51335116202
+    },
+    {
+      "day": 295,
+      "parlay_legs": [
+        "NCAAB:Oakland Golden Grizzlies",
+        "NCAAB:Wichita State Shockers",
+        "NCAAB:Liberty Flames",
+        "NCAAB:LSU Tigers",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 152900.51335116202
+    },
+    {
+      "day": 296,
+      "parlay_legs": [
+        "NCAAW:NCAAW Team 4",
+        "NCAAB:Purdue Boilermakers",
+        "NCAAB:VCU Rams",
+        "NCAAF:NCAAF Team 4",
+        "NHL:NHL Team 2"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 155335.81501809089
+    },
+    {
+      "day": 297,
+      "parlay_legs": [
+        "NCAAB:Utah Utes",
+        "NCAAF:NCAAF Team 1",
+        "NHL:NHL Team 3",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Gonzaga Bulldogs"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 155235.81501809089
+    },
+    {
+      "day": 298,
+      "parlay_legs": [
+        "NCAAB:Baylor Bears",
+        "NCAAF:NCAAF Team 1",
+        "NFL:NFL Team 1",
+        "NCAAW:NCAAW Team 2",
+        "NHL:NHL Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 155135.81501809089
+    },
+    {
+      "day": 299,
+      "parlay_legs": [
+        "NCAAB:Baylor Bears",
+        "NCAAB:North Carolina Central Eagles",
+        "NCAAB:James Madison Dukes",
+        "NCAAB:McNeese Cowboys",
+        "NCAAB:North Carolina Central Eagles"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 157571.11668501975
+    },
+    {
+      "day": 300,
+      "parlay_legs": [
+        "NCAAB:Fisher College Eagles",
+        "NCAAB:Schreiner Mountaineers",
+        "NHL:NHL Team 6",
+        "NCAAB:Houston Cougars",
+        "NCAAB:Old Dominion Monarchs"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 157471.11668501975
+    },
+    {
+      "day": 301,
+      "parlay_legs": [
+        "NCAAB:San Diego State Aztecs",
+        "NCAAB:Loyola Marymount Lions",
+        "NHL:NHL Team 2",
+        "NHL:NHL Team 1",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 157371.11668501975
+    },
+    {
+      "day": 302,
+      "parlay_legs": [
+        "NCAAB:Southern Jaguars",
+        "NHL:NHL Team 4",
+        "WNBA:WNBA Team 1",
+        "NCAAB:South Carolina Gamecocks",
+        "NCAAB:Arizona State Sun Devils"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 157271.11668501975
+    },
+    {
+      "day": 303,
+      "parlay_legs": [
+        "NCAAB:Northern Iowa Panthers",
+        "NCAAB:Brevard Tornados",
+        "NCAAB:Mercer Bears",
+        "NFL:NFL Team 1",
+        "NCAAB:Hofstra Pride"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 157171.11668501975
+    },
+    {
+      "day": 304,
+      "parlay_legs": [
+        "NCAAB:VMI Keydets",
+        "NCAAB:Central Arkansas Bears",
+        "NCAAB:Detroit Mercy Titans",
+        "NCAAW:NCAAW Team 6",
+        "NCAAB:McNeese Cowboys"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 157071.11668501975
+    },
+    {
+      "day": 305,
+      "parlay_legs": [
+        "NCAAB:Gonzaga Bulldogs",
+        "NCAAB:Marshall Thundering Herd",
+        "WNBA:WNBA Team 3",
+        "NCAAB:Oregon State Beavers",
+        "NHL:NHL Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 156971.11668501975
+    },
+    {
+      "day": 306,
+      "parlay_legs": [
+        "NCAAB:Samford Bulldogs",
+        "NCAAB:Austin Peay Governors",
+        "NCAAB:Cincinnati Bearcats",
+        "NHL:NHL Team 4",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 156871.11668501975
+    },
+    {
+      "day": 307,
+      "parlay_legs": [
+        "NCAAB:Clarks Summit Defenders",
+        "NHL:NHL Team 4",
+        "WNBA:WNBA Team 1",
+        "NHL:NHL Team 3",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 156771.11668501975
+    },
+    {
+      "day": 308,
+      "parlay_legs": [
+        "NCAAB:Creighton Bluejays",
+        "NCAAB:Incarnate Word Cardinals",
+        "WNBA:WNBA Team 1",
+        "NHL:NHL Team 5",
+        "NCAAW:NCAAW Team 6"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 156671.11668501975
+    },
+    {
+      "day": 309,
+      "parlay_legs": [
+        "NCAAB:Rice Owls",
+        "WNBA:WNBA Team 1",
+        "NFL:NFL Team 1",
+        "NHL:NHL Team 3",
+        "NHL:NHL Team 6"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 156571.11668501975
+    },
+    {
+      "day": 310,
+      "parlay_legs": [
+        "NCAAB:St. Bonaventure Bonnies",
+        "NCAAB:Maryland Terrapins",
+        "NHL:NHL Team 6",
+        "NCAAW:NCAAW Team 5",
+        "NCAAB:Furman Paladins"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 156471.11668501975
+    },
+    {
+      "day": 311,
+      "parlay_legs": [
+        "NHL:NHL Team 2",
+        "NHL:NHL Team 7",
+        "NCAAB:Colgate Raiders",
+        "NHL:NHL Team 4",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 156371.11668501975
+    },
+    {
+      "day": 312,
+      "parlay_legs": [
+        "NCAAB:Arizona Wildcats",
+        "NCAAB:UC Davis Aggies",
+        "NHL:NHL Team 3",
+        "NHL:NHL Team 1",
+        "NHL:NHL Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 156271.11668501975
+    },
+    {
+      "day": 313,
+      "parlay_legs": [
+        "NCAAB:Tulane Green Wave",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Louisville Cardinals",
+        "NCAAF:NCAAF Team 1",
+        "NHL:NHL Team 3"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 158706.4183519486
+    },
+    {
+      "day": 314,
+      "parlay_legs": [
+        "NCAAB:Saint Joseph's Hawks",
+        "NCAAB:Utah Tech Trailblazers",
+        "NCAAB:BYU Cougars",
+        "NHL:NHL Team 3",
+        "NCAAW:NCAAW Team 6"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 158606.4183519486
+    },
+    {
+      "day": 315,
+      "parlay_legs": [
+        "NCAAB:Xavier Musketeers",
+        "NCAAB:SMU Mustangs",
+        "NHL:NHL Team 5",
+        "NCAAW:NCAAW Team 1",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 161041.72001887747
+    },
+    {
+      "day": 316,
+      "parlay_legs": [
+        "NCAAB:Le Moyne Dolphins",
+        "NCAAB:Virginia Tech Hokies",
+        "NCAAW:NCAAW Team 6",
+        "NHL:NHL Team 2",
+        "WNBA:WNBA Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 160941.72001887747
+    },
+    {
+      "day": 317,
+      "parlay_legs": [
+        "NCAAB:UCLA Bruins",
+        "NCAAB:Bradley Braves",
+        "NCAAB:Grambling Tigers",
+        "NCAAB:South Alabama Jaguars",
+        "NCAAB:UMass Lowell River Hawks"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 160841.72001887747
+    },
+    {
+      "day": 318,
+      "parlay_legs": [
+        "NCAAB:North Texas Mean Green",
+        "NCAAB:New Mexico Lobos",
+        "NCAAB:Charleston Cougars",
+        "NCAAW:NCAAW Team 4",
+        "WNBA:WNBA Team 2"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 163277.02168580634
+    },
+    {
+      "day": 319,
+      "parlay_legs": [
+        "NCAAB:Arizona Wildcats",
+        "NCAAB:Bob Jones Bruins",
+        "NCAAB:North Dakota Fighting Hawks",
+        "NFL:NFL Team 1",
+        "NCAAB:North Carolina Tar Heels"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 163177.02168580634
+    },
+    {
+      "day": 320,
+      "parlay_legs": [
+        "NFL:NFL Team 1",
+        "NCAAB:Northern Colorado Bears",
+        "NCAAB:South Florida Bulls",
+        "NCAAW:NCAAW Team 4",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 163077.02168580634
+    },
+    {
+      "day": 321,
+      "parlay_legs": [
+        "WNBA:WNBA Team 2",
+        "NCAAB:SMU Mustangs",
+        "NHL:NHL Team 4",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Tulane Green Wave"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 165512.3233527352
+    },
+    {
+      "day": 322,
+      "parlay_legs": [
+        "NHL:NHL Team 7",
+        "NCAAB:Seattle U Redhawks",
+        "NCAAB:Long Island University Sharks",
+        "NCAAF:NCAAF Team 4",
+        "NCAAB:St. Francis Brooklyn Terriers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 165412.3233527352
+    },
+    {
+      "day": 323,
+      "parlay_legs": [
+        "NCAAB:Santa Clara Broncos",
+        "NCAAB:Loyola Maryland Greyhounds",
+        "NHL:NHL Team 3",
+        "NCAAW:NCAAW Team 5",
+        "NCAAB:Siena Saints"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 165312.3233527352
+    },
+    {
+      "day": 324,
+      "parlay_legs": [
+        "NCAAB:East Tennessee State Buccaneers",
+        "NCAAB:UAB Blazers",
+        "NCAAB:George Washington Revolutionaries",
+        "NHL:NHL Team 3",
+        "NCAAB:Idaho State Bengals"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 167747.62501966406
+    },
+    {
+      "day": 325,
+      "parlay_legs": [
+        "NCAAB:Davidson Wildcats",
+        "NCAAB:Northern Iowa Panthers",
+        "NCAAF:NCAAF Team 3",
+        "NCAAB:North Carolina Tar Heels",
+        "NFL:NFL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 167647.62501966406
+    },
+    {
+      "day": 326,
+      "parlay_legs": [
+        "NCAAB:Texas Tech Red Raiders",
+        "NCAAB:Arizona Wildcats",
+        "NFL:NFL Team 3",
+        "NCAAB:Saint Mary's Gaels",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 170082.92668659292
+    },
+    {
+      "day": 327,
+      "parlay_legs": [
+        "NCAAB:Oakwood Ambassadors",
+        "NCAAB:Hofstra Pride",
+        "NHL:NHL Team 5",
+        "NFL:NFL Team 2",
+        "NCAAB:Kentucky Wildcats"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 169982.92668659292
+    },
+    {
+      "day": 328,
+      "parlay_legs": [
+        "NCAAB:Lipscomb Bisons",
+        "NCAAF:NCAAF Team 1",
+        "NFL:NFL Team 2",
+        "NHL:NHL Team 2",
+        "NCAAB:Santa Clara Broncos"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 169882.92668659292
+    },
+    {
+      "day": 329,
+      "parlay_legs": [
+        "NCAAB:Clemson Tigers",
+        "NCAAB:South Dakota State Jackrabbits",
+        "NCAAB:Auburn Tigers",
+        "NCAAB:Houston Cougars",
+        "NCAAB:South Carolina Gamecocks"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 169782.92668659292
+    },
+    {
+      "day": 330,
+      "parlay_legs": [
+        "NCAAB:Ohio Bobcats",
+        "NHL:NHL Team 4",
+        "NHL:NHL Team 5",
+        "NCAAW:NCAAW Team 1",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 172218.2283535218
+    },
+    {
+      "day": 331,
+      "parlay_legs": [
+        "NCAAB:Ohio State Buckeyes",
+        "NCAAB:Duke Blue Devils",
+        "NCAAB:San Diego Toreros",
+        "NCAAB:Jackson State Tigers",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 172118.2283535218
+    },
+    {
+      "day": 332,
+      "parlay_legs": [
+        "NCAAB:Iowa Hawkeyes",
+        "NCAAB:USC Trojans",
+        "NHL:NHL Team 5",
+        "WNBA:WNBA Team 1",
+        "NCAAB:Ohio State Buckeyes"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 174553.53002045065
+    },
+    {
+      "day": 333,
+      "parlay_legs": [
+        "NCAAB:Stony Brook Seawolves",
+        "NCAAB:Notre Dame Fighting Irish",
+        "NCAAF:NCAAF Team 3",
+        "NFL:NFL Team 3",
+        "NCAAB:Milwaukee Panthers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 174453.53002045065
+    },
+    {
+      "day": 334,
+      "parlay_legs": [
+        "NCAAB:Xavier Musketeers",
+        "WNBA:WNBA Team 1",
+        "NCAAW:NCAAW Team 2",
+        "NCAAB:Marshall Thundering Herd",
+        "NCAAB:App State Mountaineers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 174353.53002045065
+    },
+    {
+      "day": 335,
+      "parlay_legs": [
+        "WNBA:WNBA Team 2",
+        "NFL:NFL Team 1",
+        "NCAAF:NCAAF Team 3",
+        "NCAAB:Vermont Catamounts",
+        "NFL:NFL Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 174253.53002045065
+    },
+    {
+      "day": 336,
+      "parlay_legs": [
+        "NCAAB:Michigan State Spartans",
+        "NCAAB:Tennessee Volunteers",
+        "NCAAB:Gonzaga Bulldogs",
+        "WNBA:WNBA Team 1",
+        "NCAAW:NCAAW Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 174153.53002045065
+    },
+    {
+      "day": 337,
+      "parlay_legs": [
+        "NCAAB:Auburn Tigers",
+        "NCAAB:Green Bay Phoenix",
+        "NCAAB:Little Rock Trojans",
+        "NCAAB:South Carolina Upstate Spartans",
+        "NCAAB:Nebraska Cornhuskers"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 176588.8316873795
+    },
+    {
+      "day": 338,
+      "parlay_legs": [
+        "NCAAB:Arizona Wildcats",
+        "NCAAB:Oakland Golden Grizzlies",
+        "NCAAB:Wichita State Shockers",
+        "NCAAB:Louisiana Tech Bulldogs",
+        "NCAAB:Colgate Raiders"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 179024.13335430837
+    },
+    {
+      "day": 339,
+      "parlay_legs": [
+        "NCAAB:South Carolina Gamecocks",
+        "NCAAB:Dallas Christian Crusaders",
+        "NCAAB:LSU Shreveport Pilots",
+        "NCAAW:NCAAW Team 2",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 178924.13335430837
+    },
+    {
+      "day": 340,
+      "parlay_legs": [
+        "NCAAB:Georgetown Hoyas",
+        "NCAAB:South Florida Bulls",
+        "NCAAB:Colorado State Rams",
+        "NCAAF:NCAAF Team 3",
+        "NHL:NHL Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 178824.13335430837
+    },
+    {
+      "day": 341,
+      "parlay_legs": [
+        "NCAAB:St. Bonaventure Bonnies",
+        "WNBA:WNBA Team 1",
+        "NCAAB:UAlbany Great Danes",
+        "NCAAW:NCAAW Team 5",
+        "NCAAW:NCAAW Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 178724.13335430837
+    },
+    {
+      "day": 342,
+      "parlay_legs": [
+        "NCAAB:New Mexico Lobos",
+        "NHL:NHL Team 4",
+        "NCAAB:Texas A&M Aggies",
+        "NCAAB:UC Riverside Highlanders",
+        "NFL:NFL Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 178624.13335430837
+    },
+    {
+      "day": 343,
+      "parlay_legs": [
+        "NCAAB:Hawai'i Rainbow Warriors",
+        "NCAAB:Canisius Golden Griffins",
+        "NCAAB:Morehead State Eagles",
+        "NCAAB:DePaul Blue Demons",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 181059.43502123724
+    },
+    {
+      "day": 344,
+      "parlay_legs": [
+        "NCAAB:Grand Canyon Lopes",
+        "NCAAB:St. John's Red Storm",
+        "NHL:NHL Team 1",
+        "NCAAW:NCAAW Team 1",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 183494.7366881661
+    },
+    {
+      "day": 345,
+      "parlay_legs": [
+        "NCAAB:UCLA Bruins",
+        "NCAAB:Drake Bulldogs",
+        "NCAAB:Wayland Baptist Pioneers",
+        "NCAAW:NCAAW Team 1",
+        "WNBA:WNBA Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 183394.7366881661
+    },
+    {
+      "day": 346,
+      "parlay_legs": [
+        "NCAAB:Jacksonville Dolphins",
+        "NCAAF:NCAAF Team 1",
+        "NCAAF:NCAAF Team 4",
+        "NHL:NHL Team 1",
+        "NCAAW:NCAAW Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 183294.7366881661
+    },
+    {
+      "day": 347,
+      "parlay_legs": [
+        "NCAAB:Texas Southern Tigers",
+        "WNBA:WNBA Team 1",
+        "NHL:NHL Team 5",
+        "NHL:NHL Team 8",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 183194.7366881661
+    },
+    {
+      "day": 348,
+      "parlay_legs": [
+        "NCAAB:Minnesota Golden Gophers",
+        "NHL:NHL Team 4",
+        "NCAAB:Wofford Terriers",
+        "NCAAB:Stanford Cardinal",
+        "NCAAF:NCAAF Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 183094.7366881661
+    },
+    {
+      "day": 349,
+      "parlay_legs": [
+        "NCAAB:Furman Paladins",
+        "WNBA:WNBA Team 2",
+        "NCAAW:NCAAW Team 3",
+        "NHL:NHL Team 1",
+        "NHL:NHL Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 182994.7366881661
+    },
+    {
+      "day": 350,
+      "parlay_legs": [
+        "NCAAF:NCAAF Team 3",
+        "NCAAB:Central Michigan Chippewas",
+        "NCAAB:UConn Huskies",
+        "NHL:NHL Team 6",
+        "NCAAW:NCAAW Team 3"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 185430.03835509496
+    },
+    {
+      "day": 351,
+      "parlay_legs": [
+        "WNBA:WNBA Team 2",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Green Bay Phoenix",
+        "NHL:NHL Team 6",
+        "NCAAW:NCAAW Team 3"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 185330.03835509496
+    },
+    {
+      "day": 352,
+      "parlay_legs": [
+        "NCAAB:Maryland Terrapins",
+        "NCAAB:Cal State Fullerton Titans",
+        "NCAAB:Western Kentucky Hilltoppers",
+        "NHL:NHL Team 3",
+        "NFL:NFL Team 3"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 187765.34002202383
+    },
+    {
+      "day": 353,
+      "parlay_legs": [
+        "NCAAB:Michigan State Spartans",
+        "NCAAB:UNC Wilmington Seahawks",
+        "NCAAB:Wagner Seahawks",
+        "NCAAB:Penn State Nittany Lions",
+        "NHL:NHL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 187665.34002202383
+    },
+    {
+      "day": 354,
+      "parlay_legs": [
+        "NCAAB:Northern New Mexico Eagles",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Winthrop Eagles",
+        "NCAAB:Stetson Hatters",
+        "NCAAW:NCAAW Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 187565.34002202383
+    },
+    {
+      "day": 355,
+      "parlay_legs": [
+        "NCAAB:USC Trojans",
+        "NFL:NFL Team 2",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Long Island University Sharks",
+        "NCAAB:Baylor Bears"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 190000.6416889527
+    },
+    {
+      "day": 356,
+      "parlay_legs": [
+        "NCAAB:Utah Valley Wolverines",
+        "NCAAB:Penn State Nittany Lions",
+        "WNBA:WNBA Team 2",
+        "NHL:NHL Team 7",
+        "NCAAF:NCAAF Team 2"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 189900.6416889527
+    },
+    {
+      "day": 357,
+      "parlay_legs": [
+        "NCAAB:Northern Colorado Bears",
+        "NCAAB:Arizona Wildcats",
+        "NCAAF:NCAAF Team 4",
+        "NHL:NHL Team 3",
+        "NCAAB:Colgate Raiders"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 192335.94335588155
+    },
+    {
+      "day": 358,
+      "parlay_legs": [
+        "NHL:NHL Team 3",
+        "NCAAF:NCAAF Team 2",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Sam Houston Bearkats",
+        "NCAAF:NCAAF Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 192235.94335588155
+    },
+    {
+      "day": 359,
+      "parlay_legs": [
+        "NCAAB:Ball State Cardinals",
+        "NCAAB:Long Island University Sharks",
+        "WNBA:WNBA Team 2",
+        "NCAAB:Texas A&M-Corpus Christi Islanders",
+        "NCAAB:UConn Huskies"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 192135.94335588155
+    },
+    {
+      "day": 360,
+      "parlay_legs": [
+        "NCAAB:North Dakota State Bison",
+        "NFL:NFL Team 1",
+        "NCAAB:Lipscomb Bisons",
+        "NHL:NHL Team 1",
+        "NHL:NHL Team 3"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 194571.2450228104
+    },
+    {
+      "day": 361,
+      "parlay_legs": [
+        "NCAAB:Central Connecticut Blue Devils",
+        "NCAAB:Seton Hall Pirates",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Hartford Hawks",
+        "NCAAW:NCAAW Team 6"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 194471.2450228104
+    },
+    {
+      "day": 362,
+      "parlay_legs": [
+        "NCAAB:Oklahoma Sooners",
+        "NHL:NHL Team 6",
+        "NCAAF:NCAAF Team 2",
+        "NCAAW:NCAAW Team 1",
+        "NCAAB:Coastal Carolina Chanticleers"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 194371.2450228104
+    },
+    {
+      "day": 363,
+      "parlay_legs": [
+        "NCAAB:Florida Gulf Coast Eagles",
+        "NCAAB:Hardin-Simmons Cowboys",
+        "NCAAF:NCAAF Team 1",
+        "NCAAB:Duke Blue Devils",
+        "NFL:NFL Team 1"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 194271.2450228104
+    },
+    {
+      "day": 364,
+      "parlay_legs": [
+        "NFL:NFL Team 3",
+        "NHL:NHL Team 2",
+        "NFL:NFL Team 1",
+        "NHL:NHL Team 4",
+        "NCAAW:NCAAW Team 4"
+      ],
+      "parlay_won": false,
+      "result": "LOSS",
+      "bankroll_after": 194171.2450228104
+    },
+    {
+      "day": 365,
+      "parlay_legs": [
+        "NCAAB:Arkansas-Pine Bluff Golden Lions",
+        "NCAAB:Weber State Wildcats",
+        "NCAAB:BYU Cougars",
+        "NCAAB:Virginia Tech Hokies",
+        "NCAAB:Wofford Terriers"
+      ],
+      "parlay_won": true,
+      "result": "WIN",
+      "bankroll_after": 196606.54668973928
+    }
+  ]
+}

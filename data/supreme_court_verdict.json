@@ -1,0 +1,31 @@
+{
+    "parlay_legs": [
+        {
+            "sport": "NCAAB",
+            "pick": "Howard Bison",
+            "reason": "Maximum confidence (1.0) with strong meta/efficiency/tempo alignment. Home-court advantage against Niagara adds stability."
+        },
+        {
+            "sport": "NCAAB",
+            "pick": "Duke Blue Devils",
+            "reason": "Perfect confidence (1.0) enhanced by narrative factors (elite program reputation) against Howard. Combines model consensus with situational context."
+        },
+        {
+            "sport": "NCAAB",
+            "pick": "Virginia Cavaliers",
+            "reason": "1.0 confidence with defensive efficiency dominance. Butler’s offensive weaknesses amplify Virginia’s systemic edge."
+        },
+        {
+            "sport": "NHL",
+            "pick": "Colorado Avalanche",
+            "reason": "Highest non-NCAAB pick (0.88). Clear talent disparity against Chicago provides cross-sport diversification with minimal correlation."
+        },
+        {
+            "sport": "NCAAB",
+            "pick": "CSU Bakersfield Roadrunners",
+            "reason": "Perfect confidence (1.0) reinforced by sharp money signals. Miss Valley St’s poor metrics create high floor."
+        }
+    ],
+    "analysis": "Selected picks optimize uncorrelated value: 4 NCAAB legs with perfect confidence (diverse factors: sharp money, tempo, narrative) + 1 NHL anchor. Avoided lower-confidence NCAAB games (e.g., Minnesota Golden Gophers at 0.847) and prioritized teams with multi-model consensus. Excluded overlapping matchups (e.g., multiple mid-majors) to reduce systemic risk. Parlay leverages 'deepseek_meta' dominance (70% weight) while maintaining sport/context diversity.",
+    "supreme_confidence": 0.68
+}
