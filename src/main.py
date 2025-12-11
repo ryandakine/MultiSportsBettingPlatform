@@ -12,6 +12,11 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+
+# Import middleware
+from src.middleware.error_handler import ErrorHandlerMiddleware, add_error_handlers
+from src.middleware.rate_limiter import RateLimitMiddleware, rate_limiters
+
 from src.config import settings
 
 # Services
@@ -69,6 +74,14 @@ def create_fastapi_app():
         allow_methods=["*"],
         allow_headers=["*"],
     )
+    
+    # Add error handling middleware
+    add_error_handlers(app)
+    app.add_middleware(ErrorHandlerMiddleware)
+    
+    # Add rate limiting middleware
+    # app.add_middleware(RateLimitMiddleware, rate_limiter=rate_limiter)
+    # Note: Commented out for now, uncomment when Redis is configured
 
     # Initialize services
     # We maintain singletons or initialize here if needed for dependency injection
@@ -101,13 +114,18 @@ def create_fastapi_app():
     # Include API Routes
     try:
         from src.api import routes, websocket_routes, auth_routes
-        from src.api import feature_flag_routes, agent_query_routes
+        from src.api import feature_flag_routes, agent_query_routes, health_routes
         
+        # Core routes
+        app.include_router(health_routes.router)  # Health checks first
         app.include_router(routes.router)
         app.include_router(websocket_routes.router)
         app.include_router(auth_routes.router)
+        
+        # New production routes
         app.include_router(feature_flag_routes.router)
         app.include_router(agent_query_routes.router)
+        
         logger.info("✅ API Routes loaded successfully")
     except Exception as e:
         logger.error(f"❌ Failed to load routes: {e}")
