@@ -4,20 +4,36 @@ import { Card, CardBody } from '@progress/kendo-react-layout';
 import { Button } from '@progress/kendo-react-buttons';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
 import { Notification } from '@progress/kendo-react-notification';
-import PortfolioPerformanceChart from './components/PortfolioPerformanceChart';
-import BettingOpportunitiesGrid from './components/BettingOpportunitiesGrid';
-import RealSportsBettingGrid from './components/RealSportsBettingGrid';
-import AdvancedAnalyticsDashboard from './components/AdvancedAnalyticsDashboard';
-import AnalyticsDashboard from './components/AnalyticsDashboard';
-import AIPredictionsDashboard from './components/AIPredictionsDashboard';
 import ParlayMaker from './components/ParlayMaker';
 import NotificationSystem from './components/NotificationSystem';
 import UserManagement from './components/UserManagement';
+import AnalyticsDashboard from './components/AnalyticsDashboard';
 import apiService from './services/ApiService';
 import './App.css';
 
+// Placeholder for chart-dependent components (Node 24 compatibility issue)
+const ChartPlaceholder = ({ title }) => (
+  <Card>
+    <CardBody>
+      <h3>{title}</h3>
+      <div style={{
+        height: '300px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#f8f9fa',
+        borderRadius: '8px',
+        color: '#666'
+      }}>
+        📊 Charts temporarily disabled due to Node 24 compatibility.
+        <br />Use Node 20 LTS for full chart support.
+      </div>
+    </CardBody>
+  </Card>
+);
+
 function App() {
-  const [currentView, setCurrentView] = useState('portfolio');
+  const [currentView, setCurrentView] = useState('parlay-maker'); // Default to Parlay Maker
   const [theme, setTheme] = useState('default');
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,15 +47,13 @@ function App() {
   ];
 
   const views = [
-    { text: 'Portfolio Performance', value: 'portfolio', icon: '📊' },
-    { text: 'Live Betting Opportunities', value: 'opportunities', icon: '🎯' },
-    { text: 'Real Sports Betting Grid', value: 'real-sports', icon: '🏈' },
-    { text: 'AI Predictions Dashboard', value: 'ai-predictions', icon: '🤖' },
     { text: 'AI Parlay Maker', value: 'parlay-maker', icon: '🎫' },
-    { text: 'Advanced Analytics', value: 'analytics', icon: '📈' },
     { text: 'Sports Analytics', value: 'sports-analytics', icon: '🏀' },
     { text: 'Notifications', value: 'notifications', icon: '🔔' },
-    { text: 'User Management', value: 'user-management', icon: '👥' }
+    { text: 'User Management', value: 'user-management', icon: '👥' },
+    { text: 'Portfolio (Charts)', value: 'portfolio', icon: '📊' },
+    { text: 'AI Predictions (Charts)', value: 'ai-predictions', icon: '🤖' },
+    { text: 'Advanced Analytics (Charts)', value: 'analytics', icon: '📈' }
   ];
 
   useEffect(() => {
@@ -50,12 +64,10 @@ function App() {
     try {
       const token = localStorage.getItem('access_token');
       if (token) {
-        // Use getProfile to verify token validity with backend
         const response = await apiService.getProfile();
         if (response.success) {
           setUser(response.user);
         } else {
-          // Token invalid or expired
           localStorage.removeItem('access_token');
           localStorage.removeItem('refresh_token');
           localStorage.removeItem('user');
@@ -73,64 +85,41 @@ function App() {
       const response = await apiService.login(credentials.username, credentials.password);
       if (response.success) {
         setUser(response.user);
-        // Tokens are already set in apiService.login
-        setNotification({
-          type: 'success',
-          message: 'Login successful!'
-        });
+        setNotification({ type: 'success', message: 'Login successful!' });
       } else {
-        setNotification({
-          type: 'error',
-          message: response.message || 'Login failed'
-        });
+        setNotification({ type: 'error', message: response.message || 'Login failed' });
       }
     } catch (error) {
-      setNotification({
-        type: 'error',
-        message: 'Login failed'
-      });
+      setNotification({ type: 'error', message: 'Login failed' });
     }
   };
 
   const handleLogout = async () => {
-    try {
-      await apiService.logout();
-    } catch (e) { console.error(e); }
-
+    try { await apiService.logout(); } catch (e) { console.error(e); }
     setUser(null);
-    // Local storage clean up happens in apiService.logout
-    setNotification({
-      type: 'info',
-      message: 'Logged out successfully'
-    });
+    setNotification({ type: 'info', message: 'Logged out successfully' });
   };
 
-  const closeNotification = () => {
-    setNotification(null);
-  };
+  const closeNotification = () => setNotification(null);
 
   const renderView = () => {
     switch (currentView) {
-      case 'portfolio':
-        return <PortfolioPerformanceChart />;
-      case 'opportunities':
-        return <BettingOpportunitiesGrid />;
-      case 'real-sports':
-        return <RealSportsBettingGrid />;
-      case 'ai-predictions':
-        return <AIPredictionsDashboard />;
       case 'parlay-maker':
         return <ParlayMaker />;
-      case 'analytics':
-        return <AdvancedAnalyticsDashboard />;
       case 'sports-analytics':
         return <AnalyticsDashboard />;
       case 'notifications':
         return <NotificationSystem />;
       case 'user-management':
         return <UserManagement />;
+      case 'portfolio':
+        return <ChartPlaceholder title="Portfolio Performance" />;
+      case 'ai-predictions':
+        return <ChartPlaceholder title="AI Predictions Dashboard" />;
+      case 'analytics':
+        return <ChartPlaceholder title="Advanced Analytics" />;
       default:
-        return <PortfolioPerformanceChart />;
+        return <ParlayMaker />;
     }
   };
 
@@ -167,7 +156,7 @@ function App() {
                 🏈 MultiSports Betting Platform
               </h1>
               <p style={{ margin: 0, color: '#666', fontSize: '14px' }}>
-                Advanced sports betting with real-time data, AI predictions, and professional analytics
+                Advanced sports betting with AI predictions and professional analytics
               </p>
             </div>
 
@@ -186,20 +175,12 @@ function App() {
                   <span style={{ fontSize: '14px', color: '#666' }}>
                     Welcome, {user.username}!
                   </span>
-                  <Button
-                    themeColor="secondary"
-                    size="small"
-                    onClick={handleLogout}
-                  >
+                  <Button themeColor="secondary" size="small" onClick={handleLogout}>
                     Logout
                   </Button>
                 </div>
               ) : (
-                <Button
-                  themeColor="primary"
-                  size="small"
-                  onClick={() => handleLogin({ username: 'demo', password: 'demo123' })}
-                >
+                <Button themeColor="primary" size="small" onClick={() => handleLogin({ username: 'demo', password: 'demo123' })}>
                   Demo Login
                 </Button>
               )}
@@ -247,7 +228,7 @@ function App() {
               🚀 MultiSports Betting Platform - Powered by Kendo React UI
             </p>
             <p style={{ margin: 0 }}>
-              Real-time sports data • AI-powered predictions • Advanced analytics • Professional interface
+              Real-time sports data • AI-powered predictions • Advanced analytics
             </p>
           </div>
         </CardBody>

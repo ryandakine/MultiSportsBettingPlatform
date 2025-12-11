@@ -1,11 +1,28 @@
 import React, { useState } from 'react';
 import { Card, CardTitle, CardBody, CardActions, CardSubtitle } from '@progress/kendo-react-layout';
 import { Button } from '@progress/kendo-react-buttons';
-import { Badge } from '@progress/kendo-react-indicators';
-import { Loader } from '@progress/kendo-react-indicators';
 import { Slider } from '@progress/kendo-react-inputs';
 import { Switch } from '@progress/kendo-react-inputs';
 import apiService from '../services/ApiService';
+
+// Simple Badge component (replacing Kendo due to version conflicts)
+const Badge = ({ themeColor, size, style, children }) => (
+    <span style={{
+        display: 'inline-block',
+        padding: size === 'large' ? '8px 12px' : '4px 8px',
+        borderRadius: '4px',
+        fontSize: size === 'large' ? '14px' : '12px',
+        fontWeight: 'bold',
+        backgroundColor: themeColor === 'success' ? '#28a745' : themeColor === 'info' ? '#17a2b8' : '#6c757d',
+        color: '#fff',
+        ...style
+    }}>{children}</span>
+);
+
+// Simple Loader component
+const Loader = ({ type }) => (
+    <span style={{ display: 'inline-block' }}>⏳ Loading...</span>
+);
 
 const ParlayMaker = () => {
     const [parlayResult, setParlayResult] = useState(null);

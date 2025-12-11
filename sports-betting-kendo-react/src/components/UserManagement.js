@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { TreeList, TreeListColumn } from '@progress/kendo-react-treelist';
+import { Grid, GridColumn } from '@progress/kendo-react-grid';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { Button } from '@progress/kendo-react-buttons';
 import { Form, Field, FormElement } from '@progress/kendo-react-form';
@@ -80,15 +80,15 @@ const UserManagement = () => {
 
     const ActionCell = (props) => (
         <td>
-            <Button 
-                size="small" 
+            <Button
+                size="small"
                 themeColor="primary"
                 onClick={() => handleEdit(props.dataItem)}
             >
                 Edit
             </Button>
-            <Button 
-                size="small" 
+            <Button
+                size="small"
                 themeColor="error"
                 style={{ marginLeft: '8px' }}
             >
@@ -109,8 +109,8 @@ const UserManagement = () => {
         <td>
             <div className="win-rate-cell">
                 <div className="win-rate-bar">
-                    <div 
-                        className="win-rate-fill" 
+                    <div
+                        className="win-rate-fill"
                         style={{ width: `${props.dataItem.winRate}%` }}
                     ></div>
                 </div>
@@ -126,23 +126,20 @@ const UserManagement = () => {
                 <Button themeColor="primary">Add New User</Button>
             </div>
 
-            <TreeList 
+            <Grid
                 data={users}
-                idField="id"
-                parentIdField="parentId"
-                expandField="expanded"
-                height="600px"
+                style={{ height: '600px' }}
             >
-                <TreeListColumn field="username" title="Username" width="150px" />
-                <TreeListColumn field="email" title="Email" width="200px" />
-                <TreeListColumn field="role" title="Role" width="120px" />
-                <TreeListColumn field="status" title="Status" width="100px" cell={StatusCell} />
-                <TreeListColumn field="subscriptionTier" title="Subscription" width="120px" />
-                <TreeListColumn field="totalBets" title="Total Bets" width="100px" />
-                <TreeListColumn field="winRate" title="Win Rate" width="120px" cell={WinRateCell} />
-                <TreeListColumn field="lastLogin" title="Last Login" width="150px" format="{0:g}" />
-                <TreeListColumn title="Actions" width="150px" cell={ActionCell} />
-            </TreeList>
+                <GridColumn field="username" title="Username" width="150px" />
+                <GridColumn field="email" title="Email" width="200px" />
+                <GridColumn field="role" title="Role" width="120px" />
+                <GridColumn field="status" title="Status" width="100px" cell={StatusCell} />
+                <GridColumn field="subscriptionTier" title="Subscription" width="120px" />
+                <GridColumn field="totalBets" title="Total Bets" width="100px" />
+                <GridColumn field="winRate" title="Win Rate" width="120px" cell={WinRateCell} />
+                <GridColumn field="lastLogin" title="Last Login" width="150px" format="{0:g}" />
+                <GridColumn title="Actions" width="150px" cell={ActionCell} />
+            </Grid>
 
             {showDialog && (
                 <Dialog title="Edit User" onClose={handleClose} width={500}>
