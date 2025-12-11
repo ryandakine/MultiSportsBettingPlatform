@@ -228,6 +228,17 @@ class ApiService {
         });
     }
 
+    // AI Prediction Methods (for Parlay Maker)
+    async getPrediction(sports, queryText, options = {}) {
+        const user = this.getCurrentUser();
+        return await this.request('POST', '/predict', {
+            user_id: user?.id || 'anonymous',
+            sports: sports,
+            query_text: queryText,
+            ...options
+        });
+    }
+
     // Utility Methods
     isAuthenticated() {
         return !!this.token;
