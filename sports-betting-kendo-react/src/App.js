@@ -7,6 +7,7 @@ import { Notification } from '@progress/kendo-react-notification';
 import ParlayMaker from './components/ParlayMaker';
 import NotificationSystem from './components/NotificationSystem';
 import UserManagement from './components/UserManagement';
+import DailyPicksDashboard from './components/DailyPicksDashboard';
 import AnalyticsDashboard from './components/AnalyticsDashboard';
 import apiService from './services/ApiService';
 import './App.css';
@@ -33,7 +34,7 @@ const ChartPlaceholder = ({ title }) => (
 );
 
 function App() {
-  const [currentView, setCurrentView] = useState('parlay-maker'); // Default to Parlay Maker
+  const [currentView, setCurrentView] = useState('daily-picks'); // Default to Daily Picks for testing
   const [theme, setTheme] = useState('default');
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -47,6 +48,7 @@ function App() {
   ];
 
   const views = [
+    { text: 'Daily Picks', value: 'daily-picks', icon: '📅' },
     { text: 'AI Parlay Maker', value: 'parlay-maker', icon: '🎫' },
     { text: 'Sports Analytics', value: 'sports-analytics', icon: '🏀' },
     { text: 'Notifications', value: 'notifications', icon: '🔔' },
@@ -104,6 +106,8 @@ function App() {
 
   const renderView = () => {
     switch (currentView) {
+      case 'daily-picks':
+        return <DailyPicksDashboard />;
       case 'parlay-maker':
         return <ParlayMaker />;
       case 'sports-analytics':
