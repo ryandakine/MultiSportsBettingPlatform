@@ -29,7 +29,9 @@ const AdvancedAnalyticsV2Dashboard = () => {
     const sports = [
         { text: 'All Sports', value: 'all' },
         { text: 'NFL Football', value: 'nfl' },
-        { text: 'NBA Basketball', value: 'nba' },
+        { text: 'NCAAB Men\'s', value: 'ncaab' },
+        { text: 'NCAAB Women\'s', value: 'ncaaw' },
+        { text: 'WNBA Basketball', value: 'wnba' },
         { text: 'MLB Baseball', value: 'mlb' },
         { text: 'NHL Hockey', value: 'nhl' }
     ];
@@ -47,7 +49,7 @@ const AdvancedAnalyticsV2Dashboard = () => {
     useEffect(() => {
         fetchAdvancedAnalytics();
         setupAutoRefresh();
-        
+
         return () => {
             if (refreshInterval) {
                 clearInterval(refreshInterval);
@@ -60,7 +62,7 @@ const AdvancedAnalyticsV2Dashboard = () => {
         const interval = setInterval(() => {
             fetchAdvancedAnalytics();
         }, 3 * 60 * 1000);
-        
+
         setRefreshInterval(interval);
     };
 
@@ -203,7 +205,7 @@ const AdvancedAnalyticsV2Dashboard = () => {
                                 Sophisticated analytics with predictive modeling, trend analysis, and AI-powered insights
                             </p>
                         </div>
-                        
+
                         <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                             <DropDownList
                                 data={sports}
@@ -213,7 +215,7 @@ const AdvancedAnalyticsV2Dashboard = () => {
                                 valueField="value"
                                 style={{ width: '150px' }}
                             />
-                            
+
                             <DropDownList
                                 data={categories}
                                 value={categories.find(c => c.value === selectedCategory)}
@@ -222,20 +224,20 @@ const AdvancedAnalyticsV2Dashboard = () => {
                                 valueField="value"
                                 style={{ width: '150px' }}
                             />
-                            
-                            <Button 
-                                themeColor="primary" 
-                                size="small" 
+
+                            <Button
+                                themeColor="primary"
+                                size="small"
                                 onClick={fetchAdvancedAnalytics}
                                 icon="refresh"
                                 disabled={loading}
                             >
                                 {loading ? 'Refreshing...' : 'Refresh'}
                             </Button>
-                            
-                            <Button 
-                                themeColor="success" 
-                                size="small" 
+
+                            <Button
+                                themeColor="success"
+                                size="small"
                                 onClick={generateInsight}
                                 icon="plus"
                             >
@@ -262,8 +264,8 @@ const AdvancedAnalyticsV2Dashboard = () => {
                                     {metric.trend} trend
                                 </div>
                                 <div style={{ marginTop: '8px' }}>
-                                    <ProgressBar 
-                                        value={metric.value * 100} 
+                                    <ProgressBar
+                                        value={metric.value * 100}
                                         color={getConfidenceColor(metric.value)}
                                         style={{ height: '8px' }}
                                     />
@@ -321,10 +323,10 @@ const AdvancedAnalyticsV2Dashboard = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <div style={{ 
-                                        padding: '12px', 
-                                        backgroundColor: '#f8f9fa', 
+
+                                    <div style={{
+                                        padding: '12px',
+                                        backgroundColor: '#f8f9fa',
                                         borderRadius: '8px',
                                         borderLeft: '4px solid #007bff'
                                     }}>
@@ -355,21 +357,21 @@ const AdvancedAnalyticsV2Dashboard = () => {
                                 <ChartValueAxisItem />
                             </ChartValueAxis>
                             <ChartSeries>
-                                <ChartSeriesItem 
-                                    type="line" 
-                                    data={[0.65, 0.68, 0.72, 0.70, 0.75, 0.73, 0.77, 0.79]} 
+                                <ChartSeriesItem
+                                    type="line"
+                                    data={[0.65, 0.68, 0.72, 0.70, 0.75, 0.73, 0.77, 0.79]}
                                     name="Win Rate"
                                     color="#007bff"
                                 />
-                                <ChartSeriesItem 
-                                    type="line" 
-                                    data={[0.58, 0.61, 0.64, 0.62, 0.66, 0.65, 0.68, 0.70]} 
+                                <ChartSeriesItem
+                                    type="line"
+                                    data={[0.58, 0.61, 0.64, 0.62, 0.66, 0.65, 0.68, 0.70]}
                                     name="Scoring"
                                     color="#28a745"
                                 />
-                                <ChartSeriesItem 
-                                    type="line" 
-                                    data={[0.72, 0.70, 0.68, 0.71, 0.69, 0.73, 0.71, 0.74]} 
+                                <ChartSeriesItem
+                                    type="line"
+                                    data={[0.72, 0.70, 0.68, 0.71, 0.69, 0.73, 0.71, 0.74]}
                                     name="Defense"
                                     color="#fd7e14"
                                 />
@@ -383,9 +385,9 @@ const AdvancedAnalyticsV2Dashboard = () => {
                         <h3 style={{ margin: '0 0 16px 0' }}>🎯 Trend Summary</h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                             {trends.map((trend, index) => (
-                                <div key={index} style={{ 
-                                    padding: '12px', 
-                                    border: '1px solid #e9ecef', 
+                                <div key={index} style={{
+                                    padding: '12px',
+                                    border: '1px solid #e9ecef',
                                     borderRadius: '8px',
                                     backgroundColor: '#f8f9fa'
                                 }}>
@@ -417,13 +419,13 @@ const AdvancedAnalyticsV2Dashboard = () => {
                         style={{ height: '400px' }}
                     >
                         <GridColumn field="bet_type" title="Bet Type" width="120px" />
-                        <GridColumn 
-                            field="risk_level" 
-                            title="Risk Level" 
+                        <GridColumn
+                            field="risk_level"
+                            title="Risk Level"
                             width="100px"
                             cell={(props) => (
                                 <td>
-                                    <Badge 
+                                    <Badge
                                         themeColor={getRiskColor(props.dataItem.risk_level)}
                                         style={{ fontSize: '12px' }}
                                     >
@@ -432,9 +434,9 @@ const AdvancedAnalyticsV2Dashboard = () => {
                                 </td>
                             )}
                         />
-                        <GridColumn 
-                            field="risk_score" 
-                            title="Risk Score" 
+                        <GridColumn
+                            field="risk_score"
+                            title="Risk Score"
                             width="100px"
                             cell={(props) => (
                                 <td>
@@ -451,9 +453,9 @@ const AdvancedAnalyticsV2Dashboard = () => {
                                 </td>
                             )}
                         />
-                        <GridColumn 
-                            field="confidence" 
-                            title="Confidence" 
+                        <GridColumn
+                            field="confidence"
+                            title="Confidence"
                             width="100px"
                             cell={(props) => (
                                 <td>
@@ -461,9 +463,9 @@ const AdvancedAnalyticsV2Dashboard = () => {
                                 </td>
                             )}
                         />
-                        <GridColumn 
-                            field="factors" 
-                            title="Risk Factors" 
+                        <GridColumn
+                            field="factors"
+                            title="Risk Factors"
                             width="200px"
                             cell={(props) => (
                                 <td>
@@ -474,9 +476,9 @@ const AdvancedAnalyticsV2Dashboard = () => {
                                 </td>
                             )}
                         />
-                        <GridColumn 
-                            field="mitigation_strategies" 
-                            title="Mitigation" 
+                        <GridColumn
+                            field="mitigation_strategies"
+                            title="Mitigation"
                             width="200px"
                             cell={(props) => (
                                 <td>
@@ -497,9 +499,9 @@ const AdvancedAnalyticsV2Dashboard = () => {
                     <h3 style={{ margin: '0 0 16px 0' }}>🤖 Predictive Models Performance</h3>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
                         {predictiveModels.map((model, index) => (
-                            <div key={index} style={{ 
-                                padding: '16px', 
-                                border: '1px solid #e9ecef', 
+                            <div key={index} style={{
+                                padding: '16px',
+                                border: '1px solid #e9ecef',
                                 borderRadius: '8px',
                                 backgroundColor: '#f8f9fa'
                             }}>

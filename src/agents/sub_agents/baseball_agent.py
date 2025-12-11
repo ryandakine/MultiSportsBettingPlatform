@@ -239,29 +239,7 @@ class BaseballAgent(BaseSubAgent):
         
         return " ".join(reasoning_parts) if reasoning_parts else "Analysis based on comprehensive MLB metrics and team performance data."
     
-    async def find_betting_opportunities(self) -> List[Dict[str, Any]]:
-        """Find upcoming betting opportunities for MLB."""
-        opportunities = []
-        
-        # Simulate finding 1-3 upcoming games
-        num_games = random.randint(1, 3)
-        teams = list(self.team_stats.keys())
-        
-        for _ in range(num_games):
-            t1, t2 = random.sample(teams, 2)
-            
-            # Create a game opportunity
-            game = {
-                "sport": self.sport.value,
-                "title": f"{t1} vs {t2}",
-                "teams": [t1, t2],
-                "time": datetime.now().isoformat(),  # Use current time for "Live" simulation
-                "query_text": f"Win prediction for {t1} vs {t2}",
-                "context": "Autonomous Market Scan"
-            }
-            opportunities.append(game)
-            
-        return opportunities
+
 
     async def get_sport_specific_insights(self) -> Dict[str, Any]:
         """Get MLB-specific insights and statistics."""

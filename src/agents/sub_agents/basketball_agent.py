@@ -15,38 +15,44 @@ from .base_sub_agent import BaseSubAgent
 class BasketballAgent(BaseSubAgent):
     """NBA/NCAAB-specific prediction agent."""
     
-    def __init__(self, name: str = "NBA/NCAAB Basketball Agent"):
+    def __init__(self, name: str = "WNBA/NCAAB/NCAAW Basketball Agent"):
         super().__init__(SportType.BASKETBALL, name)
         
-        # NBA team stats
-        self.nba_teams = {
-            "Lakers": {"wins": 45, "losses": 37, "ppg": 113.2, "opp_ppg": 111.8, "pace": 100.2},
-            "Warriors": {"wins": 44, "losses": 38, "ppg": 118.9, "opp_ppg": 117.1, "pace": 102.1},
-            "Celtics": {"wins": 57, "losses": 25, "ppg": 118.6, "opp_ppg": 110.6, "pace": 98.9},
-            "Bucks": {"wins": 58, "losses": 24, "ppg": 116.9, "opp_ppg": 113.3, "pace": 99.8},
-            "Nets": {"wins": 45, "losses": 37, "ppg": 113.4, "opp_ppg": 112.9, "pace": 98.7},
-            "Suns": {"wins": 45, "losses": 37, "ppg": 113.6, "opp_ppg": 111.5, "pace": 98.4},
-            "Heat": {"wins": 44, "losses": 38, "ppg": 109.5, "opp_ppg": 109.8, "pace": 96.2},
-            "Nuggets": {"wins": 53, "losses": 29, "ppg": 115.8, "opp_ppg": 112.5, "pace": 98.1}
+        # WNBA teams
+        self.wnba_teams = {
+            "Aces": {"wins": 34, "losses": 6, "ppg": 92.8, "opp_ppg": 80.3, "pace": 82.5},
+            "Liberty": {"wins": 32, "losses": 8, "ppg": 89.2, "opp_ppg": 80.6, "pace": 80.1},
+            "Sun": {"wins": 27, "losses": 13, "ppg": 82.7, "opp_ppg": 79.0, "pace": 77.8},
+            "Wings": {"wins": 22, "losses": 18, "ppg": 87.9, "opp_ppg": 84.9, "pace": 81.2},
+            "Dream": {"wins": 19, "losses": 21, "ppg": 82.5, "opp_ppg": 84.0, "pace": 79.5},
+            "Lynx": {"wins": 19, "losses": 21, "ppg": 80.2, "opp_ppg": 85.0, "pace": 78.4}
         }
         
-        # NCAAB teams
+        # NCAAD Men's teams
         self.ncaab_teams = {
             "Duke": {"wins": 27, "losses": 9, "ppg": 78.5, "opp_ppg": 65.2, "conference": "ACC"},
             "Kentucky": {"wins": 22, "losses": 12, "ppg": 75.8, "opp_ppg": 69.4, "conference": "SEC"},
             "Kansas": {"wins": 28, "losses": 8, "ppg": 74.9, "opp_ppg": 65.8, "conference": "Big 12"},
-            "North Carolina": {"wins": 29, "losses": 7, "ppg": 77.2, "opp_ppg": 67.1, "conference": "ACC"},
-            "Michigan State": {"wins": 20, "losses": 15, "ppg": 70.1, "opp_ppg": 68.9, "conference": "Big Ten"},
-            "Villanova": {"wins": 18, "losses": 16, "ppg": 72.4, "opp_ppg": 69.8, "conference": "Big East"}
+            "UConn (M)": {"wins": 31, "losses": 3, "ppg": 81.5, "opp_ppg": 64.0, "conference": "Big East"},
+            "Purdue": {"wins": 30, "losses": 4, "ppg": 83.2, "opp_ppg": 69.5, "conference": "Big Ten"}
+        }
+
+        # NCAAW Women's teams
+        self.ncaaw_teams = {
+            "South Carolina": {"wins": 32, "losses": 0, "ppg": 86.4, "opp_ppg": 55.4, "conference": "SEC"},
+            "Iowa": {"wins": 29, "losses": 4, "ppg": 92.8, "opp_ppg": 71.2, "conference": "Big Ten"},
+            "USC": {"wins": 26, "losses": 5, "ppg": 74.5, "opp_ppg": 61.3, "conference": "Pac-12"},
+            "UConn (W)": {"wins": 29, "losses": 5, "ppg": 80.8, "opp_ppg": 56.3, "conference": "Big East"},
+            "LSU": {"wins": 28, "losses": 5, "ppg": 85.9, "opp_ppg": 62.1, "conference": "SEC"}
         }
         
-        # Player stats
+        # Player stats (WNBA/NCAAW/NCAAB)
         self.player_stats = {
-            "LeBron James": {"ppg": 25.4, "apg": 7.9, "rpg": 7.2, "team": "Lakers"},
-            "Stephen Curry": {"ppg": 29.4, "apg": 6.3, "rpg": 6.1, "team": "Warriors"},
-            "Giannis Antetokounmpo": {"ppg": 31.1, "apg": 5.7, "rpg": 11.8, "team": "Bucks"},
-            "Kevin Durant": {"ppg": 29.7, "apg": 5.5, "rpg": 6.7, "team": "Suns"},
-            "Nikola Jokic": {"ppg": 24.5, "apg": 9.8, "rpg": 11.8, "team": "Nuggets"}
+            "A'ja Wilson": {"ppg": 22.8, "rpg": 9.5, "apg": 1.6, "team": "Aces"},
+            "Breanna Stewart": {"ppg": 23.0, "rpg": 9.3, "apg": 3.8, "team": "Liberty"},
+            "Caitlin Clark": {"ppg": 31.6, "rpg": 7.4, "apg": 8.9, "team": "Iowa"},
+            "Zach Edey": {"ppg": 24.2, "rpg": 11.7, "apg": 2.0, "team": "Purdue"},
+            "Angel Reese": {"ppg": 19.0, "rpg": 13.1, "apg": 2.3, "team": "LSU"}
         }
         
         self.betting_types = [
@@ -54,10 +60,10 @@ class BasketballAgent(BaseSubAgent):
         ]
     
     async def analyze_sport_data(self, query_params: dict) -> Dict[str, Any]:
-        """Analyze NBA/NCAAB-specific data and return insights."""
+        """Analyze WNBA/NCAAB/NCAAW-specific data and return insights."""
         analysis = {
             "sport": "basketball",
-            "league": "NBA/NCAAB",
+            "league": "NCAAB", # Default
             "analysis_type": "comprehensive",
             "teams_analyzed": [],
             "offensive_analysis": {},
@@ -71,12 +77,21 @@ class BasketballAgent(BaseSubAgent):
         # Determine league and teams from query
         query_text = query_params.get("query_text", "").lower()
         
-        # Check if it's NBA or NCAAB
-        is_ncaab = any(word in query_text for word in ["college", "ncaa", "ncaab", "duke", "kentucky", "kansas"])
+        # Determine league
+        is_wnba = "wnba" in query_text
+        is_ncaaw = any(word in query_text for word in ["women", "ncaaw"]) and not is_wnba
+        is_ncaab = any(word in query_text for word in ["college", "ncaa", "ncaab", "men"]) or (not is_wnba and not is_ncaaw)
         
         # Select appropriate team database
-        team_db = self.ncaab_teams if is_ncaab else self.nba_teams
-        analysis["league"] = "NCAAB" if is_ncaab else "NBA"
+        if is_wnba:
+            team_db = self.wnba_teams
+            analysis["league"] = "WNBA"
+        elif is_ncaaw:
+            team_db = self.ncaaw_teams
+            analysis["league"] = "NCAAW"
+        else:
+            team_db = self.ncaab_teams
+            analysis["league"] = "NCAAB"
         
         # Extract team mentions
         mentioned_teams = []
@@ -84,7 +99,7 @@ class BasketballAgent(BaseSubAgent):
             if team.lower() in query_text:
                 mentioned_teams.append(team)
         
-        # If no teams mentioned, use random teams
+        # If no teams mentioned, use random teams from selected league
         if not mentioned_teams:
             mentioned_teams = random.sample(list(team_db.keys()), 2)
         
@@ -109,7 +124,7 @@ class BasketballAgent(BaseSubAgent):
                 "defensive_advantage": team1 if team_db[team1]["opp_ppg"] < team_db[team2]["opp_ppg"] else team2
             }
             
-            # Pace analysis
+            # Pace analysis (WNBA only has explicit pace stats in our mock, others implied)
             if "pace" in team_db[team1] and "pace" in team_db[team2]:
                 analysis["pace_analysis"] = {
                     "team1_pace": team_db[team1]["pace"],
@@ -133,8 +148,8 @@ class BasketballAgent(BaseSubAgent):
         analysis["historical_data"] = {
             "head_to_head": {"team1_wins": random.randint(2, 8), "team2_wins": random.randint(2, 8)},
             "recent_form": {"team1_last_10": random.randint(4, 9), "team2_last_10": random.randint(4, 9)},
-            "home_away": {"team1_home": f"{random.randint(15, 25)}-{random.randint(5, 15)}", 
-                         "team2_away": f"{random.randint(10, 20)}-{random.randint(10, 20)}"}
+            "home_away": {"team1_home": f"{random.randint(10, 20)}-{random.randint(2, 10)}", 
+                         "team2_away": f"{random.randint(5, 15)}-{random.randint(5, 15)}"}
         }
         
         # Key metrics
@@ -149,16 +164,21 @@ class BasketballAgent(BaseSubAgent):
         return analysis
     
     async def get_sport_specific_prediction(self, analysis: Dict[str, Any]) -> str:
-        """Generate NBA/NCAAB-specific prediction based on analysis."""
+        """Generate WNBA/NCAAB/NCAAW-specific prediction based on analysis."""
         teams = analysis.get("teams_analyzed", [])
         if len(teams) < 2:
-            return "Lakers -3.5 (Home court advantage)"
+            return "Aces -5.5 (Championship pedigree)"
         
         team1, team2 = teams[0], teams[1]
         
         # Get team databases
-        is_ncaab = analysis.get("league") == "NCAAB"
-        team_db = self.ncaab_teams if is_ncaab else self.nba_teams
+        league = analysis.get("league", "NCAAB")
+        if league == "WNBA":
+            team_db = self.wnba_teams
+        elif league == "NCAAW":
+            team_db = self.ncaaw_teams
+        else:
+            team_db = self.ncaab_teams
         
         # Calculate expected total
         total_points = analysis.get("offensive_analysis", {}).get("total_points_expected", 220)
@@ -284,52 +304,23 @@ class BasketballAgent(BaseSubAgent):
         
         return " ".join(reasoning_parts) if reasoning_parts else f"Analysis based on comprehensive {league} metrics and team performance data."
     
-    async def find_betting_opportunities(self) -> List[Dict[str, Any]]:
-        """Find upcoming betting opportunities for NBA/NCAAB."""
-        opportunities = []
-        
-        # Simulate finding 1-3 upcoming games
-        num_games = random.randint(1, 3)
-        
-        # Decide if NBA or NCAAB for this scan
-        league = "NBA" if random.random() > 0.3 else "NCAAB"
-        teams_db = self.nba_teams if league == "NBA" else self.ncaab_teams
-        teams = list(teams_db.keys())
-        
-        if len(teams) < 2:
-            return []
-            
-        for _ in range(num_games):
-            t1, t2 = random.sample(teams, 2)
-            
-            # Create a game opportunity
-            game = {
-                "sport": self.sport.value,
-                "title": f"{t1} vs {t2}",
-                "teams": [t1, t2],
-                "time": datetime.now().isoformat(),
-                "query_text": f"{league} prediction for {t1} vs {t2}",
-                "context": "Autonomous Market Scan",
-                "league": league
-            }
-            opportunities.append(game)
-            
-        return opportunities
+
 
     async def get_sport_specific_insights(self) -> Dict[str, Any]:
-        """Get NBA/NCAAB-specific insights and statistics."""
+        """Get Basketball-specific insights and statistics."""
         base_insights = await super().get_sport_specific_insights()
         
         # Add basketball-specific insights
         basketball_insights = {
-            "league": "NBA/NCAAB",
-            "nba_teams_tracked": len(self.nba_teams),
+            "league": "WNBA/NCAAB/NCAAW",
+            "wnba_teams_tracked": len(self.wnba_teams),
             "ncaab_teams_tracked": len(self.ncaab_teams),
+            "ncaaw_teams_tracked": len(self.ncaaw_teams),
             "players_tracked": len(self.player_stats),
             "betting_types": self.betting_types,
-            "top_nba_teams": sorted(self.nba_teams.items(), key=lambda x: x[1]["wins"], reverse=True)[:3],
+            "top_wnba_teams": sorted(self.wnba_teams.items(), key=lambda x: x[1]["wins"], reverse=True)[:3],
             "top_ncaab_teams": sorted(self.ncaab_teams.items(), key=lambda x: x[1]["wins"], reverse=True)[:3],
-            "top_scorers": sorted(self.player_stats.items(), key=lambda x: x[1]["ppg"], reverse=True)[:3]
+            "top_ncaaw_teams": sorted(self.ncaaw_teams.items(), key=lambda x: x[1]["wins"], reverse=True)[:3]
         }
         
         base_insights.update(basketball_insights)

@@ -27,7 +27,9 @@ const AIPredictionsDashboard = () => {
     const sports = [
         { text: 'All Sports', value: 'all' },
         { text: 'NFL Football', value: 'nfl' },
-        { text: 'NBA Basketball', value: 'nba' },
+        { text: 'NCAAB Men\'s', value: 'ncaab' },
+        { text: 'NCAAB Women\'s', value: 'ncaaw' },
+        { text: 'WNBA Basketball', value: 'wnba' },
         { text: 'MLB Baseball', value: 'mlb' },
         { text: 'NHL Hockey', value: 'nhl' }
     ];
@@ -44,7 +46,7 @@ const AIPredictionsDashboard = () => {
         fetchAIPredictions();
         fetchLiveGames();
         setupAutoRefresh();
-        
+
         return () => {
             if (refreshInterval) {
                 clearInterval(refreshInterval);
@@ -58,7 +60,7 @@ const AIPredictionsDashboard = () => {
             fetchAIPredictions();
             fetchLiveGames();
         }, 2 * 60 * 1000);
-        
+
         setRefreshInterval(interval);
     };
 
@@ -196,7 +198,7 @@ const AIPredictionsDashboard = () => {
                                 Advanced machine learning predictions with ensemble methods and real-time insights
                             </p>
                         </div>
-                        
+
                         <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                             <DropDownList
                                 data={sports}
@@ -206,7 +208,7 @@ const AIPredictionsDashboard = () => {
                                 valueField="value"
                                 style={{ width: '150px' }}
                             />
-                            
+
                             <DropDownList
                                 data={models}
                                 value={models.find(m => m.value === selectedModel)}
@@ -215,10 +217,10 @@ const AIPredictionsDashboard = () => {
                                 valueField="value"
                                 style={{ width: '150px' }}
                             />
-                            
-                            <Button 
-                                themeColor="primary" 
-                                size="small" 
+
+                            <Button
+                                themeColor="primary"
+                                size="small"
                                 onClick={fetchAIPredictions}
                                 icon="refresh"
                                 disabled={loading}
@@ -246,8 +248,8 @@ const AIPredictionsDashboard = () => {
                                     Accuracy
                                 </div>
                                 <div style={{ marginTop: '8px' }}>
-                                    <ProgressBar 
-                                        value={model.accuracy * 100} 
+                                    <ProgressBar
+                                        value={model.accuracy * 100}
                                         color={getModelColor(model.model_name)}
                                         style={{ height: '8px' }}
                                     />
@@ -273,31 +275,31 @@ const AIPredictionsDashboard = () => {
                         <GridColumn field="home_team" title="Home Team" width="150px" />
                         <GridColumn field="away_team" title="Away Team" width="150px" />
                         <GridColumn field="status" title="Status" width="100px" />
-                        <GridColumn 
-                            field="ai_prediction" 
-                            title="AI Prediction" 
+                        <GridColumn
+                            field="ai_prediction"
+                            title="AI Prediction"
                             width="120px"
                             cell={(props) => (
                                 <td>
                                     {props.dataItem.ai_prediction ? (
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                            <span style={{ 
+                                            <span style={{
                                                 color: getConfidenceColor(props.dataItem.ai_confidence || 0.5),
                                                 fontWeight: 'bold'
                                             }}>
                                                 {props.dataItem.ai_prediction}
                                             </span>
-                                            <Badge 
-                                                themeColor={props.dataItem.ai_confidence >= 0.7 ? 'success' : 
-                                                           props.dataItem.ai_confidence >= 0.5 ? 'warning' : 'error'}
+                                            <Badge
+                                                themeColor={props.dataItem.ai_confidence >= 0.7 ? 'success' :
+                                                    props.dataItem.ai_confidence >= 0.5 ? 'warning' : 'error'}
                                                 style={{ fontSize: '10px' }}
                                             >
                                                 {formatPercentage(props.dataItem.ai_confidence || 0.5)}
                                             </Badge>
                                         </div>
                                     ) : (
-                                        <Button 
-                                            size="small" 
+                                        <Button
+                                            size="small"
                                             themeColor="primary"
                                             onClick={() => generatePrediction(props.dataItem)}
                                         >
@@ -307,23 +309,23 @@ const AIPredictionsDashboard = () => {
                                 </td>
                             )}
                         />
-                        <GridColumn 
-                            field="ensemble_prediction" 
-                            title="Ensemble" 
+                        <GridColumn
+                            field="ensemble_prediction"
+                            title="Ensemble"
                             width="120px"
                             cell={(props) => (
                                 <td>
                                     {props.dataItem.ensemble_prediction ? (
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                            <span style={{ 
+                                            <span style={{
                                                 color: getConfidenceColor(props.dataItem.ensemble_confidence || 0.5),
                                                 fontWeight: 'bold'
                                             }}>
                                                 {props.dataItem.ensemble_prediction}
                                             </span>
-                                            <Badge 
-                                                themeColor={props.dataItem.ensemble_confidence >= 0.7 ? 'success' : 
-                                                           props.dataItem.ensemble_confidence >= 0.5 ? 'warning' : 'error'}
+                                            <Badge
+                                                themeColor={props.dataItem.ensemble_confidence >= 0.7 ? 'success' :
+                                                    props.dataItem.ensemble_confidence >= 0.5 ? 'warning' : 'error'}
                                                 style={{ fontSize: '10px' }}
                                             >
                                                 {formatPercentage(props.dataItem.ensemble_confidence || 0.5)}
@@ -335,9 +337,9 @@ const AIPredictionsDashboard = () => {
                                 </td>
                             )}
                         />
-                        <GridColumn 
-                            field="consensus_score" 
-                            title="Consensus" 
+                        <GridColumn
+                            field="consensus_score"
+                            title="Consensus"
                             width="100px"
                             cell={(props) => (
                                 <td>
@@ -387,13 +389,13 @@ const AIPredictionsDashboard = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <h4 style={{ margin: '0 0 12px 0' }}>Individual Model Predictions</h4>
                                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
                                         {ensemble.model_predictions.map((prediction, predIndex) => (
-                                            <div key={predIndex} style={{ 
-                                                padding: '12px', 
-                                                border: '1px solid #e9ecef', 
+                                            <div key={predIndex} style={{
+                                                padding: '12px',
+                                                border: '1px solid #e9ecef',
                                                 borderRadius: '8px',
                                                 backgroundColor: '#f8f9fa'
                                             }}>
@@ -434,27 +436,27 @@ const AIPredictionsDashboard = () => {
                                 <ChartValueAxisItem />
                             </ChartValueAxis>
                             <ChartSeries>
-                                <ChartSeriesItem 
-                                    type="line" 
-                                    data={[0.75, 0.78, 0.82, 0.79, 0.85, 0.83, 0.87, 0.89]} 
+                                <ChartSeriesItem
+                                    type="line"
+                                    data={[0.75, 0.78, 0.82, 0.79, 0.85, 0.83, 0.87, 0.89]}
                                     name="Neural Network"
                                     color="#007bff"
                                 />
-                                <ChartSeriesItem 
-                                    type="line" 
-                                    data={[0.72, 0.75, 0.78, 0.76, 0.80, 0.82, 0.84, 0.86]} 
+                                <ChartSeriesItem
+                                    type="line"
+                                    data={[0.72, 0.75, 0.78, 0.76, 0.80, 0.82, 0.84, 0.86]}
                                     name="Random Forest"
                                     color="#28a745"
                                 />
-                                <ChartSeriesItem 
-                                    type="line" 
-                                    data={[0.70, 0.73, 0.76, 0.74, 0.78, 0.80, 0.82, 0.84]} 
+                                <ChartSeriesItem
+                                    type="line"
+                                    data={[0.70, 0.73, 0.76, 0.74, 0.78, 0.80, 0.82, 0.84]}
                                     name="Gradient Boosting"
                                     color="#fd7e14"
                                 />
-                                <ChartSeriesItem 
-                                    type="line" 
-                                    data={[0.78, 0.81, 0.85, 0.83, 0.87, 0.89, 0.91, 0.93]} 
+                                <ChartSeriesItem
+                                    type="line"
+                                    data={[0.78, 0.81, 0.85, 0.83, 0.87, 0.89, 0.91, 0.93]}
                                     name="Ensemble"
                                     color="#6f42c1"
                                 />
@@ -469,8 +471,8 @@ const AIPredictionsDashboard = () => {
                         <Chart style={{ height: '300px' }}>
                             <ChartTooltip />
                             <ChartSeries>
-                                <ChartSeriesItem 
-                                    type="donut" 
+                                <ChartSeriesItem
+                                    type="donut"
                                     data={[
                                         { category: "High Confidence (>80%)", value: 45 },
                                         { category: "Medium Confidence (60-80%)", value: 35 },
@@ -490,9 +492,9 @@ const AIPredictionsDashboard = () => {
                 <CardBody>
                     <h3 style={{ margin: '0 0 16px 0' }}>🧠 AI Insights & Recommendations</h3>
                     <div style={{ display: 'grid', gap: '16px' }}>
-                        <div style={{ 
-                            padding: '16px', 
-                            border: '1px solid #e9ecef', 
+                        <div style={{
+                            padding: '16px',
+                            border: '1px solid #e9ecef',
                             borderRadius: '8px',
                             backgroundColor: '#f8f9fa'
                         }}>
@@ -504,10 +506,10 @@ const AIPredictionsDashboard = () => {
                                 Recommendation: Consider higher bet sizes for high-confidence predictions
                             </div>
                         </div>
-                        
-                        <div style={{ 
-                            padding: '16px', 
-                            border: '1px solid #e9ecef', 
+
+                        <div style={{
+                            padding: '16px',
+                            border: '1px solid #e9ecef',
                             borderRadius: '8px',
                             backgroundColor: '#f8f9fa'
                         }}>
@@ -519,10 +521,10 @@ const AIPredictionsDashboard = () => {
                                 Recommendation: Reduce bet size or avoid this game due to uncertainty
                             </div>
                         </div>
-                        
-                        <div style={{ 
-                            padding: '16px', 
-                            border: '1px solid #e9ecef', 
+
+                        <div style={{
+                            padding: '16px',
+                            border: '1px solid #e9ecef',
                             borderRadius: '8px',
                             backgroundColor: '#f8f9fa'
                         }}>

@@ -15,6 +15,8 @@ from src.services.auth_service import (
     AuthService, UserRegistration, UserLogin, PasswordChange,
     PasswordReset, AuthStatus
 )
+from src.db.database import get_db
+from sqlalchemy.ext.asyncio import AsyncSession
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -29,10 +31,13 @@ security = HTTPBearer()
 # Initialize auth service
 auth_service = AuthService()
 
-def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security)) -> Dict[str, Any]:
+async def get_current_user(
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+    db: AsyncSession = Depends(get_db)
+) -> Dict[str, Any]:
     """Get current user from JWT token."""
     token = credentials.credentials
-    result = auth_service.validate_token(token)
+    result = await auth_service.validate_token(db, token)
     
     if result["status"] != AuthStatus.SUCCESS:
         raise HTTPException(
@@ -43,14 +48,14 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(securit
     return result["user"]
 
 @router.post("/register", response_model=Dict[str, Any])
-async def register_user(registration: UserRegistration, request: Request):
+async def register_user(registration: UserRegistration, request: Request, db: AsyncSession = Depends(get_db)):
     """Register a new user."""
     try:
         # Get client IP and user agent
         client_ip = request.client.host if request.client else "unknown"
         user_agent = request.headers.get("user-agent", "unknown")
         
-        result = auth_service.register_user(registration)
+        result = await auth_service.register_user(db, registration)
         
         if result["status"] == AuthStatus.SUCCESS:
             logger.info(f"✅ User registered: {registration.username} from {client_ip}")
@@ -58,7 +63,8 @@ async def register_user(registration: UserRegistration, request: Request):
                 "success": True,
                 "message": result["message"],
                 "user_id": result["user_id"],
-                "username": result["username"]
+                "username": result["username"],
+                "email": result["email"]
             }
         else:
             raise HTTPException(
@@ -76,14 +82,14 @@ async def register_user(registration: UserRegistration, request: Request):
         )
 
 @router.post("/login", response_model=Dict[str, Any])
-async def login_user(login: UserLogin, request: Request):
+async def login_user(login: UserLogin, request: Request, db: AsyncSession = Depends(get_db)):
     """Authenticate a user and create a session."""
     try:
         # Get client IP and user agent
         client_ip = request.client.host if request.client else "unknown"
         user_agent = request.headers.get("user-agent", "unknown")
         
-        result = auth_service.login_user(login, client_ip, user_agent)
+        result = await auth_service.login_user(db, login, client_ip, user_agent)
         
         if result["status"] == AuthStatus.SUCCESS:
             logger.info(f"✅ User logged in: {login.username} from {client_ip}")
@@ -173,11 +179,13 @@ async def get_current_user_info(current_user: Dict[str, Any] = Depends(get_curre
 @router.post("/change-password", response_model=Dict[str, Any])
 async def change_password(
     password_change: PasswordChange,
-    current_user: Dict[str, Any] = Depends(get_current_user)
+    current_user: Dict[str, Any] = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db)
 ):
     """Change the current user's password."""
     try:
-        result = auth_service.change_password(current_user["id"], password_change)
+        user_id = current_user["id"]
+        result = await auth_service.change_password(db, user_id, password_change)
         
         if result["status"] == AuthStatus.SUCCESS:
             logger.info(f"✅ Password changed for user: {current_user['username']}")
@@ -185,8 +193,13 @@ async def change_password(
                 "success": True,
                 "message": result["message"]
             }
-        else:
+        elif result["status"] == AuthStatus.INVALID_CREDENTIALS:
             raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail=result["message"]
+            )
+        else:
+             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
                 detail=result["message"]
             )

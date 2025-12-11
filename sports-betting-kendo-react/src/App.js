@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { Card, CardBody } from '@progress/kendo-react-layout';
 import { Button } from '@progress/kendo-react-buttons';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
@@ -34,7 +35,8 @@ const ChartPlaceholder = ({ title }) => (
 );
 
 function App() {
-  const [currentView, setCurrentView] = useState('daily-picks'); // Default to Daily Picks for testing
+  const navigate = useNavigate();
+  const location = useLocation();
   const [theme, setTheme] = useState('default');
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -48,14 +50,14 @@ function App() {
   ];
 
   const views = [
-    { text: 'Daily Picks', value: 'daily-picks', icon: '📅' },
-    { text: 'AI Parlay Maker', value: 'parlay-maker', icon: '🎫' },
-    { text: 'Sports Analytics', value: 'sports-analytics', icon: '🏀' },
-    { text: 'Notifications', value: 'notifications', icon: '🔔' },
-    { text: 'User Management', value: 'user-management', icon: '👥' },
-    { text: 'Portfolio (Charts)', value: 'portfolio', icon: '📊' },
-    { text: 'AI Predictions (Charts)', value: 'ai-predictions', icon: '🤖' },
-    { text: 'Advanced Analytics (Charts)', value: 'analytics', icon: '📈' }
+    { text: 'Daily Picks', value: '/daily-picks', icon: '📅' },
+    { text: 'AI Parlay Maker', value: '/parlay-maker', icon: '🎫' },
+    { text: 'Sports Analytics', value: '/sports-analytics', icon: '🏀' },
+    { text: 'Notifications', value: '/notifications', icon: '🔔' },
+    { text: 'User Management', value: '/user-management', icon: '👥' },
+    { text: 'Portfolio (Charts)', value: '/portfolio', icon: '📊' },
+    { text: 'AI Predictions (Charts)', value: '/ai-predictions', icon: '🤖' },
+    { text: 'Advanced Analytics (Charts)', value: '/analytics', icon: '📈' }
   ];
 
   useEffect(() => {
@@ -103,29 +105,6 @@ function App() {
   };
 
   const closeNotification = () => setNotification(null);
-
-  const renderView = () => {
-    switch (currentView) {
-      case 'daily-picks':
-        return <DailyPicksDashboard />;
-      case 'parlay-maker':
-        return <ParlayMaker />;
-      case 'sports-analytics':
-        return <AnalyticsDashboard />;
-      case 'notifications':
-        return <NotificationSystem />;
-      case 'user-management':
-        return <UserManagement />;
-      case 'portfolio':
-        return <ChartPlaceholder title="Portfolio Performance" />;
-      case 'ai-predictions':
-        return <ChartPlaceholder title="AI Predictions Dashboard" />;
-      case 'analytics':
-        return <ChartPlaceholder title="Advanced Analytics" />;
-      default:
-        return <ParlayMaker />;
-    }
-  };
 
   if (loading) {
     return (
@@ -200,9 +179,9 @@ function App() {
             {views.map((view) => (
               <Button
                 key={view.value}
-                themeColor={currentView === view.value ? 'primary' : 'secondary'}
+                themeColor={location.pathname.startsWith(view.value) ? 'primary' : 'secondary'}
                 size="small"
-                onClick={() => setCurrentView(view.value)}
+                onClick={() => navigate(view.value)}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -221,7 +200,19 @@ function App() {
 
       {/* Main Content */}
       <div className="main-content">
-        {renderView()}
+        <Routes>
+          <Route path="/" element={<Navigate to="/daily-picks" replace />} />
+          <Route path="/daily-picks" element={<DailyPicksDashboard />} />
+          <Route path="/parlay-maker" element={<ParlayMaker />} />
+          <Route path="/sports-analytics" element={<AnalyticsDashboard />} />
+          <Route path="/notifications" element={<NotificationSystem />} />
+          <Route path="/user-management" element={<UserManagement />} />
+          <Route path="/portfolio" element={<ChartPlaceholder title="Portfolio Performance" />} />
+          <Route path="/ai-predictions" element={<ChartPlaceholder title="AI Predictions Dashboard" />} />
+          <Route path="/analytics" element={<ChartPlaceholder title="Advanced Analytics" />} />
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/daily-picks" replace />} />
+        </Routes>
       </div>
 
       {/* Footer */}

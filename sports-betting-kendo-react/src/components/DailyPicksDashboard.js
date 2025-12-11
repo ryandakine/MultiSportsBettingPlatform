@@ -29,7 +29,9 @@ const DailyPicksDashboard = () => {
 
     const sports = [
         { text: 'NFL Football', value: 'nfl', icon: '🏈' },
-        { text: 'NBA Basketball', value: 'nba', icon: '🏀' },
+        { text: 'NCAAB Men\'s', value: 'ncaab', icon: '🏀' },
+        { text: 'NCAAB Women\'s', value: 'ncaaw', icon: '🏀' },
+        { text: 'WNBA Basketball', value: 'wnba', icon: '🏀' },
         { text: 'MLB Baseball', value: 'mlb', icon: '⚾' },
         { text: 'NHL Hockey', value: 'nhl', icon: '🏒' }
     ];

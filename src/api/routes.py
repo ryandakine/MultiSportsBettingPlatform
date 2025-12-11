@@ -12,6 +12,7 @@ from src.api.models import (
     BettingQuery, PredictionResponse, OutcomeReport, 
     UserPreferences, SystemStatus, HealthCheck
 )
+from typing import List
 from src.config import settings
 
 # Import authentication and preferences routes
@@ -20,6 +21,7 @@ from src.api.preferences_routes import router as preferences_router
 from src.api.websocket_routes import router as websocket_router
 from src.api.social_routes import router as social_router
 from src.api.specialized_integration_routes import router as specialized_router
+from src.api.notification_routes import router as notification_router
 
 # Create router
 router = APIRouter(prefix="/api/v1", tags=["head-agent"])
@@ -30,6 +32,7 @@ router.include_router(preferences_router, prefix="/preferences", tags=["User Pre
 router.include_router(websocket_router, tags=["WebSocket"])
 router.include_router(social_router, prefix="/social", tags=["Social Features"])
 router.include_router(specialized_router, tags=["Specialized Systems"])
+router.include_router(notification_router, tags=["Notifications"])
 
 # Global Head Agent instance
 head_agent = HeadAgent()
@@ -99,6 +102,21 @@ async def get_predictions(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
 
+@router.get("/predictions", response_model=List[Dict[str, Any]])
+async def get_prediction_history(
+    user_id: str,
+    limit: int = 20,
+    offset: int = 0,
+    head_agent: HeadAgent = Depends(get_head_agent)
+) -> List[Dict[str, Any]]:
+    """
+    Get paginated prediction history.
+    """
+    try:
+        return await head_agent.get_prediction_history(user_id, limit, offset)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get history: {str(e)}")
+
 @router.post("/report-outcome")
 async def report_outcome(
     report: OutcomeReport,
@@ -161,6 +179,24 @@ async def get_system_status(
         
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to get system status: {str(e)}")
+
+from src.services.real_sports_service import real_sports_service
+
+@router.get("/sports/live-games/{sport}")
+async def get_live_games(sport: str) -> Dict[str, Any]:
+    """
+    Get live games for a specific sport using real data.
+    """
+    try:
+        games = await real_sports_service.get_live_games(sport)
+        return {
+            "success": True,
+            "data": games,
+            "sport": sport,
+            "updated_at": datetime.now().isoformat()
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch live games: {str(e)}")
 
 @router.get("/sports")
 async def get_available_sports(

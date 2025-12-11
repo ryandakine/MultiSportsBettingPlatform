@@ -11,6 +11,7 @@ from abc import ABC, abstractmethod
 from typing import Dict, Any, List, Optional
 from datetime import datetime
 import uuid
+from src.services.real_sports_service import real_sports_service
 
 from src.agents.head_agent import SubAgentInterface, Prediction, SportType, PredictionConfidence
 from src.services.claude_service import ClaudeService
@@ -58,8 +59,30 @@ class BaseSubAgent(SubAgentInterface, ABC):
         pass
     
     async def find_betting_opportunities(self) -> List[Dict[str, Any]]:
-        """Find potential betting opportunities (upcoming games)."""
-        return []
+        """Find potential betting opportunities (upcoming games) using Real Sports Data."""
+        try:
+            # Fetch real live games from ESPN via our service
+            games = await real_sports_service.get_live_games(self.sport.value)
+            
+            opportunities = []
+            for game in games:
+                # Convert to betting opportunity format
+                opp = {
+                    "game_id": game['id'],
+                    "sport": game['sport'],
+                    "matchup": f"{game['away_team']} @ {game['home_team']}",
+                    "start_time": game['date'],
+                    "status": game['status'],
+                    "home_team": game['home_team'],
+                    "away_team": game['away_team'],
+                    "details": game
+                }
+                opportunities.append(opp)
+                
+            return opportunities
+        except Exception as e:
+            logger.error(f"Error finding betting opportunities for {self.sport.value}: {e}")
+            return []
     
     async def get_prediction(self, query_params: dict) -> Prediction:
         """Get prediction from sub-agent (implements SubAgentInterface)."""

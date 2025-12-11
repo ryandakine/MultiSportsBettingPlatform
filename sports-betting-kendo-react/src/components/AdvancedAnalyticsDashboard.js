@@ -33,7 +33,9 @@ const AdvancedAnalyticsDashboard = () => {
     const sports = [
         { text: 'All Sports', value: 'all' },
         { text: 'NFL Football', value: 'nfl' },
-        { text: 'NBA Basketball', value: 'nba' },
+        { text: 'NCAAB Men\'s', value: 'ncaab' },
+        { text: 'NCAAB Women\'s', value: 'ncaaw' },
+        { text: 'WNBA Basketball', value: 'wnba' },
         { text: 'MLB Baseball', value: 'mlb' },
         { text: 'NHL Hockey', value: 'nhl' }
     ];
@@ -41,7 +43,7 @@ const AdvancedAnalyticsDashboard = () => {
     useEffect(() => {
         fetchAnalyticsData();
         setupAutoRefresh();
-        
+
         return () => {
             if (refreshInterval) {
                 clearInterval(refreshInterval);
@@ -54,7 +56,7 @@ const AdvancedAnalyticsDashboard = () => {
         const interval = setInterval(() => {
             fetchAnalyticsData();
         }, 5 * 60 * 1000);
-        
+
         setRefreshInterval(interval);
     };
 
@@ -170,7 +172,7 @@ const AdvancedAnalyticsDashboard = () => {
                                 Real-time performance tracking, risk analysis, and AI-powered insights
                             </p>
                         </div>
-                        
+
                         <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                             <DropDownList
                                 data={timeframes}
@@ -180,7 +182,7 @@ const AdvancedAnalyticsDashboard = () => {
                                 valueField="value"
                                 style={{ width: '150px' }}
                             />
-                            
+
                             <DropDownList
                                 data={sports}
                                 value={sports.find(s => s.value === selectedSport)}
@@ -189,10 +191,10 @@ const AdvancedAnalyticsDashboard = () => {
                                 valueField="value"
                                 style={{ width: '150px' }}
                             />
-                            
-                            <Button 
-                                themeColor="primary" 
-                                size="small" 
+
+                            <Button
+                                themeColor="primary"
+                                size="small"
                                 onClick={fetchAnalyticsData}
                                 icon="refresh"
                                 disabled={loading}
@@ -281,15 +283,15 @@ const AdvancedAnalyticsDashboard = () => {
                                 <ChartValueAxisItem />
                             </ChartValueAxis>
                             <ChartSeries>
-                                <ChartSeriesItem 
-                                    type="line" 
-                                    data={[1000, 1050, 980, 1120, 1080, 1250, 1180, 1350]} 
+                                <ChartSeriesItem
+                                    type="line"
+                                    data={[1000, 1050, 980, 1120, 1080, 1250, 1180, 1350]}
                                     name="Portfolio Value"
                                     color="#007bff"
                                 />
-                                <ChartSeriesItem 
-                                    type="line" 
-                                    data={[0, 5, -2, 12, 8, 25, 18, 35]} 
+                                <ChartSeriesItem
+                                    type="line"
+                                    data={[0, 5, -2, 12, 8, 25, 18, 35]}
                                     name="ROI %"
                                     color="#28a745"
                                 />
@@ -311,10 +313,10 @@ const AdvancedAnalyticsDashboard = () => {
                                 color={getRiskLevelColor(riskAnalysis?.current_risk_level)}
                             />
                             <div style={{ marginTop: '16px' }}>
-                                <Badge 
-                                    themeColor={riskAnalysis?.current_risk_level === 'low' ? 'success' : 
-                                               riskAnalysis?.current_risk_level === 'medium' ? 'warning' : 
-                                               riskAnalysis?.current_risk_level === 'high' ? 'error' : 'info'}
+                                <Badge
+                                    themeColor={riskAnalysis?.current_risk_level === 'low' ? 'success' :
+                                        riskAnalysis?.current_risk_level === 'medium' ? 'warning' :
+                                            riskAnalysis?.current_risk_level === 'high' ? 'error' : 'info'}
                                     style={{ fontSize: '16px', padding: '8px 16px' }}
                                 >
                                     {riskAnalysis?.current_risk_level?.toUpperCase() || 'UNKNOWN'}
@@ -338,15 +340,15 @@ const AdvancedAnalyticsDashboard = () => {
                     >
                         <GridColumn field="sport" title="Sport" width="120px" />
                         <GridColumn field="total_bets" title="Total Bets" width="100px" />
-                        <GridColumn 
-                            field="win_rate" 
-                            title="Win Rate" 
+                        <GridColumn
+                            field="win_rate"
+                            title="Win Rate"
                             width="120px"
                             cell={(props) => (
                                 <td>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                        <ProgressBar 
-                                            value={props.dataItem.win_rate * 100} 
+                                        <ProgressBar
+                                            value={props.dataItem.win_rate * 100}
                                             style={{ flex: 1 }}
                                             color={props.dataItem.win_rate > 0.6 ? '#28a745' : props.dataItem.win_rate > 0.5 ? '#ffc107' : '#dc3545'}
                                         />
@@ -357,9 +359,9 @@ const AdvancedAnalyticsDashboard = () => {
                                 </td>
                             )}
                         />
-                        <GridColumn 
-                            field="roi" 
-                            title="ROI" 
+                        <GridColumn
+                            field="roi"
+                            title="ROI"
                             width="100px"
                             cell={(props) => (
                                 <td style={{ color: getPerformanceColor(props.dataItem.roi) }}>
@@ -367,9 +369,9 @@ const AdvancedAnalyticsDashboard = () => {
                                 </td>
                             )}
                         />
-                        <GridColumn 
-                            field="total_profit" 
-                            title="Profit/Loss" 
+                        <GridColumn
+                            field="total_profit"
+                            title="Profit/Loss"
                             width="120px"
                             cell={(props) => (
                                 <td style={{ color: getPerformanceColor(props.dataItem.total_profit) }}>
@@ -390,18 +392,18 @@ const AdvancedAnalyticsDashboard = () => {
                     {insights.length > 0 ? (
                         <div style={{ display: 'grid', gap: '16px' }}>
                             {insights.map((insight, index) => (
-                                <div key={index} style={{ 
-                                    padding: '16px', 
-                                    border: '1px solid #e9ecef', 
+                                <div key={index} style={{
+                                    padding: '16px',
+                                    border: '1px solid #e9ecef',
                                     borderRadius: '8px',
                                     backgroundColor: '#f8f9fa'
                                 }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
                                         <h4 style={{ margin: 0, color: '#007bff' }}>{insight.title}</h4>
-                                        <Badge 
-                                            themeColor={insight.insight_type === 'trend' ? 'success' : 
-                                                       insight.insight_type === 'risk' ? 'error' : 
-                                                       insight.insight_type === 'pattern' ? 'info' : 'warning'}
+                                        <Badge
+                                            themeColor={insight.insight_type === 'trend' ? 'success' :
+                                                insight.insight_type === 'risk' ? 'error' :
+                                                    insight.insight_type === 'pattern' ? 'info' : 'warning'}
                                             style={{ fontSize: '12px' }}
                                         >
                                             {insight.insight_type.toUpperCase()}
@@ -449,21 +451,21 @@ const AdvancedAnalyticsDashboard = () => {
                                     {formatCurrency(riskAnalysis.bet_size_recommendation)}
                                 </div>
                             </div>
-                            
+
                             <div>
                                 <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Max Daily Loss</h4>
                                 <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#dc3545' }}>
                                     {formatCurrency(riskAnalysis.max_daily_loss)}
                                 </div>
                             </div>
-                            
+
                             <div>
                                 <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Diversification Score</h4>
                                 <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#28a745' }}>
                                     {riskAnalysis.diversification_score.toFixed(0)}%
                                 </div>
                             </div>
-                            
+
                             <div>
                                 <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Bankroll Utilization</h4>
                                 <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#ffc107' }}>
@@ -471,7 +473,7 @@ const AdvancedAnalyticsDashboard = () => {
                                 </div>
                             </div>
                         </div>
-                        
+
                         {riskAnalysis.risk_factors && riskAnalysis.risk_factors.length > 0 && (
                             <div style={{ marginTop: '16px' }}>
                                 <h4 style={{ margin: '0 0 8px 0', fontSize: '14px', color: '#666' }}>Risk Factors</h4>

@@ -299,37 +299,7 @@ class FootballAgent(BaseSubAgent):
         
         return " ".join(reasoning_parts) if reasoning_parts else f"Analysis based on comprehensive {league} metrics and team performance data."
     
-    async def find_betting_opportunities(self) -> List[Dict[str, Any]]:
-        """Find upcoming betting opportunities for NFL/NCAAF."""
-        opportunities = []
-        
-        # Simulate finding 1-3 upcoming games
-        num_games = random.randint(1, 3)
-        
-        # Decide if NFL or NCAAF for this scan
-        league = "NFL" if random.random() > 0.4 else "NCAAF"
-        teams_db = self.nfl_teams if league == "NFL" else self.ncaaf_teams
-        teams = list(teams_db.keys())
-        
-        if len(teams) < 2:
-            return []
-            
-        for _ in range(num_games):
-            t1, t2 = random.sample(teams, 2)
-            
-            # Create a game opportunity
-            game = {
-                "sport": self.sport.value,
-                "title": f"{t1} vs {t2}",
-                "teams": [t1, t2],
-                "time": datetime.now().isoformat(),
-                "query_text": f"{league} prediction for {t1} vs {t2}",
-                "context": "Autonomous Market Scan",
-                "league": league
-            }
-            opportunities.append(game)
-            
-        return opportunities
+
 
     async def get_sport_specific_insights(self) -> Dict[str, Any]:
         """Get NFL/NCAAF-specific insights and statistics."""

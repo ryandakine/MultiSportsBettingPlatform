@@ -15,11 +15,11 @@ from dataclasses import dataclass, asdict
 from enum import Enum
 import jwt
 import bcrypt
-import redis
+import redis.asyncio as redis
 from pydantic import BaseModel, EmailStr, validator
 import logging
-from sqlalchemy.orm import Session
-from src.db.database import SessionLocal
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
 from src.db.models.user import User as UserModel
 
 # Configure logging
@@ -146,32 +146,41 @@ class PasswordChange(BaseModel):
 class AuthService:
     """Authentication and session management service."""
     
-    def __init__(self, redis_url: str = "redis://localhost:6379", 
+    def __init__(self, redis_url: str = None, 
                  jwt_secret: str = None, jwt_algorithm: str = "HS256"):
         """Initialize the authentication service."""
-        self.redis_url = redis_url
-        self.jwt_secret = jwt_secret or os.getenv("JWT_SECRET", "your-secret-key-change-in-production")
+        from src.config import settings
+        
+        self.redis_url = redis_url or settings.redis_url
+        self.jwt_secret = jwt_secret or settings.secret_key
         self.jwt_algorithm = jwt_algorithm
         
-        # Security settings
-        self.max_login_attempts = 5
-        self.lockout_duration = 15  # minutes
-        self.session_timeout = 24  # hours
-        self.remember_me_timeout = 30  # days
+        # Security settings (from centralized config)
+        self.max_login_attempts = settings.max_login_attempts
+        self.lockout_duration = settings.lockout_duration_minutes
+        self.session_timeout = settings.session_timeout_hours
+        self.remember_me_timeout = settings.remember_me_timeout_days
         self.password_reset_timeout = 1  # hour
         
-        # Rate limiting settings
-        self.rate_limit_requests = 100  # requests per hour
+        # Rate limiting settings (from centralized config)
+        self.rate_limit_requests = settings.rate_limit_requests_per_hour
         self.rate_limit_window = 3600  # seconds
         
-        # Initialize Redis connection
-        try:
-            self.redis_client = redis.from_url(redis_url, decode_responses=True)
-            self.redis_client.ping()
-            logger.info("✅ Redis connection established")
-        except Exception as e:
-            logger.warning(f"⚠️ Redis connection failed: {e}")
-            self.redis_client = None
+        # Redis client (lazy initialized)
+        self.redis_client = None
+        logger.info("✅ AuthService initialized (Redis will connect on first use)")
+    
+    async def _get_redis(self):
+        """Lazy-initialize async Redis connection."""
+        if self.redis_client is None:
+            try:
+                self.redis_client = await redis.from_url(self.redis_url, decode_responses=True)
+                await self.redis_client.ping()
+                logger.info("✅ Async Redis connection established")
+            except Exception as e:
+                logger.warning(f"⚠️ Redis connection failed: {e}")
+                self.redis_client = False  # Mark as failed to avoid retrying constantly
+        return self.redis_client if self.redis_client is not False else None
     
     def _generate_user_id(self) -> str:
         """Generate a unique user ID."""
@@ -219,70 +228,75 @@ class AuthService:
             logger.warning("Invalid JWT token")
             return None
     
-    def _is_rate_limited(self, identifier: str, limit_type: str = "auth") -> bool:
+    async def _is_rate_limited(self, identifier: str, limit_type: str = "auth") -> bool:
         """Check if a request is rate limited."""
-        if not self.redis_client:
+        redis_client = await self._get_redis()
+        if not redis_client:
             return False
         
         key = f"rate_limit:{limit_type}:{identifier}"
-        current_count = self.redis_client.get(key)
+        current_count = await redis_client.get(key)
         
         if current_count is None:
-            self.redis_client.setex(key, self.rate_limit_window, 1)
+            await redis_client.setex(key, self.rate_limit_window, 1)
             return False
         
         count = int(current_count)
         if count >= self.rate_limit_requests:
             return True
         
-        self.redis_client.incr(key)
+        await redis_client.incr(key)
         return False
     
-    def _increment_login_attempts(self, username: str) -> int:
+    async def _increment_login_attempts(self, username: str) -> int:
         """Increment failed login attempts for a user."""
-        if not self.redis_client:
+        redis_client = await self._get_redis()
+        if not redis_client:
             return 0
         
         key = f"login_attempts:{username}"
-        attempts = self.redis_client.incr(key)
-        self.redis_client.expire(key, self.lockout_duration * 60)
+        attempts = await redis_client.incr(key)
+        await redis_client.expire(key, self.lockout_duration * 60)
         return attempts
     
-    def _check_account_locked(self, username: str) -> bool:
+    async def _check_account_locked(self, username: str) -> bool:
         """Check if an account is locked due to too many failed attempts."""
-        if not self.redis_client:
+        redis_client = await self._get_redis()
+        if not redis_client:
             return False
         
         key = f"login_attempts:{username}"
-        attempts = self.redis_client.get(key)
+        attempts = await redis_client.get(key)
         
         if attempts and int(attempts) >= self.max_login_attempts:
             return True
         
         return False
     
-    def _reset_login_attempts(self, username: str):
+    async def _reset_login_attempts(self, username: str):
         """Reset failed login attempts for a user."""
-        if self.redis_client:
+        redis_client = await self._get_redis()
+        if redis_client:
             key = f"login_attempts:{username}"
-            self.redis_client.delete(key)
+            await redis_client.delete(key)
     
-    def register_user(self, registration: UserRegistration) -> Dict[str, Any]:
+    async def register_user(self, db: AsyncSession, registration: UserRegistration) -> Dict[str, Any]:
         """Register a new user."""
-        db = SessionLocal()
         try:
             # Check rate limiting (keep Redis for this)
-            if self._is_rate_limited("registration", "registration"):
+            if await self._is_rate_limited("registration", "registration"):
                 return {
                     "status": AuthStatus.RATE_LIMITED,
                     "message": "Too many registration attempts. Please try again later."
                 }
             
             # Check if username or email already exists
-            existing_user = db.query(UserModel).filter(
+            query = select(UserModel).where(
                 (UserModel.username == registration.username) | 
                 (UserModel.email == registration.email)
-            ).first()
+            )
+            result = await db.execute(query)
+            existing_user = result.scalar_one_or_none()
             
             if existing_user:
                 if existing_user.username == registration.username:
@@ -306,8 +320,8 @@ class AuthService:
             )
             
             db.add(user)
-            db.commit()
-            db.refresh(user)
+            await db.commit()
+            await db.refresh(user)
             
             logger.info(f"✅ User registered successfully: {user.username}")
             
@@ -320,37 +334,36 @@ class AuthService:
             }
             
         except Exception as e:
-            db.rollback()
+            await db.rollback()
             logger.error(f"❌ Registration failed: {e}")
             return {
                 "status": AuthStatus.INVALID_CREDENTIALS,
                 "message": "Registration failed. Please try again."
             }
-        finally:
-            db.close()
     
-    def login_user(self, login: UserLogin, ip_address: str = None, 
+    async def login_user(self, db: AsyncSession, login: UserLogin, ip_address: str = None, 
                    user_agent: str = None) -> Dict[str, Any]:
         """Authenticate a user and create a session."""
-        db = SessionLocal()
         try:
             # Keep Redis for rate limiting / account locking if available
-            if self._is_rate_limited(login.username, "login"):
+            if await self._is_rate_limited(login.username, "login"):
                 return {
                     "status": AuthStatus.RATE_LIMITED,
                     "message": "Too many login attempts. Please try again later."
                 }
             
-            if self._check_account_locked(login.username):
+            if await self._check_account_locked(login.username):
                 return {
                     "status": AuthStatus.ACCOUNT_LOCKED,
                     "message": f"Account locked. Try again in {self.lockout_duration} minutes."
                 }
             
             # Get user from DB
-            user = db.query(UserModel).filter(UserModel.username == login.username).first()
+            query = select(UserModel).where(UserModel.username == login.username)
+            result = await db.execute(query)
+            user = result.scalar_one_or_none()
             if not user:
-                self._increment_login_attempts(login.username)
+                await self._increment_login_attempts(login.username)
                 return {
                     "status": AuthStatus.USER_NOT_FOUND,
                     "message": "Invalid username or password"
@@ -358,22 +371,22 @@ class AuthService:
             
             # Verify password
             if not self._verify_password(login.password, user.password_hash):
-                attempts = self._increment_login_attempts(login.username)
+                attempts = await self._increment_login_attempts(login.username)
                 return {
                     "status": AuthStatus.INVALID_CREDENTIALS,
                     "message": f"Invalid username or password."
                 }
             
             # Reset login attempts
-            self._reset_login_attempts(login.username)
+            await self._reset_login_attempts(login.username)
             
             # Update last login
             user.last_login = datetime.utcnow()
-            db.commit()
+            await db.commit()
             
             # Create session (Keep sessions in Redis for simple fast expiry)
             session_timeout = self.remember_me_timeout if login.remember_me else self.session_timeout
-            session = self._create_session(user.id, ip_address, user_agent, session_timeout)
+            session = await self._create_session(user.id, ip_address, user_agent, session_timeout)
             
             # Create JWT token
             token = self._create_jwt_token(user.id, user.role, session_timeout * 3600)
@@ -401,13 +414,11 @@ class AuthService:
                 "status": AuthStatus.INVALID_CREDENTIALS,
                 "message": "Login failed. Please try again."
             }
-        finally:
-            db.close()
     
-    def logout_user(self, session_id: str) -> Dict[str, Any]:
+    async def logout_user(self, session_id: str) -> Dict[str, Any]:
         """Logout a user by invalidating their session."""
         try:
-            if self._invalidate_session(session_id):
+            if await self._invalidate_session(session_id):
                 return {
                     "status": AuthStatus.SUCCESS,
                     "message": "Logout successful"
@@ -424,7 +435,7 @@ class AuthService:
                 "message": "Logout failed"
             }
     
-    def validate_token(self, token: str) -> Dict[str, Any]:
+    async def validate_token(self, db: AsyncSession, token: str) -> Dict[str, Any]:
         """Validate a JWT token and return user information."""
         try:
             payload = self._decode_jwt_token(token)
@@ -435,7 +446,7 @@ class AuthService:
                 }
             
             user_id = payload.get('user_id')
-            user = self._get_user_by_id(user_id)
+            user = await self._get_user_by_id(db, user_id)
             
             if not user or not user.is_active:
                 return {
@@ -462,11 +473,13 @@ class AuthService:
                 "message": "Token validation failed"
             }
     
-    def change_password(self, user_id: str, password_change: PasswordChange) -> Dict[str, Any]:
+    async def change_password(self, db: AsyncSession, user_id: str, password_change: PasswordChange) -> Dict[str, Any]:
         """Change a user's password."""
-        db = SessionLocal()
         try:
-            user = db.query(UserModel).filter(UserModel.id == user_id).first()
+            query = select(UserModel).where(UserModel.id == user_id)
+            result = await db.execute(query)
+            user = result.scalar_one_or_none()
+            
             if not user:
                 return {
                     "status": AuthStatus.USER_NOT_FOUND,
@@ -485,10 +498,10 @@ class AuthService:
             user.password_hash = new_password_hash
             
             # Commit changes
-            db.commit()
+            await db.commit()
             
             # Invalidate all sessions for this user
-            self._invalidate_user_sessions(user_id)
+            await self._invalidate_user_sessions(user_id)
             
             logger.info(f"✅ Password changed successfully for user: {user.username}")
             
@@ -498,27 +511,28 @@ class AuthService:
             }
             
         except Exception as e:
-            db.rollback()
+            await db.rollback()
             logger.error(f"❌ Password change failed: {e}")
             return {
                 "status": AuthStatus.INVALID_CREDENTIALS,
                 "message": "Password change failed"
             }
-        finally:
-            db.close()
     
-    def get_user_sessions(self, user_id: str) -> List[Dict[str, Any]]:
+    async def get_user_sessions(self, user_id: str) -> List[Dict[str, Any]]:
         """Get all active sessions for a user."""
         try:
-            if not self.redis_client:
+            redis_client = await self._get_redis()
+            if not redis_client:
                 return []
             
-            pattern = f"session:*:user:{user_id}"
-            session_keys = self.redis_client.keys(pattern)
+            # Use user_sessions set for lookup
+            user_sessions_key = f"user_sessions:{user_id}"
+            session_ids = await redis_client.smembers(user_sessions_key)
             
             sessions = []
-            for key in session_keys:
-                session_data = self.redis_client.hgetall(key)
+            for session_id in session_ids:
+                session_key = f"session:{session_id}"
+                session_data = await redis_client.hgetall(session_key)
                 if session_data and session_data.get('is_active') == 'True':
                     sessions.append({
                         "session_id": session_data.get('session_id'),
@@ -550,11 +564,13 @@ class AuthService:
         key = f"user:email:{email}"
         return self.redis_client.exists(key) > 0
     
-    def _get_user_by_username(self, username: str) -> Optional[User]:
+    async def _get_user_by_username(self, db: AsyncSession, username: str) -> Optional[User]:
         """Get a user by username."""
-        db = SessionLocal()
         try:
-            db_user = db.query(UserModel).filter(UserModel.username == username).first()
+            query = select(UserModel).where(UserModel.username == username)
+            result = await db.execute(query)
+            db_user = result.scalar_one_or_none()
+            
             if not db_user:
                 return None
             
@@ -574,8 +590,6 @@ class AuthService:
             )
         except Exception:
             return None
-        finally:
-            db.close()
     
     def _get_user_by_email(self, email: str) -> Optional[User]:
         """Get a user by email."""
@@ -590,11 +604,12 @@ class AuthService:
         
         return None
     
-    def _get_user_by_id(self, user_id: str) -> Optional[User]:
+    async def _get_user_by_id(self, db: AsyncSession, user_id: str) -> Optional[User]:
         """Get a user by ID."""
-        db = SessionLocal()
         try:
-            db_user = db.query(UserModel).filter(UserModel.id == user_id).first()
+            query = select(UserModel).where(UserModel.id == user_id)
+            result = await db.execute(query)
+            db_user = result.scalar_one_or_none()
             if not db_user:
                 return None
             
@@ -616,8 +631,6 @@ class AuthService:
         except Exception as e:
             logger.error(f"❌ Failed to get user by ID: {e}")
             return None
-        finally:
-            db.close()
     
     def _store_user(self, user: User):
         """Store a user in Redis."""
@@ -650,7 +663,7 @@ class AuthService:
         self.redis_client.expire(f"user:username:{user.username}", 86400 * 30)
         self.redis_client.expire(f"user:email:{user.email}", 86400 * 30)
     
-    def _create_session(self, user_id: str, ip_address: str = None, 
+    async def _create_session(self, user_id: str, ip_address: str = None, 
                        user_agent: str = None, timeout_hours: int = None) -> Session:
         """Create a new session for a user."""
         if timeout_hours is None:
@@ -669,7 +682,8 @@ class AuthService:
             user_agent=user_agent or "unknown"
         )
         
-        if self.redis_client:
+        redis_client = await self._get_redis()
+        if redis_client:
             session_key = f"session:{session_id}"
             session_data = {
                 'session_id': session.session_id,
@@ -681,86 +695,117 @@ class AuthService:
                 'is_active': str(session.is_active)
             }
             
-            self.redis_client.hset(session_key, mapping=session_data)
-            self.redis_client.expire(session_key, timeout_hours * 3600)
+            await redis_client.hset(session_key, mapping=session_data)
+            await redis_client.expire(session_key, timeout_hours * 3600)
             
             # Store session reference for user
             user_sessions_key = f"user_sessions:{user_id}"
-            self.redis_client.sadd(user_sessions_key, session_id)
-            self.redis_client.expire(user_sessions_key, timeout_hours * 3600)
+            await redis_client.sadd(user_sessions_key, session_id)
+            await redis_client.expire(user_sessions_key, timeout_hours * 3600)
         
         return session
     
-    def _invalidate_session(self, session_id: str) -> bool:
+    async def _invalidate_session(self, session_id: str) -> bool:
         """Invalidate a session."""
-        if not self.redis_client:
+        redis_client = await self._get_redis()
+        if not redis_client:
             return False
         
         session_key = f"session:{session_id}"
-        session_data = self.redis_client.hgetall(session_key)
+        session_data = await redis_client.hgetall(session_key)
         
         if session_data:
             user_id = session_data.get('user_id')
             
             # Mark session as inactive
-            self.redis_client.hset(session_key, 'is_active', 'False')
+            await redis_client.hset(session_key, 'is_active', 'False')
             
             # Remove from user sessions
             if user_id:
                 user_sessions_key = f"user_sessions:{user_id}"
-                self.redis_client.srem(user_sessions_key, session_id)
+                await redis_client.srem(user_sessions_key, session_id)
             
             return True
         
         return False
     
-    def _invalidate_user_sessions(self, user_id: str):
+    async def _invalidate_user_sessions(self, user_id: str):
         """Invalidate all sessions for a user."""
-        if not self.redis_client:
+        redis_client = await self._get_redis()
+        if not redis_client:
             return
         
         user_sessions_key = f"user_sessions:{user_id}"
-        session_ids = self.redis_client.smembers(user_sessions_key)
+        session_ids = await redis_client.smembers(user_sessions_key)
         
         for session_id in session_ids:
-            self._invalidate_session(session_id)
+            await self._invalidate_session(session_id)
     
-    def cleanup_expired_sessions(self) -> int:
+    async def cleanup_expired_sessions(self) -> int:
         """Clean up expired sessions and return count of cleaned sessions."""
-        if not self.redis_client:
+        redis_client = await self._get_redis()
+        if not redis_client:
             return 0
         
         cleaned_count = 0
         pattern = "session:*"
-        session_keys = self.redis_client.keys(pattern)
-        
-        for key in session_keys:
-            session_data = self.redis_client.hgetall(key)
-            if session_data:
-                expires_at_str = session_data.get('expires_at')
-                if expires_at_str:
-                    try:
-                        expires_at = datetime.fromisoformat(expires_at_str)
-                        if expires_at < datetime.utcnow():
-                            self.redis_client.delete(key)
+        # Use SCAN instead of KEYS for better performance in production
+        cursor = 0
+        while True:
+            cursor, session_keys = await redis_client.scan(cursor, match=pattern, count=100)
+            
+            for key in session_keys:
+                session_data = await redis_client.hgetall(key)
+                if session_data:
+                    expires_at_str = session_data.get('expires_at')
+                    if expires_at_str:
+                        try:
+                            expires_at = datetime.fromisoformat(expires_at_str)
+                            if expires_at < datetime.utcnow():
+                                await redis_client.delete(key)
+                                cleaned_count += 1
+                        except Exception:
+                            # If we can't parse the date, delete the session
+                            await redis_client.delete(key)
                             cleaned_count += 1
-                    except Exception:
-                        # If we can't parse the date, delete the session
-                        self.redis_client.delete(key)
-                        cleaned_count += 1
+            
+            if cursor == 0:
+                break
         
         logger.info(f"🧹 Cleaned up {cleaned_count} expired sessions")
         return cleaned_count
     
-    def get_stats(self) -> Dict[str, Any]:
+    async def get_stats(self) -> Dict[str, Any]:
         """Get authentication service statistics."""
-        if not self.redis_client:
+        redis_client = await self._get_redis()
+        if not redis_client:
             return {"error": "Redis not available"}
         
         try:
-            total_users = len(self.redis_client.keys("user:*"))
-            active_sessions = len(self.redis_client.keys("session:*"))
-            locked_accounts = len(self.redis_client.keys("login_attempts:*"))
+            # Use SCAN for better performance
+            total_users = 0
+            cursor = 0
+            while True:
+                cursor, keys = await redis_client.scan(cursor, match="user:*", count=100)
+                total_users += len(keys)
+                if cursor == 0:
+                    break
+            
+            active_sessions = 0
+            cursor = 0
+            while True:
+                cursor, keys = await redis_client.scan(cursor, match="session:*", count=100)
+                active_sessions += len(keys)
+                if cursor == 0:
+                    break
+            
+            locked_accounts = 0
+            cursor = 0
+            while True:
+                cursor, keys = await redis_client.scan(cursor, match="login_attempts:*", count=100)
+                locked_accounts += len(keys)
+                if cursor == 0:
+                    break
             
             return {
                 "total_users": total_users,

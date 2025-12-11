@@ -20,7 +20,7 @@ const WinRateDonut = () => (
 
 const SportPerformanceBar = () => (
     <div style={{ padding: '10px' }}>
-        {['NBA', 'NFL', 'MLB', 'NHL'].map(sport => (
+        {['NCAAB', 'NCAAW', 'WNBA', 'NFL', 'MLB', 'NHL'].map(sport => (
             <div key={sport} style={{ marginBottom: '10px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
                     <span>{sport}</span>

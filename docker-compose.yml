@@ -11,7 +11,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://betting_user:secure_password_2024@database:5432/multisports_betting
+      - DATABASE_URL=postgresql+asyncpg://betting_user:secure_password_2024@database:5432/multisports_betting
       - REDIS_URL=redis://cache:6379
       - SECRET_KEY=production-secret-key-change-in-production
       - DEBUG=false
@@ -67,7 +67,7 @@ services:
     ports:
       - "8001:8001"
     environment:
-      - DATABASE_URL=postgresql://betting_user:secure_password_2024@database:5432/multisports_betting
+      - DATABASE_URL=postgresql+asyncpg://betting_user:secure_password_2024@database:5432/multisports_betting
       - REDIS_URL=redis://cache:6379
       - ANALYTICS_PORT=8001
     depends_on:
@@ -90,10 +90,7 @@ services:
 
   # PostgreSQL Database
   database:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: database
+    image: postgres:15-alpine
     container_name: multisports-database
     ports:
       - "5432:5432"
@@ -101,7 +98,6 @@ services:
       - POSTGRES_DB=multisports_betting
       - POSTGRES_USER=betting_user
       - POSTGRES_PASSWORD=secure_password_2024
-      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -110,23 +106,19 @@ services:
     restart: unless-stopped
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U betting_user -d multisports_betting"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   # Redis Cache
   cache:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: cache
+    image: redis:7-alpine
     container_name: multisports-cache
     ports:
       - "6379:6379"
     volumes:
       - redis_data:/data
-      - ./redis.conf:/usr/local/etc/redis/redis.conf
     networks:
       - multisports-network
     restart: unless-stopped
@@ -139,10 +131,7 @@ services:
 
   # Prometheus Monitoring
   prometheus:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: monitoring
+    image: prom/prometheus:latest
     container_name: multisports-prometheus
     ports:
       - "9090:9090"
@@ -198,48 +187,8 @@ services:
       - multisports-network
     restart: unless-stopped
 
-  # Elasticsearch for Logging
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
-    container_name: multisports-elasticsearch
-    environment:
-      - discovery.type=single-node
-      - xpack.security.enabled=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-    ports:
-      - "9200:9200"
-    volumes:
-      - elasticsearch_data:/usr/share/elasticsearch/data
-    networks:
-      - multisports-network
-    restart: unless-stopped
-
-  # Kibana for Log Visualization
-  kibana:
-    image: docker.elastic.co/kibana/kibana:8.11.0
-    container_name: multisports-kibana
-    ports:
-      - "5601:5601"
-    environment:
-      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    depends_on:
-      - elasticsearch
-    networks:
-      - multisports-network
-    restart: unless-stopped
-
-  # Filebeat for Log Collection
-  filebeat:
-    image: docker.elastic.co/beats/filebeat:8.11.0
-    container_name: multisports-filebeat
-    volumes:
-      - ./logs:/var/log/multisports
-      - ./monitoring/filebeat.yml:/usr/share/filebeat/filebeat.yml
-    depends_on:
-      - elasticsearch
-    networks:
-      - multisports-network
-    restart: unless-stopped
+  # Elasticsearch and Kibana removed to save resources during remediation/testing
+  # Can be re-enabled later
 
 volumes:
   postgres_data:
@@ -250,12 +199,7 @@ volumes:
     driver: local
   grafana_data:
     driver: local
-  elasticsearch_data:
-    driver: local
 
 networks:
   multisports-network:
     driver: bridge
-    ipam:
-      config:
-        - subnet: 172.20.0.0/16 

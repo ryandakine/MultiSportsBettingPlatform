@@ -29,7 +29,9 @@ const AdvancedAnalyticsV3Dashboard = () => {
     const sports = [
         { text: 'All Sports', value: 'all' },
         { text: 'NFL Football', value: 'nfl' },
-        { text: 'NBA Basketball', value: 'nba' },
+        { text: 'NCAAB Men\'s', value: 'ncaab' },
+        { text: 'NCAAB Women\'s', value: 'ncaaw' },
+        { text: 'WNBA Basketball', value: 'wnba' },
         { text: 'MLB Baseball', value: 'mlb' },
         { text: 'NHL Hockey', value: 'nhl' }
     ];
@@ -45,7 +47,7 @@ const AdvancedAnalyticsV3Dashboard = () => {
     useEffect(() => {
         fetchAdvancedAnalyticsV3();
         setupAutoRefresh();
-        
+
         return () => {
             if (refreshInterval) {
                 clearInterval(refreshInterval);
@@ -58,7 +60,7 @@ const AdvancedAnalyticsV3Dashboard = () => {
         const interval = setInterval(() => {
             fetchAdvancedAnalyticsV3();
         }, 3 * 60 * 1000);
-        
+
         setRefreshInterval(interval);
     };
 
@@ -183,7 +185,7 @@ const AdvancedAnalyticsV3Dashboard = () => {
                                 Sophisticated analytics with predictive modeling, market intelligence, behavioral analytics, and machine learning
                             </p>
                         </div>
-                        
+
                         <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
                             <DropDownList
                                 data={sports}
@@ -193,7 +195,7 @@ const AdvancedAnalyticsV3Dashboard = () => {
                                 valueField="value"
                                 style={{ width: '150px' }}
                             />
-                            
+
                             <DropDownList
                                 data={categories}
                                 value={categories.find(c => c.value === selectedCategory)}
@@ -202,10 +204,10 @@ const AdvancedAnalyticsV3Dashboard = () => {
                                 valueField="value"
                                 style={{ width: '150px' }}
                             />
-                            
-                            <Button 
-                                themeColor="primary" 
-                                size="small" 
+
+                            <Button
+                                themeColor="primary"
+                                size="small"
                                 onClick={fetchAdvancedAnalyticsV3}
                                 icon="refresh"
                                 disabled={loading}
@@ -227,16 +229,16 @@ const AdvancedAnalyticsV3Dashboard = () => {
                                     {metric.name}
                                 </h3>
                                 <div style={{ fontSize: '28px', fontWeight: 'bold', color: getTrendColor(metric.trend) }}>
-                                    {metric.unit === 'USD' ? formatCurrency(metric.value) : 
-                                     metric.unit === 'percentage' ? formatPercentage(metric.value) : 
-                                     `${metric.value.toFixed(2)} ${metric.unit}`}
+                                    {metric.unit === 'USD' ? formatCurrency(metric.value) :
+                                        metric.unit === 'percentage' ? formatPercentage(metric.value) :
+                                            `${metric.value.toFixed(2)} ${metric.unit}`}
                                 </div>
                                 <div style={{ fontSize: '14px', color: '#666' }}>
                                     {metric.trend} trend
                                 </div>
                                 <div style={{ marginTop: '8px' }}>
-                                    <ProgressBar 
-                                        value={metric.percentile} 
+                                    <ProgressBar
+                                        value={metric.percentile}
                                         color={getConfidenceColor(metric.percentile / 100)}
                                         style={{ height: '8px' }}
                                     />
@@ -300,11 +302,11 @@ const AdvancedAnalyticsV3Dashboard = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
-                                        <div style={{ 
-                                            padding: '12px', 
-                                            backgroundColor: '#fff3cd', 
+                                        <div style={{
+                                            padding: '12px',
+                                            backgroundColor: '#fff3cd',
                                             borderRadius: '8px',
                                             borderLeft: '4px solid #ffc107'
                                         }}>
@@ -315,10 +317,10 @@ const AdvancedAnalyticsV3Dashboard = () => {
                                                 ))}
                                             </ul>
                                         </div>
-                                        
-                                        <div style={{ 
-                                            padding: '12px', 
-                                            backgroundColor: '#d1ecf1', 
+
+                                        <div style={{
+                                            padding: '12px',
+                                            backgroundColor: '#d1ecf1',
                                             borderRadius: '8px',
                                             borderLeft: '4px solid #17a2b8'
                                         }}>
@@ -347,9 +349,9 @@ const AdvancedAnalyticsV3Dashboard = () => {
                     >
                         <GridColumn field="market_segment" title="Market Segment" width="120px" />
                         <GridColumn field="insight_type" title="Type" width="120px" />
-                        <GridColumn 
-                            field="title" 
-                            title="Title" 
+                        <GridColumn
+                            field="title"
+                            title="Title"
                             width="200px"
                             cell={(props) => (
                                 <td>
@@ -359,9 +361,9 @@ const AdvancedAnalyticsV3Dashboard = () => {
                                 </td>
                             )}
                         />
-                        <GridColumn 
-                            field="confidence" 
-                            title="Confidence" 
+                        <GridColumn
+                            field="confidence"
+                            title="Confidence"
                             width="100px"
                             cell={(props) => (
                                 <td>
@@ -369,15 +371,15 @@ const AdvancedAnalyticsV3Dashboard = () => {
                                 </td>
                             )}
                         />
-                        <GridColumn 
-                            field="impact_level" 
-                            title="Impact" 
+                        <GridColumn
+                            field="impact_level"
+                            title="Impact"
                             width="100px"
                             cell={(props) => (
                                 <td>
-                                    <Badge 
-                                        themeColor={props.dataItem.impact_level === 'high' ? 'error' : 
-                                                   props.dataItem.impact_level === 'medium' ? 'warning' : 'success'}
+                                    <Badge
+                                        themeColor={props.dataItem.impact_level === 'high' ? 'error' :
+                                            props.dataItem.impact_level === 'medium' ? 'warning' : 'success'}
                                         style={{ fontSize: '12px' }}
                                     >
                                         {props.dataItem.impact_level.toUpperCase()}
@@ -385,13 +387,13 @@ const AdvancedAnalyticsV3Dashboard = () => {
                                 </td>
                             )}
                         />
-                        <GridColumn 
-                            field="trend_direction" 
-                            title="Trend" 
+                        <GridColumn
+                            field="trend_direction"
+                            title="Trend"
                             width="100px"
                             cell={(props) => (
                                 <td>
-                                    <div style={{ 
+                                    <div style={{
                                         color: getTrendColor(props.dataItem.trend_direction),
                                         fontWeight: 'bold'
                                     }}>
@@ -400,9 +402,9 @@ const AdvancedAnalyticsV3Dashboard = () => {
                                 </td>
                             )}
                         />
-                        <GridColumn 
-                            field="data_points" 
-                            title="Data Points" 
+                        <GridColumn
+                            field="data_points"
+                            title="Data Points"
                             width="100px"
                             cell={(props) => (
                                 <td>
@@ -420,9 +422,9 @@ const AdvancedAnalyticsV3Dashboard = () => {
                     <h3 style={{ margin: '0 0 16px 0' }}>👥 Behavioral Analytics</h3>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '16px' }}>
                         {behavioralAnalytics.map((behavior, index) => (
-                            <div key={index} style={{ 
-                                padding: '16px', 
-                                border: '1px solid #e9ecef', 
+                            <div key={index} style={{
+                                padding: '16px',
+                                border: '1px solid #e9ecef',
                                 borderRadius: '8px',
                                 backgroundColor: '#f8f9fa'
                             }}>
@@ -473,9 +475,9 @@ const AdvancedAnalyticsV3Dashboard = () => {
                     <h3 style={{ margin: '0 0 16px 0' }}>🤖 Machine Learning Models</h3>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '16px' }}>
                         {mlModels.map((model, index) => (
-                            <div key={index} style={{ 
-                                padding: '16px', 
-                                border: '1px solid #e9ecef', 
+                            <div key={index} style={{
+                                padding: '16px',
+                                border: '1px solid #e9ecef',
                                 borderRadius: '8px',
                                 backgroundColor: '#f8f9fa'
                             }}>
@@ -541,21 +543,21 @@ const AdvancedAnalyticsV3Dashboard = () => {
                                 <ChartValueAxisItem />
                             </ChartValueAxis>
                             <ChartSeries>
-                                <ChartSeriesItem 
-                                    type="line" 
-                                    data={[0.85, 0.87, 0.89, 0.88, 0.91, 0.90, 0.92, 0.94]} 
+                                <ChartSeriesItem
+                                    type="line"
+                                    data={[0.85, 0.87, 0.89, 0.88, 0.91, 0.90, 0.92, 0.94]}
                                     name="Predictive Accuracy"
                                     color="#007bff"
                                 />
-                                <ChartSeriesItem 
-                                    type="line" 
-                                    data={[0.78, 0.80, 0.82, 0.81, 0.84, 0.83, 0.85, 0.87]} 
+                                <ChartSeriesItem
+                                    type="line"
+                                    data={[0.78, 0.80, 0.82, 0.81, 0.84, 0.83, 0.85, 0.87]}
                                     name="Market Intelligence"
                                     color="#28a745"
                                 />
-                                <ChartSeriesItem 
-                                    type="line" 
-                                    data={[0.82, 0.84, 0.86, 0.85, 0.88, 0.87, 0.89, 0.91]} 
+                                <ChartSeriesItem
+                                    type="line"
+                                    data={[0.82, 0.84, 0.86, 0.85, 0.88, 0.87, 0.89, 0.91]}
                                     name="Behavioral Analytics"
                                     color="#fd7e14"
                                 />
@@ -570,8 +572,8 @@ const AdvancedAnalyticsV3Dashboard = () => {
                         <Chart style={{ height: '300px' }}>
                             <ChartTooltip />
                             <ChartSeries>
-                                <ChartSeriesItem 
-                                    type="donut" 
+                                <ChartSeriesItem
+                                    type="donut"
                                     data={[
                                         { category: "Predictive Insights", value: 30 },
                                         { category: "Market Intelligence", value: 25 },

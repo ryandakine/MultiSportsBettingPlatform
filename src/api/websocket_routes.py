@@ -11,6 +11,8 @@ from typing import Dict, Any, List
 from fastapi import WebSocket, WebSocketDisconnect, Depends, HTTPException
 from fastapi.routing import APIRouter
 from fastapi.security import HTTPBearer
+from src.db.database import get_db
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.services.websocket_service import (
     websocket_manager, 
@@ -29,10 +31,13 @@ router = APIRouter()
 security = HTTPBearer()
 auth_service = AuthService()
 
-async def get_current_user_from_token(token: str = Depends(security)) -> str:
+async def get_current_user_from_token(
+    token: str = Depends(security),
+    db: AsyncSession = Depends(get_db)
+) -> str:
     """Get current user from JWT token."""
     try:
-        result = auth_service.validate_token(token.credentials)
+        result = await auth_service.validate_token(db, token.credentials)
         if result.get("status") == AuthStatus.SUCCESS:
             return result["user"]["id"]
         raise Exception("Invalid token")

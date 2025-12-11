@@ -4,33 +4,51 @@ Database Configuration
 Configures SQLAlchemy engine and session factory.
 """
 import os
-from sqlalchemy import create_engine
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker, declarative_base
+from src.config import settings
 
-# Default to SQLite for easy local development, but support Postgres
-DATABASE_URL = os.getenv(
-    "DATABASE_URL", 
-    "sqlite:///./multisports_betting.db"
-)
+# Get DB URL from settings
+DATABASE_URL = settings.database_url
 
 # SQLite implementation needs a specific check for ensure_related_objects
 connect_args = {}
-if DATABASE_URL.startswith("sqlite"):
-    connect_args = {"check_same_thread": False}
+pool_settings = {}
 
-engine = create_engine(
-    DATABASE_URL, 
-    connect_args=connect_args
+if "sqlite" in DATABASE_URL:
+    connect_args = {"check_same_thread": False}
+    # SQLite doesn't support connection pooling the same way
+else:
+    # Production PostgreSQL pooling settings
+    pool_settings = {
+        "pool_size": int(os.environ.get("DB_POOL_SIZE", "20")),
+        "max_overflow": int(os.environ.get("DB_MAX_OVERFLOW", "10")),
+        "pool_pre_ping": True,  # Verify connections before use
+        "pool_recycle": 3600,   # Recycle connections after 1 hour
+    }
+
+# Create Async Engine
+engine = create_async_engine(
+    DATABASE_URL,
+    echo=settings.debug,
+    connect_args=connect_args,
+    future=True,
+    **pool_settings
 )
 
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Async Session Factory
+AsyncSessionLocal = sessionmaker(
+    engine, 
+    class_=AsyncSession, 
+    expire_on_commit=False
+)
 
 Base = declarative_base()
 
-def get_db():
-    """Dependency for getting a database session."""
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+async def get_db():
+    """Dependency for getting an async database session."""
+    async with AsyncSessionLocal() as session:
+        try:
+            yield session
+        finally:
+            await session.close()
