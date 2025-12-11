@@ -1,0 +1,3784 @@
+{
+  "backtest_info": {
+    "data_source": "REAL HISTORICAL DATA",
+    "simulation_days": 1772,
+    "sports_enabled": [
+      "basketball",
+      "hockey",
+      "wcbb"
+    ],
+    "initial_bankroll": 10000,
+    "bet_size": 100,
+    "timestamp": "2025-12-11T00:09:28.573830"
+  },
+  "strategy_performance": {
+    "2_leg": {
+      "leg_count": 2,
+      "zone": "optimal",
+      "total_parlays": 1772,
+      "wins": 984,
+      "losses": 788,
+      "win_rate": 55.53,
+      "total_wagered": 177200.0,
+      "total_profit": 181397.25,
+      "roi": 102.37,
+      "final_bankroll": 191397.25,
+      "best_day_profit": 264.43,
+      "worst_day_loss": -100
+    },
+    "3_leg": {
+      "leg_count": 3,
+      "zone": "optimal",
+      "total_parlays": 1772,
+      "wins": 749,
+      "losses": 1023,
+      "win_rate": 42.27,
+      "total_wagered": 177200.0,
+      "total_profit": 343874.24,
+      "roi": 194.06,
+      "final_bankroll": 353874.24,
+      "best_day_profit": 595.69,
+      "worst_day_loss": -100
+    },
+    "4_leg": {
+      "leg_count": 4,
+      "zone": "aggressive",
+      "total_parlays": 1772,
+      "wins": 559,
+      "losses": 1213,
+      "win_rate": 31.55,
+      "total_wagered": 177200.0,
+      "total_profit": 565195.83,
+      "roi": 318.96,
+      "final_bankroll": 575195.83,
+      "best_day_profit": 1228.08,
+      "worst_day_loss": -100
+    },
+    "5_leg": {
+      "leg_count": 5,
+      "zone": "aggressive",
+      "total_parlays": 1772,
+      "wins": 434,
+      "losses": 1338,
+      "win_rate": 24.49,
+      "total_wagered": 177200.0,
+      "total_profit": 923120.92,
+      "roi": 520.95,
+      "final_bankroll": 933120.92,
+      "best_day_profit": 2435.3,
+      "worst_day_loss": -100
+    },
+    "6_leg": {
+      "leg_count": 6,
+      "zone": "aggressive",
+      "total_parlays": 1772,
+      "wins": 326,
+      "losses": 1446,
+      "win_rate": 18.4,
+      "total_wagered": 177200.0,
+      "total_profit": 1400604.43,
+      "roi": 790.41,
+      "final_bankroll": 1410604.43,
+      "best_day_profit": 4739.89,
+      "worst_day_loss": -100
+    }
+  },
+  "optimal_zone_analysis": {
+    "optimal_zone": {
+      "win_rate": 48.9,
+      "total_profit": 525271.49,
+      "parlays": 3544
+    },
+    "aggressive_zone": {
+      "win_rate": 24.81,
+      "total_profit": 2888921.18,
+      "parlays": 5316
+    }
+  },
+  "sport_distribution": {
+    "hockey": 1623,
+    "basketball": 7354,
+    "wcbb": 2297
+  },
+  "recommendations": [
+    "\ud83c\udfaf Best strategy: 6-leg parlays with 790.4% ROI",
+    "\ud83d\udcca Optimal zone (2-3 legs): 48.9% win rate, $525,271 profit",
+    "\ud83d\udcca Aggressive zone (4-6 legs): 24.8% win rate, $2,888,921 profit"
+  ],
+  "breakeven_analysis": {
+    "2_leg": {
+      "payout_multiplier": 3.64,
+      "breakeven_win_rate": 27.44,
+      "required_per_leg_accuracy": 52.38,
+      "actual_win_rate": 55.53,
+      "actual_per_leg_accuracy": 74.52,
+      "edge_over_breakeven": 28.09,
+      "profitable": true
+    },
+    "3_leg": {
+      "payout_multiplier": 6.96,
+      "breakeven_win_rate": 14.37,
+      "required_per_leg_accuracy": 52.38,
+      "actual_win_rate": 42.27,
+      "actual_per_leg_accuracy": 75.05,
+      "edge_over_breakeven": 27.89,
+      "profitable": true
+    },
+    "4_leg": {
+      "payout_multiplier": 13.28,
+      "breakeven_win_rate": 7.53,
+      "required_per_leg_accuracy": 52.38,
+      "actual_win_rate": 31.55,
+      "actual_per_leg_accuracy": 74.94,
+      "edge_over_breakeven": 24.02,
+      "profitable": true
+    },
+    "5_leg": {
+      "payout_multiplier": 25.35,
+      "breakeven_win_rate": 3.94,
+      "required_per_leg_accuracy": 52.38,
+      "actual_win_rate": 24.49,
+      "actual_per_leg_accuracy": 75.48,
+      "edge_over_breakeven": 20.55,
+      "profitable": true
+    },
+    "6_leg": {
+      "payout_multiplier": 48.4,
+      "breakeven_win_rate": 2.07,
+      "required_per_leg_accuracy": 52.38,
+      "actual_win_rate": 18.4,
+      "actual_per_leg_accuracy": 75.42,
+      "edge_over_breakeven": 16.33,
+      "profitable": true
+    }
+  },
+  "sample_winning_parlays": [
+    {
+      "date": "2014-10-10",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Montr\u00e9al",
+          "opponent": "Boston",
+          "predicted_winner": "Montr\u00e9al",
+          "actual_winner": "Montr\u00e9al",
+          "is_correct": true,
+          "confidence": 0.677,
+          "margin": 2
+        },
+        {
+          "sport": "hockey",
+          "team": "Ottawa",
+          "opponent": "Colorado",
+          "predicted_winner": "Ottawa",
+          "actual_winner": "Ottawa",
+          "is_correct": true,
+          "confidence": 0.63,
+          "margin": 2
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 9964.4281,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-10-11",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Detroit",
+          "opponent": "Toronto",
+          "predicted_winner": "Detroit",
+          "actual_winner": "Detroit",
+          "is_correct": true,
+          "confidence": 0.673,
+          "margin": 3
+        },
+        {
+          "sport": "hockey",
+          "team": "Nashville",
+          "opponent": "Winnipeg",
+          "predicted_winner": "Nashville",
+          "actual_winner": "Nashville",
+          "is_correct": true,
+          "confidence": 0.652,
+          "margin": 2
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 10228.856199999998,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-10-11",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Detroit",
+          "opponent": "Toronto",
+          "predicted_winner": "Detroit",
+          "actual_winner": "Detroit",
+          "is_correct": true,
+          "confidence": 0.673,
+          "margin": 3
+        },
+        {
+          "sport": "hockey",
+          "team": "Nashville",
+          "opponent": "Winnipeg",
+          "predicted_winner": "Nashville",
+          "actual_winner": "Nashville",
+          "is_correct": true,
+          "confidence": 0.652,
+          "margin": 2
+        },
+        {
+          "sport": "hockey",
+          "team": "Columbus",
+          "opponent": "Calgary",
+          "predicted_winner": "Columbus",
+          "actual_winner": "Columbus",
+          "is_correct": true,
+          "confidence": 0.635,
+          "margin": 1
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 695.6932429,
+      "profit_loss": 595.6932429,
+      "bankroll_after": 10195.6932429,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-10-24",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Pittsburgh",
+          "opponent": "Los Angeles",
+          "predicted_winner": "Pittsburgh",
+          "actual_winner": "Pittsburgh",
+          "is_correct": true,
+          "confidence": 0.709,
+          "margin": 3
+        },
+        {
+          "sport": "hockey",
+          "team": "Tampa Bay",
+          "opponent": "Philadelphia",
+          "predicted_winner": "Tampa Bay",
+          "actual_winner": "Tampa Bay",
+          "is_correct": true,
+          "confidence": 0.658,
+          "margin": 1
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 9993.284299999998,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-10-24",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Pittsburgh",
+          "opponent": "Los Angeles",
+          "predicted_winner": "Pittsburgh",
+          "actual_winner": "Pittsburgh",
+          "is_correct": true,
+          "confidence": 0.709,
+          "margin": 3
+        },
+        {
+          "sport": "hockey",
+          "team": "Tampa Bay",
+          "opponent": "Philadelphia",
+          "predicted_winner": "Tampa Bay",
+          "actual_winner": "Tampa Bay",
+          "is_correct": true,
+          "confidence": 0.658,
+          "margin": 1
+        },
+        {
+          "sport": "hockey",
+          "team": "Minnesota",
+          "opponent": "San Jose",
+          "predicted_winner": "Minnesota",
+          "actual_winner": "Minnesota",
+          "is_correct": true,
+          "confidence": 0.644,
+          "margin": 1
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 695.6932429,
+      "profit_loss": 595.6932429,
+      "bankroll_after": 10291.386485800002,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-10-24",
+      "leg_count": 4,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Pittsburgh",
+          "opponent": "Los Angeles",
+          "predicted_winner": "Pittsburgh",
+          "actual_winner": "Pittsburgh",
+          "is_correct": true,
+          "confidence": 0.709,
+          "margin": 3
+        },
+        {
+          "sport": "hockey",
+          "team": "Tampa Bay",
+          "opponent": "Philadelphia",
+          "predicted_winner": "Tampa Bay",
+          "actual_winner": "Tampa Bay",
+          "is_correct": true,
+          "confidence": 0.658,
+          "margin": 1
+        },
+        {
+          "sport": "hockey",
+          "team": "Minnesota",
+          "opponent": "San Jose",
+          "predicted_winner": "Minnesota",
+          "actual_winner": "Minnesota",
+          "is_correct": true,
+          "confidence": 0.644,
+          "margin": 1
+        },
+        {
+          "sport": "hockey",
+          "team": "New Jersey",
+          "opponent": "Winnipeg",
+          "predicted_winner": "New Jersey",
+          "actual_winner": "New Jersey",
+          "is_correct": true,
+          "confidence": 0.64,
+          "margin": 1
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 1328.0784006961,
+      "profit_loss": 1228.0784006961,
+      "bankroll_after": 10228.0784006961,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-10-24",
+      "leg_count": 5,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Pittsburgh",
+          "opponent": "Los Angeles",
+          "predicted_winner": "Pittsburgh",
+          "actual_winner": "Pittsburgh",
+          "is_correct": true,
+          "confidence": 0.709,
+          "margin": 3
+        },
+        {
+          "sport": "hockey",
+          "team": "Tampa Bay",
+          "opponent": "Philadelphia",
+          "predicted_winner": "Tampa Bay",
+          "actual_winner": "Tampa Bay",
+          "is_correct": true,
+          "confidence": 0.658,
+          "margin": 1
+        },
+        {
+          "sport": "hockey",
+          "team": "Minnesota",
+          "opponent": "San Jose",
+          "predicted_winner": "Minnesota",
+          "actual_winner": "Minnesota",
+          "is_correct": true,
+          "confidence": 0.644,
+          "margin": 1
+        },
+        {
+          "sport": "hockey",
+          "team": "New Jersey",
+          "opponent": "Winnipeg",
+          "predicted_winner": "New Jersey",
+          "actual_winner": "New Jersey",
+          "is_correct": true,
+          "confidence": 0.64,
+          "margin": 1
+        },
+        {
+          "sport": "hockey",
+          "team": "Vancouver",
+          "opponent": "Montr\u00e9al",
+          "predicted_winner": "Vancouver",
+          "actual_winner": "Vancouver",
+          "is_correct": true,
+          "confidence": 0.592,
+          "margin": 1
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 2535.301666928855,
+      "profit_loss": 2435.301666928855,
+      "bankroll_after": 11435.301666928855,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-10-29",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Chicago",
+          "opponent": "Montr\u00e9al",
+          "predicted_winner": "Chicago",
+          "actual_winner": "Chicago",
+          "is_correct": true,
+          "confidence": 0.718,
+          "margin": 5
+        },
+        {
+          "sport": "hockey",
+          "team": "Pittsburgh",
+          "opponent": "Minnesota",
+          "predicted_winner": "Pittsburgh",
+          "actual_winner": "Pittsburgh",
+          "is_correct": true,
+          "confidence": 0.699,
+          "margin": 3
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 10057.712399999997,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-10-29",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Chicago",
+          "opponent": "Montr\u00e9al",
+          "predicted_winner": "Chicago",
+          "actual_winner": "Chicago",
+          "is_correct": true,
+          "confidence": 0.718,
+          "margin": 5
+        },
+        {
+          "sport": "hockey",
+          "team": "Pittsburgh",
+          "opponent": "Minnesota",
+          "predicted_winner": "Pittsburgh",
+          "actual_winner": "Pittsburgh",
+          "is_correct": true,
+          "confidence": 0.699,
+          "margin": 3
+        },
+        {
+          "sport": "hockey",
+          "team": "Los Angeles",
+          "opponent": "Dallas",
+          "predicted_winner": "Los Angeles",
+          "actual_winner": "Los Angeles",
+          "is_correct": true,
+          "confidence": 0.672,
+          "margin": 2
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 695.6932429,
+      "profit_loss": 595.6932429,
+      "bankroll_after": 10687.079728700002,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-10-29",
+      "leg_count": 4,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Chicago",
+          "opponent": "Montr\u00e9al",
+          "predicted_winner": "Chicago",
+          "actual_winner": "Chicago",
+          "is_correct": true,
+          "confidence": 0.718,
+          "margin": 5
+        },
+        {
+          "sport": "hockey",
+          "team": "Pittsburgh",
+          "opponent": "Minnesota",
+          "predicted_winner": "Pittsburgh",
+          "actual_winner": "Pittsburgh",
+          "is_correct": true,
+          "confidence": 0.699,
+          "margin": 3
+        },
+        {
+          "sport": "hockey",
+          "team": "Los Angeles",
+          "opponent": "Dallas",
+          "predicted_winner": "Los Angeles",
+          "actual_winner": "Los Angeles",
+          "is_correct": true,
+          "confidence": 0.672,
+          "margin": 2
+        },
+        {
+          "sport": "hockey",
+          "team": "Ottawa",
+          "opponent": "Detroit",
+          "predicted_winner": "Ottawa",
+          "actual_winner": "Ottawa",
+          "is_correct": true,
+          "confidence": 0.653,
+          "margin": 2
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 1328.0784006961,
+      "profit_loss": 1228.0784006961,
+      "bankroll_after": 11256.1568013922,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-10-29",
+      "leg_count": 5,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Chicago",
+          "opponent": "Montr\u00e9al",
+          "predicted_winner": "Chicago",
+          "actual_winner": "Chicago",
+          "is_correct": true,
+          "confidence": 0.718,
+          "margin": 5
+        },
+        {
+          "sport": "hockey",
+          "team": "Pittsburgh",
+          "opponent": "Minnesota",
+          "predicted_winner": "Pittsburgh",
+          "actual_winner": "Pittsburgh",
+          "is_correct": true,
+          "confidence": 0.699,
+          "margin": 3
+        },
+        {
+          "sport": "hockey",
+          "team": "Los Angeles",
+          "opponent": "Dallas",
+          "predicted_winner": "Los Angeles",
+          "actual_winner": "Los Angeles",
+          "is_correct": true,
+          "confidence": 0.672,
+          "margin": 2
+        },
+        {
+          "sport": "hockey",
+          "team": "Ottawa",
+          "opponent": "Detroit",
+          "predicted_winner": "Ottawa",
+          "actual_winner": "Ottawa",
+          "is_correct": true,
+          "confidence": 0.653,
+          "margin": 2
+        },
+        {
+          "sport": "hockey",
+          "team": "Boston",
+          "opponent": "Florida",
+          "predicted_winner": "Boston",
+          "actual_winner": "Boston",
+          "is_correct": true,
+          "confidence": 0.636,
+          "margin": 1
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 2535.301666928855,
+      "profit_loss": 2435.301666928855,
+      "bankroll_after": 13670.60333385771,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-10-29",
+      "leg_count": 6,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Chicago",
+          "opponent": "Montr\u00e9al",
+          "predicted_winner": "Chicago",
+          "actual_winner": "Chicago",
+          "is_correct": true,
+          "confidence": 0.718,
+          "margin": 5
+        },
+        {
+          "sport": "hockey",
+          "team": "Pittsburgh",
+          "opponent": "Minnesota",
+          "predicted_winner": "Pittsburgh",
+          "actual_winner": "Pittsburgh",
+          "is_correct": true,
+          "confidence": 0.699,
+          "margin": 3
+        },
+        {
+          "sport": "hockey",
+          "team": "Los Angeles",
+          "opponent": "Dallas",
+          "predicted_winner": "Los Angeles",
+          "actual_winner": "Los Angeles",
+          "is_correct": true,
+          "confidence": 0.672,
+          "margin": 2
+        },
+        {
+          "sport": "hockey",
+          "team": "Ottawa",
+          "opponent": "Detroit",
+          "predicted_winner": "Ottawa",
+          "actual_winner": "Ottawa",
+          "is_correct": true,
+          "confidence": 0.653,
+          "margin": 2
+        },
+        {
+          "sport": "hockey",
+          "team": "Boston",
+          "opponent": "Florida",
+          "predicted_winner": "Boston",
+          "actual_winner": "Boston",
+          "is_correct": true,
+          "confidence": 0.636,
+          "margin": 1
+        },
+        {
+          "sport": "hockey",
+          "team": "St. Louis",
+          "opponent": "New Jersey",
+          "predicted_winner": "St. Louis",
+          "actual_winner": "St. Louis",
+          "is_correct": true,
+          "confidence": 0.626,
+          "margin": 1
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 4839.890882167185,
+      "profit_loss": 4739.890882167185,
+      "bankroll_after": 13439.890882167185,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-11-07",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Minnesota",
+          "opponent": "Buffalo",
+          "predicted_winner": "Minnesota",
+          "actual_winner": "Minnesota",
+          "is_correct": true,
+          "confidence": 0.637,
+          "margin": 3
+        },
+        {
+          "sport": "hockey",
+          "team": "San Jose",
+          "opponent": "Tampa Bay",
+          "predicted_winner": "San Jose",
+          "actual_winner": "San Jose",
+          "is_correct": true,
+          "confidence": 0.605,
+          "margin": 1
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 10022.140499999996,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-11-07",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Minnesota",
+          "opponent": "Buffalo",
+          "predicted_winner": "Minnesota",
+          "actual_winner": "Minnesota",
+          "is_correct": true,
+          "confidence": 0.637,
+          "margin": 3
+        },
+        {
+          "sport": "hockey",
+          "team": "San Jose",
+          "opponent": "Tampa Bay",
+          "predicted_winner": "San Jose",
+          "actual_winner": "San Jose",
+          "is_correct": true,
+          "confidence": 0.605,
+          "margin": 1
+        },
+        {
+          "sport": "hockey",
+          "team": "Dallas",
+          "opponent": "Los Angeles",
+          "predicted_winner": "Dallas",
+          "actual_winner": "Dallas",
+          "is_correct": true,
+          "confidence": 0.589,
+          "margin": 2
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 695.6932429,
+      "profit_loss": 595.6932429,
+      "bankroll_after": 10982.772971600003,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-11-10",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Montr\u00e9al",
+          "opponent": "Detroit",
+          "predicted_winner": "Montr\u00e9al",
+          "actual_winner": "Montr\u00e9al",
+          "is_correct": true,
+          "confidence": 0.704,
+          "margin": 3
+        },
+        {
+          "sport": "hockey",
+          "team": "Arizona",
+          "opponent": "Edmonton",
+          "predicted_winner": "Arizona",
+          "actual_winner": "Arizona",
+          "is_correct": true,
+          "confidence": 0.666,
+          "margin": 1
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 10086.568599999995,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-11-10",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "hockey",
+          "team": "Montr\u00e9al",
+          "opponent": "Detroit",
+          "predicted_winner": "Montr\u00e9al",
+          "actual_winner": "Montr\u00e9al",
+          "is_correct": true,
+          "confidence": 0.704,
+          "margin": 3
+        },
+        {
+          "sport": "hockey",
+          "team": "Arizona",
+          "opponent": "Edmonton",
+          "predicted_winner": "Arizona",
+          "actual_winner": "Arizona",
+          "is_correct": true,
+          "confidence": 0.666,
+          "margin": 1
+        },
+        {
+          "sport": "hockey",
+          "team": "Minnesota",
+          "opponent": "Winnipeg",
+          "predicted_winner": "Minnesota",
+          "actual_winner": "Minnesota",
+          "is_correct": true,
+          "confidence": 0.641,
+          "margin": 1
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 695.6932429,
+      "profit_loss": 595.6932429,
+      "bankroll_after": 11378.466214500004,
+      "sports_used": [
+        "hockey"
+      ]
+    },
+    {
+      "date": "2014-11-14",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Arizona Wildcats",
+          "opponent": "Mount St. Mary's Mountaineers",
+          "predicted_winner": "Arizona Wildcats",
+          "actual_winner": "Arizona Wildcats",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 23
+        },
+        {
+          "sport": "basketball",
+          "team": "Wisconsin Badgers",
+          "opponent": "Northern Kentucky Norse",
+          "predicted_winner": "Wisconsin Badgers",
+          "actual_winner": "Wisconsin Badgers",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 31
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 10250.996699999994,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2014-11-14",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Arizona Wildcats",
+          "opponent": "Mount St. Mary's Mountaineers",
+          "predicted_winner": "Arizona Wildcats",
+          "actual_winner": "Arizona Wildcats",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 23
+        },
+        {
+          "sport": "basketball",
+          "team": "Wisconsin Badgers",
+          "opponent": "Northern Kentucky Norse",
+          "predicted_winner": "Wisconsin Badgers",
+          "actual_winner": "Wisconsin Badgers",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 31
+        },
+        {
+          "sport": "basketball",
+          "team": "Virginia Cavaliers",
+          "opponent": "James Madison Dukes",
+          "predicted_winner": "Virginia Cavaliers",
+          "actual_winner": "Virginia Cavaliers",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 28
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 695.6932429,
+      "profit_loss": 595.6932429,
+      "bankroll_after": 11874.159457400005,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2014-11-14",
+      "leg_count": 4,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Arizona Wildcats",
+          "opponent": "Mount St. Mary's Mountaineers",
+          "predicted_winner": "Arizona Wildcats",
+          "actual_winner": "Arizona Wildcats",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 23
+        },
+        {
+          "sport": "basketball",
+          "team": "Wisconsin Badgers",
+          "opponent": "Northern Kentucky Norse",
+          "predicted_winner": "Wisconsin Badgers",
+          "actual_winner": "Wisconsin Badgers",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 31
+        },
+        {
+          "sport": "basketball",
+          "team": "Virginia Cavaliers",
+          "opponent": "James Madison Dukes",
+          "predicted_winner": "Virginia Cavaliers",
+          "actual_winner": "Virginia Cavaliers",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 28
+        },
+        {
+          "sport": "basketball",
+          "team": "Gonzaga Bulldogs",
+          "opponent": "Sacramento State Hornets",
+          "predicted_winner": "Gonzaga Bulldogs",
+          "actual_winner": "Gonzaga Bulldogs",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 46
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 1328.0784006961,
+      "profit_loss": 1228.0784006961,
+      "bankroll_after": 11684.2352020883,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2014-11-15",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Michigan Wolverines",
+          "opponent": "Hillsdale Chargers",
+          "predicted_winner": "Michigan Wolverines",
+          "actual_winner": "Michigan Wolverines",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 24
+        },
+        {
+          "sport": "basketball",
+          "team": "Bethune-Cookman Wildcats",
+          "opponent": "Trinity (FL) Tigers",
+          "predicted_winner": "Bethune-Cookman Wildcats",
+          "actual_winner": "Bethune-Cookman Wildcats",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 22
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 10515.424799999993,
+      "sports_used": [
+        "basketball"
+      ]
+    }
+  ],
+  "sample_recent_results": [
+    {
+      "date": "2025-03-19",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "George Mason Patriots",
+          "opponent": "Samford Bulldogs",
+          "predicted_winner": "George Mason Patriots",
+          "actual_winner": "George Mason Patriots",
+          "is_correct": true,
+          "confidence": 0.986,
+          "margin": 17
+        },
+        {
+          "sport": "basketball",
+          "team": "Northern Colorado Bears",
+          "opponent": "UC Irvine Anteaters",
+          "predicted_winner": "Northern Colorado Bears",
+          "actual_winner": "UC Irvine Anteaters",
+          "is_correct": false,
+          "confidence": 0.79,
+          "margin": 10
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 189381.8255999982,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-19",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "George Mason Patriots",
+          "opponent": "Samford Bulldogs",
+          "predicted_winner": "George Mason Patriots",
+          "actual_winner": "George Mason Patriots",
+          "is_correct": true,
+          "confidence": 0.986,
+          "margin": 17
+        },
+        {
+          "sport": "basketball",
+          "team": "Northern Colorado Bears",
+          "opponent": "UC Irvine Anteaters",
+          "predicted_winner": "Northern Colorado Bears",
+          "actual_winner": "UC Irvine Anteaters",
+          "is_correct": false,
+          "confidence": 0.79,
+          "margin": 10
+        },
+        {
+          "sport": "basketball",
+          "team": "Dayton Flyers",
+          "opponent": "Florida Atlantic Owls",
+          "predicted_winner": "Dayton Flyers",
+          "actual_winner": "Dayton Flyers",
+          "is_correct": true,
+          "confidence": 0.78,
+          "margin": 7
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 350600.0794746991,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-19",
+      "leg_count": 4,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "George Mason Patriots",
+          "opponent": "Samford Bulldogs",
+          "predicted_winner": "George Mason Patriots",
+          "actual_winner": "George Mason Patriots",
+          "is_correct": true,
+          "confidence": 0.986,
+          "margin": 17
+        },
+        {
+          "sport": "basketball",
+          "team": "Northern Colorado Bears",
+          "opponent": "UC Irvine Anteaters",
+          "predicted_winner": "Northern Colorado Bears",
+          "actual_winner": "UC Irvine Anteaters",
+          "is_correct": false,
+          "confidence": 0.79,
+          "margin": 10
+        },
+        {
+          "sport": "basketball",
+          "team": "Dayton Flyers",
+          "opponent": "Florida Atlantic Owls",
+          "predicted_winner": "Dayton Flyers",
+          "actual_winner": "Dayton Flyers",
+          "is_correct": true,
+          "confidence": 0.78,
+          "margin": 7
+        },
+        {
+          "sport": "basketball",
+          "team": "North Texas Mean Green",
+          "opponent": "Furman Paladins",
+          "predicted_winner": "North Texas Mean Green",
+          "actual_winner": "North Texas Mean Green",
+          "is_correct": true,
+          "confidence": 0.765,
+          "margin": 11
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 569455.4339856387,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-19",
+      "leg_count": 5,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "George Mason Patriots",
+          "opponent": "Samford Bulldogs",
+          "predicted_winner": "George Mason Patriots",
+          "actual_winner": "George Mason Patriots",
+          "is_correct": true,
+          "confidence": 0.986,
+          "margin": 17
+        },
+        {
+          "sport": "basketball",
+          "team": "Northern Colorado Bears",
+          "opponent": "UC Irvine Anteaters",
+          "predicted_winner": "Northern Colorado Bears",
+          "actual_winner": "UC Irvine Anteaters",
+          "is_correct": false,
+          "confidence": 0.79,
+          "margin": 10
+        },
+        {
+          "sport": "basketball",
+          "team": "Dayton Flyers",
+          "opponent": "Florida Atlantic Owls",
+          "predicted_winner": "Dayton Flyers",
+          "actual_winner": "Dayton Flyers",
+          "is_correct": true,
+          "confidence": 0.78,
+          "margin": 7
+        },
+        {
+          "sport": "basketball",
+          "team": "North Texas Mean Green",
+          "opponent": "Furman Paladins",
+          "predicted_winner": "North Texas Mean Green",
+          "actual_winner": "North Texas Mean Green",
+          "is_correct": true,
+          "confidence": 0.765,
+          "margin": 11
+        },
+        {
+          "sport": "basketball",
+          "team": "Mount St. Mary's Mountaineers",
+          "opponent": "American University Eagles",
+          "predicted_winner": "Mount St. Mary's Mountaineers",
+          "actual_winner": "Mount St. Mary's Mountaineers",
+          "is_correct": true,
+          "confidence": 0.732,
+          "margin": 11
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 926415.0184463281,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-19",
+      "leg_count": 6,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "George Mason Patriots",
+          "opponent": "Samford Bulldogs",
+          "predicted_winner": "George Mason Patriots",
+          "actual_winner": "George Mason Patriots",
+          "is_correct": true,
+          "confidence": 0.986,
+          "margin": 17
+        },
+        {
+          "sport": "basketball",
+          "team": "Northern Colorado Bears",
+          "opponent": "UC Irvine Anteaters",
+          "predicted_winner": "Northern Colorado Bears",
+          "actual_winner": "UC Irvine Anteaters",
+          "is_correct": false,
+          "confidence": 0.79,
+          "margin": 10
+        },
+        {
+          "sport": "basketball",
+          "team": "Dayton Flyers",
+          "opponent": "Florida Atlantic Owls",
+          "predicted_winner": "Dayton Flyers",
+          "actual_winner": "Dayton Flyers",
+          "is_correct": true,
+          "confidence": 0.78,
+          "margin": 7
+        },
+        {
+          "sport": "basketball",
+          "team": "North Texas Mean Green",
+          "opponent": "Furman Paladins",
+          "predicted_winner": "North Texas Mean Green",
+          "actual_winner": "North Texas Mean Green",
+          "is_correct": true,
+          "confidence": 0.765,
+          "margin": 11
+        },
+        {
+          "sport": "basketball",
+          "team": "Mount St. Mary's Mountaineers",
+          "opponent": "American University Eagles",
+          "predicted_winner": "Mount St. Mary's Mountaineers",
+          "actual_winner": "Mount St. Mary's Mountaineers",
+          "is_correct": true,
+          "confidence": 0.732,
+          "margin": 11
+        },
+        {
+          "sport": "basketball",
+          "team": "North Alabama Lions",
+          "opponent": "Bradley Braves",
+          "predicted_winner": "North Alabama Lions",
+          "actual_winner": "Bradley Braves",
+          "is_correct": false,
+          "confidence": 0.728,
+          "margin": 9
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 1406664.5367043386,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-20",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "St. John's Red Storm",
+          "opponent": "Omaha Mavericks",
+          "predicted_winner": "St. John's Red Storm",
+          "actual_winner": "St. John's Red Storm",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 30
+        },
+        {
+          "sport": "basketball",
+          "team": "UCLA Bruins",
+          "opponent": "Utah State Aggies",
+          "predicted_winner": "UCLA Bruins",
+          "actual_winner": "UCLA Bruins",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 25
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 189646.2536999982,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-20",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "St. John's Red Storm",
+          "opponent": "Omaha Mavericks",
+          "predicted_winner": "St. John's Red Storm",
+          "actual_winner": "St. John's Red Storm",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 30
+        },
+        {
+          "sport": "basketball",
+          "team": "UCLA Bruins",
+          "opponent": "Utah State Aggies",
+          "predicted_winner": "UCLA Bruins",
+          "actual_winner": "UCLA Bruins",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 25
+        },
+        {
+          "sport": "basketball",
+          "team": "SIU Edwardsville Cougars",
+          "opponent": "Houston Cougars",
+          "predicted_winner": "SIU Edwardsville Cougars",
+          "actual_winner": "Houston Cougars",
+          "is_correct": false,
+          "confidence": 0.984,
+          "margin": 38
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 350500.0794746991,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-20",
+      "leg_count": 4,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "St. John's Red Storm",
+          "opponent": "Omaha Mavericks",
+          "predicted_winner": "St. John's Red Storm",
+          "actual_winner": "St. John's Red Storm",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 30
+        },
+        {
+          "sport": "basketball",
+          "team": "UCLA Bruins",
+          "opponent": "Utah State Aggies",
+          "predicted_winner": "UCLA Bruins",
+          "actual_winner": "UCLA Bruins",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 25
+        },
+        {
+          "sport": "basketball",
+          "team": "SIU Edwardsville Cougars",
+          "opponent": "Houston Cougars",
+          "predicted_winner": "SIU Edwardsville Cougars",
+          "actual_winner": "Houston Cougars",
+          "is_correct": false,
+          "confidence": 0.984,
+          "margin": 38
+        },
+        {
+          "sport": "basketball",
+          "team": "Gonzaga Bulldogs",
+          "opponent": "Georgia Bulldogs",
+          "predicted_winner": "Gonzaga Bulldogs",
+          "actual_winner": "Gonzaga Bulldogs",
+          "is_correct": true,
+          "confidence": 0.949,
+          "margin": 21
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 569355.4339856387,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-20",
+      "leg_count": 5,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "St. John's Red Storm",
+          "opponent": "Omaha Mavericks",
+          "predicted_winner": "St. John's Red Storm",
+          "actual_winner": "St. John's Red Storm",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 30
+        },
+        {
+          "sport": "basketball",
+          "team": "UCLA Bruins",
+          "opponent": "Utah State Aggies",
+          "predicted_winner": "UCLA Bruins",
+          "actual_winner": "UCLA Bruins",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 25
+        },
+        {
+          "sport": "basketball",
+          "team": "SIU Edwardsville Cougars",
+          "opponent": "Houston Cougars",
+          "predicted_winner": "SIU Edwardsville Cougars",
+          "actual_winner": "Houston Cougars",
+          "is_correct": false,
+          "confidence": 0.984,
+          "margin": 38
+        },
+        {
+          "sport": "basketball",
+          "team": "Gonzaga Bulldogs",
+          "opponent": "Georgia Bulldogs",
+          "predicted_winner": "Gonzaga Bulldogs",
+          "actual_winner": "Gonzaga Bulldogs",
+          "is_correct": true,
+          "confidence": 0.949,
+          "margin": 21
+        },
+        {
+          "sport": "basketball",
+          "team": "Creighton Bluejays",
+          "opponent": "Louisville Cardinals",
+          "predicted_winner": "Creighton Bluejays",
+          "actual_winner": "Creighton Bluejays",
+          "is_correct": true,
+          "confidence": 0.916,
+          "margin": 14
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 926315.0184463281,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-20",
+      "leg_count": 6,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "St. John's Red Storm",
+          "opponent": "Omaha Mavericks",
+          "predicted_winner": "St. John's Red Storm",
+          "actual_winner": "St. John's Red Storm",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 30
+        },
+        {
+          "sport": "basketball",
+          "team": "UCLA Bruins",
+          "opponent": "Utah State Aggies",
+          "predicted_winner": "UCLA Bruins",
+          "actual_winner": "UCLA Bruins",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 25
+        },
+        {
+          "sport": "basketball",
+          "team": "SIU Edwardsville Cougars",
+          "opponent": "Houston Cougars",
+          "predicted_winner": "SIU Edwardsville Cougars",
+          "actual_winner": "Houston Cougars",
+          "is_correct": false,
+          "confidence": 0.984,
+          "margin": 38
+        },
+        {
+          "sport": "basketball",
+          "team": "Gonzaga Bulldogs",
+          "opponent": "Georgia Bulldogs",
+          "predicted_winner": "Gonzaga Bulldogs",
+          "actual_winner": "Gonzaga Bulldogs",
+          "is_correct": true,
+          "confidence": 0.949,
+          "margin": 21
+        },
+        {
+          "sport": "basketball",
+          "team": "Creighton Bluejays",
+          "opponent": "Louisville Cardinals",
+          "predicted_winner": "Creighton Bluejays",
+          "actual_winner": "Creighton Bluejays",
+          "is_correct": true,
+          "confidence": 0.916,
+          "margin": 14
+        },
+        {
+          "sport": "basketball",
+          "team": "Alabama State Hornets",
+          "opponent": "Auburn Tigers",
+          "predicted_winner": "Alabama State Hornets",
+          "actual_winner": "Auburn Tigers",
+          "is_correct": false,
+          "confidence": 0.86,
+          "margin": 20
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 1406564.5367043386,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-21",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Mount St. Mary's Mountaineers",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 44
+        },
+        {
+          "sport": "basketball",
+          "team": "Iowa State Cyclones",
+          "opponent": "Lipscomb Bisons",
+          "predicted_winner": "Iowa State Cyclones",
+          "actual_winner": "Iowa State Cyclones",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 27
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 189910.6817999982,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-21",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Mount St. Mary's Mountaineers",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 44
+        },
+        {
+          "sport": "basketball",
+          "team": "Iowa State Cyclones",
+          "opponent": "Lipscomb Bisons",
+          "predicted_winner": "Iowa State Cyclones",
+          "actual_winner": "Iowa State Cyclones",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 27
+        },
+        {
+          "sport": "basketball",
+          "team": "Maryland Terrapins",
+          "opponent": "Grand Canyon Lopes",
+          "predicted_winner": "Maryland Terrapins",
+          "actual_winner": "Maryland Terrapins",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 32
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 695.6932429,
+      "profit_loss": 595.6932429,
+      "bankroll_after": 351095.7727175991,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-21",
+      "leg_count": 4,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Mount St. Mary's Mountaineers",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 44
+        },
+        {
+          "sport": "basketball",
+          "team": "Iowa State Cyclones",
+          "opponent": "Lipscomb Bisons",
+          "predicted_winner": "Iowa State Cyclones",
+          "actual_winner": "Iowa State Cyclones",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 27
+        },
+        {
+          "sport": "basketball",
+          "team": "Maryland Terrapins",
+          "opponent": "Grand Canyon Lopes",
+          "predicted_winner": "Maryland Terrapins",
+          "actual_winner": "Maryland Terrapins",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 32
+        },
+        {
+          "sport": "wcbb",
+          "team": "South Carolina Gamecocks",
+          "opponent": "Tennessee Tech Golden Eagles",
+          "predicted_winner": "South Carolina Gamecocks",
+          "actual_winner": "South Carolina Gamecocks",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 60
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 1328.0784006961,
+      "profit_loss": 1228.0784006961,
+      "bankroll_after": 570583.5123863347,
+      "sports_used": [
+        "wcbb",
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-21",
+      "leg_count": 5,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Mount St. Mary's Mountaineers",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 44
+        },
+        {
+          "sport": "basketball",
+          "team": "Iowa State Cyclones",
+          "opponent": "Lipscomb Bisons",
+          "predicted_winner": "Iowa State Cyclones",
+          "actual_winner": "Iowa State Cyclones",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 27
+        },
+        {
+          "sport": "basketball",
+          "team": "Maryland Terrapins",
+          "opponent": "Grand Canyon Lopes",
+          "predicted_winner": "Maryland Terrapins",
+          "actual_winner": "Maryland Terrapins",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 32
+        },
+        {
+          "sport": "wcbb",
+          "team": "South Carolina Gamecocks",
+          "opponent": "Tennessee Tech Golden Eagles",
+          "predicted_winner": "South Carolina Gamecocks",
+          "actual_winner": "South Carolina Gamecocks",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 60
+        },
+        {
+          "sport": "wcbb",
+          "team": "TCU Horned Frogs",
+          "opponent": "Fairleigh Dickinson Knights",
+          "predicted_winner": "TCU Horned Frogs",
+          "actual_winner": "TCU Horned Frogs",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 22
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 2535.301666928855,
+      "profit_loss": 2435.301666928855,
+      "bankroll_after": 928750.3201132569,
+      "sports_used": [
+        "wcbb",
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-21",
+      "leg_count": 6,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Mount St. Mary's Mountaineers",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 44
+        },
+        {
+          "sport": "basketball",
+          "team": "Iowa State Cyclones",
+          "opponent": "Lipscomb Bisons",
+          "predicted_winner": "Iowa State Cyclones",
+          "actual_winner": "Iowa State Cyclones",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 27
+        },
+        {
+          "sport": "basketball",
+          "team": "Maryland Terrapins",
+          "opponent": "Grand Canyon Lopes",
+          "predicted_winner": "Maryland Terrapins",
+          "actual_winner": "Maryland Terrapins",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 32
+        },
+        {
+          "sport": "wcbb",
+          "team": "South Carolina Gamecocks",
+          "opponent": "Tennessee Tech Golden Eagles",
+          "predicted_winner": "South Carolina Gamecocks",
+          "actual_winner": "South Carolina Gamecocks",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 60
+        },
+        {
+          "sport": "wcbb",
+          "team": "TCU Horned Frogs",
+          "opponent": "Fairleigh Dickinson Knights",
+          "predicted_winner": "TCU Horned Frogs",
+          "actual_winner": "TCU Horned Frogs",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 22
+        },
+        {
+          "sport": "wcbb",
+          "team": "Stephen F. Austin Ladyjacks",
+          "opponent": "Notre Dame Fighting Irish",
+          "predicted_winner": "Stephen F. Austin Ladyjacks",
+          "actual_winner": "Notre Dame Fighting Irish",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 52
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 1406464.5367043386,
+      "sports_used": [
+        "wcbb",
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-22",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "UCLA Bruins",
+          "opponent": "Southern Jaguars",
+          "predicted_winner": "UCLA Bruins",
+          "actual_winner": "UCLA Bruins",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 38
+        },
+        {
+          "sport": "wcbb",
+          "team": "Duke Blue Devils",
+          "opponent": "Lehigh Mountain Hawks",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 61
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 190175.10989999818,
+      "sports_used": [
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-22",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "UCLA Bruins",
+          "opponent": "Southern Jaguars",
+          "predicted_winner": "UCLA Bruins",
+          "actual_winner": "UCLA Bruins",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 38
+        },
+        {
+          "sport": "wcbb",
+          "team": "Duke Blue Devils",
+          "opponent": "Lehigh Mountain Hawks",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 61
+        },
+        {
+          "sport": "wcbb",
+          "team": "Tennessee Lady Volunteers",
+          "opponent": "South Florida Bulls",
+          "predicted_winner": "Tennessee Lady Volunteers",
+          "actual_winner": "Tennessee Lady Volunteers",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 35
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 695.6932429,
+      "profit_loss": 595.6932429,
+      "bankroll_after": 351691.46596049913,
+      "sports_used": [
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-22",
+      "leg_count": 4,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "UCLA Bruins",
+          "opponent": "Southern Jaguars",
+          "predicted_winner": "UCLA Bruins",
+          "actual_winner": "UCLA Bruins",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 38
+        },
+        {
+          "sport": "wcbb",
+          "team": "Duke Blue Devils",
+          "opponent": "Lehigh Mountain Hawks",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 61
+        },
+        {
+          "sport": "wcbb",
+          "team": "Tennessee Lady Volunteers",
+          "opponent": "South Florida Bulls",
+          "predicted_winner": "Tennessee Lady Volunteers",
+          "actual_winner": "Tennessee Lady Volunteers",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 35
+        },
+        {
+          "sport": "wcbb",
+          "team": "UNC Greensboro Spartans",
+          "opponent": "USC Trojans",
+          "predicted_winner": "UNC Greensboro Spartans",
+          "actual_winner": "USC Trojans",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 46
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 570483.5123863347,
+      "sports_used": [
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-22",
+      "leg_count": 5,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "UCLA Bruins",
+          "opponent": "Southern Jaguars",
+          "predicted_winner": "UCLA Bruins",
+          "actual_winner": "UCLA Bruins",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 38
+        },
+        {
+          "sport": "wcbb",
+          "team": "Duke Blue Devils",
+          "opponent": "Lehigh Mountain Hawks",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 61
+        },
+        {
+          "sport": "wcbb",
+          "team": "Tennessee Lady Volunteers",
+          "opponent": "South Florida Bulls",
+          "predicted_winner": "Tennessee Lady Volunteers",
+          "actual_winner": "Tennessee Lady Volunteers",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 35
+        },
+        {
+          "sport": "wcbb",
+          "team": "UNC Greensboro Spartans",
+          "opponent": "USC Trojans",
+          "predicted_winner": "UNC Greensboro Spartans",
+          "actual_winner": "USC Trojans",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 46
+        },
+        {
+          "sport": "wcbb",
+          "team": "UConn Huskies",
+          "opponent": "Arkansas State Red Wolves",
+          "predicted_winner": "UConn Huskies",
+          "actual_winner": "UConn Huskies",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 69
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 928650.3201132569,
+      "sports_used": [
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-22",
+      "leg_count": 6,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "UCLA Bruins",
+          "opponent": "Southern Jaguars",
+          "predicted_winner": "UCLA Bruins",
+          "actual_winner": "UCLA Bruins",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 38
+        },
+        {
+          "sport": "wcbb",
+          "team": "Duke Blue Devils",
+          "opponent": "Lehigh Mountain Hawks",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 61
+        },
+        {
+          "sport": "wcbb",
+          "team": "Tennessee Lady Volunteers",
+          "opponent": "South Florida Bulls",
+          "predicted_winner": "Tennessee Lady Volunteers",
+          "actual_winner": "Tennessee Lady Volunteers",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 35
+        },
+        {
+          "sport": "wcbb",
+          "team": "UNC Greensboro Spartans",
+          "opponent": "USC Trojans",
+          "predicted_winner": "UNC Greensboro Spartans",
+          "actual_winner": "USC Trojans",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 46
+        },
+        {
+          "sport": "wcbb",
+          "team": "UConn Huskies",
+          "opponent": "Arkansas State Red Wolves",
+          "predicted_winner": "UConn Huskies",
+          "actual_winner": "UConn Huskies",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 69
+        },
+        {
+          "sport": "wcbb",
+          "team": "NC State Wolfpack",
+          "opponent": "Vermont Catamounts",
+          "predicted_winner": "NC State Wolfpack",
+          "actual_winner": "NC State Wolfpack",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 20
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 1406364.5367043386,
+      "sports_used": [
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-23",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "LSU Tigers",
+          "opponent": "San Diego State Aztecs",
+          "predicted_winner": "LSU Tigers",
+          "actual_winner": "LSU Tigers",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 55
+        },
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Baylor Bears",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.962,
+          "margin": 23
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 190439.53799999817,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-23",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "LSU Tigers",
+          "opponent": "San Diego State Aztecs",
+          "predicted_winner": "LSU Tigers",
+          "actual_winner": "LSU Tigers",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 55
+        },
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Baylor Bears",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.962,
+          "margin": 23
+        },
+        {
+          "sport": "wcbb",
+          "team": "Texas Longhorns",
+          "opponent": "William & Mary Tribe",
+          "predicted_winner": "Texas Longhorns",
+          "actual_winner": "Texas Longhorns",
+          "is_correct": true,
+          "confidence": 0.96,
+          "margin": 44
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 695.6932429,
+      "profit_loss": 595.6932429,
+      "bankroll_after": 352287.15920339915,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-23",
+      "leg_count": 4,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "LSU Tigers",
+          "opponent": "San Diego State Aztecs",
+          "predicted_winner": "LSU Tigers",
+          "actual_winner": "LSU Tigers",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 55
+        },
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Baylor Bears",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.962,
+          "margin": 23
+        },
+        {
+          "sport": "wcbb",
+          "team": "Texas Longhorns",
+          "opponent": "William & Mary Tribe",
+          "predicted_winner": "Texas Longhorns",
+          "actual_winner": "Texas Longhorns",
+          "is_correct": true,
+          "confidence": 0.96,
+          "margin": 44
+        },
+        {
+          "sport": "wcbb",
+          "team": "Notre Dame Fighting Irish",
+          "opponent": "Michigan Wolverines",
+          "predicted_winner": "Notre Dame Fighting Irish",
+          "actual_winner": "Notre Dame Fighting Irish",
+          "is_correct": true,
+          "confidence": 0.958,
+          "margin": 21
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 1328.0784006961,
+      "profit_loss": 1228.0784006961,
+      "bankroll_after": 571711.5907870308,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-23",
+      "leg_count": 5,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "LSU Tigers",
+          "opponent": "San Diego State Aztecs",
+          "predicted_winner": "LSU Tigers",
+          "actual_winner": "LSU Tigers",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 55
+        },
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Baylor Bears",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.962,
+          "margin": 23
+        },
+        {
+          "sport": "wcbb",
+          "team": "Texas Longhorns",
+          "opponent": "William & Mary Tribe",
+          "predicted_winner": "Texas Longhorns",
+          "actual_winner": "Texas Longhorns",
+          "is_correct": true,
+          "confidence": 0.96,
+          "margin": 44
+        },
+        {
+          "sport": "wcbb",
+          "team": "Notre Dame Fighting Irish",
+          "opponent": "Michigan Wolverines",
+          "predicted_winner": "Notre Dame Fighting Irish",
+          "actual_winner": "Notre Dame Fighting Irish",
+          "is_correct": true,
+          "confidence": 0.958,
+          "margin": 21
+        },
+        {
+          "sport": "wcbb",
+          "team": "Louisville Cardinals",
+          "opponent": "TCU Horned Frogs",
+          "predicted_winner": "Louisville Cardinals",
+          "actual_winner": "TCU Horned Frogs",
+          "is_correct": false,
+          "confidence": 0.904,
+          "margin": 15
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 928550.3201132569,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-23",
+      "leg_count": 6,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "LSU Tigers",
+          "opponent": "San Diego State Aztecs",
+          "predicted_winner": "LSU Tigers",
+          "actual_winner": "LSU Tigers",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 55
+        },
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Baylor Bears",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.962,
+          "margin": 23
+        },
+        {
+          "sport": "wcbb",
+          "team": "Texas Longhorns",
+          "opponent": "William & Mary Tribe",
+          "predicted_winner": "Texas Longhorns",
+          "actual_winner": "Texas Longhorns",
+          "is_correct": true,
+          "confidence": 0.96,
+          "margin": 44
+        },
+        {
+          "sport": "wcbb",
+          "team": "Notre Dame Fighting Irish",
+          "opponent": "Michigan Wolverines",
+          "predicted_winner": "Notre Dame Fighting Irish",
+          "actual_winner": "Notre Dame Fighting Irish",
+          "is_correct": true,
+          "confidence": 0.958,
+          "margin": 21
+        },
+        {
+          "sport": "wcbb",
+          "team": "Louisville Cardinals",
+          "opponent": "TCU Horned Frogs",
+          "predicted_winner": "Louisville Cardinals",
+          "actual_winner": "TCU Horned Frogs",
+          "is_correct": false,
+          "confidence": 0.904,
+          "margin": 15
+        },
+        {
+          "sport": "basketball",
+          "team": "Saint Mary's Gaels",
+          "opponent": "Alabama Crimson Tide",
+          "predicted_winner": "Saint Mary's Gaels",
+          "actual_winner": "Alabama Crimson Tide",
+          "is_correct": false,
+          "confidence": 0.85,
+          "margin": 14
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 1406264.5367043386,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-24",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "NC State Wolfpack",
+          "opponent": "Michigan State Spartans",
+          "predicted_winner": "NC State Wolfpack",
+          "actual_winner": "NC State Wolfpack",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        },
+        {
+          "sport": "wcbb",
+          "team": "Oklahoma Sooners",
+          "opponent": "Iowa Hawkeyes",
+          "predicted_winner": "Oklahoma Sooners",
+          "actual_winner": "Oklahoma Sooners",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 190703.96609999816,
+      "sports_used": [
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-24",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "NC State Wolfpack",
+          "opponent": "Michigan State Spartans",
+          "predicted_winner": "NC State Wolfpack",
+          "actual_winner": "NC State Wolfpack",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        },
+        {
+          "sport": "wcbb",
+          "team": "Oklahoma Sooners",
+          "opponent": "Iowa Hawkeyes",
+          "predicted_winner": "Oklahoma Sooners",
+          "actual_winner": "Oklahoma Sooners",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        },
+        {
+          "sport": "wcbb",
+          "team": "Florida State Seminoles",
+          "opponent": "LSU Tigers",
+          "predicted_winner": "Florida State Seminoles",
+          "actual_winner": "LSU Tigers",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 30
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 352187.15920339915,
+      "sports_used": [
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-24",
+      "leg_count": 4,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "NC State Wolfpack",
+          "opponent": "Michigan State Spartans",
+          "predicted_winner": "NC State Wolfpack",
+          "actual_winner": "NC State Wolfpack",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        },
+        {
+          "sport": "wcbb",
+          "team": "Oklahoma Sooners",
+          "opponent": "Iowa Hawkeyes",
+          "predicted_winner": "Oklahoma Sooners",
+          "actual_winner": "Oklahoma Sooners",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        },
+        {
+          "sport": "wcbb",
+          "team": "Florida State Seminoles",
+          "opponent": "LSU Tigers",
+          "predicted_winner": "Florida State Seminoles",
+          "actual_winner": "LSU Tigers",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 30
+        },
+        {
+          "sport": "wcbb",
+          "team": "Texas Longhorns",
+          "opponent": "Illinois Fighting Illini",
+          "predicted_winner": "Texas Longhorns",
+          "actual_winner": "Texas Longhorns",
+          "is_correct": true,
+          "confidence": 0.983,
+          "margin": 17
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 571611.5907870308,
+      "sports_used": [
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-24",
+      "leg_count": 5,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "NC State Wolfpack",
+          "opponent": "Michigan State Spartans",
+          "predicted_winner": "NC State Wolfpack",
+          "actual_winner": "NC State Wolfpack",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        },
+        {
+          "sport": "wcbb",
+          "team": "Oklahoma Sooners",
+          "opponent": "Iowa Hawkeyes",
+          "predicted_winner": "Oklahoma Sooners",
+          "actual_winner": "Oklahoma Sooners",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        },
+        {
+          "sport": "wcbb",
+          "team": "Florida State Seminoles",
+          "opponent": "LSU Tigers",
+          "predicted_winner": "Florida State Seminoles",
+          "actual_winner": "LSU Tigers",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 30
+        },
+        {
+          "sport": "wcbb",
+          "team": "Texas Longhorns",
+          "opponent": "Illinois Fighting Illini",
+          "predicted_winner": "Texas Longhorns",
+          "actual_winner": "Texas Longhorns",
+          "is_correct": true,
+          "confidence": 0.983,
+          "margin": 17
+        },
+        {
+          "sport": "basketball",
+          "team": "Queens University Royals",
+          "opponent": "Cleveland State Vikings",
+          "predicted_winner": "Queens University Royals",
+          "actual_winner": "Cleveland State Vikings",
+          "is_correct": false,
+          "confidence": 0.905,
+          "margin": 15
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 928450.3201132569,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-24",
+      "leg_count": 6,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "NC State Wolfpack",
+          "opponent": "Michigan State Spartans",
+          "predicted_winner": "NC State Wolfpack",
+          "actual_winner": "NC State Wolfpack",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        },
+        {
+          "sport": "wcbb",
+          "team": "Oklahoma Sooners",
+          "opponent": "Iowa Hawkeyes",
+          "predicted_winner": "Oklahoma Sooners",
+          "actual_winner": "Oklahoma Sooners",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        },
+        {
+          "sport": "wcbb",
+          "team": "Florida State Seminoles",
+          "opponent": "LSU Tigers",
+          "predicted_winner": "Florida State Seminoles",
+          "actual_winner": "LSU Tigers",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 30
+        },
+        {
+          "sport": "wcbb",
+          "team": "Texas Longhorns",
+          "opponent": "Illinois Fighting Illini",
+          "predicted_winner": "Texas Longhorns",
+          "actual_winner": "Texas Longhorns",
+          "is_correct": true,
+          "confidence": 0.983,
+          "margin": 17
+        },
+        {
+          "sport": "basketball",
+          "team": "Queens University Royals",
+          "opponent": "Cleveland State Vikings",
+          "predicted_winner": "Queens University Royals",
+          "actual_winner": "Cleveland State Vikings",
+          "is_correct": false,
+          "confidence": 0.905,
+          "margin": 15
+        },
+        {
+          "sport": "wcbb",
+          "team": "Tennessee Lady Volunteers",
+          "opponent": "Ohio State Buckeyes",
+          "predicted_winner": "Tennessee Lady Volunteers",
+          "actual_winner": "Tennessee Lady Volunteers",
+          "is_correct": true,
+          "confidence": 0.9,
+          "margin": 15
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 1406164.5367043386,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-25",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "USC Trojans",
+          "opponent": "Mississippi State Bulldogs",
+          "predicted_winner": "USC Trojans",
+          "actual_winner": "USC Trojans",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 37
+        },
+        {
+          "sport": "wcbb",
+          "team": "UConn Huskies",
+          "opponent": "South Dakota State Jackrabbits",
+          "predicted_winner": "UConn Huskies",
+          "actual_winner": "UConn Huskies",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 190968.39419999815,
+      "sports_used": [
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-25",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "USC Trojans",
+          "opponent": "Mississippi State Bulldogs",
+          "predicted_winner": "USC Trojans",
+          "actual_winner": "USC Trojans",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 37
+        },
+        {
+          "sport": "wcbb",
+          "team": "UConn Huskies",
+          "opponent": "South Dakota State Jackrabbits",
+          "predicted_winner": "UConn Huskies",
+          "actual_winner": "UConn Huskies",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        },
+        {
+          "sport": "basketball",
+          "team": "Cleveland State Vikings",
+          "opponent": "Florida Gulf Coast Eagles",
+          "predicted_winner": "Cleveland State Vikings",
+          "actual_winner": "Cleveland State Vikings",
+          "is_correct": true,
+          "confidence": 0.776,
+          "margin": 7
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 695.6932429,
+      "profit_loss": 595.6932429,
+      "bankroll_after": 352782.85244629916,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-25",
+      "leg_count": 4,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "USC Trojans",
+          "opponent": "Mississippi State Bulldogs",
+          "predicted_winner": "USC Trojans",
+          "actual_winner": "USC Trojans",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 37
+        },
+        {
+          "sport": "wcbb",
+          "team": "UConn Huskies",
+          "opponent": "South Dakota State Jackrabbits",
+          "predicted_winner": "UConn Huskies",
+          "actual_winner": "UConn Huskies",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        },
+        {
+          "sport": "basketball",
+          "team": "Cleveland State Vikings",
+          "opponent": "Florida Gulf Coast Eagles",
+          "predicted_winner": "Cleveland State Vikings",
+          "actual_winner": "Cleveland State Vikings",
+          "is_correct": true,
+          "confidence": 0.776,
+          "margin": 7
+        },
+        {
+          "sport": "basketball",
+          "team": "Illinois State Redbirds",
+          "opponent": "Incarnate Word Cardinals",
+          "predicted_winner": "Illinois State Redbirds",
+          "actual_winner": "Illinois State Redbirds",
+          "is_correct": true,
+          "confidence": 0.716,
+          "margin": 5
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 1328.0784006961,
+      "profit_loss": 1228.0784006961,
+      "bankroll_after": 572839.6691877268,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-25",
+      "leg_count": 5,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "USC Trojans",
+          "opponent": "Mississippi State Bulldogs",
+          "predicted_winner": "USC Trojans",
+          "actual_winner": "USC Trojans",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 37
+        },
+        {
+          "sport": "wcbb",
+          "team": "UConn Huskies",
+          "opponent": "South Dakota State Jackrabbits",
+          "predicted_winner": "UConn Huskies",
+          "actual_winner": "UConn Huskies",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        },
+        {
+          "sport": "basketball",
+          "team": "Cleveland State Vikings",
+          "opponent": "Florida Gulf Coast Eagles",
+          "predicted_winner": "Cleveland State Vikings",
+          "actual_winner": "Cleveland State Vikings",
+          "is_correct": true,
+          "confidence": 0.776,
+          "margin": 7
+        },
+        {
+          "sport": "basketball",
+          "team": "Illinois State Redbirds",
+          "opponent": "Incarnate Word Cardinals",
+          "predicted_winner": "Illinois State Redbirds",
+          "actual_winner": "Illinois State Redbirds",
+          "is_correct": true,
+          "confidence": 0.716,
+          "margin": 5
+        },
+        {
+          "sport": "basketball",
+          "team": "Oklahoma State Cowboys",
+          "opponent": "North Texas Mean Green",
+          "predicted_winner": "Oklahoma State Cowboys",
+          "actual_winner": "North Texas Mean Green",
+          "is_correct": false,
+          "confidence": 0.649,
+          "margin": 2
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 928350.3201132569,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-25",
+      "leg_count": 6,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "USC Trojans",
+          "opponent": "Mississippi State Bulldogs",
+          "predicted_winner": "USC Trojans",
+          "actual_winner": "USC Trojans",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 37
+        },
+        {
+          "sport": "wcbb",
+          "team": "UConn Huskies",
+          "opponent": "South Dakota State Jackrabbits",
+          "predicted_winner": "UConn Huskies",
+          "actual_winner": "UConn Huskies",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 34
+        },
+        {
+          "sport": "basketball",
+          "team": "Cleveland State Vikings",
+          "opponent": "Florida Gulf Coast Eagles",
+          "predicted_winner": "Cleveland State Vikings",
+          "actual_winner": "Cleveland State Vikings",
+          "is_correct": true,
+          "confidence": 0.776,
+          "margin": 7
+        },
+        {
+          "sport": "basketball",
+          "team": "Illinois State Redbirds",
+          "opponent": "Incarnate Word Cardinals",
+          "predicted_winner": "Illinois State Redbirds",
+          "actual_winner": "Illinois State Redbirds",
+          "is_correct": true,
+          "confidence": 0.716,
+          "margin": 5
+        },
+        {
+          "sport": "basketball",
+          "team": "Oklahoma State Cowboys",
+          "opponent": "North Texas Mean Green",
+          "predicted_winner": "Oklahoma State Cowboys",
+          "actual_winner": "North Texas Mean Green",
+          "is_correct": false,
+          "confidence": 0.649,
+          "margin": 2
+        },
+        {
+          "sport": "basketball",
+          "team": "Chattanooga Mocs",
+          "opponent": "Bradley Braves",
+          "predicted_winner": "Chattanooga Mocs",
+          "actual_winner": "Chattanooga Mocs",
+          "is_correct": true,
+          "confidence": 0.503,
+          "margin": 2
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 1406064.5367043386,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-28",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Tennessee Volunteers",
+          "opponent": "Kentucky Wildcats",
+          "predicted_winner": "Tennessee Volunteers",
+          "actual_winner": "Tennessee Volunteers",
+          "is_correct": true,
+          "confidence": 0.805,
+          "margin": 13
+        },
+        {
+          "sport": "basketball",
+          "team": "Auburn Tigers",
+          "opponent": "Michigan Wolverines",
+          "predicted_winner": "Auburn Tigers",
+          "actual_winner": "Auburn Tigers",
+          "is_correct": true,
+          "confidence": 0.793,
+          "margin": 13
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 191232.82229999814,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-28",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Tennessee Volunteers",
+          "opponent": "Kentucky Wildcats",
+          "predicted_winner": "Tennessee Volunteers",
+          "actual_winner": "Tennessee Volunteers",
+          "is_correct": true,
+          "confidence": 0.805,
+          "margin": 13
+        },
+        {
+          "sport": "basketball",
+          "team": "Auburn Tigers",
+          "opponent": "Michigan Wolverines",
+          "predicted_winner": "Auburn Tigers",
+          "actual_winner": "Auburn Tigers",
+          "is_correct": true,
+          "confidence": 0.793,
+          "margin": 13
+        },
+        {
+          "sport": "wcbb",
+          "team": "LSU Tigers",
+          "opponent": "NC State Wolfpack",
+          "predicted_winner": "LSU Tigers",
+          "actual_winner": "LSU Tigers",
+          "is_correct": true,
+          "confidence": 0.724,
+          "margin": 7
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 695.6932429,
+      "profit_loss": 595.6932429,
+      "bankroll_after": 353378.5456891992,
+      "sports_used": [
+        "wcbb",
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-28",
+      "leg_count": 4,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Tennessee Volunteers",
+          "opponent": "Kentucky Wildcats",
+          "predicted_winner": "Tennessee Volunteers",
+          "actual_winner": "Tennessee Volunteers",
+          "is_correct": true,
+          "confidence": 0.805,
+          "margin": 13
+        },
+        {
+          "sport": "basketball",
+          "team": "Auburn Tigers",
+          "opponent": "Michigan Wolverines",
+          "predicted_winner": "Auburn Tigers",
+          "actual_winner": "Auburn Tigers",
+          "is_correct": true,
+          "confidence": 0.793,
+          "margin": 13
+        },
+        {
+          "sport": "wcbb",
+          "team": "LSU Tigers",
+          "opponent": "NC State Wolfpack",
+          "predicted_winner": "LSU Tigers",
+          "actual_winner": "LSU Tigers",
+          "is_correct": true,
+          "confidence": 0.724,
+          "margin": 7
+        },
+        {
+          "sport": "wcbb",
+          "team": "Duke Blue Devils",
+          "opponent": "North Carolina Tar Heels",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.72,
+          "margin": 9
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 1328.0784006961,
+      "profit_loss": 1228.0784006961,
+      "bankroll_after": 574067.7475884228,
+      "sports_used": [
+        "wcbb",
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-28",
+      "leg_count": 5,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Tennessee Volunteers",
+          "opponent": "Kentucky Wildcats",
+          "predicted_winner": "Tennessee Volunteers",
+          "actual_winner": "Tennessee Volunteers",
+          "is_correct": true,
+          "confidence": 0.805,
+          "margin": 13
+        },
+        {
+          "sport": "basketball",
+          "team": "Auburn Tigers",
+          "opponent": "Michigan Wolverines",
+          "predicted_winner": "Auburn Tigers",
+          "actual_winner": "Auburn Tigers",
+          "is_correct": true,
+          "confidence": 0.793,
+          "margin": 13
+        },
+        {
+          "sport": "wcbb",
+          "team": "LSU Tigers",
+          "opponent": "NC State Wolfpack",
+          "predicted_winner": "LSU Tigers",
+          "actual_winner": "LSU Tigers",
+          "is_correct": true,
+          "confidence": 0.724,
+          "margin": 7
+        },
+        {
+          "sport": "wcbb",
+          "team": "Duke Blue Devils",
+          "opponent": "North Carolina Tar Heels",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.72,
+          "margin": 9
+        },
+        {
+          "sport": "basketball",
+          "team": "Houston Cougars",
+          "opponent": "Purdue Boilermakers",
+          "predicted_winner": "Houston Cougars",
+          "actual_winner": "Houston Cougars",
+          "is_correct": true,
+          "confidence": 0.628,
+          "margin": 2
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 2535.301666928855,
+      "profit_loss": 2435.301666928855,
+      "bankroll_after": 930785.6217801857,
+      "sports_used": [
+        "wcbb",
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-28",
+      "leg_count": 6,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Tennessee Volunteers",
+          "opponent": "Kentucky Wildcats",
+          "predicted_winner": "Tennessee Volunteers",
+          "actual_winner": "Tennessee Volunteers",
+          "is_correct": true,
+          "confidence": 0.805,
+          "margin": 13
+        },
+        {
+          "sport": "basketball",
+          "team": "Auburn Tigers",
+          "opponent": "Michigan Wolverines",
+          "predicted_winner": "Auburn Tigers",
+          "actual_winner": "Auburn Tigers",
+          "is_correct": true,
+          "confidence": 0.793,
+          "margin": 13
+        },
+        {
+          "sport": "wcbb",
+          "team": "LSU Tigers",
+          "opponent": "NC State Wolfpack",
+          "predicted_winner": "LSU Tigers",
+          "actual_winner": "LSU Tigers",
+          "is_correct": true,
+          "confidence": 0.724,
+          "margin": 7
+        },
+        {
+          "sport": "wcbb",
+          "team": "Duke Blue Devils",
+          "opponent": "North Carolina Tar Heels",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.72,
+          "margin": 9
+        },
+        {
+          "sport": "basketball",
+          "team": "Houston Cougars",
+          "opponent": "Purdue Boilermakers",
+          "predicted_winner": "Houston Cougars",
+          "actual_winner": "Houston Cougars",
+          "is_correct": true,
+          "confidence": 0.628,
+          "margin": 2
+        },
+        {
+          "sport": "wcbb",
+          "team": "South Carolina Gamecocks",
+          "opponent": "Maryland Terrapins",
+          "predicted_winner": "South Carolina Gamecocks",
+          "actual_winner": "South Carolina Gamecocks",
+          "is_correct": true,
+          "confidence": 0.558,
+          "margin": 4
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 4839.890882167185,
+      "profit_loss": 4739.890882167185,
+      "bankroll_after": 1410804.427586506,
+      "sports_used": [
+        "wcbb",
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-03-29",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "UConn Huskies",
+          "opponent": "Oklahoma Sooners",
+          "predicted_winner": "UConn Huskies",
+          "actual_winner": "UConn Huskies",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 23
+        },
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Alabama Crimson Tide",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.909,
+          "margin": 20
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 364.42810000000003,
+      "profit_loss": 264.42810000000003,
+      "bankroll_after": 191497.25039999813,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-29",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "UConn Huskies",
+          "opponent": "Oklahoma Sooners",
+          "predicted_winner": "UConn Huskies",
+          "actual_winner": "UConn Huskies",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 23
+        },
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Alabama Crimson Tide",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.909,
+          "margin": 20
+        },
+        {
+          "sport": "wcbb",
+          "team": "UCLA Bruins",
+          "opponent": "Ole Miss Rebels",
+          "predicted_winner": "UCLA Bruins",
+          "actual_winner": "UCLA Bruins",
+          "is_correct": true,
+          "confidence": 0.838,
+          "margin": 14
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 695.6932429,
+      "profit_loss": 595.6932429,
+      "bankroll_after": 353974.2389320992,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-29",
+      "leg_count": 4,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "UConn Huskies",
+          "opponent": "Oklahoma Sooners",
+          "predicted_winner": "UConn Huskies",
+          "actual_winner": "UConn Huskies",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 23
+        },
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Alabama Crimson Tide",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.909,
+          "margin": 20
+        },
+        {
+          "sport": "wcbb",
+          "team": "UCLA Bruins",
+          "opponent": "Ole Miss Rebels",
+          "predicted_winner": "UCLA Bruins",
+          "actual_winner": "UCLA Bruins",
+          "is_correct": true,
+          "confidence": 0.838,
+          "margin": 14
+        },
+        {
+          "sport": "wcbb",
+          "team": "TCU Horned Frogs",
+          "opponent": "Notre Dame Fighting Irish",
+          "predicted_winner": "TCU Horned Frogs",
+          "actual_winner": "TCU Horned Frogs",
+          "is_correct": true,
+          "confidence": 0.718,
+          "margin": 9
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 1328.0784006961,
+      "profit_loss": 1228.0784006961,
+      "bankroll_after": 575295.8259891189,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-29",
+      "leg_count": 5,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "UConn Huskies",
+          "opponent": "Oklahoma Sooners",
+          "predicted_winner": "UConn Huskies",
+          "actual_winner": "UConn Huskies",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 23
+        },
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Alabama Crimson Tide",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.909,
+          "margin": 20
+        },
+        {
+          "sport": "wcbb",
+          "team": "UCLA Bruins",
+          "opponent": "Ole Miss Rebels",
+          "predicted_winner": "UCLA Bruins",
+          "actual_winner": "UCLA Bruins",
+          "is_correct": true,
+          "confidence": 0.838,
+          "margin": 14
+        },
+        {
+          "sport": "wcbb",
+          "team": "TCU Horned Frogs",
+          "opponent": "Notre Dame Fighting Irish",
+          "predicted_winner": "TCU Horned Frogs",
+          "actual_winner": "TCU Horned Frogs",
+          "is_correct": true,
+          "confidence": 0.718,
+          "margin": 9
+        },
+        {
+          "sport": "wcbb",
+          "team": "Texas Longhorns",
+          "opponent": "Tennessee Lady Volunteers",
+          "predicted_winner": "Texas Longhorns",
+          "actual_winner": "Texas Longhorns",
+          "is_correct": true,
+          "confidence": 0.706,
+          "margin": 8
+        }
+      ],
+      "parlay_won": true,
+      "bet_amount": 100,
+      "payout": 2535.301666928855,
+      "profit_loss": 2435.301666928855,
+      "bankroll_after": 933220.9234471145,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-03-29",
+      "leg_count": 6,
+      "legs": [
+        {
+          "sport": "wcbb",
+          "team": "UConn Huskies",
+          "opponent": "Oklahoma Sooners",
+          "predicted_winner": "UConn Huskies",
+          "actual_winner": "UConn Huskies",
+          "is_correct": true,
+          "confidence": 0.99,
+          "margin": 23
+        },
+        {
+          "sport": "basketball",
+          "team": "Duke Blue Devils",
+          "opponent": "Alabama Crimson Tide",
+          "predicted_winner": "Duke Blue Devils",
+          "actual_winner": "Duke Blue Devils",
+          "is_correct": true,
+          "confidence": 0.909,
+          "margin": 20
+        },
+        {
+          "sport": "wcbb",
+          "team": "UCLA Bruins",
+          "opponent": "Ole Miss Rebels",
+          "predicted_winner": "UCLA Bruins",
+          "actual_winner": "UCLA Bruins",
+          "is_correct": true,
+          "confidence": 0.838,
+          "margin": 14
+        },
+        {
+          "sport": "wcbb",
+          "team": "TCU Horned Frogs",
+          "opponent": "Notre Dame Fighting Irish",
+          "predicted_winner": "TCU Horned Frogs",
+          "actual_winner": "TCU Horned Frogs",
+          "is_correct": true,
+          "confidence": 0.718,
+          "margin": 9
+        },
+        {
+          "sport": "wcbb",
+          "team": "Texas Longhorns",
+          "opponent": "Tennessee Lady Volunteers",
+          "predicted_winner": "Texas Longhorns",
+          "actual_winner": "Texas Longhorns",
+          "is_correct": true,
+          "confidence": 0.706,
+          "margin": 8
+        },
+        {
+          "sport": "basketball",
+          "team": "Texas Tech Red Raiders",
+          "opponent": "Florida Gators",
+          "predicted_winner": "Texas Tech Red Raiders",
+          "actual_winner": "Florida Gators",
+          "is_correct": false,
+          "confidence": 0.7,
+          "margin": 5
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 1410704.427586506,
+      "sports_used": [
+        "basketball",
+        "wcbb"
+      ]
+    },
+    {
+      "date": "2025-04-01",
+      "leg_count": 2,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Colorado Buffaloes",
+          "opponent": "Villanova Wildcats",
+          "predicted_winner": "Colorado Buffaloes",
+          "actual_winner": "Villanova Wildcats",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 21
+        },
+        {
+          "sport": "basketball",
+          "team": "Tulane Green Wave",
+          "opponent": "USC Trojans",
+          "predicted_winner": "Tulane Green Wave",
+          "actual_winner": "USC Trojans",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 29
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 191397.25039999813,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-04-01",
+      "leg_count": 3,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Colorado Buffaloes",
+          "opponent": "Villanova Wildcats",
+          "predicted_winner": "Colorado Buffaloes",
+          "actual_winner": "Villanova Wildcats",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 21
+        },
+        {
+          "sport": "basketball",
+          "team": "Tulane Green Wave",
+          "opponent": "USC Trojans",
+          "predicted_winner": "Tulane Green Wave",
+          "actual_winner": "USC Trojans",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 29
+        },
+        {
+          "sport": "basketball",
+          "team": "Cincinnati Bearcats",
+          "opponent": "DePaul Blue Demons",
+          "predicted_winner": "Cincinnati Bearcats",
+          "actual_winner": "Cincinnati Bearcats",
+          "is_correct": true,
+          "confidence": 0.984,
+          "margin": 22
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 353874.2389320992,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-04-01",
+      "leg_count": 4,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Colorado Buffaloes",
+          "opponent": "Villanova Wildcats",
+          "predicted_winner": "Colorado Buffaloes",
+          "actual_winner": "Villanova Wildcats",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 21
+        },
+        {
+          "sport": "basketball",
+          "team": "Tulane Green Wave",
+          "opponent": "USC Trojans",
+          "predicted_winner": "Tulane Green Wave",
+          "actual_winner": "USC Trojans",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 29
+        },
+        {
+          "sport": "basketball",
+          "team": "Cincinnati Bearcats",
+          "opponent": "DePaul Blue Demons",
+          "predicted_winner": "Cincinnati Bearcats",
+          "actual_winner": "Cincinnati Bearcats",
+          "is_correct": true,
+          "confidence": 0.984,
+          "margin": 22
+        },
+        {
+          "sport": "basketball",
+          "team": "Chattanooga Mocs",
+          "opponent": "Loyola Chicago Ramblers",
+          "predicted_winner": "Chattanooga Mocs",
+          "actual_winner": "Chattanooga Mocs",
+          "is_correct": true,
+          "confidence": 0.757,
+          "margin": 7
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 575195.8259891189,
+      "sports_used": [
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-04-01",
+      "leg_count": 5,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Colorado Buffaloes",
+          "opponent": "Villanova Wildcats",
+          "predicted_winner": "Colorado Buffaloes",
+          "actual_winner": "Villanova Wildcats",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 21
+        },
+        {
+          "sport": "basketball",
+          "team": "Tulane Green Wave",
+          "opponent": "USC Trojans",
+          "predicted_winner": "Tulane Green Wave",
+          "actual_winner": "USC Trojans",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 29
+        },
+        {
+          "sport": "basketball",
+          "team": "Cincinnati Bearcats",
+          "opponent": "DePaul Blue Demons",
+          "predicted_winner": "Cincinnati Bearcats",
+          "actual_winner": "Cincinnati Bearcats",
+          "is_correct": true,
+          "confidence": 0.984,
+          "margin": 22
+        },
+        {
+          "sport": "basketball",
+          "team": "Chattanooga Mocs",
+          "opponent": "Loyola Chicago Ramblers",
+          "predicted_winner": "Chattanooga Mocs",
+          "actual_winner": "Chattanooga Mocs",
+          "is_correct": true,
+          "confidence": 0.757,
+          "margin": 7
+        },
+        {
+          "sport": "wcbb",
+          "team": "UConn Huskies",
+          "opponent": "USC Trojans",
+          "predicted_winner": "UConn Huskies",
+          "actual_winner": "UConn Huskies",
+          "is_correct": true,
+          "confidence": 0.756,
+          "margin": 14
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 933120.9234471145,
+      "sports_used": [
+        "wcbb",
+        "basketball"
+      ]
+    },
+    {
+      "date": "2025-04-01",
+      "leg_count": 6,
+      "legs": [
+        {
+          "sport": "basketball",
+          "team": "Colorado Buffaloes",
+          "opponent": "Villanova Wildcats",
+          "predicted_winner": "Colorado Buffaloes",
+          "actual_winner": "Villanova Wildcats",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 21
+        },
+        {
+          "sport": "basketball",
+          "team": "Tulane Green Wave",
+          "opponent": "USC Trojans",
+          "predicted_winner": "Tulane Green Wave",
+          "actual_winner": "USC Trojans",
+          "is_correct": false,
+          "confidence": 0.99,
+          "margin": 29
+        },
+        {
+          "sport": "basketball",
+          "team": "Cincinnati Bearcats",
+          "opponent": "DePaul Blue Demons",
+          "predicted_winner": "Cincinnati Bearcats",
+          "actual_winner": "Cincinnati Bearcats",
+          "is_correct": true,
+          "confidence": 0.984,
+          "margin": 22
+        },
+        {
+          "sport": "basketball",
+          "team": "Chattanooga Mocs",
+          "opponent": "Loyola Chicago Ramblers",
+          "predicted_winner": "Chattanooga Mocs",
+          "actual_winner": "Chattanooga Mocs",
+          "is_correct": true,
+          "confidence": 0.757,
+          "margin": 7
+        },
+        {
+          "sport": "wcbb",
+          "team": "UConn Huskies",
+          "opponent": "USC Trojans",
+          "predicted_winner": "UConn Huskies",
+          "actual_winner": "UConn Huskies",
+          "is_correct": true,
+          "confidence": 0.756,
+          "margin": 14
+        },
+        {
+          "sport": "basketball",
+          "team": "Oregon State Beavers",
+          "opponent": "UCF Knights",
+          "predicted_winner": "Oregon State Beavers",
+          "actual_winner": "UCF Knights",
+          "is_correct": false,
+          "confidence": 0.607,
+          "margin": 1
+        }
+      ],
+      "parlay_won": false,
+      "bet_amount": 100,
+      "payout": 0,
+      "profit_loss": -100,
+      "bankroll_after": 1410604.427586506,
+      "sports_used": [
+        "wcbb",
+        "basketball"
+      ]
+    }
+  ]
+}

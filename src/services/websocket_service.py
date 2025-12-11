@@ -66,7 +66,6 @@ class WebSocketMessage:
 class ConnectionInfo:
     """Connection information for a WebSocket client."""
     websocket: WebSocket
-    user_id: Optional[str] = None
     session_id: str
     client_id: str
     connected_at: datetime
@@ -74,6 +73,7 @@ class ConnectionInfo:
     status: ConnectionStatus
     subscriptions: Set[str]
     user_preferences: Dict[str, Any]
+    user_id: Optional[str] = None
     
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for serialization."""
@@ -93,7 +93,7 @@ class WebSocketAuthenticationService:
     
     def __init__(self):
         self.security = HTTPBearer()
-        self.secret_key = settings.SECRET_KEY
+        self.secret_key = settings.secret_key
         self.algorithm = "HS256"
     
     async def authenticate_websocket(self, token: str) -> Optional[str]:

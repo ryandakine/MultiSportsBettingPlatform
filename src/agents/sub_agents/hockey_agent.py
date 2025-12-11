@@ -119,8 +119,11 @@ class HockeyAgent(BaseSubAgent):
         
         analysis["goalie_analysis"] = {
             "starting_goalies": goalies_involved,
-            "goalie_advantage": goalies_involved[0]["name"] if goalies_involved and goalies_involved[0]["stats"]["gaa"] < goalies_involved[1]["stats"]["gaa"] else goalies_involved[1]["name"] if len(goalies_involved) > 1 else None
+            "goalie_advantage": None
         }
+        
+        if len(goalies_involved) >= 2:
+             analysis["goalie_analysis"]["goalie_advantage"] = goalies_involved[0]["name"] if goalies_involved[0]["stats"]["gaa"] < goalies_involved[1]["stats"]["gaa"] else goalies_involved[1]["name"]
         
         # Ice conditions (simulated)
         analysis["ice_conditions"] = {
@@ -307,6 +310,34 @@ class HockeyAgent(BaseSubAgent):
         
         return " ".join(reasoning_parts) if reasoning_parts else "Analysis based on comprehensive NHL metrics and team performance data."
     
+    async def find_betting_opportunities(self) -> List[Dict[str, Any]]:
+        """Find upcoming betting opportunities for NHL."""
+        opportunities = []
+        
+        # Simulate finding 1-3 upcoming games
+        num_games = random.randint(1, 3)
+        teams = list(self.nhl_teams.keys())
+        
+        if len(teams) < 2:
+            return []
+            
+        for _ in range(num_games):
+            t1, t2 = random.sample(teams, 2)
+            
+            # Create a game opportunity
+            game = {
+                "sport": self.sport.value,
+                "title": f"{t1} vs {t2}",
+                "teams": [t1, t2],
+                "time": datetime.now().isoformat(),
+                "query_text": f"NHL prediction for {t1} vs {t2}",
+                "context": "Autonomous Market Scan",
+                "league": "NHL"
+            }
+            opportunities.append(game)
+            
+        return opportunities
+
     async def get_sport_specific_insights(self) -> Dict[str, Any]:
         """Get NHL-specific insights and statistics."""
         base_insights = await super().get_sport_specific_insights()

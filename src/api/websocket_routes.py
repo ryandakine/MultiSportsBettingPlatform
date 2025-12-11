@@ -19,7 +19,7 @@ from src.services.websocket_service import (
     ConnectionInfo
 )
 from src.services.real_time_predictions import real_time_service, PredictionType
-from src.services.auth_service import verify_token
+from src.services.auth_service import AuthService, AuthStatus
 import logging
 
 # Configure logging
@@ -27,12 +27,15 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter()
 security = HTTPBearer()
+auth_service = AuthService()
 
 async def get_current_user_from_token(token: str = Depends(security)) -> str:
     """Get current user from JWT token."""
     try:
-        user_id = verify_token(token.credentials)
-        return user_id
+        result = auth_service.validate_token(token.credentials)
+        if result.get("status") == AuthStatus.SUCCESS:
+            return result["user"]["id"]
+        raise Exception("Invalid token")
     except Exception as e:
         raise HTTPException(status_code=401, detail="Invalid authentication token")
 

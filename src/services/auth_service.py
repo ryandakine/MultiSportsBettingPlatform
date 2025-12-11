@@ -18,6 +18,9 @@ import bcrypt
 import redis
 from pydantic import BaseModel, EmailStr, validator
 import logging
+from sqlalchemy.orm import Session
+from src.db.database import SessionLocal
+from src.db.models.user import User as UserModel
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -266,83 +269,86 @@ class AuthService:
     
     def register_user(self, registration: UserRegistration) -> Dict[str, Any]:
         """Register a new user."""
+        db = SessionLocal()
         try:
-            # Check rate limiting
+            # Check rate limiting (keep Redis for this)
             if self._is_rate_limited("registration", "registration"):
                 return {
                     "status": AuthStatus.RATE_LIMITED,
                     "message": "Too many registration attempts. Please try again later."
                 }
             
-            # Check if username already exists
-            if self._user_exists_by_username(registration.username):
-                return {
-                    "status": AuthStatus.INVALID_CREDENTIALS,
-                    "message": "Username already exists"
-                }
+            # Check if username or email already exists
+            existing_user = db.query(UserModel).filter(
+                (UserModel.username == registration.username) | 
+                (UserModel.email == registration.email)
+            ).first()
             
-            # Check if email already exists
-            if self._user_exists_by_email(registration.email):
-                return {
-                    "status": AuthStatus.INVALID_CREDENTIALS,
-                    "message": "Email already registered"
-                }
+            if existing_user:
+                if existing_user.username == registration.username:
+                    return {"status": AuthStatus.INVALID_CREDENTIALS, "message": "Username already exists"}
+                return {"status": AuthStatus.INVALID_CREDENTIALS, "message": "Email already registered"}
             
             # Create new user
-            user_id = self._generate_user_id()
+            import uuid
+            user_id = str(uuid.uuid4())
             password_hash = self._hash_password(registration.password)
             
-            user = User(
+            user = UserModel(
                 id=user_id,
                 username=registration.username,
                 email=registration.email,
                 password_hash=password_hash,
-                role=UserRole.USER,
+                role=UserRole.USER.value,
                 is_active=True,
                 is_verified=False,
                 created_at=datetime.utcnow()
             )
             
-            # Store user in Redis
-            self._store_user(user)
+            db.add(user)
+            db.commit()
+            db.refresh(user)
             
             logger.info(f"✅ User registered successfully: {user.username}")
             
             return {
                 "status": AuthStatus.SUCCESS,
                 "message": "User registered successfully",
-                "user_id": user_id,
+                "user_id": user.id,
                 "username": user.username,
                 "email": user.email
             }
             
         except Exception as e:
+            db.rollback()
             logger.error(f"❌ Registration failed: {e}")
             return {
                 "status": AuthStatus.INVALID_CREDENTIALS,
                 "message": "Registration failed. Please try again."
             }
+        finally:
+            db.close()
     
     def login_user(self, login: UserLogin, ip_address: str = None, 
                    user_agent: str = None) -> Dict[str, Any]:
         """Authenticate a user and create a session."""
+        db = SessionLocal()
         try:
-            # Check rate limiting
+            # Keep Redis for rate limiting / account locking if available
             if self._is_rate_limited(login.username, "login"):
                 return {
                     "status": AuthStatus.RATE_LIMITED,
                     "message": "Too many login attempts. Please try again later."
                 }
             
-            # Check if account is locked
             if self._check_account_locked(login.username):
                 return {
                     "status": AuthStatus.ACCOUNT_LOCKED,
-                    "message": f"Account locked due to too many failed attempts. Try again in {self.lockout_duration} minutes."
+                    "message": f"Account locked. Try again in {self.lockout_duration} minutes."
                 }
             
-            # Get user by username
-            user = self._get_user_by_username(login.username)
+            # Get user from DB
+            user = db.query(UserModel).filter(UserModel.username == login.username).first()
             if not user:
                 self._increment_login_attempts(login.username)
                 return {
@@ -353,26 +359,24 @@ class AuthService:
             # Verify password
             if not self._verify_password(login.password, user.password_hash):
                 attempts = self._increment_login_attempts(login.username)
-                remaining_attempts = max(0, self.max_login_attempts - attempts)
-                
                 return {
                     "status": AuthStatus.INVALID_CREDENTIALS,
-                    "message": f"Invalid username or password. {remaining_attempts} attempts remaining."
+                    "message": f"Invalid username or password."
                 }
             
-            # Reset login attempts on successful login
+            # Reset login attempts
             self._reset_login_attempts(login.username)
             
             # Update last login
             user.last_login = datetime.utcnow()
-            self._store_user(user)
+            db.commit()
             
-            # Create session
+            # Create session (Keep sessions in Redis for simple fast expiry)
             session_timeout = self.remember_me_timeout if login.remember_me else self.session_timeout
             session = self._create_session(user.id, ip_address, user_agent, session_timeout)
             
             # Create JWT token
-            token = self._create_jwt_token(user.id, user.role.value, session_timeout * 3600)
+            token = self._create_jwt_token(user.id, user.role, session_timeout * 3600)
             
             logger.info(f"✅ User logged in successfully: {user.username}")
             
@@ -385,7 +389,7 @@ class AuthService:
                     "id": user.id,
                     "username": user.username,
                     "email": user.email,
-                    "role": user.role.value,
+                    "role": user.role,
                     "is_verified": user.is_verified
                 },
                 "expires_in": session_timeout * 3600
@@ -397,6 +401,8 @@ class AuthService:
                 "status": AuthStatus.INVALID_CREDENTIALS,
                 "message": "Login failed. Please try again."
             }
+        finally:
+            db.close()
     
     def logout_user(self, session_id: str) -> Dict[str, Any]:
         """Logout a user by invalidating their session."""
@@ -458,8 +464,9 @@ class AuthService:
     
     def change_password(self, user_id: str, password_change: PasswordChange) -> Dict[str, Any]:
         """Change a user's password."""
+        db = SessionLocal()
         try:
-            user = self._get_user_by_id(user_id)
+            user = db.query(UserModel).filter(UserModel.id == user_id).first()
             if not user:
                 return {
                     "status": AuthStatus.USER_NOT_FOUND,
@@ -477,8 +484,8 @@ class AuthService:
             new_password_hash = self._hash_password(password_change.new_password)
             user.password_hash = new_password_hash
             
-            # Store updated user
-            self._store_user(user)
+            # Commit changes
+            db.commit()
             
             # Invalidate all sessions for this user
             self._invalidate_user_sessions(user_id)
@@ -491,11 +498,14 @@ class AuthService:
             }
             
         except Exception as e:
+            db.rollback()
             logger.error(f"❌ Password change failed: {e}")
             return {
                 "status": AuthStatus.INVALID_CREDENTIALS,
                 "message": "Password change failed"
             }
+        finally:
+            db.close()
     
     def get_user_sessions(self, user_id: str) -> List[Dict[str, Any]]:
         """Get all active sessions for a user."""
@@ -542,16 +552,30 @@ class AuthService:
     
     def _get_user_by_username(self, username: str) -> Optional[User]:
         """Get a user by username."""
-        if not self.redis_client:
+        db = SessionLocal()
+        try:
+            db_user = db.query(UserModel).filter(UserModel.username == username).first()
+            if not db_user:
+                return None
+            
+            return User(
+                id=db_user.id,
+                username=db_user.username,
+                email=db_user.email,
+                password_hash=db_user.password_hash,
+                role=UserRole(db_user.role),
+                is_active=db_user.is_active,
+                is_verified=db_user.is_verified,
+                created_at=db_user.created_at,
+                last_login=db_user.last_login,
+                login_attempts=db_user.login_attempts['count'] if isinstance(db_user.login_attempts, dict) else 0,
+                locked_until=db_user.locked_until,
+                preferences=db_user.preferences or {}
+            )
+        except Exception:
             return None
-        
-        key = f"user:username:{username}"
-        user_id = self.redis_client.get(key)
-        
-        if user_id:
-            return self._get_user_by_id(user_id)
-        
-        return None
+        finally:
+            db.close()
     
     def _get_user_by_email(self, email: str) -> Optional[User]:
         """Get a user by email."""
@@ -568,33 +592,32 @@ class AuthService:
     
     def _get_user_by_id(self, user_id: str) -> Optional[User]:
         """Get a user by ID."""
-        if not self.redis_client:
-            return None
-        
-        key = f"user:{user_id}"
-        user_data = self.redis_client.hgetall(key)
-        
-        if not user_data:
-            return None
-        
+        db = SessionLocal()
         try:
+            db_user = db.query(UserModel).filter(UserModel.id == user_id).first()
+            if not db_user:
+                return None
+            
+            # Convert to User dataclass
             return User(
-                id=user_data['id'],
-                username=user_data['username'],
-                email=user_data['email'],
-                password_hash=user_data['password_hash'],
-                role=UserRole(user_data.get('role', 'user')),
-                is_active=user_data.get('is_active', 'True').lower() == 'true',
-                is_verified=user_data.get('is_verified', 'False').lower() == 'true',
-                created_at=datetime.fromisoformat(user_data.get('created_at', datetime.utcnow().isoformat())),
-                last_login=datetime.fromisoformat(user_data['last_login']) if user_data.get('last_login') else None,
-                login_attempts=int(user_data.get('login_attempts', 0)),
-                locked_until=datetime.fromisoformat(user_data['locked_until']) if user_data.get('locked_until') else None,
-                preferences=eval(user_data.get('preferences', '{}'))
+                id=db_user.id,
+                username=db_user.username,
+                email=db_user.email,
+                password_hash=db_user.password_hash,
+                role=UserRole(db_user.role),
+                is_active=db_user.is_active,
+                is_verified=db_user.is_verified,
+                created_at=db_user.created_at,
+                last_login=db_user.last_login,
+                login_attempts=db_user.login_attempts['count'] if isinstance(db_user.login_attempts, dict) else 0,
+                locked_until=db_user.locked_until,
+                preferences=db_user.preferences or {}
             )
         except Exception as e:
-            logger.error(f"❌ Failed to deserialize user data: {e}")
+            logger.error(f"❌ Failed to get user by ID: {e}")
             return None
+        finally:
+            db.close()
     
     def _store_user(self, user: User):
         """Store a user in Redis."""

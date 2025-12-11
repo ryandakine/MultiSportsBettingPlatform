@@ -13,8 +13,12 @@ from datetime import datetime
 from dataclasses import dataclass
 from enum import Enum
 import json
+import uuid
 
 from src.config import settings
+from sqlalchemy.orm import Session
+from src.db.database import SessionLocal
+from src.db.models.prediction import Prediction as PredictionModel
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -74,7 +78,7 @@ class HeadAgent:
         self.sub_agents: Dict[SportType, SubAgentInterface] = {}
         self.global_model = None
         self.active_sessions: Dict[str, Dict[str, Any]] = {}
-        self.prediction_history: List[Prediction] = []
+        # self.prediction_history: List[Prediction] = [] # REMOVED: Caused memory leak
         self.user_preferences: Dict[str, Dict[str, Any]] = {}
         
         logger.info("Head Agent initialized")
@@ -136,8 +140,25 @@ class HeadAgent:
                 prediction = await agent.get_prediction(query_params)
                 predictions[sport.value] = prediction
                 
-                # Store in history
-                self.prediction_history.append(prediction)
+                # Store in database
+                db = SessionLocal()
+                try:
+                    db_prediction = PredictionModel(
+                        id=f"pred_{sport.value}_{uuid.uuid4()}", # Unique ID
+                        user_id=user_query.user_id,
+                        sport=sport.value,
+                        prediction_text=prediction.prediction,
+                        confidence=prediction.confidence.value,
+                        reasoning=prediction.reasoning,
+                        timestamp=datetime.utcnow(),
+                        metadata_json=prediction.metadata
+                    )
+                    db.add(db_prediction)
+                    db.commit()
+                except Exception as db_err:
+                    logger.error(f"Failed to save prediction to DB: {db_err}")
+                finally:
+                    db.close()
                 
             except Exception as e:
                 logger.error(f"Error getting prediction from {sport.value} agent: {e}")
@@ -203,16 +224,33 @@ class HeadAgent:
         """Report prediction outcome for learning."""
         logger.info(f"Reporting outcome for prediction {prediction_id}: {outcome}")
         
-        # Find the prediction in history
-        for prediction in self.prediction_history:
-            if hasattr(prediction, 'id') and prediction.id == prediction_id:
+        # Update prediction in DB
+        db = SessionLocal()
+        try:
+            prediction = db.query(PredictionModel).filter(PredictionModel.id == prediction_id).first()
+            if prediction:
+                prediction.outcome = outcome
+                prediction.outcome_reported_at = datetime.utcnow()
+                db.commit()
+                
                 # Report to relevant sub-agent
-                if prediction.sport in self.sub_agents:
+                sport_enum = None
+                try:
+                    sport_enum = SportType(prediction.sport)
+                except ValueError:
+                    pass
+                    
+                if sport_enum and sport_enum in self.sub_agents:
                     try:
-                        await self.sub_agents[prediction.sport].report_outcome(prediction_id, outcome)
+                        await self.sub_agents[sport_enum].report_outcome(prediction_id, outcome)
                     except Exception as e:
-                        logger.error(f"Error reporting outcome to {prediction.sport.value} agent: {e}")
-                break
+                        logger.error(f"Error reporting outcome to {sport_enum.value} agent: {e}")
+            else:
+                logger.warning(f"Prediction {prediction_id} not found in DB for outcome reporting")
+        except Exception as e:
+            logger.error(f"Error updating outcome: {e}")
+        finally:
+            db.close()
         
         # Update global learning model (placeholder)
         await self._update_global_model(prediction_id, outcome, user_id)
@@ -221,6 +259,55 @@ class HeadAgent:
         """Update global learning model (placeholder for future implementation)."""
         # TODO: Implement global learning across sports
         logger.info(f"Global model update: prediction {prediction_id} outcome {outcome}")
+    
+    async def start_autonomous_loop(self) -> None:
+        """Start the autonomous operation loop."""
+        logger.info("🚀 Starting Head Agent Autonomous Loop")
+        asyncio.create_task(self._run_autonomous_loop())
+    
+    async def _run_autonomous_loop(self) -> None:
+        """Main autonomous loop."""
+        while True:
+            try:
+                logger.info("🤖 Head Agent: Scanning for betting opportunities...")
+                await self.scan_market()
+            except Exception as e:
+                logger.error(f"❌ Error in autonomous loop: {e}")
+            
+            # Sleep for a bit (e.g., 60 seconds)
+            await asyncio.sleep(60)
+
+    async def scan_market(self) -> None:
+        """Scan active sub-agents for betting opportunities."""
+        for sport, agent in self.sub_agents.items():
+            try:
+                # Find opportunities
+                opportunities = await agent.find_betting_opportunities()
+                
+                if opportunities:
+                    logger.info(f"🔎 Found {len(opportunities)} opportunities for {sport.value}")
+                    
+                    for opp in opportunities:
+                        # Generate prediction automatically
+                        user_query = UserQuery(
+                            user_id="autonomous_agent",
+                            sports=[sport],
+                            query_text=opp.get("query_text", ""),
+                            preferences={"autonomous": True},
+                            timestamp=datetime.now()
+                        )
+                        
+                        # Use existing aggregation logic to generate and store prediction
+                        result = await self.aggregate_predictions(user_query)
+                        
+                        # Broadcast if a prediction was made
+                        if "combined_prediction" in result and "error" not in result:
+                            # Here we would broadcast to websocket users
+                            # For now, just log it
+                            logger.info(f"📢 Autonomous Prediction Generated: {result['combined_prediction'].get('recommendation')}")
+                            
+            except Exception as e:
+                logger.error(f"Error scanning market for {sport.value}: {e}")
     
     async def get_user_session(self, user_id: str) -> Dict[str, Any]:
         """Get user session information."""
@@ -246,7 +333,17 @@ class HeadAgent:
             "status": "operational",
             "active_sports": len(self.sub_agents),
             "active_sessions": len(self.active_sessions),
-            "prediction_history_count": len(self.prediction_history),
+            "prediction_history_count": self._get_prediction_count(),
             "agent_statuses": agent_statuses,
             "timestamp": datetime.now().isoformat()
-        } 
+        }
+
+    def _get_prediction_count(self) -> int:
+        """Get total number of predictions from DB."""
+        db = SessionLocal()
+        try:
+            return db.query(PredictionModel).count()
+        except Exception:
+            return 0
+        finally:
+            db.close() 

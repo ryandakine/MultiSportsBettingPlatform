@@ -10,6 +10,7 @@ import RealSportsBettingGrid from './components/RealSportsBettingGrid';
 import AdvancedAnalyticsDashboard from './components/AdvancedAnalyticsDashboard';
 import AnalyticsDashboard from './components/AnalyticsDashboard';
 import AIPredictionsDashboard from './components/AIPredictionsDashboard';
+import ParlayMaker from './components/ParlayMaker';
 import NotificationSystem from './components/NotificationSystem';
 import UserManagement from './components/UserManagement';
 import apiService from './services/ApiService';
@@ -34,6 +35,7 @@ function App() {
     { text: 'Live Betting Opportunities', value: 'opportunities', icon: '🎯' },
     { text: 'Real Sports Betting Grid', value: 'real-sports', icon: '🏈' },
     { text: 'AI Predictions Dashboard', value: 'ai-predictions', icon: '🤖' },
+    { text: 'AI Parlay Maker', value: 'parlay-maker', icon: '🎫' },
     { text: 'Advanced Analytics', value: 'analytics', icon: '📈' },
     { text: 'Sports Analytics', value: 'sports-analytics', icon: '🏀' },
     { text: 'Notifications', value: 'notifications', icon: '🔔' },
@@ -46,13 +48,17 @@ function App() {
 
   const checkAuthentication = async () => {
     try {
-      const token = localStorage.getItem('accessToken');
+      const token = localStorage.getItem('access_token');
       if (token) {
-        const response = await apiService.getCurrentUser();
+        // Use getProfile to verify token validity with backend
+        const response = await apiService.getProfile();
         if (response.success) {
-          setUser(response.data);
+          setUser(response.user);
         } else {
-          localStorage.removeItem('accessToken');
+          // Token invalid or expired
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('refresh_token');
+          localStorage.removeItem('user');
         }
       }
     } catch (error) {
@@ -64,10 +70,10 @@ function App() {
 
   const handleLogin = async (credentials) => {
     try {
-      const response = await apiService.login(credentials);
+      const response = await apiService.login(credentials.username, credentials.password);
       if (response.success) {
-        setUser(response.data.user);
-        localStorage.setItem('accessToken', response.data.access_token);
+        setUser(response.user);
+        // Tokens are already set in apiService.login
         setNotification({
           type: 'success',
           message: 'Login successful!'
@@ -86,9 +92,13 @@ function App() {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await apiService.logout();
+    } catch (e) { console.error(e); }
+
     setUser(null);
-    localStorage.removeItem('accessToken');
+    // Local storage clean up happens in apiService.logout
     setNotification({
       type: 'info',
       message: 'Logged out successfully'
@@ -109,6 +119,8 @@ function App() {
         return <RealSportsBettingGrid />;
       case 'ai-predictions':
         return <AIPredictionsDashboard />;
+      case 'parlay-maker':
+        return <ParlayMaker />;
       case 'analytics':
         return <AdvancedAnalyticsDashboard />;
       case 'sports-analytics':
@@ -158,7 +170,7 @@ function App() {
                 Advanced sports betting with real-time data, AI predictions, and professional analytics
               </p>
             </div>
-            
+
             <div style={{ display: 'flex', gap: '12px', alignItems: 'center' }}>
               <DropDownList
                 data={themes}
@@ -168,23 +180,23 @@ function App() {
                 valueField="value"
                 style={{ width: '150px' }}
               />
-              
+
               {user ? (
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span style={{ fontSize: '14px', color: '#666' }}>
                     Welcome, {user.username}!
                   </span>
-                  <Button 
-                    themeColor="secondary" 
-                    size="small" 
+                  <Button
+                    themeColor="secondary"
+                    size="small"
                     onClick={handleLogout}
                   >
                     Logout
                   </Button>
                 </div>
               ) : (
-                <Button 
-                  themeColor="primary" 
+                <Button
+                  themeColor="primary"
                   size="small"
                   onClick={() => handleLogin({ username: 'demo', password: 'demo123' })}
                 >
@@ -206,9 +218,9 @@ function App() {
                 themeColor={currentView === view.value ? 'primary' : 'secondary'}
                 size="small"
                 onClick={() => setCurrentView(view.value)}
-                style={{ 
-                  display: 'flex', 
-                  alignItems: 'center', 
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
                   gap: '6px',
                   minWidth: 'auto',
                   padding: '8px 12px'

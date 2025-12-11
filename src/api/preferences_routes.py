@@ -21,7 +21,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # Initialize router
-router = APIRouter(prefix="/preferences", tags=["User Preferences"])
+router = APIRouter(tags=["User Preferences"])
 
 # Initialize preferences service
 preferences_service = UserPreferencesService()

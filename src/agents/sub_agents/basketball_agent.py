@@ -284,6 +284,38 @@ class BasketballAgent(BaseSubAgent):
         
         return " ".join(reasoning_parts) if reasoning_parts else f"Analysis based on comprehensive {league} metrics and team performance data."
     
+    async def find_betting_opportunities(self) -> List[Dict[str, Any]]:
+        """Find upcoming betting opportunities for NBA/NCAAB."""
+        opportunities = []
+        
+        # Simulate finding 1-3 upcoming games
+        num_games = random.randint(1, 3)
+        
+        # Decide if NBA or NCAAB for this scan
+        league = "NBA" if random.random() > 0.3 else "NCAAB"
+        teams_db = self.nba_teams if league == "NBA" else self.ncaab_teams
+        teams = list(teams_db.keys())
+        
+        if len(teams) < 2:
+            return []
+            
+        for _ in range(num_games):
+            t1, t2 = random.sample(teams, 2)
+            
+            # Create a game opportunity
+            game = {
+                "sport": self.sport.value,
+                "title": f"{t1} vs {t2}",
+                "teams": [t1, t2],
+                "time": datetime.now().isoformat(),
+                "query_text": f"{league} prediction for {t1} vs {t2}",
+                "context": "Autonomous Market Scan",
+                "league": league
+            }
+            opportunities.append(game)
+            
+        return opportunities
+
     async def get_sport_specific_insights(self) -> Dict[str, Any]:
         """Get NBA/NCAAB-specific insights and statistics."""
         base_insights = await super().get_sport_specific_insights()

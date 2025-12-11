@@ -5,10 +5,11 @@
 
 class ApiService {
     constructor() {
-        this.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+        // Updated to point to v1 API by default
+        this.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:8000/api/v1';
         this.token = localStorage.getItem('access_token');
         this.refreshToken = localStorage.getItem('refresh_token');
-        
+
         // Request interceptor for adding auth headers
         this.setupInterceptors();
     }
@@ -59,7 +60,7 @@ class ApiService {
 
     // Authentication Methods
     async login(username, password) {
-        const response = await this.request('POST', '/api/auth/login', {
+        const response = await this.request('POST', '/auth/login', {
             username,
             password
         });
@@ -67,11 +68,11 @@ class ApiService {
         if (response.success && response.data) {
             this.token = response.data.access_token;
             this.refreshToken = response.data.refresh_token;
-            
+
             localStorage.setItem('access_token', this.token);
             localStorage.setItem('refresh_token', this.refreshToken);
             localStorage.setItem('user', JSON.stringify(response.data.user));
-            
+
             this.setupInterceptors();
         }
 
@@ -79,7 +80,7 @@ class ApiService {
     }
 
     async register(username, email, password) {
-        return await this.request('POST', '/api/auth/register', {
+        return await this.request('POST', '/auth/register', {
             username,
             email,
             password
@@ -87,21 +88,21 @@ class ApiService {
     }
 
     async logout() {
-        const response = await this.request('POST', '/api/auth/logout');
-        
+        const response = await this.request('POST', '/auth/logout');
+
         this.token = null;
         this.refreshToken = null;
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
         localStorage.removeItem('user');
-        
+
         this.setupInterceptors();
         return response;
     }
 
     async refreshAccessToken() {
         try {
-            const response = await this.request('POST', '/api/auth/refresh', {
+            const response = await this.request('POST', '/auth/refresh', {
                 refresh_token: this.refreshToken
             });
 
@@ -118,7 +119,7 @@ class ApiService {
     }
 
     async getProfile() {
-        return await this.request('GET', '/api/auth/profile');
+        return await this.request('GET', '/auth/me');
     }
 
     // Portfolio Methods

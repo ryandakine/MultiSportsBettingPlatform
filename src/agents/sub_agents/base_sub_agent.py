@@ -57,6 +57,10 @@ class BaseSubAgent(SubAgentInterface, ABC):
         """Generate reasoning for the prediction."""
         pass
     
+    async def find_betting_opportunities(self) -> List[Dict[str, Any]]:
+        """Find potential betting opportunities (upcoming games)."""
+        return []
+    
     async def get_prediction(self, query_params: dict) -> Prediction:
         """Get prediction from sub-agent (implements SubAgentInterface)."""
         try:
