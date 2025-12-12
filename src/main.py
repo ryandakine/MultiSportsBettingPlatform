@@ -15,7 +15,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 # Import middleware
 from src.middleware.error_handler import ErrorHandlerMiddleware, add_error_handlers
-from src.middleware.rate_limiter import RateLimitMiddleware, rate_limiters
+from src.middleware.rate_limiter import RateLimitMiddleware, rate_limiter
+from src.middleware.security_headers import SecurityHeadersMiddleware
 
 from src.config import settings
 
@@ -78,6 +79,9 @@ def create_fastapi_app():
     # Add error handling middleware
     add_error_handlers(app)
     app.add_middleware(ErrorHandlerMiddleware)
+    
+    # Add security headers
+    app.add_middleware(SecurityHeadersMiddleware)
     
     # Add rate limiting middleware
     # app.add_middleware(RateLimitMiddleware, rate_limiter=rate_limiter)
