@@ -119,6 +119,7 @@ def create_fastapi_app():
     try:
         from src.api import routes, websocket_routes, auth_routes
         from src.api import feature_flag_routes, agent_query_routes, health_routes
+        from src.api import betting_routes, parlay_routes
         
         # Core routes
         app.include_router(health_routes.router)  # Health checks first
@@ -126,9 +127,13 @@ def create_fastapi_app():
         app.include_router(websocket_routes.router)
         app.include_router(auth_routes.router)
         
-        # New production routes
+        # Production routes
         app.include_router(feature_flag_routes.router)
         app.include_router(agent_query_routes.router)
+        
+        # Betting routes
+        app.include_router(betting_routes.router)
+        app.include_router(parlay_routes.router)
         
         logger.info("✅ API Routes loaded successfully")
     except Exception as e:
