@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,33 +11,33 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-        
+
         .container {
             max-width: 1400px;
             margin: 0 auto;
         }
-        
+
         .header {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px;
             border-radius: 20px;
             margin-bottom: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
-        
+
         h1 {
             color: #667eea;
             font-size: 2.5em;
             margin-bottom: 10px;
         }
-        
+
         .status {
             display: inline-block;
             padding: 8px 16px;
@@ -44,31 +45,31 @@
             font-weight: bold;
             margin-top: 10px;
         }
-        
+
         .status.running {
             background: #10b981;
             color: white;
         }
-        
+
         .status.stopped {
             background: #ef4444;
             color: white;
         }
-        
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
             margin-bottom: 20px;
         }
-        
+
         .card {
             background: rgba(255, 255, 255, 0.95);
             padding: 25px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         }
-        
+
         .card h2 {
             color: #667eea;
             font-size: 1.3em;
@@ -77,7 +78,7 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .metric {
             display: flex;
             justify-content: space-between;
@@ -85,51 +86,51 @@
             padding: 12px 0;
             border-bottom: 1px solid #e5e7eb;
         }
-        
+
         .metric:last-child {
             border-bottom: none;
         }
-        
+
         .metric-label {
             color: #6b7280;
             font-size: 0.95em;
         }
-        
+
         .metric-value {
             font-size: 1.4em;
             font-weight: bold;
             color: #1f2937;
         }
-        
+
         .metric-value.positive {
             color: #10b981;
         }
-        
+
         .metric-value.negative {
             color: #ef4444;
         }
-        
+
         .big-number {
             font-size: 3em;
             font-weight: bold;
             text-align: center;
             margin: 20px 0;
         }
-        
+
         .big-number.positive {
             color: #10b981;
         }
-        
+
         .big-number.negative {
             color: #ef4444;
         }
-        
+
         .controls {
             display: flex;
             gap: 10px;
             margin-top: 20px;
         }
-        
+
         button {
             flex: 1;
             padding: 15px;
@@ -140,34 +141,34 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        
+
         .btn-start {
             background: #10b981;
             color: white;
         }
-        
+
         .btn-stop {
             background: #ef4444;
             color: white;
         }
-        
+
         .btn-refresh {
             background: #3b82f6;
             color: white;
         }
-        
+
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        
+
         .loading {
             text-align: center;
             padding: 40px;
             color: white;
             font-size: 1.2em;
         }
-        
+
         .error {
             background: #fef2f2;
             border: 2px solid #ef4444;
@@ -178,13 +179,14 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
             <h1>🎯 Autonomous Betting Dashboard</h1>
             <div class="status" id="systemStatus">Loading...</div>
         </div>
-        
+
         <div id="content">
             <div class="loading">Loading system data...</div>
         </div>
@@ -193,30 +195,30 @@
     <script>
         const API_BASE = 'http://localhost:8000/api/v1';
         let refreshInterval;
-        
+
         async function fetchData() {
             try {
                 // TODO: Replace with actual auth token
                 const headers = {
                     // 'Authorization': 'Bearer YOUR_TOKEN_HERE'
                 };
-                
+
                 const [status, roi, performance] = await Promise.all([
                     fetch(`${API_BASE}/betting/status`, { headers }).catch(() => null),
                     fetch(`${API_BASE}/betting/roi`, { headers }).catch(() => null),
                     fetch(`${API_BASE}/betting/performance`, { headers }).catch(() => null)
                 ]);
-                
+
                 const statusData = status ? await status.json() : null;
                 const roiData = roi ? await roi.json() : null;
                 const perfData = performance ? await performance.json() : null;
-                
+
                 renderDashboard(statusData, roiData, perfData);
             } catch (error) {
                 showError(error);
             }
         }
-        
+
         function renderDashboard(status, roi, performance) {
             // Update status badge
             const statusEl = document.getElementById('systemStatus');
@@ -227,7 +229,22 @@
                 statusEl.className = 'status stopped';
                 statusEl.textContent = '⏸️ Stopped';
             }
-            
+
+            // Safe accessors with defaults
+            const allTimeROI = roi?.all_time?.roi_percentage ?? 0;
+            const netProfit = roi?.all_time?.net_profit ?? 0;
+            const winRate = roi?.all_time?.win_rate ?? 0;
+            const dailyROI = roi?.daily?.roi_percentage ?? 0;
+            const dailyProfit = roi?.daily?.net_profit ?? 0;
+            const dailyBets = roi?.daily?.total_bets ?? 0;
+            const totalBets = roi?.all_time?.total_bets ?? 0;
+            const wins = roi?.all_time?.wins ?? 0;
+            const losses = roi?.all_time?.losses ?? 0;
+            const wagered = roi?.all_time?.total_wagered ?? 0;
+            const currentBalance = performance?.bankroll?.current_balance ?? 0;
+            const availableBalance = performance?.bankroll?.available_balance ?? 0;
+            const activeBetsCount = performance?.active_bets?.count ?? 0;
+
             // Render content
             const content = document.getElementById('content');
             content.innerHTML = `
@@ -235,18 +252,18 @@
                     <!-- ROI Card -->
                     <div class="card">
                         <h2>💰 Overall ROI</h2>
-                        <div class="big-number ${roi && roi.all_time.roi_percentage >= 0 ? 'positive' : 'negative'}">
-                            ${roi ? roi.all_time.roi_percentage.toFixed(2) : '0.00'}%
+                        <div class="big-number ${allTimeROI >= 0 ? 'positive' : 'negative'}">
+                            ${allTimeROI.toFixed(2)}%
                         </div>
                         <div class="metric">
                             <span class="metric-label">Net Profit</span>
-                            <span class="metric-value ${roi && roi.all_time.net_profit >= 0 ? 'positive' : 'negative'}">
-                                $${roi ? roi.all_time.net_profit.toFixed(2) : '0.00'}
+                            <span class="metric-value ${netProfit >= 0 ? 'positive' : 'negative'}">
+                                $${netProfit.toFixed(2)}
                             </span>
                         </div>
                         <div class="metric">
                             <span class="metric-label">Win Rate</span>
-                            <span class="metric-value">${roi ? roi.all_time.win_rate.toFixed(1) : '0.0'}%</span>
+                            <span class="metric-value">${winRate.toFixed(1)}%</span>
                         </div>
                     </div>
                     
@@ -255,15 +272,15 @@
                         <h2>💵 Bankroll</h2>
                         <div class="metric">
                             <span class="metric-label">Current Balance</span>
-                            <span class="metric-value">$${performance && performance.bankroll ? performance.bankroll.current_balance.toFixed(2) : '0.00'}</span>
+                            <span class="metric-value">$${currentBalance.toFixed(2)}</span>
                         </div>
                         <div class="metric">
                             <span class="metric-label">Available</span>
-                            <span class="metric-value">$${performance && performance.bankroll ? performance.bankroll.available_balance.toFixed(2) : '0.00'}</span>
+                            <span class="metric-value">$${availableBalance.toFixed(2)}</span>
                         </div>
                         <div class="metric">
                             <span class="metric-label">Active Bets</span>
-                            <span class="metric-value">${performance && performance.active_bets ? performance.active_bets.count : '0'}</span>
+                            <span class="metric-value">${activeBetsCount}</span>
                         </div>
                     </div>
                     
@@ -272,19 +289,19 @@
                         <h2>📊 Today</h2>
                         <div class="metric">
                             <span class="metric-label">ROI</span>
-                            <span class="metric-value ${roi && roi.daily.roi_percentage >= 0 ? 'positive' : 'negative'}">
-                                ${roi ? roi.daily.roi_percentage.toFixed(2) : '0.00'}%
+                            <span class="metric-value ${dailyROI >= 0 ? 'positive' : 'negative'}">
+                                ${dailyROI.toFixed(2)}%
                             </span>
                         </div>
                         <div class="metric">
                             <span class="metric-label">Profit/Loss</span>
-                            <span class="metric-value ${roi && roi.daily.net_profit >= 0 ? 'positive' : 'negative'}">
-                                $${roi ? roi.daily.net_profit.toFixed(2) : '0.00'}
+                            <span class="metric-value ${dailyProfit >= 0 ? 'positive' : 'negative'}">
+                                $${dailyProfit.toFixed(2)}
                             </span>
                         </div>
                         <div class="metric">
                             <span class="metric-label">Bets</span>
-                            <span class="metric-value">${roi ? roi.daily.total_bets : '0'}</span>
+                            <span class="metric-value">${dailyBets}</span>
                         </div>
                     </div>
                     
@@ -293,15 +310,15 @@
                         <h2>📈 Statistics</h2>
                         <div class="metric">
                             <span class="metric-label">Total Bets</span>
-                            <span class="metric-value">${roi ? roi.all_time.total_bets : '0'}</span>
+                            <span class="metric-value">${totalBets}</span>
                         </div>
                         <div class="metric">
                             <span class="metric-label">Wins/Losses</span>
-                            <span class="metric-value">${roi ? roi.all_time.wins : '0'}/${roi ? roi.all_time.losses : '0'}</span>
+                            <span class="metric-value">${wins}/${losses}</span>
                         </div>
                         <div class="metric">
                             <span class="metric-label">Total Wagered</span>
-                            <span class="metric-value">$${roi ? roi.all_time.total_wagered.toFixed(2) : '0.00'}</span>
+                            <span class="metric-value">$${wagered.toFixed(2)}</span>
                         </div>
                     </div>
                 </div>
@@ -317,7 +334,7 @@
                 </div>
             `;
         }
-        
+
         function showError(error) {
             const content = document.getElementById('content');
             content.innerHTML = `
@@ -329,7 +346,7 @@
                 </div>
             `;
         }
-        
+
         async function startBetting() {
             if (confirm('Start autonomous betting? (Paper trading mode)')) {
                 try {
@@ -349,7 +366,7 @@
                 }
             }
         }
-        
+
         async function stopBetting() {
             if (confirm('Stop autonomous betting?')) {
                 try {
@@ -362,12 +379,13 @@
                 }
             }
         }
-        
+
         // Initial load
         fetchData();
-        
+
         // Auto-refresh every 30 seconds
         refreshInterval = setInterval(fetchData, 30000);
     </script>
 </body>
+
 </html>
