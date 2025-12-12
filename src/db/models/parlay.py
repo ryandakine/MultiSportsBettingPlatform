@@ -7,7 +7,7 @@ Extended support for multi-leg parlay bets.
 from sqlalchemy import Column, String, Float, DateTime, Integer, JSON, ForeignKey
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
-from src.db.models import Base
+from src.db.database import Base
 
 
 class ParlayLeg(Base):

@@ -1,12 +1,13 @@
 """
-Subscription Database Model
-===========================
-Track user subscriptions and usage.
+Subscription and Billing Models
+================================
+Track user subscriptions and usage for monetization.
 """
 
-from sqlalchemy import Column, String, Integer, DateTime, Boolean, Float, JSON
+from sqlalchemy import Column, String, Float, DateTime, Integer, Boolean, JSON, Enum as SQLEnum
 from sqlalchemy.sql import func
-from src.db.models import Base
+from src.db.database import Base
+import enum
 
 
 class Subscription(Base):

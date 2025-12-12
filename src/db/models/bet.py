@@ -6,7 +6,7 @@ Track all bets placed, outcomes, and performance.
 
 from sqlalchemy import Column, String, Float, DateTime, Boolean, Integer, JSON, Enum as SQLEnum
 from sqlalchemy.sql import func
-from src.db.models import Base
+from src.db.database import Base
 import enum
 
 
@@ -74,7 +74,6 @@ class Bet(Base):
     
     # Metadata
     notes = Column(String, nullable=True)
-    metadata_json = Column(JSON, nullable=True)
 
 
 class Bankroll(Base):
