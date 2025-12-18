@@ -1,0 +1,144 @@
+.privacy-section {
+  padding: 100px 20px;
+  background: rgba(10, 14, 39, 1);
+}
+
+.privacy-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-bottom: 64px;
+}
+
+.privacy-card {
+  background: rgba(26, 31, 58, 0.8);
+  border-radius: 16px;
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.privacy-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(102, 126, 234, 0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.privacy-icon {
+  font-size: 64px;
+  margin-bottom: 24px;
+}
+
+.privacy-card h3 {
+  font-size: 24px;
+  margin-bottom: 24px;
+  color: white;
+}
+
+.privacy-card ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 24px;
+}
+
+.privacy-card ul li {
+  padding: 12px 0;
+  padding-left: 28px;
+  position: relative;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+.privacy-card ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #667eea;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.privacy-note {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.8;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.privacy-philosophy {
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 16px;
+  padding: 48px;
+  border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.privacy-philosophy h3 {
+  font-size: 32px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.privacy-philosophy > p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 32px;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.philosophy-points {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 32px;
+}
+
+.philosophy-point {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+}
+
+.point-icon {
+  font-size: 24px;
+  color: #667eea;
+  font-weight: 700;
+}
+
+.philosophy-point span:last-child {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+}
+
+.philosophy-conclusion {
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-style: italic;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .privacy-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .philosophy-points {
+    grid-template-columns: 1fr;
+  }
+  
+  .privacy-philosophy {
+    padding: 32px 24px;
+  }
+}
+
+

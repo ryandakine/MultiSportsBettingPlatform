@@ -10,6 +10,7 @@ from typing import Optional
 
 from src.services.autonomous_betting_engine import autonomous_engine
 from src.services.bet_tracker import bet_tracker
+from src.services.bet_settlement_service import bet_settlement_service
 from src.api.auth_routes import get_current_user
 
 router = APIRouter(prefix="/api/v1/betting", tags=["Autonomous Betting"])
@@ -72,6 +73,22 @@ async def stop_autonomous_betting(current_user: dict = Depends(get_current_user)
 @router.get("/status")
 async def get_betting_status(current_user: dict = Depends(get_current_user)):
     """Get current autonomous betting status."""
+    return {
+        "enabled": autonomous_engine.enabled,
+        "running": autonomous_engine.running,
+        "mode": "paper_trading" if autonomous_engine.paper_trading else "live",
+        "settings": {
+            "min_edge": autonomous_engine.min_edge_threshold,
+            "max_bet_percentage": autonomous_engine.max_bet_percentage,
+            "kelly_multiplier": autonomous_engine.kelly_multiplier,
+            "enable_parlays": autonomous_engine.enable_parlays
+        }
+    }
+
+
+@router.get("/status/public")
+async def get_betting_status_public():
+    """Get current autonomous betting status (public endpoint, no auth required)."""
     return {
         "enabled": autonomous_engine.enabled,
         "running": autonomous_engine.running,
@@ -155,3 +172,28 @@ async def get_roi_dashboard(current_user: dict = Depends(get_current_user)):
         "weekly": weekly,
         "daily": daily
     }
+
+
+@router.post("/settle")
+async def settle_pending_bets(
+    days_back: int = 7,
+    current_user: dict = Depends(get_current_user)
+):
+    """
+    Settle all pending bets from the last N days.
+    
+    This endpoint:
+    1. Finds all pending bets
+    2. Fetches game results from sports APIs
+    3. Matches bets to games
+    4. Updates bet status (won/lost/pushed)
+    5. Calculates payouts
+    
+    Args:
+        days_back: Number of days to look back (default: 7)
+    """
+    try:
+        result = await bet_settlement_service.settle_pending_bets(days_back=days_back)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to settle bets: {str(e)}")

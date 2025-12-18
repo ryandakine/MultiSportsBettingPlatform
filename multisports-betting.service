@@ -1,0 +1,24 @@
+[Unit]
+Description=MultiSports Betting Platform API Server
+After=network.target postgresql.service redis.service
+
+[Service]
+Type=simple
+User=ryan
+WorkingDirectory=/home/ryan/MultiSportsBettingPlatform
+Environment="PATH=/usr/bin:/usr/local/bin"
+Environment="PYTHONPATH=/home/ryan/MultiSportsBettingPlatform"
+ExecStart=/usr/bin/python3 -m uvicorn src.main:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Environment variables (set these in the system or override file)
+Environment="AUTO_BETTING_ENABLED=true"
+Environment="AUTO_BETTING_USER_ID=demo_user"
+Environment="AUTO_BETTING_PAPER_TRADING=true"
+
+[Install]
+WantedBy=multi-user.target
+

@@ -48,6 +48,15 @@ class BetTracker:
         async with AsyncSessionLocal() as session:
             bet_id = str(uuid.uuid4())
             
+            # Parse game_date if provided as string or datetime
+            game_date = bet_data.get("game_date")
+            if game_date and isinstance(game_date, str):
+                try:
+                    from dateutil import parser
+                    game_date = parser.parse(game_date)
+                except Exception:
+                    game_date = None
+            
             bet = Bet(
                 id=bet_id,
                 user_id=user_id,
@@ -55,6 +64,9 @@ class BetTracker:
                 sportsbook=bet_data.get("sportsbook", "draftkings"),
                 sport=bet_data["sport"],
                 game_id=bet_data["game_id"],
+                game_date=game_date,
+                home_team=bet_data.get("home_team"),
+                away_team=bet_data.get("away_team"),
                 bet_type=bet_data["bet_type"],
                 team=bet_data.get("team"),
                 line=bet_data.get("line"),

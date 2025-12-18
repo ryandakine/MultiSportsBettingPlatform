@@ -1,0 +1,99 @@
+.story-section {
+  background: rgba(10, 14, 39, 0.5);
+  padding: 100px 20px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 64px;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.story-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-bottom: 64px;
+}
+
+.story-card {
+  background: rgba(26, 31, 58, 0.8);
+  border-radius: 16px;
+  padding: 40px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.story-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(102, 126, 234, 0.5);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.story-icon {
+  font-size: 64px;
+  margin-bottom: 24px;
+}
+
+.story-card h3 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: white;
+}
+
+.story-card p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.story-insight {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+  border-radius: 16px;
+  padding: 48px;
+  border: 1px solid rgba(102, 126, 234, 0.3);
+}
+
+.insight-content h3 {
+  font-size: 32px;
+  margin-bottom: 24px;
+  color: white;
+}
+
+.insight-content p {
+  font-size: 18px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 20px;
+}
+
+.insight-content p:last-child {
+  margin-bottom: 0;
+}
+
+.insight-content strong {
+  color: white;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .story-insight {
+    padding: 32px 24px;
+  }
+  
+  .insight-content p {
+    font-size: 16px;
+  }
+}
+
+

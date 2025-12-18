@@ -7,7 +7,6 @@ from typing import Dict, Any
 from datetime import datetime
 
 from src.agents.head_agent import HeadAgent, SportType, UserQuery
-from src.agents.mock_sub_agent import MockSubAgent
 from src.api.models import (
     BettingQuery, PredictionResponse, OutcomeReport, 
     UserPreferences, SystemStatus, HealthCheck
@@ -22,6 +21,7 @@ from src.api.websocket_routes import router as websocket_router
 from src.api.social_routes import router as social_router
 from src.api.specialized_integration_routes import router as specialized_router
 from src.api.notification_routes import router as notification_router
+from src.api.application_routes import router as application_router
 
 # Create router
 router = APIRouter(prefix="/api/v1", tags=["head-agent"])
@@ -33,6 +33,7 @@ router.include_router(websocket_router, tags=["WebSocket"])
 router.include_router(social_router, prefix="/social", tags=["Social Features"])
 router.include_router(specialized_router, tags=["Specialized Systems"])
 router.include_router(notification_router, tags=["Notifications"])
+router.include_router(application_router, tags=["License Applications"])
 
 # Global Head Agent instance
 head_agent = HeadAgent()

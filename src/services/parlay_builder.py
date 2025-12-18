@@ -28,22 +28,22 @@ class ParlayBuilder:
             "conservative": {
                 "min_legs": 2,
                 "max_legs": 3,
-                "min_leg_confidence": 0.70,
-                "min_combined_probability": 0.50,
-                "min_leg_edge": 0.08
+                "min_leg_confidence": 0.65,  # Match autonomous engine threshold
+                "min_combined_probability": 0.40,  # Lowered since we're using model probabilities
+                "min_leg_edge": 0.05  # Match autonomous engine threshold
             },
             "moderate": {
                 "min_legs": 2,
                 "max_legs": 4,
                 "min_leg_confidence": 0.65,
-                "min_combined_probability": 0.40,
+                "min_combined_probability": 0.25,  # More realistic for 3-4 leg parlays
                 "min_leg_edge": 0.05
             },
             "aggressive": {
                 "min_legs": 3,
                 "max_legs": 6,
                 "min_leg_confidence": 0.60,
-                "min_combined_probability": 0.30,
+                "min_combined_probability": 0.05,  # Realistic for 6-leg parlays (even 0.65^6 ≈ 0.075)
                 "min_leg_edge": 0.03
             }
         }
@@ -131,8 +131,15 @@ class ParlayBuilder:
             return None
         
         # Determine number of legs
-        target_legs = num_legs if num_legs else min(profile["max_legs"], len(eligible_legs))
-        target_legs = max(target_legs, profile["min_legs"])
+        if num_legs:
+            # If specific number requested, use that exactly (if we have enough)
+            if len(eligible_legs) < num_legs:
+                logger.warning(f"Not enough eligible legs ({len(eligible_legs)}) for {num_legs}-leg parlay")
+                return None
+            target_legs = num_legs
+        else:
+            target_legs = min(profile["max_legs"], len(eligible_legs))
+            target_legs = max(target_legs, profile["min_legs"])
         
         # Sort by confidence * edge (best picks first)
         eligible_legs.sort(
@@ -140,19 +147,82 @@ class ParlayBuilder:
             reverse=True
         )
         
-        # Take top picks
-        selected_legs = eligible_legs[:target_legs]
+        # Filter legs to ensure no exact duplicates (same game + same bet type)
+        # But allow same game with different bet types, and for 6-leg allow duplicate teams
+        selected_legs = []
+        seen_leg_keys = set()  # Track (game_id, bet_type) combinations
+        
+        for leg in eligible_legs:
+            game_id = leg.get("game_id")
+            bet_type = leg.get("bet_type", "moneyline")
+            leg_key = (game_id, bet_type)
+            
+            # For 6-leg parlays, allow same game with different bet types
+            # For other parlays, ensure unique game/bet_type combinations
+            if leg_key not in seen_leg_keys:
+                selected_legs.append(leg)
+                seen_leg_keys.add(leg_key)
+                if len(selected_legs) >= target_legs:
+                    break
+        
+        # If we don't have enough unique legs, check if we can use same game with different bet types
+        if len(selected_legs) < target_legs and num_legs == 6:
+            # For 6-leg, allow multiple bets from same game if different bet types
+            seen_games_only = set([leg.get("game_id") for leg in selected_legs])
+            for leg in eligible_legs:
+                if len(selected_legs) >= target_legs:
+                    break
+                game_id = leg.get("game_id")
+                bet_type = leg.get("bet_type", "moneyline")
+                leg_key = (game_id, bet_type)
+                
+                # Allow if it's a different bet type for a game we already have
+                if leg_key not in seen_leg_keys:
+                    # Check if we already have this game with a different bet type
+                    has_game_diff_bet = any(
+                        l.get("game_id") == game_id and l.get("bet_type") != bet_type 
+                        for l in selected_legs
+                    )
+                    if has_game_diff_bet or game_id not in seen_games_only:
+                        selected_legs.append(leg)
+                        seen_leg_keys.add(leg_key)
+                        seen_games_only.add(game_id)
+        
+        if len(selected_legs) < profile["min_legs"]:
+            logger.warning(f"Not enough unique legs ({len(selected_legs)}) for {target_legs}-leg parlay")
+            return None
         
         # Calculate combined metrics
         odds_list = [leg.get("odds", -110) for leg in selected_legs]
-        probs = [leg.get("probability", 0.5) for leg in selected_legs]
+        
+        # Use model probabilities (with edge) for parlay calculations, not just implied probabilities
+        probs = []
+        for leg in selected_legs:
+            prob = leg.get("probability", 0.5)
+            edge = leg.get("edge", 0)
+            
+            # Calculate implied probability from odds
+            american_odds = leg.get("odds", -110)
+            if american_odds > 0:
+                implied_prob = 100 / (american_odds + 100)
+            else:
+                implied_prob = abs(american_odds) / (abs(american_odds) + 100)
+            
+            # Model probability = implied probability + edge (what we think the true probability is)
+            if edge > 0:
+                model_prob = implied_prob + edge
+                model_prob = max(0.01, min(0.99, model_prob))  # Cap at reasonable bounds
+                probs.append(model_prob)
+            else:
+                # Fallback to provided probability
+                probs.append(prob)
         
         combined_odds = self.calculate_combined_odds(odds_list)
         combined_prob = self.calculate_combined_probability(probs)
         
         # Check if meets minimum probability
         if combined_prob < profile["min_combined_probability"]:
-            logger.warning(f"Combined probability {combined_prob} too low for {risk_level}")
+            logger.warning(f"Combined probability {combined_prob:.4f} too low for {risk_level} (min: {profile['min_combined_probability']})")
             return None
         
         # Calculate expected value

@@ -21,6 +21,7 @@ class ParlayLeg(Base):
     # Game details
     sport = Column(String, nullable=False)
     game_id = Column(String, nullable=False)
+    game_date = Column(DateTime, nullable=True)  # Date/time when the game is played
     home_team = Column(String, nullable=True)
     away_team = Column(String, nullable=True)
     

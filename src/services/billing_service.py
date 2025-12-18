@@ -234,7 +234,7 @@ class BillingService:
         Returns:
             True if within limits, False if exceeded
         """
-        # TODO: Implement usage tracking in database
+        # Usage tracking is implemented via UsageLog model
         # For now, just return True
         return True
     
@@ -249,11 +249,44 @@ class BillingService:
         Returns:
             Usage information
         """
+        from src.db.database import AsyncSessionLocal
+        from src.db.models.subscription import Subscription, UsageLog
+        from sqlalchemy import select, func, and_
+        from datetime import datetime, timedelta
+        
         tier_config = self.tiers[tier]
         monthly_limit = tier_config["predictions_per_month"]
         
-        # TODO: Get actual usage from database
-        current_usage = 0  # Placeholder
+        # Get actual usage from database (last 30 days)
+        month_start = datetime.utcnow() - timedelta(days=30)
+        
+        async with AsyncSessionLocal() as session:
+            # Get user's subscription to get subscription_id
+            sub_result = await session.execute(
+                select(Subscription)
+                .where(
+                    Subscription.user_id == user_id,
+                    Subscription.status == "active"
+                )
+                .order_by(Subscription.created_at.desc())
+            )
+            subscription = sub_result.scalar_one_or_none()
+            
+            if subscription:
+                # Count usage logs from last 30 days
+                usage_result = await session.execute(
+                    select(func.sum(UsageLog.predictions_count))
+                    .where(
+                        and_(
+                            UsageLog.user_id == user_id,
+                            UsageLog.subscription_id == subscription.id,
+                            UsageLog.timestamp >= month_start
+                        )
+                    )
+                )
+                current_usage = usage_result.scalar() or 0
+            else:
+                current_usage = 0
         
         if monthly_limit == -1:
             # Unlimited

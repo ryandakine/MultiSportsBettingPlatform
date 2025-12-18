@@ -10,6 +10,7 @@ from typing import List, Optional, Dict, Any
 from datetime import datetime
 
 from src.services.parlay_builder import parlay_builder
+from src.services.parlay_tracker import parlay_tracker
 from src.api.auth_routes import get_current_user
 
 router = APIRouter(prefix="/api/v1/parlays", tags=["Parlays"])
@@ -39,43 +40,54 @@ async def get_parlay_recommendations(
     
     Returns parlays at different risk levels based on current predictions.
     """
-    # TODO: Get current predictions from head_agent
-    # For now, return mock data
+    # Get current predictions from database (recent predictions with betting metadata)
+    from src.db.database import AsyncSessionLocal
+    from src.db.models.prediction import Prediction
+    from sqlalchemy import select
+    from datetime import datetime, timedelta
     
-    predictions = [
-        {
-            "game_id": "game_1",
-            "sport": "basketball",
-            "team": "Lakers",
-            "bet_type": "moneyline",
-            "odds": -150,
-            "confidence": 0.75,
-            "probability": 0.60,
-            "edge": 0.10
-        },
-        {
-            "game_id": "game_2",
-            "sport": "football",
-            "team": "Chiefs",
-            "bet_type": "spread",
-            "line": -7.5,
-            "odds": -110,
-            "confidence": 0.70,
-            "probability": 0.55,
-            "edge": 0.08
-        },
-        {
-            "game_id": "game_3",
-            "sport": "basketball",
-            "team": "Over",
-            "bet_type": "total",
-            "line": 220.5,
-            "odds": -105,
-            "confidence": 0.68,
-            "probability": 0.52,
-            "edge": 0.05
-        }
-    ]
+    # Get recent predictions (last 24 hours) with betting metadata
+    cutoff = datetime.utcnow() - timedelta(hours=24)
+    
+    async with AsyncSessionLocal() as session:
+        result = await session.execute(
+            select(Prediction)
+            .where(Prediction.timestamp >= cutoff)
+            .order_by(Prediction.timestamp.desc())
+            .limit(20)
+        )
+        db_predictions = result.scalars().all()
+    
+    # Convert to betting format
+    predictions = []
+    for pred in db_predictions:
+        metadata = pred.metadata_json or {}
+        
+        # Only include predictions with betting metadata
+        if not (metadata.get("game_id") and metadata.get("odds") and metadata.get("probability")):
+            continue
+        
+        # Convert confidence string to float if needed
+        confidence_value = pred.confidence
+        if isinstance(confidence_value, str):
+            confidence_map = {"low": 0.5, "medium": 0.65, "high": 0.85}
+            confidence_value = confidence_map.get(confidence_value.lower(), 0.65)
+        elif isinstance(confidence_value, (int, float)):
+            confidence_value = float(confidence_value) / 100.0 if confidence_value > 1 else float(confidence_value)
+        else:
+            confidence_value = 0.65
+        
+        predictions.append({
+            "game_id": metadata.get("game_id", f"game_{pred.id}"),
+            "sport": pred.sport,
+            "team": metadata.get("team"),
+            "bet_type": metadata.get("bet_type", "moneyline"),
+            "line": metadata.get("line"),
+            "odds": float(metadata.get("odds", -110)),
+            "confidence": float(confidence_value),
+            "probability": float(metadata.get("probability", confidence_value)),
+            "edge": float(metadata.get("edge", 0.05))
+        })
     
     # Build parlay recommendations
     if risk_level == "all":
@@ -99,8 +111,61 @@ async def build_custom_parlay(
     """
     Build a custom parlay with specific parameters.
     """
-    # TODO: Get filtered predictions based on sports
-    predictions = []  # Placeholder
+    # Get predictions from database filtered by requested sports
+    from src.db.database import AsyncSessionLocal
+    from src.db.models.prediction import Prediction
+    from sqlalchemy import select, or_
+    from datetime import datetime, timedelta
+    
+    # Get recent predictions (last 24 hours) for requested sports
+    cutoff = datetime.utcnow() - timedelta(hours=24)
+    
+    # Build sport filter if sports are specified
+    sport_filter = None
+    if request.sports:
+        sport_filter = Prediction.sport.in_(request.sports)
+    
+    async with AsyncSessionLocal() as session:
+        query = select(Prediction).where(
+            Prediction.timestamp >= cutoff
+        )
+        if sport_filter:
+            query = query.where(sport_filter)
+        query = query.order_by(Prediction.timestamp.desc()).limit(50)
+        
+        result = await session.execute(query)
+        db_predictions = result.scalars().all()
+    
+    # Convert to betting format
+    predictions = []
+    for pred in db_predictions:
+        metadata = pred.metadata_json or {}
+        
+        # Only include predictions with betting metadata
+        if not (metadata.get("game_id") and metadata.get("odds") and metadata.get("probability")):
+            continue
+        
+        # Convert confidence string to float if needed
+        confidence_value = pred.confidence
+        if isinstance(confidence_value, str):
+            confidence_map = {"low": 0.5, "medium": 0.65, "high": 0.85}
+            confidence_value = confidence_map.get(confidence_value.lower(), 0.65)
+        elif isinstance(confidence_value, (int, float)):
+            confidence_value = float(confidence_value) / 100.0 if confidence_value > 1 else float(confidence_value)
+        else:
+            confidence_value = 0.65
+        
+        predictions.append({
+            "game_id": metadata.get("game_id", f"game_{pred.id}"),
+            "sport": pred.sport,
+            "team": metadata.get("team"),
+            "bet_type": metadata.get("bet_type", "moneyline"),
+            "line": metadata.get("line"),
+            "odds": float(metadata.get("odds", -110)),
+            "confidence": float(confidence_value),
+            "probability": float(metadata.get("probability", confidence_value)),
+            "edge": float(metadata.get("edge", 0.05))
+        })
     
     parlay = parlay_builder.build_parlay(
         predictions,
@@ -156,12 +221,28 @@ async def place_parlay(
             detail=f"Invalid parlay: {validation['issues']}"
         )
     
-    # TODO: Check user bankroll and limits
-    # TODO: Place bet via sportsbook API
-    # TODO: Save to database
+    # Calculate combined odds from legs
+    from src.services.parlay_builder import parlay_builder
+    odds_list = [leg.get("odds", -110) for leg in request.legs]
+    combined_odds = parlay_builder.calculate_combined_odds(odds_list)
     
-    # Mock response
-    bet_id = "bet_parlay_123"
+    # Calculate combined probability
+    probs = [leg.get("probability", 0.5) for leg in request.legs]
+    combined_prob = parlay_builder.calculate_combined_probability(probs)
+    
+    # Prepare parlay data for storage
+    parlay_data = {
+        "legs": request.legs,
+        "amount": request.amount,
+        "combined_odds": combined_odds,
+        "combined_probability": combined_prob,
+        "sportsbook": request.sportsbook
+    }
+    
+    # Store parlay in database
+    bet_id = await parlay_tracker.place_parlay(
+        user_id, parlay_data, is_autonomous=False
+    )
     
     return {
         "success": True,
@@ -169,6 +250,7 @@ async def place_parlay(
         "legs": request.legs,
         "amount": request.amount,
         "sportsbook": request.sportsbook,
+        "combined_odds": combined_odds,
         "message": f"Parlay bet placed successfully ({len(request.legs)} legs)"
     }
 
@@ -176,13 +258,40 @@ async def place_parlay(
 @router.get("/active")
 async def get_active_parlays(current_user: dict = Depends(get_current_user)):
     """Get active parlay bets."""
+    from src.services.bet_tracker import bet_tracker
+    from src.db.models.bet import BetStatus, BetType
+    from sqlalchemy import select, and_
+    from src.db.database import AsyncSessionLocal
+    
     user_id = current_user.get("user_id")
     
-    # TODO: Query database for active parlays
+    async with AsyncSessionLocal() as session:
+        result = await session.execute(
+            select(Bet).where(
+                and_(
+                    Bet.user_id == user_id,
+                    Bet.bet_type == BetType.PARLAY,
+                    Bet.status == BetStatus.PENDING
+                )
+            ).order_by(Bet.placed_at.desc())
+        )
+        parlay_bets = result.scalars().all()
+        
+        parlays_with_legs = []
+        for bet in parlay_bets:
+            legs = await parlay_tracker.get_parlay_legs(bet.id)
+            parlays_with_legs.append({
+                "bet_id": bet.id,
+                "amount": bet.amount,
+                "odds": bet.odds,
+                "status": bet.status.value,
+                "placed_at": bet.placed_at.isoformat() if bet.placed_at else None,
+                "legs": legs
+            })
     
     return {
-        "active_parlays": [],
-        "count": 0
+        "active_parlays": parlays_with_legs,
+        "count": len(parlays_with_legs)
     }
 
 
@@ -194,16 +303,94 @@ async def get_parlay_history(
     """Get parlay betting history."""
     user_id = current_user.get("user_id")
     
-    # TODO: Query database for parlay history
+    # Query database for parlay history
+    from src.db.database import AsyncSessionLocal
+    from src.db.models.bet import Bet, BetStatus, BetType
+    from src.db.models.parlay import ParlayCard, ParlayLeg
+    from sqlalchemy import select, func, and_, or_
+    from datetime import datetime, timedelta
+    
+    cutoff_date = datetime.utcnow() - timedelta(days=days_back)
+    
+    async with AsyncSessionLocal() as session:
+        # Get parlay bets
+        result = await session.execute(
+            select(Bet)
+            .where(
+                and_(
+                    Bet.user_id == user_id,
+                    Bet.bet_type == BetType.PARLAY,
+                    Bet.placed_at >= cutoff_date
+                )
+            )
+            .order_by(Bet.placed_at.desc())
+            .limit(limit)
+        )
+        parlay_bets = result.scalars().all()
+        
+        # Get parlay legs for each bet
+        parlays_with_legs = []
+        total_wagered = 0.0
+        total_won = 0.0
+        wins = 0
+        losses = 0
+        
+        for bet in parlay_bets:
+            # Get legs for this parlay
+            legs_result = await session.execute(
+                select(ParlayLeg)
+                .where(ParlayLeg.parlay_bet_id == bet.id)
+                .order_by(ParlayLeg.created_at)
+            )
+            legs = legs_result.scalars().all()
+            
+            parlays_with_legs.append({
+                "id": bet.id,
+                "placed_at": bet.placed_at.isoformat() if bet.placed_at else None,
+                "amount": bet.amount,
+                "odds": bet.odds,
+                "status": bet.status.value,
+                "payout": bet.payout,
+                "roi": bet.roi,
+                "legs": [
+                    {
+                        "leg_number": leg.leg_number,
+                        "sport": leg.sport,
+                        "team": leg.team,
+                        "bet_type": leg.bet_type,
+                        "line": leg.line,
+                        "odds": leg.odds,
+                        "status": leg.status.value if leg.status else None
+                    }
+                    for leg in legs
+                ]
+            })
+            
+            total_wagered += bet.amount
+            if bet.status == BetStatus.WON:
+                total_won += bet.payout or 0
+                wins += 1
+            elif bet.status == BetStatus.LOST:
+                losses += 1
+        
+        # Calculate stats
+        total_parlays = len(parlays_with_legs)
+        win_rate = (wins / total_parlays * 100) if total_parlays > 0 else 0.0
+        
+        # Calculate average odds
+        if parlay_bets:
+            avg_odds = sum(bet.odds for bet in parlay_bets) / len(parlay_bets)
+        else:
+            avg_odds = 0
     
     return {
-        "parlays": [],
-        "count": 0,
+        "parlays": parlays_with_legs,
+        "count": total_parlays,
         "stats": {
-            "total_parlays": 0,
-            "win_rate": 0.0,
-            "average_odds": 0,
-            "total_wagered": 0.0,
-            "total_won": 0.0
+            "total_parlays": total_parlays,
+            "win_rate": round(win_rate, 2),
+            "average_odds": round(avg_odds, 2),
+            "total_wagered": round(total_wagered, 2),
+            "total_won": round(total_won, 2)
         }
     }

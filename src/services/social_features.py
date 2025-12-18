@@ -70,56 +70,6 @@ class SocialFeaturesService:
         self.communities: Dict[str, YOLOCommunity] = {}
         self.shared_predictions: Dict[str, SharedPrediction] = {}
         self.user_communities: Dict[str, List[str]] = {}
-        
-        # Initialize with some YOLO data
-        self._initialize_yolo_data()
-    
-    def _initialize_yolo_data(self):
-        """Initialize with some YOLO data."""
-        # Create some YOLO users
-        yolo_users = [
-            ("yolo_master_1", "YOLO_Master_Pro", 95.5, 150, 142, "basketball", "YOLO Legend", "YOLO or nothing! 🚀"),
-            ("yolo_master_2", "UnderdogHunter", 88.2, 120, 108, "football", "YOLO Champion", "Underdogs are the way! 🎯"),
-            ("yolo_master_3", "HomeCourtHero", 92.1, 200, 184, "basketball", "YOLO Master", "Home court advantage! 🏠"),
-            ("yolo_master_4", "RiskTaker_Elite", 89.7, 180, 162, "baseball", "YOLO Expert", "High risk, high reward! 💰"),
-            ("yolo_master_5", "HockeyYOLO", 87.3, 95, 83, "hockey", "YOLO Pro", "Hockey is unpredictable - perfect! 🏒")
-        ]
-        
-        for user_id, username, score, total, success, sport, level, motto in yolo_users:
-            self.users[user_id] = YOLOUser(
-                user_id=user_id,
-                username=username,
-                yolo_score=score,
-                total_predictions=total,
-                successful_predictions=success,
-                favorite_sport=sport,
-                yolo_level=level,
-                join_date=datetime.now() - timedelta(days=random.randint(30, 365)),
-                last_active=datetime.now() - timedelta(hours=random.randint(1, 24)),
-                yolo_motto=motto
-            )
-        
-        # Create YOLO communities
-        communities = [
-            ("yolo_masters", "YOLO Masters Elite", "The ultimate YOLO prediction community", CommunityType.YOLO_MASTERS),
-            ("basketball_yolo", "Basketball YOLO Legends", "Basketball predictions with maximum YOLO", CommunityType.SPORT_SPECIFIC),
-            ("underdog_army", "Underdog Army", "We bet on underdogs and win big!", CommunityType.UNDERDOG_LOVERS),
-            ("risk_takers_united", "Risk Takers United", "High risk, high reward predictions", CommunityType.RISK_TAKERS),
-            ("home_team_nation", "Home Team Nation", "Home court advantage believers", CommunityType.HOME_TEAM_FANS)
-        ]
-        
-        for comm_id, name, desc, comm_type in communities:
-            self.communities[comm_id] = YOLOCommunity(
-                community_id=comm_id,
-                name=name,
-                description=desc,
-                type=comm_type,
-                members=list(self.users.keys())[:random.randint(3, 5)],
-                total_predictions=random.randint(50, 200),
-                success_rate=random.uniform(0.75, 0.95),
-                created_date=datetime.now() - timedelta(days=random.randint(60, 180)),
-                yolo_energy=random.uniform(0.8, 1.0)
-            )
     
     async def create_user(self, user_id: str, username: str, favorite_sport: str) -> YOLOUser:
         """Create a new YOLO user."""

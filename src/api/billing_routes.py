@@ -11,8 +11,25 @@ from datetime import datetime
 
 from src.services.billing_service import billing_service, SubscriptionTier
 from src.api.auth_routes import get_current_user
+from src.db.database import AsyncSessionLocal
+from src.db.models.subscription import Subscription
+from sqlalchemy import select
 
 router = APIRouter(prefix="/api/v1/billing", tags=["Billing"])
+
+
+async def get_user_subscription(user_id: str) -> Optional[Subscription]:
+    """Get user's active subscription from database."""
+    async with AsyncSessionLocal() as session:
+        result = await session.execute(
+            select(Subscription)
+            .where(
+                Subscription.user_id == user_id,
+                Subscription.status == "active"
+            )
+            .order_by(Subscription.created_at.desc())
+        )
+        return result.scalar_one_or_none()
 
 
 class CreateSubscriptionRequest(BaseModel):
@@ -75,8 +92,14 @@ async def upgrade_subscription(
     current_user: dict = Depends(get_current_user)
 ):
     """Upgrade existing subscription."""
-    # TODO: Get user's current subscription from database
-    subscription_id = "sub_xxx"  # Placeholder
+    user_id = current_user.get("user_id")
+    
+    # Get user's current subscription from database
+    subscription = await get_user_subscription(user_id)
+    if not subscription:
+        raise HTTPException(status_code=404, detail="No active subscription found")
+    
+    subscription_id = subscription.stripe_subscription_id or subscription.id
     
     try:
         new_tier = SubscriptionTier(request.new_tier)
@@ -97,8 +120,14 @@ async def upgrade_subscription(
 @router.post("/cancel")
 async def cancel_subscription(current_user: dict = Depends(get_current_user)):
     """Cancel subscription at period end."""
-    # TODO: Get user's subscription from database
-    subscription_id = "sub_xxx"  # Placeholder
+    user_id = current_user.get("user_id")
+    
+    # Get user's subscription from database
+    subscription = await get_user_subscription(user_id)
+    if not subscription:
+        raise HTTPException(status_code=404, detail="No active subscription found")
+    
+    subscription_id = subscription.stripe_subscription_id or subscription.id
     
     success = await billing_service.cancel_subscription(subscription_id)
     
@@ -116,8 +145,12 @@ async def get_usage(current_user: dict = Depends(get_current_user)):
     """Get current usage and limits."""
     user_id = current_user.get("user_id")
     
-    # TODO: Get user's tier from database
-    tier = SubscriptionTier.FREE  # Placeholder
+    # Get user's tier from database
+    subscription = await get_user_subscription(user_id)
+    if subscription:
+        tier = SubscriptionTier(subscription.tier)
+    else:
+        tier = SubscriptionTier.FREE
     
     usage = await billing_service.check_usage_limit(user_id, tier)
     

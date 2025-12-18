@@ -49,13 +49,43 @@ async def lifelong(app: FastAPI):
         await initialize_sub_agents()
         await head_agent.start_autonomous_loop()
         logger.info("✅ Autonomous agents started")
+        
+        # Start scheduled tasks (bet settlement, etc.)
+        from src.services.scheduled_tasks import scheduled_tasks_service
+        await scheduled_tasks_service.start()
+        logger.info("✅ Scheduled tasks started")
+        
+        # Auto-start autonomous betting engine (if enabled)
+        auto_betting_enabled = os.getenv("AUTO_BETTING_ENABLED", "true").lower() == "true"
+        auto_betting_user_id = os.getenv("AUTO_BETTING_USER_ID", "demo_user")
+        
+        if auto_betting_enabled:
+            try:
+                from src.services.autonomous_betting_engine import autonomous_engine
+                
+                # Ensure paper trading mode for safety (unless explicitly disabled)
+                autonomous_engine.paper_trading = os.getenv("AUTO_BETTING_PAPER_TRADING", "true").lower() == "true"
+                
+                # Start autonomous betting
+                await autonomous_engine.start(auto_betting_user_id)
+                logger.info(f"✅ Autonomous betting started automatically for user: {auto_betting_user_id}")
+                logger.info(f"   Mode: {'Paper Trading' if autonomous_engine.paper_trading else 'LIVE'}")
+            except Exception as e:
+                logger.error(f"❌ Failed to auto-start autonomous betting: {e}")
+                import traceback
+                traceback.print_exc()
     except Exception as e:
         logger.error(f"❌ Failed to start autonomous agents: {e}")
     
     yield
     
-    # Shutdown logic (if any)
+    # Shutdown logic
     logger.info("🛑 Shutting down...")
+    try:
+        from src.services.scheduled_tasks import scheduled_tasks_service
+        await scheduled_tasks_service.stop()
+    except Exception as e:
+        logger.error(f"Error stopping scheduled tasks: {e}")
 
 def create_fastapi_app():
     """Create a FastAPI application with all features."""

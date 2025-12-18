@@ -227,7 +227,7 @@ class MobileAPIService:
 
     async def _generate_data_for_endpoint(self, db: Session, endpoint: str, user_id: str, params: Dict[str, Any] = None) -> Dict[str, Any]:
         """Wrapper to fetch real data based on endpoint."""
-        # Simple placeholder for data fetching logic
+        # Fetch real data from database based on endpoint
         if endpoint == "user_profile":
             user = db.get(User, user_id)
             if user:
