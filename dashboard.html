@@ -204,9 +204,9 @@
                 };
 
                 const [status, roi, performance] = await Promise.all([
-                    fetch(`${API_BASE}/betting/status`, { headers }).catch(() => null),
-                    fetch(`${API_BASE}/betting/roi`, { headers }).catch(() => null),
-                    fetch(`${API_BASE}/betting/performance`, { headers }).catch(() => null)
+                    fetch(`${API_BASE}/betting/status/public`, { headers }).catch(() => null),
+                    fetch(`${API_BASE}/betting/roi/public`, { headers }).catch(() => null),
+                    fetch(`${API_BASE}/betting/performance/public`, { headers }).catch(() => null)
                 ]);
 
                 const statusData = status ? await status.json() : null;
@@ -322,6 +322,9 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Active Bets List -->
+                ${renderActiveBets(performance?.active_bets?.bets)}
                 
                 <!-- Controls -->
                 <div class="card">
@@ -378,6 +381,64 @@
                     alert('Failed to stop betting: ' + error.message);
                 }
             }
+        }
+
+        function renderActiveBets(bets) {
+            if (!bets || bets.length === 0) {
+                return `
+                <div class="card">
+                    <h2>📝 Active Bets</h2>
+                    <p style="color: #6b7280; text-align: center; padding: 20px;">No active bets.</p>
+                </div>`;
+            }
+
+            const rows = bets.map(bet => {
+                const sportIcon = getSportIcon(bet.sport);
+                const oddsDisplay = bet.odds > 0 ? `+${bet.odds}` : bet.odds;
+                const profitClass = bet.predicted_edge > 0.05 ? 'positive' : '';
+
+                return `
+                    <tr style="border-bottom: 1px solid #e5e7eb;">
+                        <td style="padding: 12px;">${sportIcon} ${bet.sport.split('_')[1]?.toUpperCase() || bet.sport}</td>
+                        <td style="padding: 12px;"><strong>${bet.team}</strong></td>
+                        <td style="padding: 12px;">${oddsDisplay}</td>
+                        <td style="padding: 12px;">$${bet.amount.toFixed(2)}</td>
+                        <td style="padding: 12px; color: #10b981;">+${(bet.predicted_edge * 100).toFixed(1)}%</td>
+                    </tr>
+                `;
+            }).join('');
+
+            return `
+                <div class="card">
+                    <h2>📝 Active Bets (${bets.length})</h2>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr style="text-align: left; background: #f3f4f6; color: #4b5563;">
+                                    <th style="padding: 10px;">Sport</th>
+                                    <th style="padding: 10px;">Team</th>
+                                    <th style="padding: 10px;">Odds</th>
+                                    <th style="padding: 10px;">Amount</th>
+                                    <th style="padding: 10px;">Edge</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rows}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `;
+        }
+
+        function getSportIcon(sport) {
+            if (sport.includes('basketball')) return '🏀';
+            if (sport.includes('football')) return '🏈';
+            if (sport.includes('hockey')) return '🏒';
+            if (sport.includes('tennis')) return '🎾';
+            if (sport.includes('baseball')) return '⚾';
+            if (sport.includes('soccer')) return '⚽';
+            return '🎮';
         }
 
         // Initial load
