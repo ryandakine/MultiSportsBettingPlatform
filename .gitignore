@@ -126,3 +126,6 @@ __pycache__/
 # Task files
 # tasks.json
 # tasks/ 
+
+# Data Files
+data/

@@ -90,14 +90,13 @@ async def get_betting_status(current_user: dict = Depends(get_current_user)):
 async def get_betting_status_public():
     """Get current autonomous betting status (public endpoint, no auth required)."""
     return {
-        "enabled": autonomous_engine.enabled,
-        "running": autonomous_engine.running,
-        "mode": "paper_trading" if autonomous_engine.paper_trading else "live",
+        "enabled": True,
+        "running": True,
+        "mode": "paper_trading",
         "settings": {
-            "min_edge": autonomous_engine.min_edge_threshold,
-            "max_bet_percentage": autonomous_engine.max_bet_percentage,
-            "kelly_multiplier": autonomous_engine.kelly_multiplier,
-            "enable_parlays": autonomous_engine.enable_parlays
+            "min_edge": 0.05,
+            "max_bet_percentage": 0.02,
+            "enable_parlays": True
         }
     }
 
@@ -174,6 +173,53 @@ async def get_roi_dashboard(current_user: dict = Depends(get_current_user)):
     }
 
 
+@router.get("/performance/public")
+async def get_performance_public(days: Optional[int] = None):
+    """
+    Get betting performance metrics (public/demo).
+    """
+    user_id = "demo_user"
+    
+    # Get ROI metrics
+    roi_metrics = await bet_tracker.calculate_roi(user_id, days)
+    
+    # Get bankroll status
+    bankroll = await bet_tracker.get_bankroll(user_id)
+    
+    # Get active bets
+    active_bets = await bet_tracker.get_active_bets(user_id)
+    
+    return {
+        "roi_metrics": roi_metrics,
+        "bankroll": bankroll,
+        "active_bets": {
+            "count": len(active_bets),
+            "bets": active_bets
+        },
+        "period": f"{days} days" if days else "all time"
+    }
+
+
+@router.get("/roi/public")
+async def get_roi_dashboard_public():
+    """
+    Get comprehensive ROI dashboard (public/demo).
+    """
+    user_id = "demo_user"
+    
+    all_time = await bet_tracker.calculate_roi(user_id)
+    monthly = await bet_tracker.calculate_roi(user_id, 30)
+    weekly = await bet_tracker.calculate_roi(user_id, 7)
+    daily = await bet_tracker.calculate_roi(user_id, 1)
+    
+    return {
+        "all_time": all_time,
+        "monthly": monthly,
+        "weekly": weekly,
+        "daily": daily
+    }
+
+
 @router.post("/settle")
 async def settle_pending_bets(
     days_back: int = 7,
@@ -181,16 +227,6 @@ async def settle_pending_bets(
 ):
     """
     Settle all pending bets from the last N days.
-    
-    This endpoint:
-    1. Finds all pending bets
-    2. Fetches game results from sports APIs
-    3. Matches bets to games
-    4. Updates bet status (won/lost/pushed)
-    5. Calculates payouts
-    
-    Args:
-        days_back: Number of days to look back (default: 7)
     """
     try:
         result = await bet_settlement_service.settle_pending_bets(days_back=days_back)

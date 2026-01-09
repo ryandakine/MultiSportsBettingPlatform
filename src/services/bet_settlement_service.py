@@ -14,6 +14,7 @@ from src.db.database import AsyncSessionLocal
 from src.db.models.bet import Bet, BetStatus, BetType
 from src.services.bet_tracker import bet_tracker
 from src.services.real_sports_service import real_sports_service
+from src.services.historical_game_scraper import historical_game_scraper
 from src.services.team_normalization import normalization_service
 
 logger = logging.getLogger(__name__)
@@ -58,16 +59,28 @@ class BetSettlementService:
         cutoff_date = datetime.utcnow() - timedelta(days=days_back)
         
         async with AsyncSessionLocal() as session:
-            # Get all pending bets from last N days
-            result = await session.execute(
-                select(Bet).where(
-                    and_(
-                        Bet.status == BetStatus.PENDING,
-                        Bet.placed_at >= cutoff_date
-                    )
-                ).order_by(Bet.placed_at.desc())
-            )
-            pending_bets = result.scalars().all()
+            # Get all pending bets from last N days using raw SQL to avoid enum issues
+            from sqlalchemy import text
+            query = text("""
+                SELECT id FROM bets
+                WHERE status = 'pending'
+                AND placed_at >= :cutoff_date
+                ORDER BY placed_at DESC
+            """)
+            result = await session.execute(query, {"cutoff_date": cutoff_date})
+            bet_ids = [row[0] for row in result.fetchall()]
+            
+            # Load Bet objects by ID (now that enum values are fixed)
+            pending_bets = []
+            for bet_id in bet_ids:
+                try:
+                    bet_result = await session.execute(select(Bet).where(Bet.id == bet_id))
+                    bet = bet_result.scalar_one_or_none()
+                    if bet:
+                        pending_bets.append(bet)
+                except Exception as e:
+                    logger.warning(f"Could not load bet {bet_id}: {e}")
+                    continue
             
             if not pending_bets:
                 logger.info("✅ No pending bets to settle")
@@ -151,28 +164,44 @@ class BetSettlementService:
     async def _fetch_games_for_date(self, sport: str, date: datetime.date) -> List[Dict[str, Any]]:
         """Fetch games for a specific sport and date."""
         try:
-            # ESPN API returns games for the date requested
-            # For historical dates, we can check completed games
-            games = await real_sports_service.get_live_games(sport)
+            # Check if this is a historical date (more than 2 days old)
+            days_old = (datetime.now().date() - date).days
             
-            # Filter for games on the target date
+            if days_old > 2:
+                # Use historical scraper for older dates
+                logger.info(f"📜 Using historical scraper for {sport} on {date} ({days_old} days old)")
+                games = await historical_game_scraper.get_historical_games(sport, date)
+            else:
+                # Use regular API for recent dates
+                games = await real_sports_service.get_live_games(sport, date=date)
+            
+            # Filter for games on the target date (in case API returns nearby dates)
             target_date_str = date.strftime('%Y-%m-%d')
             filtered_games = []
             
             for game in games:
-                game_date_str = game.get('date', '')
-                # Parse date from ISO format
-                try:
-                    if 'T' in game_date_str:
-                        game_date = datetime.fromisoformat(game_date_str.replace('Z', '+00:00')).date()
-                        if game_date == date:
-                            filtered_games.append(game)
-                    elif game_date_str.startswith(target_date_str):
-                        filtered_games.append(game)
-                except Exception:
-                    # If we can't parse, include it if it might match
-                    if target_date_str in game_date_str:
-                        filtered_games.append(game)
+                # Check game_date if available, otherwise use date field
+                game_date = None
+                if 'game_date' in game:
+                    game_date = game['game_date']
+                    if isinstance(game_date, str):
+                        try:
+                            game_date = datetime.fromisoformat(game_date.replace('Z', '+00:00')).date()
+                        except:
+                            pass
+                
+                if not game_date:
+                    game_date_str = game.get('date', '')
+                    try:
+                        if 'T' in game_date_str:
+                            game_date = datetime.fromisoformat(game_date_str.replace('Z', '+00:00')).date()
+                        elif game_date_str.startswith(target_date_str):
+                            game_date = date
+                    except Exception:
+                        pass
+                
+                if game_date == date or (not game_date and target_date_str in game.get('date', '')):
+                    filtered_games.append(game)
             
             return filtered_games
             

@@ -1,76 +1,310 @@
 # Cursor Rules for MultiSportsBettingPlatform
+# Senior-Level Development Standards
 
 ## Project Overview
-This is a multi-level betting platform with a head agent coordinating specialized sub-agents for different sports (MLB, CFL/NFL, etc.). The system uses FastAPI, Redis, PostgreSQL, and AI integration.
+Multi-level betting platform with head agent coordinating specialized sub-agents for different sports (MLB, CFL/NFL, etc.). Uses FastAPI, Redis, PostgreSQL, SQLite, and AI integration. Financial system requiring precision, reliability, and data integrity.
 
-## Core Principles
-- **YOLO Mode**: When in doubt, implement with maximum confidence and fallback options
-- **Verbose Logging**: ALWAYS use detailed logging with clear status indicators
-- **Graceful Degradation**: Systems should work even when dependencies fail
-- **Dynamic Port Management**: Avoid port conflicts across multiple projects
+---
 
-## Verbose Logging Requirements
-- **ALWAYS** use emoji indicators (✅, ❌, ⚠️, 🚀, 🎯, etc.) for visual clarity
-- **ALWAYS** include timestamps in log messages
-- **ALWAYS** show detailed error messages with context
-- **ALWAYS** log both success and failure states
-- **ALWAYS** include system status and health checks
-- **ALWAYS** show progress indicators for long operations
-- **ALWAYS** log API request/response details
-- **ALWAYS** show port usage and availability status
+## Core Principles (MANDATORY)
 
-## Code Style
-- Use type hints extensively
-- Implement comprehensive error handling
-- Add docstrings to all functions and classes
-- Use dataclasses for data structures
-- Implement async/await patterns where appropriate
+### 1. Data Integrity & Validation (CRITICAL - NEVER VIOLATE)
+- **NEVER use synthetic, mocked, or invented data** - When data is missing, fail gracefully AND alert immediately
+- **NEVER substitute default values** for missing real data (e.g., don't use -110 odds as default when real odds unavailable)
+- **ALL betting data must be verified** from real API sources (ESPN, The Odds API, etc.)
+- **Validate data before placing bets** - Use `DataValidationService` to ensure all required fields are present and real
+- **Missing data = CRITICAL ALERT** - Missing data means the system cannot function properly:
+  - Log the missing data with CRITICAL level
+  - Send alert/notification (email, SMS, monitoring system)
+  - Track missing data incidents in a dedicated monitoring table
+  - Include: what data is missing, from which source, when, impact (bet skipped, prediction failed, etc.)
+- **Reject bets with missing critical data** - Better to skip a bet than place one with bad data, BUT this is a system failure that needs immediate attention
+- **Track data source** - Always include API verification flags in metadata (`api_verified`, `odds_source`, etc.)
+- **Implement data quality monitoring** - Track data availability rates, missing data patterns, API failures
+- **For Over/Under bets specifically**:
+  - Line MUST be positive (totals are always positive, e.g., 45.5, 220.5)
+  - Team field MUST be "Over" or "Under" (not a team name)
+  - Reject bets with negative lines (those are spreads, not totals)
+  - Reject bets with missing lines
+- **For Spread bets**:
+  - Line MUST be present (can be positive or negative)
+  - Team MUST match home or away team
+- **For Moneyline bets**:
+  - Team MUST match home or away team
+  - Odds MUST be from verified API source
+- **When in doubt, skip the bet** - It's better to place fewer bets with real data than many bets with bad data
 
-## Testing Strategy
-- Create standalone tests that bypass dependency issues
-- Test both success and failure scenarios
-- Include integration tests for external systems
-- Use mock services for development
+### 2. Type Safety & Validation
+- **ALWAYS use type hints** - Every function must have parameter and return type hints
+- **Use `TypedDict` or Pydantic models** for complex data structures
+- **Validate inputs at boundaries** - Validate data when entering the system (API endpoints, service methods)
+- **Use `Optional[T]`** when values can be None, never use `T = None` as default
+- **Use `Enum` for fixed sets of values** (bet types, statuses, etc.)
+- **Import types from `typing` module** - Use `List`, `Dict`, `Optional`, `Union`, `Callable`, etc.
 
-## Error Handling
-- Catch specific exceptions, not generic ones
-- Provide meaningful error messages
-- Implement fallback mechanisms
-- Log all errors with context
+### 3. Error Handling Best Practices
+- **Catch specific exceptions** - Never use bare `except:` or `except Exception:` unless absolutely necessary
+- **Log errors with full context** - Include: what was attempted, parameters, error message, stack trace
+- **Fail fast and fail loudly** - Don't silently swallow errors that indicate real problems
+- **Use custom exception classes** - Create domain-specific exceptions (`DataValidationError`, `BetPlacementError`, etc.)
+- **Provide actionable error messages** - Tell the user/system what went wrong and how to fix it
+- **Implement retry logic with exponential backoff** for transient failures (network, API rate limits)
+- **Use circuit breakers** for external service calls that may fail repeatedly
 
-## API Design
-- Use consistent response formats
-- Include status indicators in all responses
-- Implement proper HTTP status codes
-- Add request/response logging
+### 4. Database & Transaction Management
+- **ALWAYS use transactions** for multi-step database operations
+- **ALWAYS commit or rollback** - Never leave transactions open
+- **Use async database sessions** - `AsyncSessionLocal()` for all database operations
+- **Handle transaction conflicts** - Retry on deadlocks, handle unique constraint violations gracefully
+- **Use raw SQL sparingly** - Prefer ORM unless performance requires SQL
+- **Index frequently queried columns** - Add indexes for `user_id`, `status`, `game_date`, `placed_at`
+- **Validate data before database writes** - Don't let invalid data reach the database
+- **Use migrations for schema changes** - Never manually alter database schemas
 
-## Debugging Guidelines
-- **ALWAYS** show the exact error message and stack trace
-- **ALWAYS** log the current state of the system
-- **ALWAYS** show what was attempted and what failed
-- **ALWAYS** provide clear next steps or fallback options
-- **ALWAYS** log system health and connectivity status
+### 5. Async/Await Patterns
+- **Use async/await consistently** - If one function in a call chain is async, make the whole chain async
+- **Never mix sync and async** - Don't call async functions without `await`, don't block async functions
+- **Use `asyncio.gather()`** for concurrent operations when dependencies allow
+- **Use `asyncio.create_task()`** for fire-and-forget background operations
+- **Handle cancellation** - Use `try/except asyncio.CancelledError` for cleanup in long-running tasks
+- **Set timeouts** - Use `asyncio.wait_for()` or `timeout` parameters for external calls
 
-## YOLO Mode Implementation
-- When FastAPI fails, fall back to simple HTTP server
-- When external systems are unavailable, use mock responses
-- When dependencies are missing, provide alternative implementations
-- Always maintain functionality even in degraded mode
+### 6. Logging Standards (MANDATORY)
+- **ALWAYS use structured logging** - Include context (user_id, bet_id, game_id, etc.)
+- **ALWAYS use emoji indicators** for visual clarity: ✅ success, ❌ error, ⚠️ warning, 🚀 start, 🎯 target, 📊 data, 💰 money, 🔍 search
+- **ALWAYS include timestamps** - Use ISO format: `datetime.now().isoformat()`
+- **Log levels appropriately**:
+  - `DEBUG`: Detailed diagnostic information
+  - `INFO`: General information, successful operations
+  - `WARNING`: Something unexpected but handled
+  - `ERROR`: Error occurred but system can continue
+  - `CRITICAL`: System cannot continue
+- **Log both success and failure** - Don't only log errors
+- **Include request IDs/correlation IDs** for tracing requests across services
+- **Log performance metrics** - Response times, database query times, API call durations
+- **Never log sensitive data** - Passwords, API keys, full credit card numbers
 
-## Integration Requirements
-- Support multiple specialized betting systems
-- Implement cross-system prediction aggregation
-- Provide health monitoring for all systems
-- Enable dynamic system discovery and connection
+### 8. Code Organization & Structure
+- **Single Responsibility Principle** - Each function/class should do one thing well
+- **DRY (Don't Repeat Yourself)** - Extract common logic into reusable functions
+- **Separation of Concerns** - Keep business logic separate from infrastructure (database, API clients)
+- **Dependency Injection** - Pass dependencies as parameters, don't create them inside functions
+- **Use service classes** - Group related functionality into service classes
+- **Keep functions small** - Functions should fit on one screen (50-100 lines max)
+- **Use descriptive names** - Function names should describe what they do, not how
 
-## Performance Considerations
-- Use caching for frequently accessed data
-- Implement connection pooling for external services
-- Add timeout handling for all external calls
-- Monitor and log performance metrics
+### 9. API Design Standards
+- **Use consistent response formats** - All API responses should follow the same structure
+- **Include status indicators** - Success/failure status in every response
+- **Use proper HTTP status codes** - 200 (success), 201 (created), 400 (bad request), 401 (unauthorized), 404 (not found), 500 (server error)
+- **Validate request data** - Use Pydantic models for request validation
+- **Return meaningful error messages** - Help clients understand what went wrong
+- **Version APIs** - Use `/api/v1/` prefix for versioning
+- **Document APIs** - Use FastAPI's automatic OpenAPI/Swagger documentation
+- **Add request/response logging** - Log all API requests and responses (without sensitive data)
 
-## Security
-- Implement proper authentication and authorization
-- Use environment variables for sensitive data
-- Add rate limiting and request validation
-- Log security events and access attempts 
+### 10. Testing Requirements
+- **Write tests for business logic** - Critical functions must have unit tests
+- **Test edge cases** - Test boundaries, null values, empty lists, etc.
+- **Test error paths** - Test what happens when things go wrong
+- **Use fixtures** - Create reusable test fixtures for common setup
+- **Mock external dependencies** - Mock API calls, database calls in unit tests
+- **Test async code properly** - Use `pytest-asyncio` for async tests
+- **Maintain test coverage** - Aim for 80%+ coverage on critical paths
+- **Run tests before commits** - Don't commit code that breaks tests
+
+### 11. Performance & Scalability
+- **Use connection pooling** - For database and HTTP clients
+- **Cache expensive operations** - Cache API responses, database queries when appropriate
+- **Add timeouts** - All external calls must have timeouts (default: 30 seconds)
+- **Monitor performance** - Log slow operations, use profiling tools
+- **Use indexes** - Database indexes for frequently queried columns
+- **Batch operations** - Group multiple operations when possible
+- **Lazy loading** - Load data only when needed
+- **Pagination** - For large result sets, implement pagination
+
+### 12. Security Best Practices
+- **Never commit secrets** - Use environment variables for API keys, passwords, tokens
+- **Validate all inputs** - Never trust user input or external API responses
+- **Use parameterized queries** - Prevent SQL injection
+- **Sanitize user input** - Clean data before displaying or storing
+- **Implement rate limiting** - Prevent abuse of APIs
+- **Use HTTPS** - All external API calls must use HTTPS
+- **Store passwords securely** - Use hashing (bcrypt, argon2), never plain text
+- **Log security events** - Log authentication attempts, authorization failures
+
+### 13. Documentation Standards
+- **Docstrings for all functions** - Use Google or NumPy style docstrings
+- **Type hints ARE documentation** - Let type hints document function signatures
+- **README files** - Keep README.md up to date with setup instructions
+- **Inline comments** - Explain WHY, not WHAT (code should be self-documenting)
+- **CHANGELOG** - Document significant changes
+- **API documentation** - Use FastAPI's automatic docs, document endpoints manually if needed
+
+### 14. Dependency Management
+- **Pin dependency versions** - Use exact versions or minimum versions in requirements.txt
+- **Update dependencies regularly** - Check for security updates monthly
+- **Use virtual environments** - Never install packages globally
+- **Separate dev and prod dependencies** - Use requirements-dev.txt for development tools
+- **Document why dependencies are needed** - Add comments in requirements.txt
+
+### 15. Version Control Best Practices
+- **Atomic commits** - Each commit should represent one logical change
+- **Descriptive commit messages** - Use imperative mood: "Add user authentication" not "Added user authentication"
+- **Branch strategy** - Use feature branches, merge to main after review
+- **Review code before merging** - Even if solo, review your own code
+- **Don't commit broken code** - Tests should pass before committing
+- **Use .gitignore** - Don't commit generated files, secrets, IDE configs
+
+### 16. Graceful Degradation & Resilience
+- **Handle service failures gracefully** - System should continue operating when non-critical services fail
+- **Implement fallbacks** - Have backup strategies when primary services unavailable
+- **Use circuit breakers** - Prevent cascade failures by breaking circuits to failing services
+- **Health checks** - Implement health check endpoints for all services
+- **Monitoring and alerting** - Monitor system health, alert on critical failures
+- **Graceful shutdown** - Handle SIGTERM/SIGINT, clean up resources, finish in-flight requests
+
+---
+
+## Code Style & Formatting
+
+- **Follow PEP 8** - Python style guide
+- **Use Black for formatting** - Consistent code formatting across project
+- **Line length: 100 characters** - Soft limit, can exceed for readability
+- **Import organization**:
+  ```python
+  # Standard library
+  import asyncio
+  from datetime import datetime
+  
+  # Third-party
+  from fastapi import FastAPI
+  from sqlalchemy import select
+  
+  # Local
+  from src.services.bet_tracker import bet_tracker
+  ```
+- **Use f-strings** for string formatting (Python 3.6+)
+- **Use `pathlib.Path`** instead of `os.path` for file operations
+- **Use dataclasses** for data structures (Python 3.7+)
+- **Use `Enum`** for fixed sets of values
+
+---
+
+## Specific Patterns for This Project
+
+### Betting Operations
+- Always validate bet data using `DataValidationService` before placing
+- Use transactions for bet placement (update bankroll + create bet record)
+- Log all bet placements with full context (user, amount, odds, game)
+- Settle bets using real game results, never mock outcomes
+
+### Prediction Generation
+- Only generate predictions from real game data (ESPN API, The Odds API)
+- Include API verification flags in prediction metadata
+- Never generate predictions with missing critical data
+- Store source information (API endpoint, timestamp, etc.)
+
+### Database Operations
+- Use async sessions: `async with AsyncSessionLocal() as session:`
+- Always handle exceptions and rollback on error
+- Use select statements with proper filtering (don't load all rows then filter)
+- Use `first()` or `one_or_none()` instead of `all()[0]`
+
+### API Client Patterns
+- Use `httpx.AsyncClient` for async HTTP requests
+- Always set timeouts (default: 15 seconds)
+- Handle HTTP errors explicitly (check status codes)
+- Retry with exponential backoff for transient failures
+- Log API requests and responses (without sensitive data)
+
+---
+
+## Common Pitfalls to Avoid
+
+1. **Don't use default values for missing data** - Fail gracefully instead
+2. **Don't mix sync and async code** - Keep call chains consistently async or sync
+3. **Don't commit without running tests** - Ensure tests pass
+4. **Don't log sensitive information** - No passwords, API keys, tokens in logs
+5. **Don't leave transactions open** - Always commit or rollback
+6. **Don't catch generic exceptions** - Catch specific exception types
+7. **Don't ignore errors** - Always handle or propagate errors
+8. **Don't use mutable default arguments** - Use `None` and assign inside function
+9. **Don't create global state** - Use dependency injection
+10. **Don't skip validation** - Always validate inputs at boundaries
+
+---
+
+## Code Review Checklist
+
+Before submitting code, ensure:
+- [ ] Type hints on all functions
+- [ ] Docstrings for all public functions/classes
+- [ ] Error handling for all external calls
+- [ ] Data validation using DataValidationService
+- [ ] Logging with appropriate levels and context
+- [ ] Tests written for new functionality
+- [ ] No hardcoded values (use config/environment variables)
+- [ ] No commented-out code (remove or explain why kept)
+- [ ] No console.log/print statements (use logging)
+- [ ] Database transactions properly handled
+- [ ] Async code properly awaited
+- [ ] API responses follow consistent format
+- [ ] No sensitive data in logs or code
+
+---
+
+## Quick Reference
+
+### Import Patterns
+```python
+from typing import List, Dict, Optional, Any, Tuple
+from datetime import datetime, timedelta, timezone
+from dataclasses import dataclass
+from enum import Enum
+import logging
+import asyncio
+
+logger = logging.getLogger(__name__)
+```
+
+### Async Function Pattern
+```python
+async def my_function(param: str) -> Optional[Dict[str, Any]]:
+    """Brief description.
+    
+    Args:
+        param: Description of parameter
+        
+    Returns:
+        Description of return value or None if error
+        
+    Raises:
+        SpecificException: When and why this is raised
+    """
+    try:
+        # Implementation
+        logger.info(f"✅ Operation completed: {param}")
+        return result
+    except SpecificException as e:
+        logger.error(f"❌ Operation failed: {e}", exc_info=True)
+        raise
+```
+
+### Database Transaction Pattern
+```python
+async with AsyncSessionLocal() as session:
+    try:
+        # Database operations
+        session.add(new_record)
+        await session.commit()
+        logger.info(f"✅ Record created: {new_record.id}")
+    except Exception as e:
+        await session.rollback()
+        logger.error(f"❌ Transaction failed: {e}", exc_info=True)
+        raise
+```
+
+---
+
+Remember: These rules exist to prevent bugs, improve maintainability, and ensure the financial system operates correctly. When in doubt, prioritize correctness and data integrity over speed or convenience.

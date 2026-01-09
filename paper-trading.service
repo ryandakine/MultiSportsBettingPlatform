@@ -1,0 +1,15 @@
+[Unit]
+Description=Sports Betting Paper Trading Service
+After=network.target
+
+[Service]
+Type=simple
+User=ryan
+WorkingDirectory=/home/ryan/MultiSportsBettingPlatform
+Environment="PYTHONPATH=/home/ryan/MultiSportsBettingPlatform"
+ExecStart=/home/ryan/MultiSportsBettingPlatform/.venv/bin/python -m src.services.real_paper_trading
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target

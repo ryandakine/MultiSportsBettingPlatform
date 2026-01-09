@@ -9,6 +9,8 @@ from typing import List, Dict, Any, Optional
 from datetime import datetime
 import uuid
 
+from src.services.playoff_detector import playoff_detector
+
 logger = logging.getLogger(__name__)
 
 
@@ -42,9 +44,9 @@ class ParlayBuilder:
             "aggressive": {
                 "min_legs": 3,
                 "max_legs": 6,
-                "min_leg_confidence": 0.60,
-                "min_combined_probability": 0.05,  # Realistic for 6-leg parlays (even 0.65^6 ≈ 0.075)
-                "min_leg_edge": 0.03
+                "min_leg_confidence": 0.55,  # Lowered from 0.60 to make it easier to build 6-leg parlays daily
+                "min_combined_probability": 0.02,  # Lowered from 0.05 to ensure we can build 6-leg parlays daily
+                "min_leg_edge": 0.02  # Lowered from 0.03 to allow more legs to qualify
             }
         }
     
@@ -221,13 +223,33 @@ class ParlayBuilder:
         combined_prob = self.calculate_combined_probability(probs)
         
         # Check if meets minimum probability
+        # For 6-leg parlays, log confidence level but don't block placement (user wants daily placement)
         if combined_prob < profile["min_combined_probability"]:
-            logger.warning(f"Combined probability {combined_prob:.4f} too low for {risk_level} (min: {profile['min_combined_probability']})")
-            return None
+            if num_legs == 6:
+                # For 6-leg parlays, log as warning but still allow (ensuring daily placement)
+                logger.warning(
+                    f"⚠️ 6-leg parlay has low combined probability {combined_prob:.4f} "
+                    f"(below {profile['min_combined_probability']}) - PLACING ANYWAY to ensure daily placement"
+                )
+            else:
+                logger.warning(f"Combined probability {combined_prob:.4f} too low for {risk_level} (min: {profile['min_combined_probability']})")
+                return None
         
         # Calculate expected value
         decimal_odds = self._american_to_decimal(combined_odds)
         expected_value = (combined_prob * decimal_odds) - 1
+        
+        # Calculate confidence level based on combined probability
+        # High: > 0.10 (10%), Medium: 0.05-0.10 (5-10%), Low: < 0.05 (< 5%)
+        if combined_prob > 0.10:
+            confidence_level = "HIGH"
+        elif combined_prob > 0.05:
+            confidence_level = "MEDIUM"
+        else:
+            confidence_level = "LOW"
+        
+        # Build reasoning for why these legs were selected
+        reasoning = self._build_parlay_reasoning(selected_legs, combined_prob, confidence_level, num_legs)
         
         # Build parlay card
         parlay = {
@@ -238,11 +260,67 @@ class ParlayBuilder:
             "combined_odds": combined_odds,
             "combined_probability": combined_prob,
             "expected_value": expected_value,
+            "confidence_level": confidence_level,  # Add confidence indicator
+            "reasoning": reasoning,  # Explain why these legs were picked
             "recommended_amount": None,  # Will be calculated by bankroll manager
             "created_at": datetime.utcnow().isoformat()
         }
         
+        # Log detailed reasoning for 6-leg parlays
+        if num_legs == 6:
+            logger.info(
+                f"📊 6-leg parlay built: {confidence_level} confidence "
+                f"(combined prob: {combined_prob:.3f}, odds: {combined_odds:+.0f}, EV: {expected_value:+.3f})"
+            )
+            logger.info(f"🎯 Parlay Reasoning: {reasoning}")
+            # Log each leg with reasoning
+            for i, leg in enumerate(selected_legs, 1):
+                leg_prob = probs[i-1] if i-1 < len(probs) else 0.5
+                leg_edge = leg.get("edge", 0)
+                leg_conf = leg.get("confidence", 0)
+                logger.info(
+                    f"   Leg {i}: {leg.get('sport', 'unknown')} - {leg.get('team', 'TBD')} | "
+                    f"Prob: {leg_prob:.2%}, Edge: {leg_edge:.2%}, Conf: {leg_conf:.2%}, Odds: {leg.get('odds', 0):+.0f}"
+                )
+        
         return parlay
+    
+    def _build_parlay_reasoning(
+        self, 
+        selected_legs: List[Dict[str, Any]], 
+        combined_prob: float,
+        confidence_level: str,
+        num_legs: int
+    ) -> str:
+        """
+        Build human-readable reasoning for why these legs were selected.
+        """
+        if num_legs == 6:
+            # Group by sport
+            sport_counts = {}
+            total_edge = 0
+            total_confidence = 0
+            for leg in selected_legs:
+                sport = leg.get("sport", "unknown")
+                sport_counts[sport] = sport_counts.get(sport, 0) + 1
+                total_edge += leg.get("edge", 0)
+                total_confidence += leg.get("confidence", 0)
+            
+            avg_edge = total_edge / len(selected_legs) if selected_legs else 0
+            avg_confidence = total_confidence / len(selected_legs) if selected_legs else 0
+            
+            sport_breakdown = ", ".join([f"{count}x {sport}" for sport, count in sorted(sport_counts.items())])
+            
+            reasoning = (
+                f"{confidence_level} confidence 6-leg parlay ({combined_prob:.1%} win probability). "
+                f"Selected from multiple sports ({sport_breakdown}) for diversification. "
+                f"Average edge: {avg_edge:.1%}, average confidence: {avg_confidence:.1%}. "
+                f"Legs chosen based on highest confidence×edge product to maximize expected value."
+            )
+        else:
+            reasoning = f"{num_legs}-leg parlay with {combined_prob:.1%} win probability ({confidence_level} confidence)"
+        
+        return reasoning
     
     def build_multiple_parlays(
         self,

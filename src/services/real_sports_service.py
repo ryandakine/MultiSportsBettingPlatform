@@ -36,9 +36,13 @@ class RealSportsService:
         "ncaaw": "basketball_ncaaw" # Assuming this key, may degrade gracefully if invalid
     }
     
-    async def get_live_games(self, sport: str) -> List[Dict[str, Any]]:
+    async def get_live_games(self, sport: str, date: Optional[datetime.date] = None) -> List[Dict[str, Any]]:
         """
-        Fetch live games for a specific sport from ESPN and enrich with Odds API data if available.
+        Fetch games for a specific sport from ESPN and enrich with Odds API data if available.
+        
+        Args:
+            sport: Sport code (nfl, nhl, etc.)
+            date: Optional date to fetch games for (defaults to today)
         """
         sport_code = sport.lower()
         if sport_code not in self.ENDPOINTS:
@@ -47,11 +51,19 @@ class RealSportsService:
             
         # 1. Fetch Games from ESPN
         url = f"{self.BASE_URL}{self.ENDPOINTS[sport_code]}"
+        
+        # Add date parameter if specified (ESPN API format: dates=YYYYMMDD)
+        params = {}
+        if date:
+            date_str = date.strftime('%Y%m%d')
+            params['dates'] = date_str
+            logger.info(f"Fetching games for {sport} on {date} (ESPN date: {date_str})")
+        
         games = []
         
         try:
             async with httpx.AsyncClient() as client:
-                response = await client.get(url, timeout=10.0)
+                response = await client.get(url, params=params, timeout=10.0)
                 response.raise_for_status()
                 data = response.json()
                 games = self._parse_espn_response(data, sport_code)

@@ -49,3 +49,5 @@ sudo ./scripts/fix_file_watcher_limit.sh
 Each file watch uses approximately 1,080 bytes. At the maximum of 524,288 watches, this results in an upper bound of around 540 MiB of memory, which is reasonable for modern systems.
 
 
+
+

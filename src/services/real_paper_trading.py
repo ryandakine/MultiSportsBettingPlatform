@@ -13,6 +13,8 @@ import httpx
 
 from src.services.bet_tracker import bet_tracker
 from src.db.models.bet import BetStatus, BetType
+from src.services.model_prediction_service import model_prediction_service
+from src.services.feature_service import feature_service
 
 from dotenv import load_dotenv
 
@@ -58,6 +60,10 @@ class RealPaperTrading:
         """Start continuous paper trading."""
         self.running = True
         logger.info("🚀 Starting REAL paper trading service...")
+        
+        # Initialize ML Services
+        await feature_service.initialize()
+        await model_prediction_service.initialize()
         
         while self.running:
             try:
@@ -173,9 +179,8 @@ class RealPaperTrading:
             if not best_bet:
                 continue
             
-            # Check if we have edge (using simple mock prediction for now)
-            # In real system, this would call your AI prediction model
-            predicted_prob = self._get_ai_prediction(game, best_bet["team"])
+            # Check if we have edge (using real AI prediction)
+            predicted_prob = await self._get_ai_prediction(game, best_bet["team"])
             implied_prob = self._american_to_prob(best_bet["odds"])
             edge = predicted_prob - implied_prob
             
@@ -252,29 +257,53 @@ class RealPaperTrading:
         
         return best
     
-    def _get_ai_prediction(self, game: Dict, team: str) -> float:
+    async def _get_ai_prediction(self, game: Dict, team: str) -> float:
         """
         Get AI prediction for a team winning.
-        
-        TODO: Connect to actual HeadAgent predictions!
-        For now, uses simple heuristic based on odds.
+        Connects to ModelPredictionService.
         """
-        # Mock prediction - slightly better than implied odds
-        # In real system, call your prediction model here
-        import random
-        
-        # Base prediction on implied probability + small edge
-        for book in game.get("bookmakers", []):
-            for market in book.get("markets", []):
-                if market["key"] == "h2h":
-                    for outcome in market.get("outcomes", []):
-                        if outcome["name"] == team:
-                            implied = self._american_to_prob(outcome["price"])
-                            # Add some variance to simulate AI prediction
-                            noise = random.uniform(-0.05, 0.10)
-                            return min(max(implied + noise, 0.1), 0.9)
-        
-        return 0.5
+        try:
+            # Find odds for this team (needed for edge calc / fallback)
+            odds = 0
+            for book in game.get("bookmakers", []):
+                for market in book.get("markets", []):
+                    if market["key"] == "h2h":
+                        for outcome in market.get("outcomes", []):
+                            if outcome["name"] == team:
+                                odds = outcome["price"]
+                                break
+            
+            # Call Model Service
+            prediction = await model_prediction_service.get_model_prediction(
+                game["sport_key"],
+                game,
+                odds
+            )
+            
+            # If model was used, return its probability
+            # The service returns 'model_probability' (0-1)
+            # If for some reason it's missing, use odds
+            prob = prediction.get('model_probability', 0.5)
+            
+            # If model returned "Home Win Probability", but 'team' is Away team, flip it?
+            # ModelService usually predicts Home Win.
+            # We need to map 'team' to Home/Away.
+            
+            home_team = game.get("home_team")
+            if team == home_team:
+                return prob
+            else:
+                # If prediction is home win prob, away win prob is 1-prob
+                # CHECK: Does get_model_prediction return 'probability of the specific outcome' or 'home win'?
+                # _get_nba_model_prediction returns `prob` from classifier.
+                # Classifier trained on `Target_HomeWin`. So prob is Home Win Prob.
+                
+                # So if team != home_team (Away), we return 1.0 - prob
+                return 1.0 - prob
+                
+        except Exception as e:
+            logger.error(f"Prediction error: {e}")
+            return 0.5
     
     def _american_to_prob(self, odds: float) -> float:
         """Convert American odds to implied probability."""

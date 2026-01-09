@@ -16,6 +16,7 @@ from datetime import datetime, timedelta
 from src.db.database import AsyncSessionLocal
 from src.db.models.prediction import Prediction
 from src.services.real_sports_service import real_sports_service
+from src.services.model_prediction_service import model_prediction_service
 
 
 async def generate_predictions_with_betting_metadata():
@@ -23,6 +24,16 @@ async def generate_predictions_with_betting_metadata():
     print("=" * 80)
     print("🎯 GENERATING PREDICTIONS WITH BETTING METADATA")
     print("=" * 80)
+    print()
+    
+    # Initialize model prediction service (loads trained models if available)
+    print("🤖 Initializing model prediction service...")
+    await model_prediction_service.initialize()
+    model_status = model_prediction_service.get_model_status()
+    if model_status['model_loaded']:
+        print(f"   ✅ Using trained models: {', '.join(model_status['models_loaded'])}")
+    else:
+        print(f"   ⚠️  No trained models found - using fallback calculations")
     print()
     
     user_id = "demo_user"
@@ -35,11 +46,21 @@ async def generate_predictions_with_betting_metadata():
     all_games = []
     sports_to_fetch = ["ncaaf", "nhl", "ncaab", "ncaaw"]
     
-    # Get today's date range (today at 00:00 to today at 23:59:59)
-    today_start = datetime.utcnow().replace(hour=0, minute=0, second=0, microsecond=0)
-    today_end = today_start + timedelta(days=1) - timedelta(seconds=1)
+    # Get today and tomorrow's dates
+    now = datetime.utcnow()
+    today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    today_date = today_start.date()
+    tomorrow_date = today_date + timedelta(days=1)
     
-    print(f"   Filtering games for today: {today_start.strftime('%Y-%m-%d')}")
+    # Since it's early morning (before 10 AM UTC), check both today AND tomorrow
+    # Games scheduled for "tomorrow" in UTC might be happening later today in local time
+    # Also, if it's late evening (after 10 PM), include early tomorrow games
+    check_tomorrow = now.hour < 10 or now.hour >= 22
+    
+    print(f"   Current time (UTC): {now.strftime('%Y-%m-%d %H:%M')}")
+    print(f"   Filtering games for: {today_date}")
+    if check_tomorrow:
+        print(f"   Also checking tomorrow: {tomorrow_date} (early morning or late evening)")
     
     for sport_key in sports_to_fetch:
         try:
@@ -48,9 +69,8 @@ async def generate_predictions_with_betting_metadata():
             if games:
                 print(f"   ✅ Found {len(games)} total {sport_key} games from API")
                 
-                # Filter to only today's games (compare dates, not times)
-                today_games = []
-                today_date = today_start.date()  # Get just the date part for comparison
+                # Filter to today's games (and tomorrow if checking)
+                eligible_games = []
                 
                 for game in games:
                     game_date_str = game.get("date")
@@ -58,16 +78,23 @@ async def generate_predictions_with_betting_metadata():
                         try:
                             from dateutil import parser
                             game_date = parser.parse(game_date_str)
-                            # Compare just the date part (ignore time/timezone)
-                            if game_date.date() == today_date:
-                                game["sport_key"] = sport_key  # Ensure sport_key is set
-                                today_games.append(game)
+                            game_date_only = game_date.date()
+                            
+                            # Include games from today
+                            if game_date_only == today_date:
+                                game["sport_key"] = sport_key
+                                eligible_games.append(game)
+                            # Include games from tomorrow if we're checking tomorrow
+                            elif check_tomorrow and game_date_only == tomorrow_date:
+                                game["sport_key"] = sport_key
+                                eligible_games.append(game)
                         except Exception as e:
                             # If we can't parse the date, skip this game
                             continue
                 
-                print(f"   ✅ {len(today_games)} {sport_key} games scheduled for today")
-                all_games.extend(today_games)
+                date_label = "today" if not check_tomorrow else "today/tomorrow"
+                print(f"   ✅ {len(eligible_games)} {sport_key} games scheduled for {date_label}")
+                all_games.extend(eligible_games)
             else:
                 print(f"   ⚠️ No {sport_key} games found")
         except Exception as e:
@@ -168,18 +195,53 @@ async def generate_predictions_with_betting_metadata():
                 else:
                     prediction_text = f"{home_team} {line:+.1f} (Spread)"
                 
-                confidence = "medium"
+                # Get model prediction (uses trained models if available, fallback otherwise)
+                game_data = {
+                    "game_id": game_id,
+                    "home_team": home_team,
+                    "away_team": away_team,
+                    "date": game.get("date", datetime.utcnow().isoformat()),
+                    "sport": sport
+                }
                 
-                # Calculate probability from odds
-                # Convert American odds to implied probability
+                model_result = await model_prediction_service.get_model_prediction(
+                    sport=sport_key,
+                    game_data=game_data,
+                    odds=odds
+                )
+                
+                model_probability = model_result['model_probability']
+                model_confidence = model_result['confidence']
+                edge = model_result['edge']
+                model_reasoning = model_result['reasoning']
+                model_used = model_result.get('model_used', False)
+                
+                # Calculate implied probability from odds
                 if odds > 0:
-                    probability = 100 / (odds + 100)
+                    implied_probability = 100 / (odds + 100)
                 else:
-                    probability = abs(odds) / (abs(odds) + 100)
+                    implied_probability = abs(odds) / (abs(odds) + 100)
                 
-                # Calculate edge (assume 65% confidence = model thinks 65% chance, implied prob from odds)
-                model_probability = 0.65  # Model's assessment
-                edge = model_probability - probability  # Edge is difference
+                # Use model probability (from trained model or fallback)
+                probability = implied_probability  # Base probability from odds
+                
+                # Set confidence level based on edge and model confidence
+                if model_used:
+                    # When using trained model, use model's confidence
+                    if model_confidence > 0.70:
+                        confidence = "high"
+                    elif model_confidence > 0.60:
+                        confidence = "medium"
+                    else:
+                        confidence = "low"
+                else:
+                    # Fallback: use edge-based confidence
+                    if edge > 0.10:
+                        confidence = "high"
+                    elif edge > 0.05:
+                        confidence = "medium"
+                    else:
+                        confidence = "low"
                 
                 # Create prediction with betting metadata
                 prediction = Prediction(
@@ -188,7 +250,7 @@ async def generate_predictions_with_betting_metadata():
                     sport=sport,
                     prediction_text=prediction_text,
                     confidence=confidence,
-                    reasoning=f"AI analysis for {home_team} vs {away_team}",
+                    reasoning=f"{model_reasoning} | {home_team} vs {away_team}",
                     timestamp=datetime.utcnow(),
                     metadata_json={
                         "game_id": game_id,
@@ -199,7 +261,10 @@ async def generate_predictions_with_betting_metadata():
                         "line": None,
                         "odds": odds,
                         "probability": probability,
+                        "model_probability": model_probability,  # What model thinks
                         "edge": edge,
+                        "model_used": model_used,  # Whether trained model was used
+                        "model_confidence": model_confidence,  # Model's confidence level
                         "game_date": game.get("date", datetime.utcnow().isoformat()),
                         "game_date_display": game.get("date", ""),  # For display purposes
                         "sport_key": sport_key

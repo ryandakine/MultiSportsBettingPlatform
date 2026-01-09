@@ -60,3 +60,5 @@ class LicenseApplication(Base):
     metadata_json = Column(JSON, nullable=True)
 
 
+
+

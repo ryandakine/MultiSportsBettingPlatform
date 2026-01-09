@@ -11,6 +11,8 @@ import asyncio
 
 from src.services.bet_tracker import bet_tracker
 from src.services.parlay_builder import parlay_builder
+from src.services.data_validation import data_validator, DataValidationError
+from src.services.playoff_detector import playoff_detector
 
 logger = logging.getLogger(__name__)
 
@@ -240,6 +242,9 @@ class AutonomousBettingEngine:
         
         logger.info(f"📊 Found {len(eligible_predictions)} eligible predictions for betting")
         
+        # Store for potential relaxed parlay building (ensuring daily 6-leg placement)
+        self._last_eligible_predictions = eligible_predictions
+        
         # STEP 1: Place daily picks (straight bets) FIRST
         # This identifies and locks in the best individual picks
         daily_picks_placed = 0
@@ -299,19 +304,88 @@ class AutonomousBettingEngine:
                     logger.warning("⚠️ Failed to place 3-leg parlay - insufficient predictions or build failed")
             
             # Place 6-leg parlay if not already placed today
-            if not placed_6leg and len(eligible_predictions) >= 6:
-                logger.info("🎯 Building 6-leg parlay (after daily picks)")
-                parlay_placed = await self._place_parlay(
-                    user_id, eligible_predictions, bankroll, num_legs=6
-                )
-                if parlay_placed:
-                    bets_placed += 1
-                    logger.info("✅ Daily 6-leg parlay placed successfully")
+            # CRITICAL: Always attempt to place 6-leg parlay daily (user requirement)
+            if not placed_6leg:
+                if len(eligible_predictions) >= 6:
+                    logger.info("🎯 Building 6-leg parlay (after daily picks)")
+                    parlay_placed = await self._place_parlay(
+                        user_id, eligible_predictions, bankroll, num_legs=6
+                    )
+                    if parlay_placed:
+                        bets_placed += 1
+                        logger.info("✅ Daily 6-leg parlay placed successfully")
+                    else:
+                        logger.warning(
+                            f"⚠️ Failed to place 6-leg parlay with standard thresholds. "
+                            f"Available predictions: {len(eligible_predictions)}. "
+                            f"Retrying with ALL predictions (relaxed filtering)..."
+                        )
+                        # RETRY with ALL predictions (no filtering) - ensures we ALWAYS place a 6-leg parlay daily
+                        # Use all predictions from the original list, just filtered by date
+                        all_predictions = [p for p in predictions if self._is_today_or_tomorrow(p)]
+                        if len(all_predictions) >= 6:
+                            logger.info(f"🔄 Retrying 6-leg parlay with {len(all_predictions)} total predictions (relaxed filtering)")
+                            parlay_placed = await self._place_parlay(
+                                user_id, all_predictions, bankroll, num_legs=6
+                            )
+                            if parlay_placed:
+                                bets_placed += 1
+                                logger.info("✅ Daily 6-leg parlay placed (with relaxed filtering - ensuring daily placement)")
+                            else:
+                                logger.error("❌ CRITICAL: Failed to place 6-leg parlay even with relaxed filtering")
+                        else:
+                            logger.error(f"❌ CRITICAL: Only {len(all_predictions)} predictions available (need 6+ for parlay)")
                 else:
-                    logger.warning("⚠️ Failed to place 6-leg parlay - insufficient predictions or build failed")
+                    logger.warning(f"⚠️ Only {len(eligible_predictions)} eligible predictions (need 6+). Trying with ALL predictions...")
+                    # Try with all predictions if we don't have enough eligible ones
+                    all_predictions = [p for p in predictions if self._is_today_or_tomorrow(p)]
+                    if len(all_predictions) >= 6:
+                        logger.info(f"🔄 Attempting 6-leg parlay with {len(all_predictions)} total predictions (relaxed filtering)")
+                        parlay_placed = await self._place_parlay(
+                            user_id, all_predictions, bankroll, num_legs=6
+                        )
+                        if parlay_placed:
+                            bets_placed += 1
+                            logger.info("✅ Daily 6-leg parlay placed (with relaxed filtering)")
+                        else:
+                            logger.error("❌ CRITICAL: Failed to place 6-leg parlay even with relaxed filtering")
+                    else:
+                        logger.error(f"❌ CRITICAL: Only {len(all_predictions)} total predictions available (need 6+ for parlay)")
         
         logger.info(f"📊 Total bets placed: {bets_placed} ({daily_picks_placed} straight + {bets_placed - daily_picks_placed} parlays)")
         return bets_placed
+    
+    def _is_today_or_tomorrow(self, pred: Dict) -> bool:
+        """Helper to check if prediction is for today or tomorrow."""
+        from datetime import datetime, timedelta
+        now = datetime.utcnow()
+        today_date = now.replace(hour=0, minute=0, second=0, microsecond=0).date()
+        tomorrow_date = today_date + timedelta(days=1)
+        allow_tomorrow = now.hour >= 22
+        
+        game_date_str = pred.get("game_date") or pred.get("date")
+        if not game_date_str:
+            return False
+        
+        try:
+            from dateutil import parser
+            if isinstance(game_date_str, str):
+                game_date = parser.parse(game_date_str)
+            else:
+                game_date = game_date_str
+            
+            game_date_only = game_date.date()
+            
+            if game_date_only == today_date:
+                return True
+            elif allow_tomorrow and game_date_only == tomorrow_date:
+                game_hour = game_date.hour if hasattr(game_date, 'hour') else 0
+                if game_hour < 6:
+                    return True
+        except Exception:
+            pass
+        
+        return False
     
     async def _get_todays_parlays(self, user_id: str) -> List[Dict]:
         """Get parlays placed today for this user."""
@@ -353,8 +427,72 @@ class AutonomousBettingEngine:
         prediction: Dict,
         bankroll: Dict
     ) -> bool:
-        """Place a single bet based on prediction."""
+        """
+        Place a single bet based on prediction.
+        
+        CRITICAL: Validates all data is real - never uses synthetic/mocked data.
+        For playoff games, applies playoff-specific adjustments to find edge.
+        """
         try:
+            # VALIDATION: Ensure data is real and verified (NO synthetic data)
+            # Missing data = CRITICAL alert (recorded in validation)
+            is_valid, error = await data_validator.validate_prediction_for_betting(prediction)
+            if not is_valid:
+                logger.warning(f"⚠️ Skipping bet due to validation failure: {error}")
+                return False
+            
+            # Verify data came from API
+            if not data_validator.require_api_verification(prediction):
+                logger.warning(f"⚠️ Skipping bet: Data source not verified - may contain synthetic data")
+                return False
+            
+            # Check if this is a playoff game and apply playoff-specific adjustments
+            bet_type = prediction.get("bet_type", "moneyline")
+            sport = prediction.get("sport", "")
+            game_data = {
+                'name': prediction.get('game_name') or prediction.get('name', ''),
+                'date': prediction.get('game_date') or prediction.get('date'),
+                'game_id': prediction.get('game_id', '')
+            }
+            
+            is_playoff = playoff_detector.is_playoff_game(game_data, sport)
+            if is_playoff:
+                # Get playoff adjustments
+                adjustments = playoff_detector.get_playoff_adjustments(game_data, sport)
+                playoff_round = adjustments.get('round', 'Playoff')
+                
+                logger.info(f"🏆 Playoff game detected ({playoff_round}) - applying playoff-specific logic")
+                
+                # For playoff games, moneyline and over/under have less edge (everyone bets them)
+                # Adjust confidence/edge requirements for these bet types
+                if bet_type in ["moneyline", "over_under", "total"]:
+                    # These are the "public" bets - require higher edge
+                    original_edge = prediction.get("edge", 0)
+                    original_confidence = prediction.get("confidence", 0)
+                    
+                    # Playoff games: moneyline/over-under bets need MORE edge (harder to find value)
+                    # But other bet types might have more edge
+                    adjusted_edge = original_edge - 0.02  # Require 2% more edge for public bets
+                    adjusted_confidence = original_confidence - 0.05  # Require 5% more confidence
+                    
+                    if adjusted_edge < self.min_edge_threshold or adjusted_confidence < self.min_confidence:
+                        logger.info(
+                            f"⚠️ Playoff {bet_type} bet doesn't meet adjusted thresholds "
+                            f"(edge: {original_edge:.3f} -> {adjusted_edge:.3f}, "
+                            f"conf: {original_confidence:.3f} -> {adjusted_confidence:.3f}) - "
+                            f"considering alternative bet types for edge"
+                        )
+                        # TODO: Try to find alternative bet types with more edge (props, first half, etc.)
+                        # For now, skip this bet but log that we should look for alternatives
+                        return False
+                    
+                    # Update prediction with adjusted values
+                    prediction = prediction.copy()
+                    prediction['edge'] = adjusted_edge
+                    prediction['confidence'] = adjusted_confidence
+                    prediction['playoff_adjustment_applied'] = True
+                    prediction['playoff_round'] = playoff_round
+            
             # Calculate bet amount using Kelly Criterion
             bet_amount = self._calculate_bet_size(
                 prediction, bankroll["available_balance"]
@@ -366,6 +504,33 @@ class AutonomousBettingEngine:
                 logger.warning(f"⚠️ Bet amount too small: ${bet_amount:.2f} < $1 minimum")
                 return False
             
+            # Validate bet data before placing
+            bet_type = prediction.get("bet_type", "moneyline")
+            
+            # VALIDATION: Over/under bets must have valid data
+            if bet_type in ["over_under", "total"]:
+                line = prediction.get("line")
+                team = prediction.get("team", "").lower() if prediction.get("team") else ""
+                
+                # Must have a positive line (totals are always positive)
+                if line is None:
+                    logger.warning(f"⚠️ Skipping over/under bet: Missing line value")
+                    return False
+                
+                if line < 0:
+                    logger.warning(f"⚠️ Skipping over/under bet: Negative line ({line}) indicates this is a spread bet, not a total")
+                    return False
+                
+                # Must have Over/Under direction
+                if team not in ['over', 'under', 'o', 'u']:
+                    logger.warning(f"⚠️ Skipping over/under bet: Team field has '{prediction.get('team')}' instead of Over/Under")
+                    return False
+            
+            # VALIDATION: Spread bets must have a line
+            if bet_type == "spread" and prediction.get("line") is None:
+                logger.warning(f"⚠️ Skipping spread bet: Missing line value")
+                return False
+            
             # Prepare bet data with game information for settlement
             bet_data = {
                 "sportsbook": "paper_trading" if self.paper_trading else "draftkings",
@@ -374,7 +539,7 @@ class AutonomousBettingEngine:
                 "game_date": prediction.get("game_date") or prediction.get("date"),
                 "home_team": prediction.get("home_team"),
                 "away_team": prediction.get("away_team"),
-                "bet_type": prediction.get("bet_type", "moneyline"),
+                "bet_type": bet_type,
                 "team": prediction.get("team"),
                 "line": prediction.get("line"),
                 "amount": bet_amount,
@@ -486,16 +651,23 @@ class AutonomousBettingEngine:
                 user_id, parlay_data, is_autonomous=True
             )
             
+            confidence = parlay.get('confidence_level', 'UNKNOWN')
+            reasoning = parlay.get('reasoning', 'No reasoning provided')
+            
             if self.paper_trading:
                 logger.info(
                     f"📄 PAPER PARLAY: {parlay['num_legs']} legs | "
-                    f"${bet_amount} @ {parlay['combined_odds']} | ID: {parlay_bet_id}"
+                    f"${bet_amount} @ {parlay['combined_odds']} | "
+                    f"Confidence: {confidence} | ID: {parlay_bet_id}"
                 )
+                logger.info(f"   Reasoning: {reasoning}")
             else:
                 logger.info(
                     f"✅ Auto-parlay placed: {parlay['num_legs']} legs | "
-                    f"${bet_amount} | ID: {parlay_bet_id}"
+                    f"${bet_amount} @ {parlay['combined_odds']} | "
+                    f"Confidence: {confidence} | ID: {parlay_bet_id}"
                 )
+                logger.info(f"   Reasoning: {reasoning}")
             
             return True
                 

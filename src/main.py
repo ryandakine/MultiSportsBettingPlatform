@@ -41,19 +41,28 @@ async def lifelong(app: FastAPI):
         from src.services.notification_service import initialize_notification_service
         
         logger.info("🚀 Initializing services...")
-        await websocket_manager.initialize()
-        redis_client = await websocket_manager.redis_manager.get_redis()
-        await initialize_notification_service(redis_client, websocket_manager)
+        try:
+            await websocket_manager.initialize()
+            redis_client = await websocket_manager.redis_manager.get_redis()
+            await initialize_notification_service(redis_client, websocket_manager)
+        except Exception as e:
+            logger.warning(f"⚠️ WebSocket/Redis initialization failed (continuing anyway): {e}")
         
         logger.info("🚀 Initializing autonomous agents...")
-        await initialize_sub_agents()
-        await head_agent.start_autonomous_loop()
-        logger.info("✅ Autonomous agents started")
+        try:
+            await initialize_sub_agents()
+            await head_agent.start_autonomous_loop()
+            logger.info("✅ Autonomous agents started")
+        except Exception as e:
+            logger.warning(f"⚠️ Failed to start autonomous agents (continuing anyway): {e}")
         
         # Start scheduled tasks (bet settlement, etc.)
-        from src.services.scheduled_tasks import scheduled_tasks_service
-        await scheduled_tasks_service.start()
-        logger.info("✅ Scheduled tasks started")
+        try:
+            from src.services.scheduled_tasks import scheduled_tasks_service
+            await scheduled_tasks_service.start()
+            logger.info("✅ Scheduled tasks started")
+        except Exception as e:
+            logger.warning(f"⚠️ Failed to start scheduled tasks (continuing anyway): {e}")
         
         # Auto-start autonomous betting engine (if enabled)
         auto_betting_enabled = os.getenv("AUTO_BETTING_ENABLED", "true").lower() == "true"
@@ -75,7 +84,9 @@ async def lifelong(app: FastAPI):
                 import traceback
                 traceback.print_exc()
     except Exception as e:
-        logger.error(f"❌ Failed to start autonomous agents: {e}")
+        logger.error(f"❌ Critical startup error: {e}")
+        import traceback
+        traceback.print_exc()
     
     yield
     

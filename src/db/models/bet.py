@@ -24,6 +24,7 @@ class BetType(str, enum.Enum):
     MONEYLINE = "moneyline"
     SPREAD = "spread"
     OVER_UNDER = "over_under"
+    TOTAL = "total"  # Alias for over_under (legacy compatibility)
     PARLAY = "parlay"
     PROP = "prop"
 

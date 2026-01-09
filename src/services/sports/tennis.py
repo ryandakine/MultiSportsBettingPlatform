@@ -1,5 +1,6 @@
 from typing import List, Dict, Any
 from src.services.sports.base import SportService
+import random
 
 class TennisService(SportService):
     """Service for ATP/WTA Tennis data and odds."""
@@ -31,3 +32,13 @@ class TennisService(SportService):
             # Tennis specific normalizing if needed
             processed.append(match)
         return processed
+
+    async def predict_outcome(self, game_data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Generate a prediction for a Tennis match using ML models.
+        """
+        from src.services.model_prediction_service import model_prediction_service
+        
+        # Pass odds=0 for now as we don't have a reliable primary player concept here without logic
+        # Model service will likely fallback or use internal logic
+        return await model_prediction_service.get_model_prediction(self.sport_key, game_data, 0)

@@ -280,3 +280,5 @@ If you need help with Monero payments:
 **💰 Ready to pay? Follow the steps above, and you'll have your license activated within 24 hours!**
 
 
+
+
